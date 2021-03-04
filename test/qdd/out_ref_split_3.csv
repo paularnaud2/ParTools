@@ -1,0 +1,4 @@
+POINT;ETAT;COMPARE_RES
+32;O;in_32
+34;N|O;in_31|in_32
+51;O|N;in_31|in_32

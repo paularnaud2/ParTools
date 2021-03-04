@@ -1,0 +1,6 @@
+HOST=smtp.gmail.com
+PORT=465
+USER=paularnaud2pro@gmail.com
+PWD=********
+SENDER=ARNAUD Paul <paularnaud2pro@gmail.com>
+FROM=ARNAUD Paul <paularnaud2pro@gmail.com>

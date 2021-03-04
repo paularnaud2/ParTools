@@ -1,0 +1,8 @@
+*.pyc
+_old/
+~$*.xlsm
+.vscode/.ropeproject/objectdb
+.coverage
+conf_oracle.py
+conf_main.py
+htmlcov

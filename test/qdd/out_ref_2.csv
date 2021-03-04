@@ -1,0 +1,12 @@
+POINT;ETAT;COMPARE_RES
+08;O;in_22
+12;N;in_21
+13;N;in_21
+20;O|N;in_21|in_22
+21;O;in_21
+25;N|O;in_21|in_22
+28;O|N;in_21|in_22
+30;O;in_22
+31;O;in_22
+32;O;in_22
+34;N|O;in_21|in_22

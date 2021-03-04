@@ -1,0 +1,81 @@
+<intervention>
+   <prmId>prmId_1</prmId>
+   <prmDonnesGenerales>
+      <adresseInstallation>
+         <numeroEtNomVoie>numeroEtNomVoie_1</numeroEtNomVoie>
+         <codePostal>codePostal_1</codePostal>
+         <commune code="43210">
+            <libelle>commune_1</libelle>
+         </commune>
+      </adresseInstallation>
+   </prmDonnesGenerales>
+   <donneesContractuelles>
+      <titulaireContrat>
+         <civilite>civCtr_1</civilite>
+         <nom>nomCtr_1</nom>
+         <telephone1Num>num1Ctr_1</telephone1Num>
+         <telephone2Num>num2Ctr_1</telephone2Num>
+         <adresseEmail>mailCtr_1</adresseEmail>
+      </titulaireContrat>
+      <adresseDestinataire>
+         <ligne1>l1_1</ligne1>
+         <ligne4>l4_1</ligne4>
+      </adresseDestinataire>
+   </donneesContractuelles>
+</intervention>
+
+<intervention>
+   <prmId>prmId_2</prmId>
+   <codeDR>codeDR_2</codeDR>
+   <prmDonnesGenerales>
+      <adresseInstallation>
+         <commune code="43210">
+            <libelle>commune_2</libelle>
+         </commune>
+      </adresseInstallation>
+   </prmDonnesGenerales>
+   <donneesContractuelles>
+      <InterlocuteurClient>
+         <civilite>civClient_2</civilite>
+         <nom>nomClient_2</nom>
+         <prenom>prenomClient_2</prenom>
+         <telephone1Num>numClient_2</telephone1Num>
+         <adresseEmail>mailClient_2</adresseEmail>
+      </InterlocuteurClient>
+      <titulaireContrat>
+         <civilite>civCtr_2</civilite>
+         <nom>nomCtr_2</nom>
+         <telephone1Num>num1Ctr_2</telephone1Num>
+         <telephone2Num>num2Ctr_2</telephone2Num>
+         <adresseEmail>mailCtr_2</adresseEmail>
+      </titulaireContrat>
+      <adresseDestinataire>
+         <ligne1>l1_2</ligne1>
+         <ligne4>l4_2</ligne4>
+      </adresseDestinataire>
+   </donneesContractuelles>
+</intervention>
+
+<intervention>
+   <prmId>prmId_3</prmId>
+   <codeDR>codeDR_3</codeDR>
+   <prmDonnesGenerales>
+      <adresseInstallation>
+         <numeroEtNomVoie>numeroEtNomVoie_3</numeroEtNomVoie>
+         <codePostal>codePostal_3</codePostal>
+         <commune code="43210">
+            <libelle>commune_3</libelle>
+         </commune>
+      </adresseInstallation>
+      <dateDerniereReleveReelle>date_3</dateDerniereReleveReelle>
+   </prmDonnesGenerales>
+   <donneesContractuelles>
+      <InterlocuteurClient>
+         <civilite>civClient_3</civilite>
+         <nom>nomClient_3</nom>
+         <prenom>prenomClient_3</prenom>
+         <telephone1Num>numClient_3</telephone1Num>
+         <adresseEmail>mailClient_3</adresseEmail>
+      </InterlocuteurClient>
+   </donneesContractuelles>
+</intervention>

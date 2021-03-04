@@ -1,0 +1,4 @@
+prmId;numeroEtNomVoie;codePostal;libelle_adresseInstallation;civilite_titulaireContrat;nom_titulaireContrat;telephone1Num_titulaireContrat;telephone2Num_titulaireContrat;adresseEmail_titulaireContrat;ligne1;ligne4;codeDR;civilite_InterlocuteurClient;nom_InterlocuteurClient;prenom_InterlocuteurClient;telephone1Num_InterlocuteurClient;adresseEmail_InterlocuteurClient;dateDerniereReleveReelle
+prmId_1;numeroEtNomVoie_1;codePostal_1;commune_1;civCtr_1;nomCtr_1;num1Ctr_1;num2Ctr_1;mailCtr_1;l1_1;l4_1;;;;;;;
+prmId_2;;;commune_2;civCtr_2;nomCtr_2;num1Ctr_2;num2Ctr_2;mailCtr_2;l1_2;l4_2;codeDR_2;civClient_2;nomClient_2;prenomClient_2;numClient_2;mailClient_2;
+prmId_3;numeroEtNomVoie_3;codePostal_3;commune_3;;;;;;;;codeDR_3;civClient_3;nomClient_3;prenomClient_3;numClient_3;mailClient_3;date_3
