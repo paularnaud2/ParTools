@@ -18,9 +18,10 @@ def find_dup(in_dir, out_dir='', open_out=False, col=0):
     com.log("[toolDup] find_dup")
     (cur_list, out_dir) = init_find(in_dir, out_dir, col)
     bn = com.big_number(len(cur_list))
-    com.log(f"Fichier chargé, {bn} lignes à analyser.")
+    com.log(f"File loaded, {bn} lines to be analysed")
     dup_list = find_dup_list(cur_list)
     finish_find(dup_list, out_dir, open_out)
+    com.log("[toolDup] find_dup job over")
 
 
 def init_find(in_dir, out_dir, col):
@@ -28,12 +29,12 @@ def init_find(in_dir, out_dir, col):
         tmp_path = g.paths['TMP'] + gl.TMP_FOLDER
         com.mkdirs(tmp_path)
         out_dir = tmp_path + TMP_OUT
-    s = "Recherche des doublons dans "
+    s = "Searching duplicates in "
     if col == 0:
-        com.log(f"{s} le fichier {in_dir}")
+        com.log(f"{s} file {in_dir}")
         cur_list = com.load_txt(in_dir)
     else:
-        com.log(f"{s}la colonne No.{col} du fichier {in_dir}")
+        com.log(f"{s}column no. {col} of file {in_dir}")
         cur_list = com.load_csv(in_dir)
         cur_list = [x[col - 1] for x in cur_list]
         if com.has_header(cur_list):
@@ -44,15 +45,16 @@ def init_find(in_dir, out_dir, col):
 
 def del_dup(in_dir, out_dir, open_out=False):
     com.log("[toolDup] del_dup")
-    com.log(f"Suppression des doublons dans le fichier {in_dir} en cours...")
+    com.log(f"Deleting duplicates in file '{in_dir}'...")
     cur_list = com.load_txt(in_dir)
     bn = com.big_number(len(cur_list))
-    com.log(f"Fichier chargé, {bn} lignes à analyser.")
+    com.log(f"File loaded, {bn} lines to be analysed")
     if com.has_header(cur_list):
         out_list = [cur_list[0]] + del_dup_list(cur_list[1:])
     else:
         out_list = del_dup_list(cur_list)
     finish_del(out_list, out_dir, open_out)
+    com.log("[toolDup] del_dup job over")
 
 
 def find_dup_list(in_list):
@@ -99,26 +101,25 @@ def del_dup_list(in_list):
 def finish_find(dup_list, out_dir, open_out):
     n = len(dup_list)
     if n == 0:
-        com.log("Aucun doublon trouvé.")
+        com.log("No duplicates found")
         return
 
     bn = com.big_number(len(dup_list))
-    s = f"{bn} doublons trouvés. Liste (tronquée à {MAX_DUP_PRINT} éléments) :"
-    com.log(s)
-    com.log_array(dup_list[:MAX_DUP_PRINT], 1)
+    com.log(f"{bn} duplicates found")
+    com.log_example(dup_list)
 
     com.save_csv(dup_list, out_dir)
-    com.log(f"Liste des doublons sauvegardée dans '{out_dir}'")
+    com.log(f"List of duplicates saved in {out_dir}")
     if open_out:
         os.startfile(out_dir)
 
 
 def finish_del(out_list, out_dir, open_out):
 
-    com.log(f"Sauvegarde de la liste sans doublon triée dans '{out_dir}'...")
+    com.log(f"Saving list without duplicates in '{out_dir}'...")
     com.save_list(out_list, out_dir)
     bn_out = com.big_number(len(out_list))
-    com.log(f"Liste  sauvegardée, elle comporte {bn_out} lignes.")
+    com.log(f"List saved, it has {bn_out} lines")
     if open_out:
         os.startfile(out_dir)
 

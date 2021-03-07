@@ -11,7 +11,7 @@ def is_up_to_date(cnx):
         if gl.DB not in gl.IUTD_LIST or gl.iutd:
             return
 
-    com.log(f"Vérification is up to date (IUTD) pour la BDD {gl.DB}")
+    com.log(f"IUTD (Is Up To Date) check for DB {gl.DB}")
     d_now = datetime.now().strftime("%Y/%m/%d")
     if iutd_file(d_now):
         return
@@ -22,7 +22,7 @@ def is_up_to_date(cnx):
 def iutd_db(d_now, cnx):
     d_bdd = get_bdd_date(cnx)
     com.save_csv([d_bdd], gl.IUTD_DIR)
-    com.log(f"Fichier de vérification sauvegardé à l'adresse {gl.IUTD_DIR}")
+    com.log(f"Check file saved in {gl.IUTD_DIR}")
     compare_dates(d_bdd, d_now)
     gl.iutd = True
 
@@ -32,31 +32,30 @@ def iutd_file(d_now):
         d_old = com.load_txt(gl.IUTD_DIR)[0]
         if d_now == d_old:
             gl.iutd_ok = True
-            com.log("Vérification IUTD OK")
+            com.log("IUTD check OK")
             return True
         else:
             com.log_print('|')
-            s = "La date trouvée dans le fichier ne correspond pas à la date du jour"
+            s = "The date found in the check file doesn't match the current date"
             com.log(s)
             return False
     else:
         com.log_print('|')
-        com.log("Fichier de vérification IUTD introuvable")
+        com.log("Can't find IUTD check file")
         return False
 
 
 def compare_dates(d_bdd, d_now):
     if d_bdd == d_now:
-        com.log("Vérification IUTD OK")
+        com.log("IUTD check OK")
     else:
-        s = f"Attention : les confs de la BDD {gl.DB} semblent"
-        s += " ne pas être à jour :"
-        s += f"\nDate BDD : {d_bdd}"
-        s += f"\nDate du jour : {d_now}"
-        s += "\nContinuer ? (o/n)"
+        s = f"Warning: conf of DB {gl.DB} don't seem to be up to date:"
+        s += f"\nDB date: {d_bdd}"
+        s += f"\nToday's date: {d_now}"
+        s += "\nContinue? (y/n)"
         if gl.TEST_IUTD:
             com.log_print(s)
-            com.log_print('o (TEST_IUTD = True)')
+            com.log_print('y (TEST_IUTD = True)')
         elif com.log_input(s) == 'n':
             sys.exit()
 
@@ -67,10 +66,10 @@ def get_bdd_date(cnx):
 
     c = cnx.cursor()
     query = get_iutd_query()
-    com.log("Exécution de la requête IUTD : ")
+    com.log("Executing IUTD query: ")
     com.log_print(query)
     c.execute(query)
-    com.log("Requête exécutée")
+    com.log("Query executed")
     out = c.fetchone()
     out = str(out[0]).replace('-', '/')
     out = out[:10]

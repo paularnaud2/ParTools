@@ -2,7 +2,6 @@ import common as com
 import sql.gl as gl
 
 from common import g
-from sql.rg import restart
 
 
 def init():
@@ -39,16 +38,3 @@ def get_query():
     query = query.strip('\r\n;')
     query = com.replace_from_dict(query, gl.VAR_DICT)
     gl.query = query
-
-
-def init_gko():
-    s = f"Réquête exécutée pour toutes les instances :\n{gl.query}\n;"
-    com.log_print(s)
-    inst_list = gl.GKO_INSTANCES
-    inst_list = restart(inst_list)
-    if len(inst_list) == 0:
-        com.log("Aucune instance à requêter.")
-    else:
-        com.log(f"Instances à requêter : {inst_list}")
-
-    return inst_list

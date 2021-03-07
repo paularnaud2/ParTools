@@ -1,30 +1,13 @@
-# variables globales et constantes pour le package sql (import sql.gl as gl)
 from common import g
 from datetime import datetime
 
-ENV = 'PROD'
-DB = 'SGE'
-DB = 'GINKO'
-# DB = 'ADAM'
-
-# ENV = 'DIRECT'
-# DB = 'CAPC5'
-
-# ENV = 'LOCAL'
-# DB = 'XE'
+ENV = 'LOCAL'
+DB = 'XE'
 
 date = datetime.now().strftime("%Y%m%d")
 QUERY_FILE = f'sql/queries/e_{DB}.sql'
 OUT_FILE = f"{g.paths['OUT']}export_SQL_{DB}_{date}.csv"
 OUT_RG_DIR = f"{g.paths['OUT']}{DB}_OUT_{date}/"
-
-# GKO_INSTANCES = [
-# 'GKO1_IDF', 'GKO2_MMN', 'GKO3_EST', 'GKO4_RAB',
-# 'GKO5_MED', 'GKO6_SUO', 'GKO7_OUE', 'GKO8_ACL',
-# ]
-GKO_INSTANCES = ['GKO1_IDF', 'GKO2_MMN', 'GKO3_EST']
-# GKO_INSTANCES = ['GKO1_IDF']
-EXPORT_INSTANCES = False
 
 SL_STEP = 100000
 MAX_DB_CNX = 10
@@ -53,7 +36,7 @@ IUTD_LIST = ['SGE']
 client_is_init = False
 iutd = False
 
-# Globales paramétrables
+# Settable globales
 VAR_DICT = {}
 EXECUTE_PARAMS = {}
 

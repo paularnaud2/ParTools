@@ -5,71 +5,53 @@ import common as com
 def process_query_init(elt, query, th_nb):
 
     if elt == 'MONO':
-        com.log("Exécution de la requête :")
+        com.log("Executing query:")
         com.log_print(query + "\n;")
     elif gl.MAX_DB_CNX == 1:
-        s = "Exécution de la requête pour la plage {}"
-        com.log(s.format(elt))
+        com.log(f"Executing query for range {elt}")
     else:
-        s = "Exécution de la requête pour la plage {} (connexion No.{})..."
-        com.log(s.format(elt, th_nb))
+        com.log(f"Executing query for range {elt} (connection no. {th_nb})...")
 
 
 def process_query_finish(elt, th_nb):
 
     if elt == 'MONO':
-        com.log("Requête exécutée")
+        com.log("Query executed")
     elif gl.MAX_DB_CNX == 1:
-        com.log("Requête exécutée pour la plage {}".format(elt))
+        com.log(f"Query executed for range {elt}")
     else:
-        com.log("Requête exécutée pour la plage {} (connexion No.{})".format(
-            elt, th_nb))
-
-
-def connect_init(ENV, DB, cnx_str):
-
-    s = f"Connexion à la base '{DB}' de l'environnement '{ENV}' ({cnx_str})"
-    com.log(s)
-
-
-def connect_finish(DB):
-
-    s = f"Connecté à {DB}"
-    com.log(s)
+        com.log(f"Query executed for range {elt} (connection no. {th_nb})")
 
 
 def write_rows_init(range_name, th_nb):
 
     if range_name == 'MONO':
-        com.log("Écriture des lignes en cours...")
+        com.log("Writing lines...")
     elif gl.MAX_DB_CNX == 1 or th_nb == 0:
-        com.log("Écriture des lignes en cours pour la plage {}...".format(
-            range_name))
+        com.log(f"Writing lines for range {range_name}...")
     else:
-        com.log(
-            "Écriture des lignes en cours pour la plage {} (connexion No.{})..."
-            .format(range_name, th_nb))
+        s = f"Writing lines for range {range_name} (connection no. {th_nb})..."
+        com.log(s)
 
 
-def write_rows_finish(range_name, i, th_nb):
-
+def write_rows_finish(range_name, i, cnx_nb):
+    bn = com.big_number(i)
     if range_name == 'MONO':
-        s = "Écriture des lignes terminée ({} lignes écrites)"
-        com.log(s.format(com.big_number(i)))
-    elif gl.MAX_DB_CNX == 1 or th_nb == 0:
-        s = "Écriture des lignes terminée pour la plage {}. {} lignes écrites"
-        com.log(s.format(range_name, com.big_number(i)))
+        com.log(f"All lines written ({bn} lines written)")
+    elif gl.MAX_DB_CNX == 1 or cnx_nb == 0:
+        s = f"All lines written for range {range_name} ({bn} lines written)"
+        com.log(s)
     else:
-        s = "Écriture des lignes terminée pour la plage {}."
-        s += " {} lignes écrites (connexion No.{})"
-        com.log(s.format(range_name, com.big_number(i), th_nb))
+        s = f"All lines written for range {range_name}"
+        s += f" ({bn} lines written, connection no. {cnx_nb})"
+        com.log(s)
 
 
 def inject():
-    s1 = "Injection des données dans la BDD"
+    s1 = "Injecting date in DB..."
     if gl.ref_chunk != 0:
         bn = com.big_number(gl.ref_chunk * gl.NB_MAX_ELT_INSERT)
-        s = s1 + f" (reprise à partir de la ligne {bn})"
+        s = s1 + f" (restarting from line {bn})"
     else:
         s = s1
     s += "..."
@@ -77,12 +59,12 @@ def inject():
 
 
 def script(script):
-    s = "Script de base à executer pour chaque ligne du fichier d'entrée :"
+    s = "Base script to be executed for each line of input file:"
     com.log(s)
     com.log_print(script)
 
 
 def restart_fail(e, chunk, txt):
-    com.log(f"Erreur lors de la reprise : {str(e)}")
-    com.log_print(f"Contenu du fichier {chunk}:")
+    com.log(f"Error while trying to restart: {str(e)}")
+    com.log_print(f"Content of file {chunk}:")
     com.log_print(txt)

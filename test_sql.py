@@ -86,7 +86,7 @@ def upload_interrupted():
     t = md['T'] / 1000
     sleep(t)
     p.terminate()
-    com.log('Arrêt automatique du traitement (upload_interrupted)\n')
+    com.log('Automatic stop (upload_interrupted)\n')
 
 
 def download_interrupted(query, out):
@@ -108,12 +108,11 @@ def iutd():
 
     # test no iutd file date db ok
     connect(gl.SQL_ENV, gl.SQL_DB)
-    com.log_print()
+
     # test iutd file date ok
     connect(gl.SQL_ENV, gl.SQL_DB)
 
     os.remove(sql.gl.IUTD_DIR)
-    com.log('-----------------------------------------------------')
     prepare_iutp(gl.SQL_INSERT_IUTD_KO)
     sql.gl.TEST_IUTD = True
     # test no iutd file date db ko
@@ -129,6 +128,7 @@ def test_sql():
     com.mkdirs(gl.SQL_OUT, True)
     com.log_print()
 
+    com.log('Test sql.iutd------------------------------')
     iutd()
 
     com.log('Test sql.upload------------------------------')
@@ -146,12 +146,12 @@ def test_sql():
     dq.file_match(gl.SQL_IN_FILE, gl.SQL_DL_OUT)
     dq.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
 
-    com.log("Test sql.dowload RG avec merge---------------")
+    com.log("Test sql.dowload RG with merge---------------")
     download_interrupted(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG)
     download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, tr=True)
     dq.file_match(gl.SQL_DL_OUT, gl.SQL_DL_OUT_RG)
 
-    com.log("Test sql.dowload RG sans merge---------------")
+    com.log("Test sql.dowload RG without merge---------------")
     download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, merge=False)
     dq.file_match(gl.SQL_RG_REF, gl.SQL_RG_COMP)
 

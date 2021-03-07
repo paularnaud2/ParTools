@@ -24,8 +24,7 @@ def gen_range_list(rg_file_name):
         gl.bools['RANGE_QUERY'] = True
         range_dir = gl.RANGE_PATH + rg_file_name + gl.FILE_TYPE
         range_list = com.load_txt(range_dir)
-        s = "Requêtage par plage détecté. Requête modèle :\n{}\n;"
-        com.log(s.format(gl.query))
+        com.log(f"Range query detected. Base query:\n{gl.query}\n;")
     else:
         gl.bools['RANGE_QUERY'] = False
         range_list = ['MONO']
@@ -39,27 +38,26 @@ def restart(range_list):
     if a == 0:
         return range_list
 
-    if gl.bools['RANGE_QUERY'] is False and gl.DB != 'GINKO':
+    if gl.bools['RANGE_QUERY'] is False:
         com.mkdirs(gl.TMP_PATH, True)
         return range_list
 
-    s = "Traitement en cours détecté. Tuer ? (o/n)"
+    s = "Work in progress detected. Kill? (y/n)"
     if gl.TEST_RESTART:
         com.log(s)
         com.log_print("n (TEST_RESTART = True)")
-    elif com.log_input(s) == 'o':
+    elif com.log_input(s) == 'y':
         com.mkdirs(gl.TMP_PATH, True)
         return range_list
 
     list_out = modify_restart(range_list, file_list)
-    com.log("Liste des plages modifiée.")
+    com.log("Range list modified")
     return list_out
 
 
 def modify_restart(range_list, file_list):
-    # modifie la range liste en supprimant les éléments déjà
-    # présents dans la file list.
-    # on en profite pour supprimer les fichier EC qui pourront causer des pb
+    # Modifies the range list by deleting element already
+    # in file list. EC files are also deleted.
 
     list_out = []
     for elt in range_list:
@@ -70,7 +68,7 @@ def modify_restart(range_list, file_list):
         if comp_elt_ec in file_list:
             ec_path = gl.TMP_PATH + comp_elt_ec
             os.remove(ec_path)
-            com.log("Fichier EC {} supprimé".format(ec_path))
+            com.log(f"EC file {ec_path} deleted")
 
     return list_out
 
@@ -80,18 +78,17 @@ def move_tmp_folder():
     gl.bools["MERGE_OK"] = False
     out_dir = gl.OUT_RG_DIR
 
-    com.log(f"Création du dossier de sortie '{out_dir}'...")
     com.mkdirs(out_dir, True)
-    com.log('Dossier de sortie créé')
+    com.log(f"Output folder {out_dir} created")
 
     file_list = com.get_file_list(gl.TMP_PATH)
     n = len(file_list)
-    com.log(f"Déplacement de {n} fichiers vers le dossier de sortie....")
+    com.log(f"Moving {n} files to the output folder....")
     for elt in file_list:
         cur_dir = gl.TMP_PATH + elt
         target_dir = out_dir + elt
         move(cur_dir, target_dir)
-    com.log('Fichers déplacés vers {}'.format(out_dir))
+    com.log(f"Files moved to {out_dir}")
 
 
 def merge_tmp_files():
@@ -108,9 +105,8 @@ def merge_tmp_files():
             com.merge_files(cur_dir, out_file, remove_header=True)
         os.remove(cur_dir)
 
-    com.log(
-        "Fusion et suppression des {} fichiers temporaires terminée".format(
-            len(file_list)))
+    n = len(file_list)
+    com.log(f"Merging and deleting of the {n} temporary files over")
 
 
 def init_merge():
@@ -123,17 +119,17 @@ def init_merge():
     if os.path.exists(out_file):
         os.remove(out_file)
 
-    com.log("Fusion et suppression de {} fichiers temporaires...".format(
-        len(file_list)))
+    n = len(file_list)
+    com.log(f"Merging and deleting {n} temporary files...")
     return (file_list, out_file, False)
 
 
 def check_ec(file_list):
     for elt in file_list:
         if gl.EC in elt:
-            s = "Fichier EC trouvé ({})."
-            s += " Abandon de la fusion des fichiers temporaires."
-            com.log(s.format(elt))
+            s = f"EC file found ({elt})."
+            s += " Meging of temporary files aborted."
+            com.log(s)
             gl.bools["MERGE_OK"] = False
             return True
     return False

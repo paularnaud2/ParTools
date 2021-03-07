@@ -20,9 +20,9 @@ def upload(**params):
     script = get_script()
     start_time = time()
     com.check_header(gl.UPLOAD_IN)
-    com.log(f"Ouverture du fichier d'entrée {gl.UPLOAD_IN}")
+    com.log(f"Opening input file {gl.UPLOAD_IN}")
     with open(gl.UPLOAD_IN, 'r', encoding='utf-8') as in_file:
-        # on saute la première ligne (entête)
+        # First line is dismissed (header)
         in_file.readline()
         for line in in_file:
             line_list = com.csv_to_list(line)
@@ -43,7 +43,7 @@ def upload(**params):
 
 def prepare_bdd():
     if gl.EXECUTE_PARAMS:
-        com.log("Préparation de la base de donnée avant l'injection")
+        com.log("Preparing DB before data injection...")
         com.log_print('|')
         execute(**gl.EXECUTE_PARAMS)
 
@@ -54,7 +54,7 @@ def finish_this(start_time):
     bn = com.big_number(gl.counters['main'])
     dur = com.get_duration_ms(start_time)
     durs = com.get_duration_string(dur)
-    s = f"Injection des données terminée. {bn} lignes insérées en {durs}."
+    s = f"Data injection over. {bn} lines exported in {durs}."
     com.log(s)
 
 
@@ -89,7 +89,7 @@ def insert(script):
         gl.cnx.commit()
         com.save_csv([snc], gl.TMP_FILE_CHUNK)
         sn = com.big_number(gl.counters['main'])
-        com.log(f"{sn} lignes insérées au total")
+        com.log(f"{sn} lines inserted in total")
         gl.c.close()
         gl.c = gl.cnx.cursor()
     else:
@@ -109,10 +109,10 @@ def send_chunk_duration(start):
 def check_restart():
     chunk = gl.TMP_FILE_CHUNK
     if os.path.exists(chunk):
-        s = "Injection de données en cours détectée. Reprendre ? (o/n)"
+        s = "Injection running detected. Restart? (y/n)"
         if gl.TEST_RESTART:
             com.log(s)
-            com.log_print("o (TEST_RESTART = True)")
+            com.log_print("y (TEST_RESTART = True)")
         elif com.log_input(s) == 'n':
             os.remove(chunk)
             return False

@@ -1,1 +1,2 @@
-print('010'.find('01'))
+s = "test{}test"
+print(s.format(''))

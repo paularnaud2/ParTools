@@ -6,7 +6,6 @@ import sql.gl as gl
 
 from common import g
 from sql.functions import write_rows
-from sql.connect import connect
 from sql.connect import gen_cnx_dict
 from threading import Thread
 from threading import RLock
@@ -27,7 +26,7 @@ def process_range_list(range_list, rg_file_name):
 
 
 def lauch_threads(range_list, rg_file_name):
-    com.log(f"Plages à requêter : {range_list}")
+    com.log(f"Ranges to be queried: {range_list}")
     thread_list = []
     gen_cnx_dict(gl.DB, gl.ENV, gl.MAX_DB_CNX)
     for elt in range_list:
@@ -41,14 +40,13 @@ def lauch_threads(range_list, rg_file_name):
     for th in thread_list:
         th.join()
 
-    com.log("Tous les threads ont terminé leur execution")
+    com.log("All threads are done")
     com.log_print('|')
 
 
 @com.log_exeptions
 def process_range(elt='MONO', rg_file_name=''):
     with gl.sem:
-        # com.log(f'Entrée sémaphore pour elt {elt}')
         gl.counters['QUERY_RANGE'] += 1
         cur_th = get_th_nb()
         cnx = gl.cnx_dict[cur_th]
@@ -62,7 +60,6 @@ def process_range(elt='MONO', rg_file_name=''):
         c.close()
         with verrou:
             gl.th_dic[cur_th] = 0
-        # com.log(f'Sortie sémaphore pour elt {elt}')
 
 
 def process_query(c, query, elt, th_nb):
@@ -82,7 +79,7 @@ def test_restart(th_nb):
     sleep = False
     with verrou:
         if gl.counters["row"] > gl.MD['N_STOP'] and not gl.MD['STOP']:
-            s = f"TEST_RESTART : Arrêt automatique du traitement (thread No. {th_nb})\n"
+            s = f"TEST_RESTART: Automatic stop (thread no. {th_nb})\n"
             com.log(s)
             # A STOP flag is sent through the manager dict to the main process in order
             # to terminate this subprocess and all the threads.
@@ -113,35 +110,19 @@ def init_th_dict():
 
 
 def init_out_file(cursor, range_name='MONO'):
-    # on initialise le fichier de sortie avec le nom
-    # des différents champs en première ligne
+    # Output file is initialised with cursor description
+    # plus range name is EXPORT_RANGE parameter is set to True
 
+    s = gl.TMP_PATH + range_name + "{}" + gl.FILE_TYPE
+    s_ = s.format('')
+    s_EC = s.format(gl.EC)
     with verrou:
-        gl.out_files[range_name] = gl.TMP_PATH + range_name + gl.FILE_TYPE
-        gl.out_files[range_name +
-                     gl.EC] = gl.TMP_PATH + range_name + gl.EC + gl.FILE_TYPE
+        gl.out_files[range_name] = s_
+        gl.out_files[range_name + gl.EC] = s_EC
 
-    with open(gl.out_files[range_name + gl.EC], 'w',
-              encoding='utf-8') as out_file:
+    with open(s_EC, 'w', encoding='utf-8') as out_file:
         fields = [elt[0] for elt in cursor.description]
-        out_file.write(fields[0])
-        for elt in fields[1:]:
-            out_file.write(g.CSV_SEPARATOR + elt)
-        if gl.DB == 'GINKO' and gl.EXPORT_INSTANCES:
-            out_file.write(g.CSV_SEPARATOR + "INSTANCE")
-        elif gl.EXPORT_RANGE and range_name != 'MONO':
-            out_file.write(g.CSV_SEPARATOR + "RANGE")
-        out_file.write("\n")
-
-
-def process_gko_query(inst):
-    cnx = connect(gl.ENV, inst)
-    c = cnx.cursor()
-    com.log(f"Exécution de la requête pour l'instance {inst}...")
-    c.execute(gl.query)
-    com.log(f"Requête exécutée pour {inst}")
-    init_out_file(c, inst)
-    th_name = com.gen_sl_detail(inst, what="l'instance")
-    write_rows(c, inst, th_name)
-    c.close()
-    cnx.close
+        if gl.EXPORT_RANGE and range_name != 'MONO':
+            fields.append("RANGE")
+        s = g.CSV_SEPARATOR.join(fields)
+        out_file.write(s + '\n')

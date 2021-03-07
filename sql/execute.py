@@ -15,18 +15,19 @@ def execute(**params):
     cnx = connect(ENV=gl.ENV, DB=gl.DB)
     c = cnx.cursor()
     if gl.PROC:
-        com.log("Execution de la procédure :")
+        com.log("Executing proc:")
         com.log_print(script)
         c.execute(script)
-        com.log("Procédure executée")
+        com.log("Proc executed")
     else:
         command_list = script.split(';\n')
         for command in command_list[:-1]:
-            com.log("Execution de la commande :")
+            com.log("Executing command:")
             com.log_print(command)
             c.execute(command)
-            com.log("Commande executée")
+            com.log("Command executed")
     c.close()
     cnx.commit()
     cnx.close()
+    com.log('[sql] execute job over')
     com.log_print()

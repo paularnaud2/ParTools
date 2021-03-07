@@ -74,7 +74,7 @@ def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
     bn_1 = string.big_number(step)
     bn_2 = string.big_number(counter)
     if nb == 0:
-        s = "{bn1} {what} en {ds}. {bn2} {what} au total{detail}."
+        s = "{bn1} {what} in {ds}. {bn2} {what} in total{detail}."
         s = s.format(bn1=bn_1, bn2=bn_2, ds=ds, what=what, detail=detail)
     else:
         bn_3 = string.big_number(nb)

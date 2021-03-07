@@ -1,28 +1,13 @@
-# variables globales et constantes pour le package reqList
 from common import g
 from datetime import datetime
 
-ENV = 'PROD'
-DB = 'SGE'
-# DB = 'GINKO'
-DB = 'ADAM'
-# DB = 'RFC'
-
-# ENV = 'DIRECT'
-# DB = 'CAPC5'
+ENV = 'LOCAL'
+DB = 'XE'
 
 date = datetime.now().strftime("%Y%m%d")
 QUERY_FILE = 'reqlist/queries/e_RL.sql'
 IN_FILE = f"{g.paths['IN']}in.csv"
 OUT_FILE = f"{g.paths['OUT']}export_RL_{DB}_{date}.csv"
-
-GKO_INSTANCES = [
-    'GKO1_IDF', 'GKO2_MMN', 'GKO3_EST', 'GKO4_RAB', 'GKO5_MED', 'GKO6_SUO',
-    'GKO7_OUE', 'GKO8_ACL'
-]
-GKO_INSTANCES = ['GKO1_IDF', 'GKO2_MMN', 'GKO3_EST']
-# GKO_INSTANCES = ['GKO2_MMN']
-EXPORT_INSTANCES = True
 
 MAX_DB_CNX = 8
 SL_STEP_QUERY = 10
@@ -48,7 +33,7 @@ TMP_FILE_TYPE = '.csv'
 EC = '_EC'
 QN = '_QN'
 
-# Globales paramétrables
+# Settable globales
 VAR_DICT = {}
 
 # Process manager

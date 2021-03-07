@@ -1,4 +1,3 @@
-# Package SQL
 import common as com
 import sql.gl as gl
 import sql.log as log
@@ -46,9 +45,7 @@ def write_row(row, out_file, range_name='MONO'):
         line_out += g.CSV_SEPARATOR + s
     if line_out.strip(g.CSV_SEPARATOR) == '':
         return 0
-    if gl.DB == 'GINKO' and gl.EXPORT_INSTANCES:
-        line_out += g.CSV_SEPARATOR + range_name[5:]
-    elif gl.EXPORT_RANGE and range_name != 'MONO':
+    if gl.EXPORT_RANGE and range_name != 'MONO':
         line_out += g.CSV_SEPARATOR + range_name
     line_out += '\n'
     out_file.write(line_out)
