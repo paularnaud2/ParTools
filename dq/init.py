@@ -1,10 +1,10 @@
 import os
-import qdd.gl as gl
+import dq.gl as gl
 import common as com
 
 from common import g
 from math import floor
-from qdd.functions import read_list
+from dq.functions import read_list
 
 
 def init_compare_files(out):
@@ -100,10 +100,10 @@ def init_equal_diff_bool():
             gl.bool["DIFF"] = gl.DIFF_OUT
         else:
             bn = com.big_number(gl.MAX_ROW_EQUAL_OUT)
-            s = f"Attention les fichiers à comparer dépassent les {bn} lignes"
-            s += " et le paramètre EQUAL_OUT est activé."
-            s += "\nÉcrire les champs égaux dans le fichier de sortie ? (o/n)"
-            if com.log_input(s) == "o":
+            s = f"Warning: file to be compared have more than {bn} lines"
+            s += " EQUAL_OUT paramter is set to True."
+            s += "\nDo you want to write matching lines in output file ? (y/n)"
+            if com.log_input(s) == "y":
                 gl.bool["EQUAL"] = True
                 gl.bool["DIFF"] = gl.DIFF_OUT
             else:
@@ -145,6 +145,6 @@ def init_array_list():
         gl.array_list.append([])
 
     nb = gl.counters["row_max"]
-    s = "Tableau tampon initialisé."
-    s += f" Il pourra contenir un maximum de {nb} lignes."
+    s = "Buffer array initialised."
+    s += f" It can hold a maximum of {nb} lines."
     com.log(s)

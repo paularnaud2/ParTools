@@ -5,11 +5,12 @@ from .tools import init_params
 from .deco import log_exeptions
 
 from .log import log
+from .log import step_log
 from .log import init_log
 from .log import log_print
 from .log import log_array
 from .log import log_input
-from .log import step_log
+from .log import log_example
 from .log import init_sl_time
 from .log import gen_sl_detail
 

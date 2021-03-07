@@ -31,7 +31,7 @@ def split_file(**params):
             if not gen_split_out(out_dir, in_file):
                 break
 
-    com.log("Traitement terminé")
+    com.log("[toolSplit] Job over")
     com.log_print()
 
 
@@ -59,7 +59,7 @@ def gen_split_out(split_dir, in_file):
             file.write(in_line)
 
     file_nb = gl.N_OUT
-    s = f"Fichier découpé No.{file_nb} ({split_dir}) généré avec succès"
+    s = f"Splitted file no. {file_nb} ({split_dir}) successfully generated"
     if in_line == '':
         if i == 2 and gl.ADD_HEADER:
             remove(split_dir)
@@ -70,9 +70,7 @@ def gen_split_out(split_dir, in_file):
     com.log(s)
 
     if gl.N_OUT >= gl.MAX_FILE_NB:
-        s = f"Nombre maximum de fichiers atteint ({gl.MAX_FILE_NB} fichiers max)."
-        s += " Arrêt du traitement"
-        com.log(s)
+        com.log(f"Maximum number of files reached ({gl.MAX_FILE_NB})")
         return False
 
     return True

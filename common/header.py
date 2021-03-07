@@ -63,9 +63,8 @@ def has_header(in_var):
 
 def check_header(in_dir):
     if not has_header(in_dir):
-        s = f"Erreur : Le fichier d'entrée {in_dir} doit contenir une en-tête"
+        s = f"Error: the input file {in_dir} must have a header"
         log(s)
-        s = "Assurez-vous que les premiers éléments des deux premières lignes"
-        s += " sont de longeur différente."
+        s = "Make sure the first elements of the first two lines are of different lengths"
         log_print(s)
         raise Exception(g.E_MH)

@@ -1,6 +1,6 @@
 import os
 import sql
-import qdd as q
+import dq
 import common as com
 
 from test import gl
@@ -143,29 +143,29 @@ def test_sql():
     download(gl.SQL_QUERY_NO, gl.SQL_DL_OUT, ti=True)
 
     download(gl.SQL_QUERY, gl.SQL_DL_OUT)
-    q.file_match(gl.SQL_IN_FILE, gl.SQL_DL_OUT)
-    q.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
+    dq.file_match(gl.SQL_IN_FILE, gl.SQL_DL_OUT)
+    dq.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
 
     com.log("Test sql.dowload RG avec merge---------------")
     download_interrupted(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG)
     download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, tr=True)
-    q.file_match(gl.SQL_DL_OUT, gl.SQL_DL_OUT_RG)
+    dq.file_match(gl.SQL_DL_OUT, gl.SQL_DL_OUT_RG)
 
     com.log("Test sql.dowload RG sans merge---------------")
     download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, merge=False)
-    q.file_match(gl.SQL_RG_REF, gl.SQL_RG_COMP)
+    dq.file_match(gl.SQL_RG_REF, gl.SQL_RG_COMP)
 
     com.log("Test count simple----------------------------")
     download(gl.SQL_QUERY_COUNT_1, gl.SQL_DL_OUT_COUNT)
-    q.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
     download(gl.SQL_QUERY_COUNT_1_RG, gl.SQL_DL_OUT_COUNT)
-    q.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
 
     com.log("Test count group by--------------------------")
     download(gl.SQL_QUERY_COUNT_2, gl.SQL_DL_OUT_COUNT)
-    q.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
     download(gl.SQL_QUERY_COUNT_2_RG, gl.SQL_DL_OUT_COUNT)
-    q.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
-from qdd.main import sort_file
-import qdd.gl as gl
+from dq.main import sort_file
+import dq.gl as gl
 import os
 from common import log
 import common as com

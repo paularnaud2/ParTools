@@ -1,25 +1,23 @@
+from win10toast import ToastNotifier
 from common import g
 from .log import log
 
 
-def send_notif(msg, package='common', t=0, dur=10):
+def send_notif(msg, package='common', jdur=0, ndur=10):
 
-    if t != 0:
-        t = t / 1000
-        if t < g.MIN_DUR_NOTIF_TRIGGER:
+    if jdur != 0:
+        jdur = jdur / 1000
+        if jdur < g.MIN_DUR_NOTIF_TRIGGER:
             return
 
-    try:
-        from win10toast import ToastNotifier
-    except ModuleNotFoundError:
-        s = "Échec de l'envoi de la notification windows."
-        s += " Le module win10toast n'est pas installé."
-        log(s)
-        return
-
     toaster = ToastNotifier()
-    toaster.show_toast("Python - " + package, msg, duration=dur, threaded=True)
-    log("Notification Windows envoyée")
+    toaster.show_toast(
+        "Python - " + package,
+        msg,
+        duration=ndur,
+        threaded=True,
+    )
+    log("Windows notification sent")
 
 
 def list_to_dict(list_in, separator='='):
@@ -32,7 +30,7 @@ def list_to_dict(list_in, separator='='):
 
 def init_params(mod, params):
     if len(params) > 0:
-        log(f"Initialisation des paramètres : {params}")
+        log(f"Initialising parameters: {params}")
         for key in params:
             mod.__getattribute__(key)
             mod.__setattr__(key, params[key])

@@ -1,4 +1,4 @@
-import qdd as q
+import dq
 import common as com
 import toolFilter as f
 
@@ -21,7 +21,7 @@ def filter():
         COL_LIST=['PRM', 'AFFAIRE'],
         SL_STEP=500,
     )
-    q.file_match(gl.FLT_OUT, gl.FLT_OUT_REF)
+    dq.file_match(gl.FLT_OUT, gl.FLT_OUT_REF)
 
 
 def split():
@@ -32,9 +32,9 @@ def split():
         MAX_FILE_NB=3,
         ADD_HEADER=True,
     )
-    q.file_match(gl.S_OUT_1, gl.S_OUT_REF_1)
-    q.file_match(gl.S_OUT_2, gl.S_OUT_REF_2)
-    q.file_match(gl.S_OUT_3, gl.S_OUT_REF_3)
+    dq.file_match(gl.S_OUT_1, gl.S_OUT_REF_1)
+    dq.file_match(gl.S_OUT_2, gl.S_OUT_REF_2)
+    dq.file_match(gl.S_OUT_3, gl.S_OUT_REF_3)
 
 
 def test_tools():
@@ -44,7 +44,7 @@ def test_tools():
 
     # test toolParseXML
     parse_xml(IN_DIR=gl.XML_IN, OUT_DIR=gl.XML_OUT)
-    q.file_match(gl.XML_OUT, gl.XML_OUT_REF)
+    dq.file_match(gl.XML_OUT, gl.XML_OUT_REF)
 
     # test toolSplit
     split()
@@ -52,23 +52,23 @@ def test_tools():
     # test toolDup - find_dup simple
     find_dup(gl.DUP_IN, gl.DUP_OUT)
     com.log_print()
-    q.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
+    dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
     # test toolDup - find_dup col
     find_dup(gl.DUP_COL_IN, col=1)
     com.log_print()
-    q.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
+    dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
     # test toolDup - del_dup
     del_dup(gl.DUP_IN, gl.DUP_OUT)
     com.log_print()
-    q.file_match(gl.DUP_OUT, gl.DEL_DUP_OUT_REF)
+    dq.file_match(gl.DUP_OUT, gl.DEL_DUP_OUT_REF)
 
     # test toolDup - find_dup_list
     list_in = com.load_csv(gl.DUP_IN)
     dup_list = find_dup_list(list_in)
     com.save_csv(dup_list, gl.DUP_OUT)
-    q.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
+    dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
     # test toolFilter
     filter()

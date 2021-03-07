@@ -1,9 +1,9 @@
-import qdd.gl as gl
+import dq.gl as gl
 import common as com
 
-from qdd.init import init_compare
-from qdd.functions import read_list
-from qdd.functions import compare_elt
+from dq.init import init_compare
+from dq.functions import read_list
+from dq.functions import compare_elt
 
 
 def compare_sorted_files(in_file_dir_1, in_file_dir_2, out_file_dir):
@@ -27,14 +27,14 @@ def comp(in1, in2, out):
 
 def finish(out_file_dir):
 
-    s = "Fichier de sortie généré avec succès : {}\n"
-    s += "\t\t{} lignes parcourues dans le fichier 1\n"
-    s += "\t\t{} lignes parcourues dans le fichier 2\n"
-    s += "\t\t{} lignes écrites dans le fichier de sortie"
     nb_out = com.big_number(gl.counters["out"])
     nb_1 = com.big_number(gl.counters["c1"])
     nb_2 = com.big_number(gl.counters["c2"])
-    com.log(s.format(out_file_dir, nb_1, nb_2, nb_out))
+    s = f"Output file successfully generated in {out_file_dir}\n"
+    s += f"\t\t{nb_1} lines read in file 1\n"
+    s += f"\t\t{nb_2} lines read in file 2\n"
+    s += f"\t\t{nb_out} lines written in output file"
+    com.log(s)
 
 
 def compare_equal(line_1_list, line_2_list, in_file_1, in_file_2, out_file):
@@ -60,7 +60,8 @@ def compare_equal(line_1_list, line_2_list, in_file_1, in_file_2, out_file):
 
 
 def compare_line(line_1_list, line_2_list):
-    # comparaison de deux lignes dont l'élément pivot est égal
+    # Comparing two lines whose pivot element is equal
+
     line_diff = []
     for i, elt_1 in enumerate(line_1_list):
         elt_2 = line_2_list[i]

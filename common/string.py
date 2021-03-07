@@ -11,9 +11,9 @@ def get_duration_string(duration_ms):
             duration_s = duration_s % 60
             dm = str(floor(duration_m))
             ds = str(floor(duration_s))
-            out = f"{dm} minutes et {ds} secondes"
+            out = f"{dm} minutes and {ds} seconds"
             return (out)
-        out = str(duration_s) + " secondes"
+        out = str(duration_s) + " seconds"
         return (out)
     out = str(duration_ms) + " ms"
     return (out)

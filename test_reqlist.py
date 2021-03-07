@@ -1,5 +1,5 @@
+import dq
 import time
-import qdd as q
 import common as com
 import reqlist as rl
 
@@ -41,7 +41,7 @@ def reqlist(in_file,
 
 def left_join(left, right, ref):
     rl.left_join(left, right, gl.RL_OUT_JOIN, debug=False)
-    q.file_match(ref, gl.RL_OUT_JOIN)
+    dq.file_match(ref, gl.RL_OUT_JOIN)
 
 
 def test_reqlist():
@@ -74,20 +74,20 @@ def test_reqlist():
     # test nominal conditions
     reqlist(gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_1, cnx=1)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_2, gl.RL_QUERY_2)
-    q.file_match(gl.SQL_IN_FILE, gl.RL_OUT_2, del_dup=True)
-    q.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
+    dq.file_match(gl.SQL_IN_FILE, gl.RL_OUT_2, del_dup=True)
+    dq.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
 
     # test interruption other threads not finished
     com.mkdirs(gl.RL_TMP, True)
     reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, cnx=6, elt=10)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True, cnx=6, elt=10)
-    q.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
+    dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
 
     # test interruption other threads finished
     com.mkdirs(gl.RL_TMP, True)
     reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
-    q.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
+    dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
 
 
 def reqlist_interrupted(inp, out, query, sleep=False, cnx=3, elt=100):

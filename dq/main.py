@@ -1,26 +1,26 @@
 import os
-import qdd.gl as gl
+import dq.gl as gl
 import common as com
 
 from time import time
-from qdd.init import set_dirs
-from qdd.init import init_tmp_dir
-from qdd.init import init_compare_files
+from dq.init import set_dirs
+from dq.init import init_tmp_dir
+from dq.init import init_compare_files
 from toolDup import del_dup_list
-from qdd.csf import compare_sorted_files
-from qdd.sort import sort_file
-from qdd.functions import check_split
-from qdd.functions import compare_headers
+from dq.csf import compare_sorted_files
+from dq.sort import sort_file
+from dq.functions import check_split
+from dq.functions import compare_headers
 
 
-def run_qdd(**params):
+def run_dq(**params):
 
-    com.log("[qdd] run_qdd")
+    com.log("[dq] run_dq")
     start_time = time()
     com.init_params(gl, params)
     init_tmp_dir()
     dirs = set_dirs()
-    com.log(f"Tri et comparaison des fichiers {dirs['in1']} et {dirs['in2']}")
+    com.log(f"Sorting and comparing {dirs['in1']} and {dirs['in2']}")
     com.log_print('|')
     com.check_header(dirs["in1"])
     com.check_header(dirs["in2"])
@@ -31,19 +31,19 @@ def run_qdd(**params):
         com.log_print('|')
         check_split(dirs["out"])
 
-    s = "Exécution terminée en {}"
-    duration = com.get_duration_ms(start_time)
-    s = s.format(com.get_duration_string(duration))
+    dms = com.get_duration_ms(start_time)
+    dstr = com.get_duration_string(dms)
+    s = f"[dq] run_dq job finished in {dstr}"
     com.log(s)
-    com.send_notif(s, "qdd", duration)
+    com.send_notif(s, "dq", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
         os.startfile(dirs["out"])
 
 
 def file_match(in1, in2, del_dup=False, compare=False, err=True, out=''):
-    com.log("[qdd] file_match")
-    s = f"Comparaison des fichiers {in1} et {in2} en cours..."
+    com.log("[dq] file_match")
+    s = f"Comparing files '{in1}' and '{in2}'..."
     com.log(s)
     ar1 = com.load_csv(in1)
     ar2 = com.load_csv(in2)
@@ -55,15 +55,15 @@ def file_match(in1, in2, del_dup=False, compare=False, err=True, out=''):
 
     res = ar1 == ar2
     if res:
-        com.log("Les deux fichiers sont identiques")
+        com.log("Files match")
     else:
-        com.log("Les deux fichiers sont différents.")
+        com.log("Files don't match")
 
     if not res or compare:
         init_compare_files(out)
         com.save_csv(ar1, gl.TMP_1)
         com.save_csv(ar2, gl.TMP_2)
-        com.log(f"Comparaison de '{gl.TMP_1}' et '{gl.TMP_2}'...")
+        com.log(f"Deep comparison of '{gl.TMP_1}' and '{gl.TMP_2}'...")
         compare_files(gl.TMP_1, gl.TMP_2, gl.OUT_DIR)
 
     if not res and err:
@@ -80,12 +80,12 @@ def compare_files(in_1, in_2, out):
 
     duration = com.get_duration_ms(start_time)
     ds = com.get_duration_string(duration)
-    s = f"Comparaison terminée en {ds}"
+    s = f"Comparison finished in {ds}"
     com.log(s)
     if gl.counters["diff"] == 0:
-        com.log("Les deux fichiers sont identiques")
+        com.log("Files match")
         return True
     else:
         bn = com.big_number(gl.counters["diff"])
-        com.log(f"{bn} écarts trouvés")
+        com.log(f"{bn} differences found")
         return False

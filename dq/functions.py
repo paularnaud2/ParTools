@@ -1,5 +1,5 @@
 import sys
-import qdd.gl as gl
+import dq.gl as gl
 import common as com
 
 from common import g
@@ -10,8 +10,8 @@ from toolSplit import split_file
 
 def check_header(inp):
     if not com.has_header(inp):
-        s = f"Erreur : en tête absente dans le fichier '{inp}'."
-        s += " Les fichiers entrants doivent comporter une en-tête."
+        s = f"Error: missing header in file '{inp}'."
+        s += " Input files must have a header."
         com.log(s)
         raise Exception(g.E_MH)
 
@@ -22,8 +22,8 @@ def compare_headers(in1, in2):
     line2 = com.get_header(in2)
 
     if line1 != line2:
-        s = f"Erreur : les fichiers {in1} et {in2} n'ont pas la même en-tête."
-        s += " Les fichiers entrants doivent avoir la même en-tête."
+        s = f"Error: files {in1} and {in2} don't have the same header."
+        s += " Input files must have the same header."
         com.log(s)
         raise Exception(g.E_DH)
 
@@ -56,8 +56,8 @@ def write_min_elt(min_elt, out_file):
         com.step_log(gl.counters["tot_written_lines_out"], gl.SL_STEP)
         gl.prev_elt = min_elt
     elif check_dup(min_elt):
-        # on n'écrit pas les doublons purs dans le fichier de sortie
-        # mais on écrit les doublons de clé
+        # Pure duplicates are not written in output file
+        # But key duplicates are (lines differ but key equal)
         com.write_csv_line(min_elt, out_file)
         gl.counters["tot_written_lines_out"] += 1
         com.step_log(gl.counters["tot_written_lines_out"], gl.SL_STEP)
@@ -65,12 +65,11 @@ def write_min_elt(min_elt, out_file):
 
 def check_dup(elt):
     if elt == gl.prev_elt:
-        # doublon pure écarté
+        # Pure duplicates are written in a specific list
         gl.dup_list.append(elt)
         return False
     else:
-        # on enregistre et différentie les cas de doublons
-        # sur la clé de recherche
+        # Key duplicates are also written in a specific list
         if not gl.bool["dup_key"]:
             gl.dup_key_list.append(gl.prev_elt)
             gl.bool["dup_key"] = True
@@ -124,12 +123,12 @@ def split_needed():
     n_line_2 = n_line + n_out_files - 1
     n_out_files = ceil(n_line_2 / gl.MAX_LINE_SPLIT)
     bn = com.big_number(gl.MAX_LINE_SPLIT)
-    s = f"Le fichier d'entrée dépasse les {bn} lignes."
-    s += f" Il va être découpé en {n_out_files} fichiers "
-    s += f"(nb max de fichiers fixé à {gl.MAX_FILE_NB_SPLIT}). Continuer ? (o/n)"
+    s = f"Input file has more than {bn} lines."
+    s += f" It will be splitted in {n_out_files} files "
+    s += f"(max file nb set to {gl.MAX_FILE_NB_SPLIT}). Continue ? (y/n)"
     if gl.TEST_PROMPT_SPLIT:
         com.log(s)
-        com.log_print('o')
+        com.log_print('y (TEST_PROMPT_SPLIT = True)')
         return True
     if com.log_input(s) == "n":
         sys.exit()

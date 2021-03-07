@@ -50,16 +50,15 @@ def init_log(parent_module='', force_init=False):
 
     g.LOG_FILE_INITIALISED = True
     log_path = g.paths['LOG'] + g.LOG_FILE
-    s = f"Fichier de log initialisé ({log_path})"
+    s = f"Log file initialised ({log_path})"
     log(s, print_date=True)
-    log_print("Version Python : " + sys.version)
+    log_print("Python version: " + sys.version)
     log_print()
 
 
-def step_log(counter, step, what='lignes écrites', nb=0, th_name='DEFAULT'):
-    # Pour une utilisation simple, initialiser avec init_sl_time()
-    # Pour une utilisation multi_thread, initialiser avec
-    # gen_sl_detail(range_name)
+def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
+    # For a simple use, initialise with init_sl_time()
+    # For multi_thread use, initialise with gen_sl_detail(range_name)
 
     if counter % step != 0:
         return False
@@ -99,16 +98,16 @@ def init_sl_time(th_name='DEFAULT'):
         g.sl_time_dict[th_name] = time()
 
 
-def gen_sl_detail(range_name, th_nb=1, what='la plage', multi_thread=False):
+def gen_sl_detail(range_name, th_nb=1, what='range', multi_thread=False):
 
     th_name = str(range_name) + '_' + str(th_nb)
 
     if range_name not in ['', 'MONO'] and multi_thread is True:
-        detail = ' pour {} {} (thread No.{})'.format(what, range_name, th_nb)
+        detail = ' for {} {} (thread no. {})'.format(what, range_name, th_nb)
     elif range_name not in ['', 'MONO']:
-        detail = ' pour {} {}'.format(what, range_name)
+        detail = ' for {} {}'.format(what, range_name)
     elif multi_thread is True:
-        detail = ' (thread No.{})'.format(th_nb)
+        detail = ' (thread no. {})'.format(th_nb)
     else:
         detail = ''
 
@@ -122,3 +121,8 @@ def gen_sl_detail(range_name, th_nb=1, what='la plage', multi_thread=False):
 def log_array(array, nb_tab=0):
     for elt in array:
         log_print(elt, nb_tab)
+
+
+def log_example(list_in, what="duplicates"):
+    log_print(f"Examples of {what} (limited to {g.MAX_EXAMPLE_PRINT}):")
+    log_array(list_in[:g.MAX_EXAMPLE_PRINT])

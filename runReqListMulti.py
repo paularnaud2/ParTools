@@ -2,7 +2,7 @@ from reqlist import run_reqList
 from reqlist import gl
 
 if __name__ == '__main__':
-    # QDD SMO ADAM/GINKO
+    # DQ SMO ADAM/GINKO
     ""
     DB = 'ADAM'
     QUERY_FILE = 'reqlist/queries/ADAM_INFOS_SRV.sql'
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     run_reqList(DB, QUERY_FILE, gl.OUT_FILE, gl.OUT_FILE)
     ""
 
-    # QDD ctr_frn SGE/GINKO
+    # DQ ctr_frn SGE/GINKO
     """
     DB = 'SGE'
     QUERY_FILE = 'reqlist/queries/PRM_INFOS_PDL.sql'
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     run_reqList(DB, QUERY_FILE, gl.OUT_FILE, gl.OUT_FILE)
     """
 
-    # QDD oppositions ADAM/GINKO
+    # DQ oppositions ADAM/GINKO
     """
     DB = 'SGE'
     QUERY_FILE = 'reqlist/queries/PRM_ETAT-SI-NIV.sql'
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     run_reqList(DB, QUERY_FILE, gl.IN_FILE, gl.IN_FILE)
     """
 
-    # QDD ctr SGE/GINKO
+    # DQ ctr SGE/GINKO
     """
     DB = 'SGE'
     QUERY_FILE = 'reqlist/queries/SGE_ETAT_SI.sql'
