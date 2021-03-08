@@ -18,7 +18,7 @@ def test_common():
         com.log(s)
 
     # test notif
-    com.send_notif('Notification test', 'Test', dur=2)
+    com.send_notif('Notification test', 'Test', ndur=2)
 
 
 if __name__ == '__main__':

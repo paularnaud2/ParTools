@@ -87,8 +87,6 @@ def gen_header(c):
         if gl.header == '':
             header = [elt[0] for elt in c.description]
             gl.header = header
-            if gl.bools["EXPORT_INSTANCES"]:
-                header.append('INSTANCE')
 
 
 def tmp_finish(th_name):

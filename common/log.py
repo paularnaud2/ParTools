@@ -98,7 +98,7 @@ def init_sl_time(th_name='DEFAULT'):
         g.sl_time_dict[th_name] = time()
 
 
-def gen_sl_detail(range_name, th_nb=1, what='range', multi_thread=False):
+def gen_sl_detail(range_name='', th_nb=1, what='range', multi_thread=False):
 
     th_name = str(range_name) + '_' + str(th_nb)
 

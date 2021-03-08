@@ -55,12 +55,12 @@ def finish(start_time):
         find_dup(gl.OUT_FILE, col=1)
         com.log_print('|')
 
-    s = "Exécution terminée en {}"
-    t = com.get_duration_ms(start_time)
-    s = s.format(com.get_duration_string(t))
+    dms = com.get_duration_ms(start_time)
+    dstr = com.get_duration_string(dms)
+    s = f"Exécution terminée en {dstr}"
     com.log(s)
     if gl.SEND_NOTIF:
-        com.send_notif(s, "reqlist", t)
+        com.send_notif(s, "reqlist", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
         startfile(gl.OUT_FILE)

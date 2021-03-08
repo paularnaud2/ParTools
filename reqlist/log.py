@@ -2,10 +2,8 @@ import common as com
 import reqlist.gl as gl
 
 
-def start_exec(inst, th_nb):
-    if inst != '':
-        s = f"Exécution des requêtes pour {inst}..."
-    elif gl.bools['MULTI_TH'] is True:
+def start_exec(th_nb):
+    if gl.bools['MULTI_TH'] is True:
         s = f"Exécution des requêtes (thread No. {th_nb})..."
     else:
         s = "Exécution des requêtes..."
