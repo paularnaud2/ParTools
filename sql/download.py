@@ -12,7 +12,7 @@ from sql.process import process_range_list
 
 @com.log_exeptions
 def download(**params):
-    com.log('[sql] download')
+    com.log('[sql] download: start')
     start_time = time()
     com.init_params(gl, params)
     init()
@@ -23,20 +23,19 @@ def download(**params):
     process_range_list(range_list, rg_file_name)
     if gl.MERGE_RG_FILES or not gl.bools['RANGE_QUERY']:
         rg.merge_tmp_files()
+        group_by()
     else:
         rg.move_tmp_folder()
 
-    group_by()
     finish(start_time)
 
 
 def finish(start_time):
 
-    dms = com.get_duration_ms(start_time)
-    dstr = com.get_duration_string(dms)
     n = gl.counters["row"]
     bn = com.big_number(n)
-    com.log(f"Download over. {bn} lines written in {dstr}")
+    s = f"Data fetched from {gl.DB} ({bn} lines written)"
+    com.log(s)
 
     if gl.bools["MERGE_OK"]:
         out_dir = gl.OUT_FILE
@@ -52,7 +51,10 @@ def finish(start_time):
             startfile(out_dir)
 
     com.log_print('|')
-    com.log("[sql] download job over")
+    dms = com.get_duration_ms(start_time)
+    dstr = com.get_duration_string(dms)
+    s = f"download: end ({dstr})"
+    com.log("[sql] " + s)
     com.log_print()
     if gl.SEND_NOTIF:
-        com.send_notif("Download job over", "sql", dms)
+        com.send_notif(s, "sql", dms)

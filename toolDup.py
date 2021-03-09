@@ -15,13 +15,13 @@ MAX_DUP_PRINT = 5
 
 
 def find_dup(in_dir, out_dir='', open_out=False, col=0):
-    com.log("[toolDup] find_dup")
+    com.log("[toolDup] find_dup: start")
     (cur_list, out_dir) = init_find(in_dir, out_dir, col)
     bn = com.big_number(len(cur_list))
     com.log(f"File loaded, {bn} lines to be analysed")
     dup_list = find_dup_list(cur_list)
     finish_find(dup_list, out_dir, open_out)
-    com.log("[toolDup] find_dup job over")
+    com.log("[toolDup] find_dup: end")
 
 
 def init_find(in_dir, out_dir, col):
@@ -44,7 +44,7 @@ def init_find(in_dir, out_dir, col):
 
 
 def del_dup(in_dir, out_dir, open_out=False):
-    com.log("[toolDup] del_dup")
+    com.log("[toolDup] del_dup: start")
     com.log(f"Deleting duplicates in file '{in_dir}'...")
     cur_list = com.load_txt(in_dir)
     bn = com.big_number(len(cur_list))
@@ -54,7 +54,7 @@ def del_dup(in_dir, out_dir, open_out=False):
     else:
         out_list = del_dup_list(cur_list)
     finish_del(out_list, out_dir, open_out)
-    com.log("[toolDup] del_dup job over")
+    com.log("[toolDup] del_dup: end")
 
 
 def find_dup_list(in_list):

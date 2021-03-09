@@ -12,16 +12,16 @@ from sql.execute import execute
 
 @com.log_exeptions
 def upload(**params):
-    com.log('[sql] upload')
+    com.log('[sql] upload: start')
+    start_time = time()
     init(params)
     if not check_restart():
         prepare_bdd()
         init(params)
     script = get_script()
-    start_time = time()
     com.check_header(gl.UPLOAD_IN)
-    com.log(f"Opening input file {gl.UPLOAD_IN}")
     with open(gl.UPLOAD_IN, 'r', encoding='utf-8') as in_file:
+        com.log(f"Input file {gl.UPLOAD_IN} opened")
         # First line is dismissed (header)
         in_file.readline()
         for line in in_file:
@@ -52,10 +52,10 @@ def finish_this(start_time):
     gl.cnx.close()
     os.remove(gl.TMP_FILE_CHUNK)
     bn = com.big_number(gl.counters['main'])
-    dur = com.get_duration_ms(start_time)
-    durs = com.get_duration_string(dur)
-    s = f"Data injection over. {bn} lines exported in {durs}."
-    com.log(s)
+    dms = com.get_duration_ms(start_time)
+    dstr = com.get_duration_string(dms)
+    com.log(f"{bn} lines exported")
+    com.log(f"[sql] upload: end ({dstr})")
 
 
 def init(params):

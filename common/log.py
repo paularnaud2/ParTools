@@ -58,7 +58,7 @@ def init_log(parent_module='', force_init=False):
 
 def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
     # For a simple use, initialise with init_sl_time()
-    # For multi_thread use, initialise with gen_sl_detail(range_name)
+    # For multi_thread use, initialise with gen_sl_detail(rg_name)
 
     if counter % step != 0:
         return False
@@ -69,12 +69,12 @@ def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
         detail = ''
 
     st = g.sl_time_dict[th_name]
-    duration_ms = string.get_duration_ms(st)
-    ds = string.get_duration_string(duration_ms)
+    dms = string.get_duration_ms(st)
+    ds = string.get_duration_string(dms)
     bn_1 = string.big_number(step)
     bn_2 = string.big_number(counter)
     if nb == 0:
-        s = "{bn1} {what} in {ds}. {bn2} {what} in total{detail}."
+        s = "{bn1} {what} in {dstr}. {bn2} {what} in total{detail}."
         s = s.format(bn1=bn_1, bn2=bn_2, ds=ds, what=what, detail=detail)
     else:
         bn_3 = string.big_number(nb)
@@ -98,16 +98,16 @@ def init_sl_time(th_name='DEFAULT'):
         g.sl_time_dict[th_name] = time()
 
 
-def gen_sl_detail(range_name='', th_nb=1, what='range', multi_thread=False):
+def gen_sl_detail(rg_name='', th_nb=1, what='range', multi_th=False):
 
-    th_name = str(range_name) + '_' + str(th_nb)
+    th_name = str(rg_name) + '_' + str(th_nb)
 
-    if range_name not in ['', 'MONO'] and multi_thread is True:
-        detail = ' for {} {} (thread no. {})'.format(what, range_name, th_nb)
-    elif range_name not in ['', 'MONO']:
-        detail = ' for {} {}'.format(what, range_name)
-    elif multi_thread is True:
-        detail = ' (thread no. {})'.format(th_nb)
+    if rg_name not in ['', 'MONO'] and multi_th is True:
+        detail = f" for {what} {rg_name} (connection no. {th_nb})"
+    elif rg_name not in ['', 'MONO']:
+        detail = f" for {what} {rg_name}"
+    elif multi_th is True:
+        detail = f" (thread no. {th_nb})"
     else:
         detail = ''
 
@@ -124,5 +124,8 @@ def log_array(array, nb_tab=0):
 
 
 def log_example(list_in, what="duplicates"):
+    if not list_in:
+        return
+
     log_print(f"Examples of {what} (limited to {g.MAX_EXAMPLE_PRINT}):")
     log_array(list_in[:g.MAX_EXAMPLE_PRINT])

@@ -78,9 +78,9 @@ def compare_files(in_1, in_2, out):
     com.gen_header(in_1, gl.COMPARE_FIELD, out)
     compare_sorted_files(in_1, in_2, out)
 
-    duration = com.get_duration_ms(start_time)
-    ds = com.get_duration_string(duration)
-    s = f"Comparison finished in {ds}"
+    dms = com.get_duration_ms(start_time)
+    dstr = com.get_duration_string(dms)
+    s = f"Comparison finished in {dstr}"
     com.log(s)
     if gl.counters["diff"] == 0:
         com.log("Files match")

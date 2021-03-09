@@ -12,7 +12,7 @@ verrou = RLock()
 
 def process_grp(c, grp, th_nb=1):
 
-    th_name = com.gen_sl_detail(th_nb=th_nb, multi_thread=gl.bools['MULTI_TH'])
+    th_name = com.gen_sl_detail(th_nb=th_nb, multi_th=gl.bools['MULTI_TH'])
     if not file.tmp_init(th_name, th_nb):
         return
     with verrou:
@@ -35,7 +35,7 @@ def process_query(c, query, query_nb, th_name, th_nb):
     com.step_log(
         query_nb,
         gl.SL_STEP_QUERY,
-        what='requêtes exécutées',
+        what='queries executed',
         th_name=th_name,
     )
 
@@ -54,7 +54,7 @@ def test_restart(query_nb, th_nb):
     sleep = False
     with verrou:
         if query_nb == gl.counters['N_STOP'] and not gl.MD['STOP']:
-            s = f"TEST_RESTART : Arrêt automatique du traitement (thread No. {th_nb})\n"
+            s = f"TEST_RESTART: Automatic stop (thread no. {th_nb})\n"
             com.log(s)
             # A STOP flag is sent through the manager dict to the main process in order
             # to terminate this subprocess and all the threads.
@@ -65,7 +65,7 @@ def test_restart(query_nb, th_nb):
 
     if sleep:
         time.sleep(1)
-        raise Exception("This thread is not supposed to continue !")
+        raise Exception("This thread is not supposed to continue!")
 
 
 def export_cursor(cursor):

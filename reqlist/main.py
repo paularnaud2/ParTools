@@ -6,7 +6,7 @@ from time import time
 from os import startfile
 from toolDup import find_dup
 from reqlist.dl import download
-from reqlist.join import join_arrays
+from reqlist.join import left_join_arrays
 
 
 @com.log_exeptions
@@ -16,49 +16,50 @@ def run_reqList(**params):
         download(gl.QUERY_FILE)
 
     if not gl.SQUEEZE_JOIN:
-        left_join()
+        left_join_files()
 
-    finish(gl.start_time)
+    finish()
 
 
-def left_join(ldir='', rdir='', out='', debug=False):
+def left_join_files(ldir='', rdir='', out='', debug=False):
+    com.log("[reqlist] left_join_files: start")
     if debug:
         gl.DEBUG_JOIN = True
     if ldir or rdir:
         init_globals()
         com.mkdirs(gl.TMP_PATH, True)
-        com.log(f"Chargement des tableaux {ldir} et {rdir}...")
+        com.log(f"Loading arrays from '{ldir}' and '{rdir}'...")
         gl.ar_in = com.load_csv(ldir)
         ar_right = com.load_csv(rdir)
-        com.log("Tableaux chargés")
+        com.log("Arrays loaded")
         com.log_print('|')
     else:
-        com.log("Chargement du tableau de droite...")
+        com.log("Loading right arrays...")
         ar_right = com.load_csv(gl.OUT_SQL)
-        com.log("Tableau de droite chargé")
+        com.log("Right array loaded")
         com.log_print('|')
-    join_arrays(gl.ar_in, ar_right)
+    left_join_arrays(gl.ar_in, ar_right)
     if not out:
         out = gl.OUT_FILE
-    com.log("Sauvegarde du fichier de sortie...")
+    com.log("Saving output file...")
     com.save_csv(gl.out_array, out)
-    s = f"Fichier de sortie sauvegardé à l'adresse '{out}'"
+    s = f"Output file saved in {out}"
     com.log(s)
+    com.log("[reqlist] left_join_files: end")
+    com.log_print('|')
 
 
-def finish(start_time):
+def finish():
     if gl.CHECK_DUP:
-        com.log_print('|')
-        s = "Vérification des doublons sur la première colonne"
-        s += " du fichier de sortie"
+        s = "Checking duplicates on the first column of the output file..."
         com.log(s)
         find_dup(gl.OUT_FILE, col=1)
         com.log_print('|')
 
-    dms = com.get_duration_ms(start_time)
+    dms = com.get_duration_ms(gl.start_time)
     dstr = com.get_duration_string(dms)
-    s = f"Exécution terminée en {dstr}"
-    com.log(s)
+    s = f"run_reqList: end ({dstr})"
+    com.log("[reqlist] " + s)
     if gl.SEND_NOTIF:
         com.send_notif(s, "reqlist", dms)
     com.log_print()
@@ -67,13 +68,13 @@ def finish(start_time):
 
 
 def init(params):
-    com.log("[reqlist] run_reqList")
+    com.log("[reqlist] run_reqList: start")
     com.init_params(gl, params)
     init_globals()
     com.check_header(gl.IN_FILE)
-    com.log(f"Chargement du tableau d'entrée depuis {gl.IN_FILE}...")
+    com.log(f"Loading input array from '{gl.IN_FILE}'...")
     gl.ar_in = com.load_csv(gl.IN_FILE)
-    com.log("Tableau d'entrée chargé")
+    com.log("Input array loaded")
     com.log_print('|')
 
 

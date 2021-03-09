@@ -35,7 +35,7 @@ def init(params):
 
 
 def parse_xml(**params):
-    com.log("[toolParseXML] parse_xml")
+    com.log("[toolParseXML] parse_xml: start")
     init(params)
     gen_img_dict()
     save_img_dict()
@@ -43,10 +43,9 @@ def parse_xml(**params):
 
 
 def finish():
-    dur = com.get_duration_ms(gl.start_time)
+    dur = com.get_duration(gl.start_time)
     bn = com.big_number(gl.N_WRITE)
-    s = "Parsing terminé. {} lignes écrites en {}."
-    s = s.format(bn, com.get_duration_string(dur))
+    s = f"[toolParseXML] parse_xml: end ({bn} lines written in {dur}."
     com.log(s)
     com.log_print()
     if gl.OPEN_OUT_FILE:

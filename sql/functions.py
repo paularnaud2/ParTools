@@ -15,24 +15,24 @@ def get_final_script(script_file):
     return script
 
 
-def write_rows(cursor, range_name='MONO', th_name='DEFAULT', th_nb=0):
+def write_rows(cursor, rg_name='MONO', th_name='DEFAULT', th_nb=0):
 
-    log.write_rows_init(range_name, th_nb)
-    with open(gl.out_files[range_name + gl.EC], 'a',
+    log.write_rows_init(rg_name, th_nb)
+    with open(gl.out_files[rg_name + gl.EC], 'a',
               encoding='utf-8') as out_file:
         i = 0
         for row in cursor:
-            iter = write_row(row, out_file, range_name)
+            iter = write_row(row, out_file, rg_name)
             i += iter
             with verrou:
                 gl.counters["row"] += iter
             com.step_log(i, gl.SL_STEP, th_name=th_name)
 
-    rename(gl.out_files[range_name + gl.EC], gl.out_files[range_name])
-    log.write_rows_finish(range_name, i, th_nb)
+    rename(gl.out_files[rg_name + gl.EC], gl.out_files[rg_name])
+    log.write_rows_finish(rg_name, i, th_nb)
 
 
-def write_row(row, out_file, range_name='MONO'):
+def write_row(row, out_file, rg_name='MONO'):
 
     s = com.csv_clean(str(row[0]))
     line_out = s
@@ -45,8 +45,8 @@ def write_row(row, out_file, range_name='MONO'):
         line_out += g.CSV_SEPARATOR + s
     if line_out.strip(g.CSV_SEPARATOR) == '':
         return 0
-    if gl.EXPORT_RANGE and range_name != 'MONO':
-        line_out += g.CSV_SEPARATOR + range_name
+    if gl.EXPORT_RANGE and rg_name != 'MONO':
+        line_out += g.CSV_SEPARATOR + rg_name
     line_out += '\n'
     out_file.write(line_out)
     return 1

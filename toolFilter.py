@@ -39,7 +39,7 @@ def init(params):
     init_vars(params)
 
     com.log(f"Filtrage en cours sur le fichier '{gl.IN_FILE}'...")
-    gl.s = "{bn_1} lignes parcourues en {ds}. {bn_2} lignes parcourues au total "
+    gl.s = "{bn_1} lignes parcourues en {dstr}. {bn_2} lignes parcourues au total "
     gl.s += "({bn_3} lignes écrites dans la liste de sortie)."
 
 

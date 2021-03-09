@@ -39,8 +39,8 @@ def reqlist(in_file,
     )
 
 
-def left_join(left, right, ref):
-    rl.left_join(left, right, gl.RL_OUT_JOIN, debug=False)
+def left_join_files(left, right, ref):
+    rl.left_join_files(left, right, gl.RL_OUT_JOIN, debug=False)
     dq.file_match(ref, gl.RL_OUT_JOIN)
 
 
@@ -49,41 +49,42 @@ def test_reqlist():
     com.mkdirs(gl.RL_TMP, True)
     com.mkdirs(gl.RL_OUT, True)
     com.log_print()
-    com.log('Test join----------------------------------------')
-    left_join(gl.RL_LEFT_1, gl.RL_RIGHT_1, gl.RL_OUT_JOIN_REF_1)
-    left_join(gl.RL_LEFT_2, gl.RL_RIGHT_2, gl.RL_OUT_JOIN_REF_2)
-    left_join(gl.RL_LEFT_3, gl.RL_RIGHT_3, gl.RL_OUT_JOIN_REF_3)
 
-    com.log("Préparation de la BDD----------------------------")
+    com.log('Test join---------------------------------------------')
+    left_join_files(gl.RL_LEFT_1, gl.RL_RIGHT_1, gl.RL_OUT_JOIN_REF_1)
+    left_join_files(gl.RL_LEFT_2, gl.RL_RIGHT_2, gl.RL_OUT_JOIN_REF_2)
+    left_join_files(gl.RL_LEFT_3, gl.RL_RIGHT_3, gl.RL_OUT_JOIN_REF_3)
+
+    com.log('Preparing DB------------------------------------------')
     upload(gl.SQL_IN_FILE)
     arr = com.load_csv(gl.SQL_IN_FILE)
     arr = [elt[0] for elt in arr]
     com.save_csv(arr, gl.RL_IN_1)
 
-    com.log('Test reqlist--------------------------------------')
-    # test no sql output
+    com.log('Test reqlist------------------------------------------')
+    # Test no sql output
     ttry(reqlist, g.E_VA, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_NO)
 
-    # test no var
+    # Test no var
     ttry(reqlist, g.E_MV, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_MV)
 
-    # test missing header
+    # Test missing header
     com.save_csv(arr[1:], gl.RL_IN_MH)
     ttry(reqlist, g.E_MH, gl.RL_IN_MH, gl.RL_OUT_1, gl.RL_QUERY_1)
 
-    # test nominal conditions
+    # Test nominal conditions
     reqlist(gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_1, cnx=1)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_2, gl.RL_QUERY_2)
     dq.file_match(gl.SQL_IN_FILE, gl.RL_OUT_2, del_dup=True)
     dq.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
 
-    # test interruption other threads not finished
+    # Test interruption other threads not finished
     com.mkdirs(gl.RL_TMP, True)
     reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, cnx=6, elt=10)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True, cnx=6, elt=10)
     dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
 
-    # test interruption other threads finished
+    # Test interruption other threads finished
     com.mkdirs(gl.RL_TMP, True)
     reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
@@ -100,7 +101,7 @@ def reqlist_interrupted(inp, out, query, sleep=False, cnx=3, elt=100):
     while not md['STOP']:
         pass
     if sleep:
-        # if sleep = True, a bit of time is let to the other threads to finish
+        # If sleep = True, a bit of time is let to the other threads to finish
         # their run as it is valuable to test the restart in this case
         # (more code coverage)
         time.sleep(0.5)

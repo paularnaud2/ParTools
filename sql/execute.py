@@ -1,6 +1,7 @@
 import common as com
 import sql.gl as gl
 
+from time import time
 from sql.init import init
 from sql.connect import connect
 from sql.functions import get_final_script
@@ -8,7 +9,8 @@ from sql.functions import get_final_script
 
 @com.log_exeptions
 def execute(**params):
-    com.log('[sql] execute')
+    com.log('[sql] execute: start')
+    start_time = time()
     com.init_params(gl, params)
     init()
     script = get_final_script(gl.SCRIPT_FILE)
@@ -29,5 +31,8 @@ def execute(**params):
     c.close()
     cnx.commit()
     cnx.close()
-    com.log('[sql] execute job over')
+
+    dms = com.get_duration_ms(start_time)
+    dstr = com.get_duration_string(dms)
+    com.log(f"[sql] execute: end ({dstr})")
     com.log_print()

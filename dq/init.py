@@ -77,7 +77,7 @@ def init_compare(in_file_1, in_file_2):
     gl.counters["out"] = 1
     gl.counters["diff"] = 0
 
-    gl.msg = "{bn_1} lignes parcourues en {ds}."
+    gl.msg = "{bn_1} lignes parcourues en {dstr}."
     gl.msg += " {bn_2} lignes parcourues au total et {bn_3} "
     gl.msg += " lignes écrites dans le fichier de sortie."
 

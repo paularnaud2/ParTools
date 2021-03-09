@@ -20,7 +20,7 @@ def init_var(params):
 
 
 def split_file(**params):
-    com.log("[toolSplit] split_file")
+    com.log("[toolSplit] split_file: start")
     init_var(params)
     (file_dir, file_name, ext) = split_in_dir()
     gl.header = com.get_header(gl.IN_DIR)
@@ -31,7 +31,7 @@ def split_file(**params):
             if not gen_split_out(out_dir, in_file):
                 break
 
-    com.log("[toolSplit] Job over")
+    com.log("[toolSplit] split_file: end")
     com.log_print()
 
 

@@ -69,7 +69,8 @@ def process_query(c, query, elt, th_nb):
     test_restart(th_nb)
     log.process_query_finish(elt, th_nb)
     init_out_file(c, elt)
-    th_name = com.gen_sl_detail(elt, th_nb)
+    mt = gl.MAX_DB_CNX > 1
+    th_name = com.gen_sl_detail(elt, th_nb, multi_th=mt)
     write_rows(c, elt, th_name, th_nb)
 
 
@@ -109,20 +110,20 @@ def init_th_dict():
         gl.th_dic[i] = 0
 
 
-def init_out_file(cursor, range_name='MONO'):
+def init_out_file(cursor, rg_name='MONO'):
     # Output file is initialised with cursor description
     # plus range name is EXPORT_RANGE parameter is set to True
 
-    s = gl.TMP_PATH + range_name + "{}" + gl.FILE_TYPE
+    s = gl.TMP_PATH + rg_name + "{}" + gl.FILE_TYPE
     s_ = s.format('')
     s_EC = s.format(gl.EC)
     with verrou:
-        gl.out_files[range_name] = s_
-        gl.out_files[range_name + gl.EC] = s_EC
+        gl.out_files[rg_name] = s_
+        gl.out_files[rg_name + gl.EC] = s_EC
 
     with open(s_EC, 'w', encoding='utf-8') as out_file:
         fields = [elt[0] for elt in cursor.description]
-        if gl.EXPORT_RANGE and range_name != 'MONO':
+        if gl.EXPORT_RANGE and rg_name != 'MONO':
             fields.append("RANGE")
         s = g.CSV_SEPARATOR.join(fields)
         out_file.write(s + '\n')

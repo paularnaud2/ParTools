@@ -19,8 +19,7 @@ from .log import gen_sl_detail
 
 from .string import big_number
 from .string import replace_from_dict
-from .string import get_duration_ms
-from .string import get_duration_string
+from .string import get_duration
 
 from .file import mkdirs
 from .file import load_txt

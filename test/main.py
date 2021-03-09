@@ -1,3 +1,6 @@
+import common as com
+
+
 def ttry(f, e_ref, *args, **kwargs):
     exception_occured = False
     try:
@@ -7,3 +10,4 @@ def ttry(f, e_ref, *args, **kwargs):
         exception_occured = True
 
     assert exception_occured
+    com.log_print()

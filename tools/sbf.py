@@ -34,10 +34,10 @@ def init():
     gl.counters["cur_list_row"] = 0
     gl.cur_list = []
     if LINE_PER_LINE:
-        gl.txt["sl_string"] = "{bn_1} lignes parcourues en {ds}"
+        gl.txt["sl_string"] = "{bn_1} lignes parcourues en {dstr}"
     else:
         gl.txt[
-            "sl_string"] = "{bn_1} buffers de {bn_3} caractères parcourus en {ds}"
+            "sl_string"] = "{bn_1} buffers de {bn_3} caractères parcourus en {dstr}"
 
     s = "Recherche de la chaîne '{}' dans le fichier '{}'..."
     s = s.format(LOOK_FOR, IN_FILE)

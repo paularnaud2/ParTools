@@ -23,32 +23,32 @@ def process_query_finish(elt, th_nb):
         com.log(f"Query executed for range {elt} (connection no. {th_nb})")
 
 
-def write_rows_init(range_name, th_nb):
+def write_rows_init(rg_name, th_nb):
 
-    if range_name == 'MONO':
+    if rg_name == 'MONO':
         com.log("Writing lines...")
     elif gl.MAX_DB_CNX == 1 or th_nb == 0:
-        com.log(f"Writing lines for range {range_name}...")
+        com.log(f"Writing lines for range {rg_name}...")
     else:
-        s = f"Writing lines for range {range_name} (connection no. {th_nb})..."
+        s = f"Writing lines for range {rg_name} (connection no. {th_nb})..."
         com.log(s)
 
 
-def write_rows_finish(range_name, i, cnx_nb):
+def write_rows_finish(rg_name, i, cnx_nb):
     bn = com.big_number(i)
-    if range_name == 'MONO':
+    if rg_name == 'MONO':
         com.log(f"All lines written ({bn} lines written)")
     elif gl.MAX_DB_CNX == 1 or cnx_nb == 0:
-        s = f"All lines written for range {range_name} ({bn} lines written)"
+        s = f"All lines written for range {rg_name} ({bn} lines written)"
         com.log(s)
     else:
-        s = f"All lines written for range {range_name}"
+        s = f"All lines written for range {rg_name}"
         s += f" ({bn} lines written, connection no. {cnx_nb})"
         com.log(s)
 
 
 def inject():
-    s1 = "Injecting date in DB..."
+    s1 = "Injecting data in DB..."
     if gl.ref_chunk != 0:
         bn = com.big_number(gl.ref_chunk * gl.NB_MAX_ELT_INSERT)
         s = s1 + f" (restarting from line {bn})"

@@ -12,19 +12,19 @@ def restart():
     if a == 0:
         return
 
-    s = "Traitement en cours détecté. Tuer ? (o/n)"
+    s = "Work in progress detected. Kill? (y/n)"
     if gl.TEST_RESTART:
         com.log(s)
         com.log_print("n (TEST_RESTART = True)")
         return
-    if com.log_input(s) == 'o':
+    if com.log_input(s) == 'y':
         com.delete_folder(gl.TMP_PATH)
         return
     return
 
 
 def gen_group_list():
-    com.log("Construction des groupes d'éléments...")
+    com.log("Building groups of elements...")
     elt_list = prepare_elt_list(gl.ar_in)
 
     i = 0
@@ -60,15 +60,15 @@ def set_query_var(query_file):
     query = com.replace_from_dict(query, gl.VAR_DICT)
     check_var(query)
     gl.query_var = query
-    com.log_print(f"Requête modèle :\n{gl.query_var}\n;")
+    com.log_print(f"Base query:\n{gl.query_var}\n;")
 
 
 def check_var(query):
     var = g.VAR_DEL + gl.VAR_IN + g.VAR_DEL
     if var not in query:
-        s = f"Erreur : la requête utilisée doit être variabilisée (contenir {var})"
+        s = f"Error: query must contain {var})"
         com.log(s)
-        com.log_print("Requête :")
+        com.log_print("Query:")
         com.log_print(query)
         raise Exception(g.E_MV)
 
@@ -88,7 +88,7 @@ def prepare_elt_list(array_in):
     elt_list.sort()
 
     bn = com.big_number(len(elt_list))
-    s = f"Liste des éléments préparée, elle contient {bn} éléments."
+    s = f"List of elements prepared, it contains {bn} elements"
     com.log(s)
 
     return elt_list
@@ -96,8 +96,7 @@ def prepare_elt_list(array_in):
 
 def check_field_nb():
     if gl.IN_FIELD_NB != 1:
-        s = "Attention les requêtes se feront sur le {}ème champ "
-        s += "du tableau d'entrée. Continuer ? (o/n)"
-        s = s.format(gl.IN_FIELD_NB)
-        if com.log_input(s) != 'o':
+        s = f"Warning: queries will take field no. {gl.IN_FIELD_NB}"
+        s += " of input file in the IN statement. Continue? (y/n)"
+        if com.log_input(s) == 'n':
             sys.exit()

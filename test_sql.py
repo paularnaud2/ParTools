@@ -53,7 +53,7 @@ def upload(inp, tr=False, md=''):
     )
 
 
-def download(query, out, merge=True, tr=False, ti=False, md=''):
+def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=''):
 
     sql.download(
         ENV=gl.SQL_ENV,
@@ -62,8 +62,8 @@ def download(query, out, merge=True, tr=False, ti=False, md=''):
         VAR_DICT={'TABLE_NAME': gl.SQL_TABLE_NAME},
         OUT_FILE=out,
         OUT_RG_DIR=gl.SQL_DL_OUT_RG_FOLDER,
-        MAX_DB_CNX=3,
-        SL_STEP=500,
+        MAX_DB_CNX=cnx,
+        SL_STEP=sl,
         MERGE_RG_FILES=merge,
         EXPORT_RANGE=False,
         CHECK_DUP=True,
@@ -86,7 +86,7 @@ def upload_interrupted():
     t = md['T'] / 1000
     sleep(t)
     p.terminate()
-    com.log('Automatic stop (upload_interrupted)\n')
+    com.log("Automatic stop (upload_interrupted)\n")
 
 
 def download_interrupted(query, out):
@@ -95,7 +95,8 @@ def download_interrupted(query, out):
     md['STOP'] = False
     md['N_STOP'] = 0.8 * 2900
     md['LOG_FILE'] = g.LOG_FILE
-    p = Process(target=download, args=(query, out, True, True, False, md))
+    d = {'query': query, 'out': out, 'tr': True, 'md': md}
+    p = Process(target=download, kwargs=d)
     p.start()
     while not md['STOP']:
         pass
@@ -106,62 +107,73 @@ def iutd():
     prepare_iutp(gl.SQL_INSERT_IUTD_OK)
     sql.gl.TEST_IUTD = True
 
-    # test no iutd file date db ok
+    # Test no iutd file date db ok
     connect(gl.SQL_ENV, gl.SQL_DB)
 
-    # test iutd file date ok
+    # Test iutd file date ok
     connect(gl.SQL_ENV, gl.SQL_DB)
 
     os.remove(sql.gl.IUTD_DIR)
     prepare_iutp(gl.SQL_INSERT_IUTD_KO)
     sql.gl.TEST_IUTD = True
-    # test no iutd file date db ko
+    # Test no iutd file date db ko
     connect(gl.SQL_ENV, gl.SQL_DB)
-    # test iutd file date ko
+    # Test iutd file date ko
     connect(gl.SQL_ENV, gl.SQL_DB)
     sql.gl.TEST_IUTD = False
 
 
-def test_sql():
-    com.init_log('test_sql', True)
+def reset():
+    com.log("Reseting folders...")
     com.mkdirs(gl.SQL_TMP, True)
     com.mkdirs(gl.SQL_OUT, True)
+    com.log("Reset over\n")
+
+
+def test_sql():
+    com.init_log('test_sql', True)
     com.log_print()
 
-    com.log('Test sql.iutd------------------------------')
+    com.log('Test iutd---------------------------------------------')
+    reset()
     iutd()
 
-    com.log('Test sql.upload------------------------------')
-    # test missing header in input file
+    com.log('Test upload-------------------------------------------')
+    # Test missing header in input file
     ttry(upload, g.E_MH, gl.SQL_IN_FILE_MH)
-    # test upload with interruption
+    # Test upload with interruption
     upload_interrupted()
     upload(gl.SQL_IN_FILE, tr=True)
 
-    com.log('Test sql.dowload-----------------------------')
-    # test download no output
+    com.log('Test dowload------------------------------------------')
+    # Test download no output
     download(gl.SQL_QUERY_NO, gl.SQL_DL_OUT, ti=True)
 
+    # Test download standard
+    reset()
     download(gl.SQL_QUERY, gl.SQL_DL_OUT)
     dq.file_match(gl.SQL_IN_FILE, gl.SQL_DL_OUT)
     dq.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
 
-    com.log("Test sql.dowload RG with merge---------------")
+    # Test dowload RG with merge
     download_interrupted(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG)
-    download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, tr=True)
+    download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, tr=True, sl=50)
     dq.file_match(gl.SQL_DL_OUT, gl.SQL_DL_OUT_RG)
 
-    com.log("Test sql.dowload RG without merge---------------")
-    download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, merge=False)
+    # Test dowload RG without merge
+    reset()
+    download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, merge=False, cnx=1, sl=50)
     dq.file_match(gl.SQL_RG_REF, gl.SQL_RG_COMP)
 
-    com.log("Test count simple----------------------------")
+    # Test count simple
+    reset()
     download(gl.SQL_QUERY_COUNT_1, gl.SQL_DL_OUT_COUNT)
     dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
     download(gl.SQL_QUERY_COUNT_1_RG, gl.SQL_DL_OUT_COUNT)
     dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
 
-    com.log("Test count group by--------------------------")
+    # Test count group by
+    reset()
     download(gl.SQL_QUERY_COUNT_2, gl.SQL_DL_OUT_COUNT)
     dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
     download(gl.SQL_QUERY_COUNT_2_RG, gl.SQL_DL_OUT_COUNT)
