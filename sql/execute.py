@@ -32,7 +32,6 @@ def execute(**params):
     cnx.commit()
     cnx.close()
 
-    dms = com.get_duration_ms(start_time)
-    dstr = com.get_duration_string(dms)
+    dstr = com.get_duration_string(start_time)
     com.log(f"[sql] execute: end ({dstr})")
     com.log_print()

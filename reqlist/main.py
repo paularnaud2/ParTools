@@ -23,6 +23,7 @@ def run_reqList(**params):
 
 def left_join_files(ldir='', rdir='', out='', debug=False):
     com.log("[reqlist] left_join_files: start")
+    start_time = time()
     if debug:
         gl.DEBUG_JOIN = True
     if ldir or rdir:
@@ -37,7 +38,6 @@ def left_join_files(ldir='', rdir='', out='', debug=False):
         com.log("Loading right arrays...")
         ar_right = com.load_csv(gl.OUT_SQL)
         com.log("Right array loaded")
-        com.log_print('|')
     left_join_arrays(gl.ar_in, ar_right)
     if not out:
         out = gl.OUT_FILE
@@ -45,7 +45,8 @@ def left_join_files(ldir='', rdir='', out='', debug=False):
     com.save_csv(gl.out_array, out)
     s = f"Output file saved in {out}"
     com.log(s)
-    com.log("[reqlist] left_join_files: end")
+    dstr = com.get_duration_string(start_time)
+    com.log(f"[reqlist] left_join_files: end ({dstr})")
     com.log_print('|')
 
 
@@ -56,8 +57,7 @@ def finish():
         find_dup(gl.OUT_FILE, col=1)
         com.log_print('|')
 
-    dms = com.get_duration_ms(gl.start_time)
-    dstr = com.get_duration_string(dms)
+    (dms, dstr) = com.get_duration_string(gl.start_time, True)
     s = f"run_reqList: end ({dstr})"
     com.log("[reqlist] " + s)
     if gl.SEND_NOTIF:
@@ -79,7 +79,6 @@ def init(params):
 
 
 def init_globals():
-
     TMP_DIR = g.paths['TMP'] + gl.TMP_FOLDER
     gl.OUT_LEFT = TMP_DIR + gl.OUT_LEFT_FILE
     gl.OUT_RIGHT = TMP_DIR + gl.OUT_RIGHT_FILE

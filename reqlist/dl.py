@@ -29,7 +29,7 @@ def download(query_file):
     n = sum([gl.counters[elt] for elt in gl.counters])
     bn = com.big_number(n)
     com.log(f"[reqlist] download: end ({bn} lines written)")
-    com.log('|')
+    com.log_print('|')
 
 
 def init(query_file):

@@ -37,7 +37,7 @@ def write_rows_init(rg_name, th_nb):
 def write_rows_finish(rg_name, i, cnx_nb):
     bn = com.big_number(i)
     if rg_name == 'MONO':
-        com.log(f"All lines written ({bn} lines written)")
+        return
     elif gl.MAX_DB_CNX == 1 or cnx_nb == 0:
         s = f"All lines written for range {rg_name} ({bn} lines written)"
         com.log(s)

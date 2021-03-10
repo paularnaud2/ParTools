@@ -20,6 +20,7 @@ def upload(**params):
         init(params)
     script = get_script()
     com.check_header(gl.UPLOAD_IN)
+    st_insert = time()
     with open(gl.UPLOAD_IN, 'r', encoding='utf-8') as in_file:
         com.log(f"Input file {gl.UPLOAD_IN} opened")
         # First line is dismissed (header)
@@ -32,7 +33,7 @@ def upload(**params):
             gl.counters['main'] += 1
             if gl.counters['main'] % gl.NB_MAX_ELT_INSERT == 0:
                 insert(script)
-                send_chunk_duration(start_time)
+                send_chunk_duration(st_insert)
 
     if gl.counters['main'] % gl.NB_MAX_ELT_INSERT != 0:
         insert(script)
@@ -52,8 +53,7 @@ def finish_this(start_time):
     gl.cnx.close()
     os.remove(gl.TMP_FILE_CHUNK)
     bn = com.big_number(gl.counters['main'])
-    dms = com.get_duration_ms(start_time)
-    dstr = com.get_duration_string(dms)
+    dstr = com.get_duration_string(start_time)
     com.log(f"{bn} lines exported")
     com.log(f"[sql] upload: end ({dstr})")
 

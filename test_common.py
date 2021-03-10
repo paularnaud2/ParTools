@@ -4,21 +4,43 @@ from common import g
 from os.path import exists
 
 
-def test_common():
-    com.init_log('test_common', True)
-
-    # test mail
+def mail():
     mail_conf = g.paths['MAIL'] + 'conf.txt'
     if exists(mail_conf):
-        com.log("Test de la fonctionnalité mail---------------")
+        com.log("Testing common.mail-------------------------------")
         com.mail('test')
     else:
-        s = f"Fichier de configuration '{mail_conf}' absent."
-        s += " La fonctionnalité mail n'a pas pu être testée."
+        s = f"Conf file '{mail_conf}' missing."
+        s += " common.mail counldn't be tested."
         com.log(s)
+    com.log_print()
 
-    # test notif
+
+def get_duration():
+    com.log("Testing common.string.get_duration--------------------")
+    dstr = com.get_duration_string(0, end_time=0.35)
+    com.log(dstr)
+    assert dstr == "350 ms"
+    dstr = com.get_duration_string(0, end_time=10)
+    com.log(dstr)
+    assert dstr == "10.0 seconds"
+    dstr = com.get_duration_string(0, end_time=150)
+    com.log(dstr)
+    assert dstr == "2 minutes and 30 seconds"
+    com.log_print()
+
+
+def send_notif():
+    com.log("Testing common.send_notif-----------------------------")
     com.send_notif('Notification test', 'Test', ndur=2)
+    com.log_print()
+
+
+def test_common():
+    com.init_log('test_common', True)
+    send_notif()
+    mail()
+    get_duration()
 
 
 if __name__ == '__main__':

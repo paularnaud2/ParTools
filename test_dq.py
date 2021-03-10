@@ -17,7 +17,8 @@ def dq_t(in1,
          tps=False,
          tpd=False,
          eq=False,
-         mls=100):
+         mls=100,
+         sl=100):
 
     dq.run_dq(
         IN_DIR=gl.TEST_DQ,
@@ -34,6 +35,7 @@ def dq_t(in1,
         TEST_PROMPT_DK=tpd,
         MAX_LINE_SPLIT=mls,
         MAX_FILE_NB_SPLIT=10,
+        SL_STEP=sl,
     )
 
     if ref:
@@ -53,22 +55,22 @@ def test_dq():
     com.mkdirs(gl.DQ_OUT, True)
     com.log_print()
 
-    # test dq no header
+    # Test dq no header
     ttry(dq_t, g.E_MH, gl.IN_MH, gl.IN12, gl.OUT1)
     ttry(dq_t, g.E_DH, gl.IN11, gl.IN_DH, gl.OUT1)
 
-    # test dup key
+    # Test dup key
     dq_t(gl.IN_DK, gl.IN12, gl.OUT1, tpd=True)
 
-    # compare matching files
+    # Compare matching files
     dq.file_match(gl.OUT_DK, gl.OUT_DK_REF, compare=True, out=gl.OUT_FM)
     dq.file_match(gl.OUT_FM, gl.REF_FM)
 
-    # compare different files
+    # Compare different files
     dq.file_match(gl.REF1_F, gl.REF2_F, err=False, out=gl.OUT_FM)
     dq.file_match(gl.OUT_FM, gl.REF_FDM)
 
-    dq_t(gl.IN11, gl.IN12, gl.OUT1, gl.REF1, 100, gl.REF_DUP1)
+    dq_t(gl.IN11, gl.IN12, gl.OUT1, gl.REF1, 100, gl.REF_DUP1, sl=10)
     dq_t(gl.IN11, gl.IN12, gl.OUT1, gl.REF1, 15, gl.REF_DUP1)
     dq_t(gl.IN11, gl.IN12, gl.OUT1, gl.REF1_E, eq=True)
 

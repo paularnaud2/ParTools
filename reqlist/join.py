@@ -7,7 +7,6 @@ from toolDup import find_dup_list
 
 
 def left_join_arrays(ar_left_in, ar_right_in):
-    com.log("[reqlist] left_join_arrays: start")
     check_void_right_array(ar_right_in)
     com.log("Preparing left array...")
     (ar_left, first_line_l) = prepare_array(ar_left_in)
@@ -31,8 +30,6 @@ def left_join_arrays(ar_left_in, ar_right_in):
     bn = com.big_number(len(gl.out_array))
     s = f"Output array generated. It has {bn} lines (including header)."
     com.log(s)
-    com.log("[reqlist] left_join_arrays: end")
-    com.log_print('|')
 
 
 def prepare_array(arr):

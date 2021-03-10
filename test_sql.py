@@ -79,6 +79,7 @@ def upload_interrupted():
     md = manager.dict()
     md['T'] = False
     md['LOG_FILE'] = g.LOG_FILE
+    com.log("[sql] upload: start", c_out=False)
     p = Process(target=upload, args=(gl.SQL_IN_FILE, True, md))
     p.start()
     while not md['T']:
@@ -95,6 +96,7 @@ def download_interrupted(query, out):
     md['STOP'] = False
     md['N_STOP'] = 0.8 * 2900
     md['LOG_FILE'] = g.LOG_FILE
+    com.log("[sql] download: start", c_out=False)
     d = {'query': query, 'out': out, 'tr': True, 'md': md}
     p = Process(target=download, kwargs=d)
     p.start()
@@ -113,6 +115,7 @@ def iutd():
     # Test iutd file date ok
     connect(gl.SQL_ENV, gl.SQL_DB)
 
+    com.log_print()
     os.remove(sql.gl.IUTD_DIR)
     prepare_iutp(gl.SQL_INSERT_IUTD_KO)
     sql.gl.TEST_IUTD = True
@@ -145,7 +148,7 @@ def test_sql():
     upload_interrupted()
     upload(gl.SQL_IN_FILE, tr=True)
 
-    com.log('Test dowload------------------------------------------')
+    com.log('Test download------------------------------------------')
     # Test download no output
     download(gl.SQL_QUERY_NO, gl.SQL_DL_OUT, ti=True)
 
@@ -155,12 +158,12 @@ def test_sql():
     dq.file_match(gl.SQL_IN_FILE, gl.SQL_DL_OUT)
     dq.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
 
-    # Test dowload RG with merge
+    # Test download RG with merge
     download_interrupted(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG)
     download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, tr=True, sl=50)
     dq.file_match(gl.SQL_DL_OUT, gl.SQL_DL_OUT_RG)
 
-    # Test dowload RG without merge
+    # Test download RG without merge
     reset()
     download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, merge=False, cnx=1, sl=50)
     dq.file_match(gl.SQL_RG_REF, gl.SQL_RG_COMP)

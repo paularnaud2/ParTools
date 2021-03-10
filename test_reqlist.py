@@ -80,6 +80,7 @@ def test_reqlist():
 
     # Test interruption other threads not finished
     com.mkdirs(gl.RL_TMP, True)
+    com.log_print()
     reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, cnx=6, elt=10)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True, cnx=6, elt=10)
     dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
@@ -96,6 +97,7 @@ def reqlist_interrupted(inp, out, query, sleep=False, cnx=3, elt=100):
     md = manager.dict()
     md['STOP'] = False
     md['LOG_FILE'] = g.LOG_FILE
+    com.log("[reqlist] run_reqList: start", c_out=False)
     p = Process(target=reqlist, args=(inp, out, query, True, md, cnx, elt))
     p.start()
     while not md['STOP']:

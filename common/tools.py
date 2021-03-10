@@ -32,16 +32,16 @@ def list_to_dict(list_in, separator='='):
 
 
 def init_params(mod, params):
+    if 'MD' in params:
+        if 'LOG_FILE' in params['MD']:
+            g.LOG_FILE_INITIALISED = True
+            g.LOG_FILE = params['MD']['LOG_FILE']
+
     if len(params) > 0:
         log(f"Initialising parameters: {params}")
         for key in params:
             mod.__getattribute__(key)
             mod.__setattr__(key, params[key])
-
-    if 'MD' in params:
-        if 'LOG_FILE' in mod.MD:
-            g.LOG_FILE_INITIALISED = True
-            g.LOG_FILE = mod.MD['LOG_FILE']
 
 
 def run_cmd(cmd, input=''):

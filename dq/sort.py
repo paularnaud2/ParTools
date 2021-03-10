@@ -1,6 +1,8 @@
 import sys
 import common as com
 import dq.gl as gl
+
+from time import time
 from dq.init import init_stf
 from dq.init import init_msf
 from dq.gstf import gen_sorted_temp_files
@@ -13,7 +15,8 @@ from dq.empty_al import empty_array_list
 def sort_file(in_file_dir, out_file_dir, prompt=False, nb=0):
     # nb variable is used to differentiate input file when main run is dq
 
-    com.log(f"Sorting '{in_file_dir}'")
+    com.log(f"[dq] sort_file: start ({in_file_dir})")
+    start_time = time()
     init_stf(in_file_dir, out_file_dir)
     gen_sorted_temp_files(in_file_dir, out_file_dir)
     com.log_print('|')
@@ -22,7 +25,7 @@ def sort_file(in_file_dir, out_file_dir, prompt=False, nb=0):
         s = f"Generating sorted output file from {nb_files} sorted temporary files..."
         com.log(s)
         merge_sorted_files(out_file_dir)
-    finish(out_file_dir, prompt, nb)
+    finish(out_file_dir, prompt, nb, start_time)
     com.log_print('|')
 
 
@@ -34,13 +37,13 @@ def merge_sorted_files(out_file_dir):
         empty_array_list(out_file_dir)
 
 
-def finish(out_file_dir, prompt, nb):
+def finish(out_file_dir, prompt, nb, start_time):
 
     n_dup_key = len(gl.dup_key_list)
     n_dup = len(gl.dup_list)
     bn1 = com.big_number(gl.counters["tot_written_lines_out"])
     bn2 = com.big_number(n_dup)
-    s = f"Sorting over. Output file {out_file_dir} successfully generated"
+    s = f"Output file {out_file_dir} successfully generated"
     s += f" ({bn1} lines written, {bn2} duplicates removed)."
     com.log(s)
     if n_dup > 0:
@@ -58,6 +61,9 @@ def finish(out_file_dir, prompt, nb):
             com.save_csv(gl.dup_key_list, gl.OUT_DUP_KEY_FILE)
             s = f"{n_dup_key} key duplicates found. List written in {gl.OUT_DUP_KEY_FILE}"
             com.log(s)
+
+    dstr = com.get_duration_string(start_time)
+    com.log(f"[dq] sort_file: end ({dstr})")
 
 
 def prompt_dup_key(n_dup_key):

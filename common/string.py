@@ -3,15 +3,6 @@ from time import time
 from common import g
 
 
-def get_duration(start_time, return_dms=False):
-    dms = get_duration_ms(start_time)
-    dstr = get_duration_string(dms)
-
-    if return_dms:
-        return (dms, dstr)
-    return dstr
-
-
 def get_duration_ms(start_time, end_time=''):
     if end_time == '':
         end_time = time()
@@ -21,20 +12,24 @@ def get_duration_ms(start_time, end_time=''):
     return duration
 
 
-def get_duration_string(duration_ms):
-    if duration_ms >= 1000:
-        duration_s = duration_ms / 1000
+def get_duration_string(start_time, return_dms=False, end_time=''):
+    dms = get_duration_ms(start_time, end_time)
+    if dms >= 1000:
+        duration_s = dms / 1000
         if duration_s > 60:
             duration_m = duration_s // 60
             duration_s = duration_s % 60
             dm = str(floor(duration_m))
             ds = str(floor(duration_s))
-            out = f"{dm} minutes and {ds} seconds"
-            return (out)
-        out = str(duration_s) + " seconds"
-        return (out)
-    out = str(duration_ms) + " ms"
-    return (out)
+            dstr = f"{dm} minutes and {ds} seconds"
+        else:
+            dstr = str(duration_s) + " seconds"
+    else:
+        dstr = str(dms) + " ms"
+
+    if return_dms:
+        return (dms, dstr)
+    return dstr
 
 
 def big_number(str_in):

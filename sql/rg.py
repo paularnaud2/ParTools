@@ -29,6 +29,7 @@ def gen_range_list(rg_file_name):
         gl.bools['RANGE_QUERY'] = False
         range_list = ['MONO']
 
+    gl.MULTI_TH = gl.bools['RANGE_QUERY'] and gl.MAX_DB_CNX > 1
     return range_list
 
 

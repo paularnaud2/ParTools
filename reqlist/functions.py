@@ -66,7 +66,7 @@ def set_query_var(query_file):
 def check_var(query):
     var = g.VAR_DEL + gl.VAR_IN + g.VAR_DEL
     if var not in query:
-        s = f"Error: query must contain {var})"
+        s = f"Error: query must contain {var}"
         com.log(s)
         com.log_print("Query:")
         com.log_print(query)

@@ -15,24 +15,27 @@ def write_log(str_in):
         in_file.write(s + '\n')
 
 
-def log_print(str_in='', nb_tab=0):
+def log_print(str_in='', nb_tab=0, c_out=True):
     if nb_tab != 0:
         for i in range(0, nb_tab):
             str_in = '\t' + str_in
 
     with g.verrou:
-        print(str_in)
+        if c_out:
+            print(str_in)
         write_log(str_in)
 
 
-def log(str_in, level=0, print_date=False, nb_tab=0):
-    if g.LOG_LEVEL >= level:
-        if print_date:
-            s = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            s = datetime.now().strftime("%H:%M:%S")
-        s = s + " - " + str_in
-        log_print(s, nb_tab)
+def log(str_in, level=0, print_date=False, nb_tab=0, c_out=True):
+    if g.LOG_LEVEL < level:
+        return
+
+    if print_date:
+        s = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    else:
+        s = datetime.now().strftime("%H:%M:%S")
+    s = s + " - " + str_in
+    log_print(s, nb_tab, c_out)
 
 
 def init_log(parent_module='', force_init=False):
@@ -69,16 +72,15 @@ def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
         detail = ''
 
     st = g.sl_time_dict[th_name]
-    dms = string.get_duration_ms(st)
-    ds = string.get_duration_string(dms)
+    dstr = string.get_duration_string(st)
     bn_1 = string.big_number(step)
     bn_2 = string.big_number(counter)
     if nb == 0:
         s = "{bn1} {what} in {dstr}. {bn2} {what} in total{detail}."
-        s = s.format(bn1=bn_1, bn2=bn_2, ds=ds, what=what, detail=detail)
+        s = s.format(bn1=bn_1, bn2=bn_2, dstr=dstr, what=what, detail=detail)
     else:
         bn_3 = string.big_number(nb)
-        s = what.format(bn_1=bn_1, ds=ds, bn_2=bn_2, bn_3=bn_3)
+        s = what.format(bn_1=bn_1, dstr=dstr, bn_2=bn_2, bn_3=bn_3)
 
     log(s)
     init_sl_time(th_name)

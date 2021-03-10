@@ -43,16 +43,15 @@ def finish(start_time):
         a = n < gl.MAX_CHECK_DUP and n > 0
 
         if a and gl.CHECK_DUP and not gl.bools["COUNT"]:
-            com.log_print('|')
             s = "Verifying duplicates on the first column of the output file..."
             com.log(s)
+            com.log_print('|')
             find_dup(out_dir, col=1)
         if gl.OPEN_OUT_FILE:
             startfile(out_dir)
 
     com.log_print('|')
-    dms = com.get_duration_ms(start_time)
-    dstr = com.get_duration_string(dms)
+    (dms, dstr) = com.get_duration_string(start_time, True)
     s = f"download: end ({dstr})"
     com.log("[sql] " + s)
     com.log_print()

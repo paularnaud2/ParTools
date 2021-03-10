@@ -3,8 +3,7 @@ import dq.gl as gl
 import common as com
 
 from time import time
-from dq.init import set_dirs
-from dq.init import init_tmp_dir
+from dq.init import init_dq
 from dq.init import init_compare_files
 from toolDup import del_dup_list
 from dq.csf import compare_sorted_files
@@ -14,14 +13,7 @@ from dq.functions import compare_headers
 
 
 def run_dq(**params):
-
-    com.log("[dq] run_dq")
-    start_time = time()
-    com.init_params(gl, params)
-    init_tmp_dir()
-    dirs = set_dirs()
-    com.log(f"Sorting and comparing {dirs['in1']} and {dirs['in2']}")
-    com.log_print('|')
+    (start_time, dirs) = init_dq(params)
     com.check_header(dirs["in1"])
     com.check_header(dirs["in2"])
     compare_headers(dirs["in1"], dirs["in2"])
@@ -30,10 +22,13 @@ def run_dq(**params):
     if not compare_files(dirs["out1"], dirs["out2"], dirs["out"]):
         com.log_print('|')
         check_split(dirs["out"])
+    finish_dq(start_time, dirs)
 
-    dms = com.get_duration_ms(start_time)
-    dstr = com.get_duration_string(dms)
-    s = f"[dq] run_dq job finished in {dstr}"
+
+def finish_dq(start_time, dirs):
+
+    (dms, dstr) = com.get_duration_string(start_time, True)
+    s = f"[dq] run_dq: end ({dstr})"
     com.log(s)
     com.send_notif(s, "dq", dms)
     com.log_print()
@@ -42,7 +37,7 @@ def run_dq(**params):
 
 
 def file_match(in1, in2, del_dup=False, compare=False, err=True, out=''):
-    com.log("[dq] file_match")
+    com.log("[dq] file_match: start")
     s = f"Comparing files '{in1}' and '{in2}'..."
     com.log(s)
     ar1 = com.load_csv(in1)
@@ -64,28 +59,33 @@ def file_match(in1, in2, del_dup=False, compare=False, err=True, out=''):
         com.save_csv(ar1, gl.TMP_1)
         com.save_csv(ar2, gl.TMP_2)
         com.log(f"Deep comparison of '{gl.TMP_1}' and '{gl.TMP_2}'...")
+        com.log_print('|')
         compare_files(gl.TMP_1, gl.TMP_2, gl.OUT_DIR)
+        com.log_print('|')
 
     if not res and err:
         os.startfile(gl.OUT_DIR)
         assert res is True
+
+    com.log("[dq] file_match: end")
     com.log_print()
 
 
 def compare_files(in_1, in_2, out):
-
+    com.log("[dq] compare_files: start")
     start_time = time()
     com.gen_header(in_1, gl.COMPARE_FIELD, out)
     compare_sorted_files(in_1, in_2, out)
 
-    dms = com.get_duration_ms(start_time)
-    dstr = com.get_duration_string(dms)
-    s = f"Comparison finished in {dstr}"
-    com.log(s)
     if gl.counters["diff"] == 0:
         com.log("Files match")
-        return True
+        out = True
     else:
         bn = com.big_number(gl.counters["diff"])
         com.log(f"{bn} differences found")
-        return False
+        out = False
+
+    dstr = com.get_duration_string(start_time)
+    com.log(f"[dq] compare_files: end ({dstr})")
+
+    return out

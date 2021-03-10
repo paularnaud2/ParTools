@@ -43,7 +43,7 @@ def parse_xml(**params):
 
 
 def finish():
-    dur = com.get_duration(gl.start_time)
+    dur = com.get_duration_string(gl.start_time)
     bn = com.big_number(gl.N_WRITE)
     s = f"[toolParseXML] parse_xml: end ({bn} lines written in {dur}."
     com.log(s)

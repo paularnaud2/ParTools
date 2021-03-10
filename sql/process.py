@@ -69,8 +69,7 @@ def process_query(c, query, elt, th_nb):
     test_restart(th_nb)
     log.process_query_finish(elt, th_nb)
     init_out_file(c, elt)
-    mt = gl.MAX_DB_CNX > 1
-    th_name = com.gen_sl_detail(elt, th_nb, multi_th=mt)
+    th_name = com.gen_sl_detail(elt, th_nb, multi_th=gl.MULTI_TH)
     write_rows(c, elt, th_name, th_nb)
 
 

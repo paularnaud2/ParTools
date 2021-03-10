@@ -1,4 +1,4 @@
-from common import *
+import common as com
 import tools.gl as gl
 from os import startfile
 
@@ -41,7 +41,7 @@ def init():
 
     s = "Recherche de la chaîne '{}' dans le fichier '{}'..."
     s = s.format(LOOK_FOR, IN_FILE)
-    log(s)
+    com.log(s)
 
 
 def finish():
@@ -51,20 +51,18 @@ def finish():
         if lowI < 0:
             lowI = 0
         highI = gl.counters["row"] + PRINT_SIZE // 2
-        save_list(gl.cur_list[lowI:highI], OUT_FILE)
+        com.save_list(gl.cur_list[lowI:highI], OUT_FILE)
         s = "Liste courante écrite dans le fichier '{}'"
-        log(s.format(OUT_FILE))
+        com.log(s.format(OUT_FILE))
         startfile(OUT_FILE)
     else:
         s = "Fichier entier parcouru ({} lignes, {} listes temporaires), chaîne de caractère '{}' introuvable"
-        log(
-            s.format(big_number(gl.counters["main"]), gl.counters["list"],
+        com.log(
+            s.format(com.big_number(gl.counters["main"]), gl.counters["list"],
                      LOOK_FOR))
 
-    duration = get_duration_ms(gl.start_time)
-    ds = get_duration_string(duration)
-    s = "Exécution terminée en {}"
-    log(s.format(ds))
+    dstr = com.get_duration_string(gl.start_time)
+    com.log(f"Exécution terminée en {dstr}")
 
 
 def fill_cur_list(in_file):
@@ -81,7 +79,7 @@ def fill_cur_list(in_file):
         gl.cur_list = []
         gl.counters["cur_list_row"] = 0
     s = "Génération de la liste temporaire No.{}..."
-    log(s.format(gl.counters["list"]), 1)
+    com.log(s.format(gl.counters["list"]), 1)
 
     while gl.counters["cur_list_row"] < MAX_LIST_SIZE:
         gl.counters["cur_list_row"] += 1
@@ -92,7 +90,7 @@ def fill_cur_list(in_file):
         if gl.bool["EOF"]:
             return
         gl.cur_list.append(line)
-    log("Liste temporaire générée", 1)
+    com.log("Liste temporaire générée", 1)
 
 
 def get_line_lpl(in_file):
@@ -122,7 +120,7 @@ def get_line_buf(in_file):
 def search_cur_list():
 
     s = "Recherche de la chaîne '{}' dans la liste temporaire No.{}"
-    log(s.format(LOOK_FOR, gl.counters["list"]), 1)
+    com.log(s.format(LOOK_FOR, gl.counters["list"]), 1)
     i = 0
     for elt in gl.cur_list:
         i += 1
@@ -132,20 +130,20 @@ def search_cur_list():
             found_msg(i, j)
             gl.bool["found"] = True
             return True
-
-    s = "Recherche dans la liste temporaire terminée, chaîne non trouvée ({} lignes parcourues au total)"
-    log(s.format(big_number(gl.counters["main"])), 1)
+    bn = com.big_number(gl.counters["main"])
+    s = f"Recherche dans la liste temporaire terminée, chaîne non trouvée ({bn} lignes parcourues au total)"
+    com.log(s)
     return False
 
 
 def found_msg(i, j):
 
-    bn = big_number(gl.counters["main"])
+    bn = com.big_number(gl.counters["main"])
     gl.counters["row"] = i
     if LINE_PER_LINE:
         s = "Chaîne trouvée à la {}ème ligne de la liste tampon No.{} (ligne globale No.{}) ligne en position {} !"
-        log(s.format(big_number(i), gl.counters["list"], bn, j + 1))
+        com.log(s.format(com.big_number(i), gl.counters["list"], bn, j + 1))
     else:
         s = "Chaîne trouvée dans le buffer No. {} (liste tampon No.{}) en position {}"
-        s = s.format(bn, gl.counters["list"], big_number(j + 1))
-        log(s)
+        s = s.format(bn, gl.counters["list"], com.big_number(j + 1))
+        com.log(s)

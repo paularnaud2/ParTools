@@ -1,4 +1,3 @@
-from common import g
 from .mail import mail
 from .deco import log_exeptions
 
@@ -19,7 +18,8 @@ from .log import gen_sl_detail
 
 from .string import big_number
 from .string import replace_from_dict
-from .string import get_duration
+from .string import get_duration_ms
+from .string import get_duration_string
 
 from .file import mkdirs
 from .file import load_txt

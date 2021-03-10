@@ -3,8 +3,23 @@ import dq.gl as gl
 import common as com
 
 from common import g
+from time import time
 from math import floor
 from dq.functions import read_list
+
+
+def init_dq(params):
+    com.log("[dq] run_dq: start")
+    start_time = time()
+    com.init_params(gl, params)
+    init_tmp_dir()
+    dirs = set_dirs()
+    s = f"run_dq job initialised. Input files {dirs['in1']} and {dirs['in2']}"
+    s += " are going to be sorted and compared."
+    com.log(s)
+    com.log_print('|')
+
+    return (start_time, dirs)
 
 
 def init_compare_files(out):
@@ -77,9 +92,9 @@ def init_compare(in_file_1, in_file_2):
     gl.counters["out"] = 1
     gl.counters["diff"] = 0
 
-    gl.msg = "{bn_1} lignes parcourues en {dstr}."
-    gl.msg += " {bn_2} lignes parcourues au total et {bn_3} "
-    gl.msg += " lignes écrites dans le fichier de sortie."
+    gl.msg = "{bn_1} lines read in {dstr}."
+    gl.msg += " {bn_2} lines read in total and {bn_3}"
+    gl.msg += " lines written in the output file."
 
     gl.LABEL_1 = gl.IN_FILE_NAME_1
     gl.LABEL_2 = gl.IN_FILE_NAME_2
