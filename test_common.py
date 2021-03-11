@@ -6,8 +6,8 @@ from os.path import exists
 
 def mail():
     mail_conf = g.paths['MAIL'] + 'conf.txt'
+    com.log("Testing common.mail-----------------------------------------")
     if exists(mail_conf):
-        com.log("Testing common.mail-------------------------------")
         com.mail('test')
     else:
         s = f"Conf file '{mail_conf}' missing."
@@ -17,7 +17,7 @@ def mail():
 
 
 def get_duration():
-    com.log("Testing common.string.get_duration--------------------")
+    com.log("Testing common.string.get_duration--------------------------")
     dstr = com.get_duration_string(0, end_time=0.35)
     com.log(dstr)
     assert dstr == "350 ms"
@@ -31,9 +31,21 @@ def get_duration():
 
 
 def send_notif():
-    com.log("Testing common.send_notif-----------------------------")
+    com.log("Testing common.send_notif-----------------------------------")
     com.send_notif('Notification test', 'Test', ndur=2)
     com.log_print()
+
+
+def check_log():
+
+    check_list = [
+        "Log file initialised",
+        "Python version:",
+        "Testing common.send_notif",
+        "Testing common.mail",
+        "Testing common.string.get_duration",
+    ]
+    com.check_log(check_list)
 
 
 def test_common():
@@ -41,6 +53,7 @@ def test_common():
     send_notif()
     mail()
     get_duration()
+    check_log()
 
 
 if __name__ == '__main__':

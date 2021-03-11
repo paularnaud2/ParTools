@@ -8,7 +8,7 @@ def process_query_init(elt, query, th_nb):
         com.log("Executing query:")
         com.log_print(query + "\n;")
     elif gl.MAX_DB_CNX == 1:
-        com.log(f"Executing query for range {elt}")
+        com.log(f"Executing query for range {elt}...")
     else:
         com.log(f"Executing query for range {elt} (connection no. {th_nb})...")
 
@@ -48,7 +48,7 @@ def write_rows_finish(rg_name, i, cnx_nb):
 
 
 def inject():
-    s1 = "Injecting data in DB..."
+    s1 = "Injecting data in DB"
     if gl.ref_chunk != 0:
         bn = com.big_number(gl.ref_chunk * gl.NB_MAX_ELT_INSERT)
         s = s1 + f" (restarting from line {bn})"

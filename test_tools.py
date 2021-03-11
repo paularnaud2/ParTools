@@ -3,11 +3,11 @@ import common as com
 import toolFilter as f
 
 from test import gl
-from toolParseXML import parse_xml
-from toolSplit import split_file
 from toolDup import del_dup
 from toolDup import find_dup
 from toolDup import find_dup_list
+from toolSplit import split_file
+from toolParseXML import parse_xml
 
 
 def filter():
@@ -37,41 +37,65 @@ def split():
     dq.file_match(gl.S_OUT_3, gl.S_OUT_REF_3)
 
 
+def check_log():
+
+    check_list = [
+        "Log file initialised",
+        "Python version:",
+        "[toolParseXML] parse_xml: start",
+        "[toolParseXML] parse_xml: end (* lines written in * ms)",
+        "[dq] file_match: start",
+        "[dq] file_match: end",
+        "[toolSplit] split_file: start",
+        "[toolSplit] split_file: end",
+        "[toolDup] find_dup: start",
+        "Examples of duplicates (limited to *):",
+        "List of duplicates saved in ",
+        "[toolDup] find_dup: end",
+        "[toolFilter] filter: start",
+        "lines read in * ms. * lines read in total (* lines written in output list).",
+        "[toolFilter] filter: end (* ms)",
+    ]
+    com.check_log(check_list)
+
+
 def test_tools():
     com.init_log('test_tools', True)
     com.mkdirs(gl.TOOLS_OUT, True)
     com.log_print()
 
-    # test toolParseXML
+    # Test toolParseXML
     parse_xml(IN_DIR=gl.XML_IN, OUT_DIR=gl.XML_OUT)
     dq.file_match(gl.XML_OUT, gl.XML_OUT_REF)
 
-    # test toolSplit
+    # Test toolSplit
     split()
 
-    # test toolDup - find_dup simple
+    # Test toolDup - find_dup simple
     find_dup(gl.DUP_IN, gl.DUP_OUT)
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
-    # test toolDup - find_dup col
+    # Test toolDup - find_dup col
     find_dup(gl.DUP_COL_IN, col=1)
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
-    # test toolDup - del_dup
+    # Test toolDup - del_dup
     del_dup(gl.DUP_IN, gl.DUP_OUT)
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DEL_DUP_OUT_REF)
 
-    # test toolDup - find_dup_list
+    # Test toolDup - find_dup_list
     list_in = com.load_csv(gl.DUP_IN)
     dup_list = find_dup_list(list_in)
     com.save_csv(dup_list, gl.DUP_OUT)
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
-    # test toolFilter
+    # Test toolFilter
     filter()
+
+    check_log()
 
 
 if __name__ == '__main__':

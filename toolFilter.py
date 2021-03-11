@@ -2,10 +2,13 @@ import os
 import common as com
 import tools.gl as gl
 
+from time import time
+
 
 def init_vars(params):
     # Input variables default values
     gl.IN_FILE = 'C:/Py/IN/in.csv'
+    gl.IN_FILE = 'test/sql/in.csv'
     gl.OUT_FILE = 'C:/Py/OUT/out_filtered.csv'
     gl.FILTER = False
     gl.EXTRACT_COL = True
@@ -24,7 +27,8 @@ def init_vars(params):
 
 
 def filter(**params):
-    com.log("[toolFilter] filter")
+    com.log("[toolFilter] filter: start")
+    start_time = time()
     init(params)
     with open(gl.IN_FILE, 'r', encoding='utf-8') as in_file:
         process_header(in_file)
@@ -32,15 +36,15 @@ def filter(**params):
         while line:
             process_line(line)
             line = in_file.readline()
-    finish()
+    finish(start_time)
 
 
 def init(params):
     init_vars(params)
 
-    com.log(f"Filtrage en cours sur le fichier '{gl.IN_FILE}'...")
-    gl.s = "{bn_1} lignes parcourues en {dstr}. {bn_2} lignes parcourues au total "
-    gl.s += "({bn_3} lignes écrites dans la liste de sortie)."
+    com.log(f"Filtering file '{gl.IN_FILE}'...")
+    gl.s = "{bn_1} lines read in {dstr}. {bn_2} lines read in total "
+    gl.s += "({bn_3} lines written in output list)."
 
 
 def process_header(in_file):
@@ -62,18 +66,20 @@ def process_line(line):
     com.step_log(gl.n_r, gl.SL_STEP, what=gl.s, nb=gl.n_o)
 
 
-def finish():
-    com.log("Filtrage terminé")
+def finish(start_time):
+    com.log("Filtering over")
     bn1 = com.big_number(gl.n_r)
     bn2 = com.big_number(gl.n_o)
-    s = f"{bn1} lignes parcourues dans le fichier d'entrée et"
-    s += f" {bn2} lignes à écrire dans le fichier de sortie"
+    s = f"{bn1} lines read in the input file and"
+    s += f" {bn2} lines to be written in the output file"
     com.log(s)
 
-    com.log("Ecriture du fichier de sortie...")
+    com.log("Writing output file...")
     com.save_csv(gl.out_list, gl.OUT_FILE)
-    s = f"Traitement terminé, fichier de sortie {gl.OUT_FILE} généré avec succès"
+    s = f"Output file saved in {gl.OUT_FILE}"
     com.log(s)
+    dstr = com.get_duration_string(start_time)
+    com.log(f"[toolFilter] filter: end ({dstr})")
     com.log_print()
     if gl.OPEN_OUT_FILE:
         os.startfile(gl.OUT_FILE)

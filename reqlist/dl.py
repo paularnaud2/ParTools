@@ -9,6 +9,7 @@ from reqlist.functions import gen_group_list
 from reqlist.process import process_grp
 
 from math import ceil
+from time import time
 from threading import Thread
 from threading import RLock
 
@@ -17,6 +18,7 @@ verrou = RLock()
 
 def download(query_file):
     com.log("[reqlist] download: start")
+    start_time = time()
     init(query_file)
 
     group_array = split_group_list()
@@ -28,7 +30,8 @@ def download(query_file):
     com.delete_folder(gl.TMP_PATH)
     n = sum([gl.counters[elt] for elt in gl.counters])
     bn = com.big_number(n)
-    com.log(f"[reqlist] download: end ({bn} lines written)")
+    dstr = com.get_duration_string(start_time)
+    com.log(f"[reqlist] download: end ({bn} lines written in {dstr})")
     com.log_print('|')
 
 

@@ -1,8 +1,10 @@
 import re
 import os
+import sys
 import common as com
 import tools.gl as gl
 
+from time import time
 from common import g
 
 # Const
@@ -36,16 +38,17 @@ def init(params):
 
 def parse_xml(**params):
     com.log("[toolParseXML] parse_xml: start")
+    start_time = time()
     init(params)
     gen_img_dict()
     save_img_dict()
-    finish()
+    finish(start_time)
 
 
-def finish():
-    dur = com.get_duration_string(gl.start_time)
+def finish(start_time):
+    dstr = com.get_duration_string(start_time)
     bn = com.big_number(gl.N_WRITE)
-    s = f"[toolParseXML] parse_xml: end ({bn} lines written in {dur}."
+    s = f"[toolParseXML] parse_xml: end ({bn} lines written in {dstr})"
     com.log(s)
     com.log_print()
     if gl.OPEN_OUT_FILE:
@@ -53,7 +56,7 @@ def finish():
 
 
 def gen_img_dict():
-    s = f"Génération du dictionnaire image à partir du fichier '{gl.IN_DIR}'..."
+    s = f"Generating parse dictionary from file '{gl.IN_DIR}'..."
     com.log(s)
     gl.parse_dict = {}
     with open(gl.IN_DIR, 'r', encoding='utf-8', errors='ignore') as in_file:
@@ -66,11 +69,11 @@ def gen_img_dict():
             fill_parse_dict(line)
 
     even_dict()
-    com.log('Dictionnaire image généré.')
+    com.log('Parse dictionary generated')
 
 
 def save_img_dict():
-    com.log('Sauvegarde du dictionnaire au format csv...')
+    com.log('Saving parse dictionary as csv...')
     header = []
     for elt in gl.parse_dict:
         header.append(elt)
@@ -85,15 +88,15 @@ def save_img_dict():
                 cur_row.append(gl.parse_dict[elt][gl.N_WRITE])
             com.write_csv_line(cur_row, out_file)
             gl.N_WRITE += 1
-            com.step_log(gl.N_WRITE, SL_STEP_WRITE, what='lignes écrites')
+            com.step_log(gl.N_WRITE, SL_STEP_WRITE, what='lines written')
 
-    com.log("Fichier csv généré à l'adresse {}".format(gl.OUT_DIR))
+    com.log(f"csv file saved in {gl.OUT_DIR}")
 
 
 def read_one_line(in_file):
     line = in_file.readline()
     gl.N_READ += 1
-    com.step_log(gl.N_READ, SL_STEP_READ, what='lignes traitées')
+    com.step_log(gl.N_READ, SL_STEP_READ, what='lines processed')
 
     return line
 
@@ -111,8 +114,7 @@ def fill_parse_dict(str_in):
                 complete_dict()
         else:
             if gl.N_ROW > 1 and gl.parse_dict != {}:
-                # on rencontre un nouvel élément
-                # (absent dans la première boucle)
+                # A new element (not in the first loop) is found
                 new_col = gen_void_list(gl.N_ROW - 1)
                 new_col.append(elt)
                 gl.parse_dict[tag] = new_col
@@ -156,10 +158,11 @@ def complete_dict():
         if n < gl.N_ROW - 1:
             gl.parse_dict[tag].append('')
         elif n >= gl.N_ROW and tag != gl.FIRST_TAG:
-            s = "Attention, la balise '{}' apparaît en doublon (id = {})."
-            s += " Elle doit être ajoutée à la liste 'MULTI_TAG_LIST'"
-            print(s.format(tag, gl.parse_dict[gl.FIRST_TAG][gl.N_ROW - 3]))
-            import sys
+            id = gl.parse_dict[gl.FIRST_TAG][gl.N_ROW - 2]
+            s = f"Warning: tag '{tag}' appears more than once (id = {id})."
+            s += " It must be added to MULTI_TAG_LIST."
+            com.log(s)
+            com.log_print("Execution aborted")
             sys.exit()
 
 

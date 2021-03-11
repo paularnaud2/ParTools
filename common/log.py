@@ -19,13 +19,18 @@ def write_log(str_in):
 def check_log(inp):
 
     log('check_log...')
-    txt = file.load_txt(g.paths['LOG'] + g.LOG_FILE, False)
+    lp = g.paths['LOG'] + g.LOG_FILE
+    txt = file.load_txt(lp, False)
     if isinstance(inp, str):
-        assert string.like(txt, inp)
+        if not string.like(txt, inp):
+            log(f"Expression '{inp}' couldn't be found in log file {lp}")
+            assert False
         return
 
     for elt in inp:
-        assert string.like(txt, elt)
+        if not string.like(txt, elt):
+            log(f"Expression '{elt}' couldn't be found in log file {lp}")
+            assert False
 
     log('check_log ok')
     log_print()

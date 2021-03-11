@@ -127,10 +127,66 @@ def iutd():
 
 
 def reset():
-    com.log("Reseting folders...")
+    com.log("Resetting folders...")
     com.mkdirs(gl.SQL_TMP, True)
     com.mkdirs(gl.SQL_OUT, True)
     com.log("Reset over\n")
+
+
+def check_log():
+
+    check_list = [
+        "Log file initialised (",
+        "Python version:",
+        "Error: the input file * must have a header",
+        "IUTD (Is Up To Date) check for DB",
+        "Can't find IUTD check file",
+        "Check file saved in",
+        "IUTD check OK",
+        "Warning: conf of DB * don't seem to be up to date:",
+        "y (TEST_IUTD = True)",
+        "The date found in the check file doesn't match the current date",
+        "Error: the input file * must have a header",
+        "Make sure the first elements of the first two lines are of different lengths",
+        "Automatic stop (upload_interrupted)",
+        "Injection running detected. Restart? (y/n)",
+        "y (TEST_RESTART = True)",
+        "* lines written in * ms. * lines written in total.",
+        "Examples of duplicates (limited to *):",
+        "Executing query for range 01 (connection no. 2)...",
+        "Query executed for range 02 (connection no. 3)",
+        "Writing lines for range 00 (connection no. 1)...",
+        "All lines written for range 01 (* lines written, connection no. 2)",
+        "TEST_RESTART: Automatic stop (thread no. *)",
+        "Range query detected. Base query:",
+        "Work in progress detected. Kill? (y/n)",
+        "n (TEST_RESTART = True)",
+        "Range list modified",
+        "lines written in * ms. * lines written in total for range * (connection no. *)",
+        "Verifying duplicates on the first column of the output file...",
+        "Resetting folders...",
+        "Reset over",
+        "Ranges to be queried: [",
+        "Creating connections for DB '*' of '*' environnement (*)",
+        "lines written in * ms. * lines written in total for range 06.",
+        "All lines written for range 09 (* lines written)",
+        "Executing query for range 09",
+        "Query executed for range 12",
+        "All threads are done",
+        "Group by on output file...",
+        "Group by over",
+        "[sql] upload: start",
+        "[sql] upload: end (* ms)",
+        "[sql] execute: start",
+        "[sql] execute: end (* ms)",
+        "[sql] download: start",
+        "[sql] download: end (* ms)",
+        "[dq] file_match: start",
+        "[dq] file_match: end",
+        "[toolDup] find_dup: start",
+        "[toolDup] find_dup: end",
+    ]
+    com.check_log(check_list)
 
 
 def test_sql():
@@ -181,6 +237,8 @@ def test_sql():
     dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
     download(gl.SQL_QUERY_COUNT_2_RG, gl.SQL_DL_OUT_COUNT)
     dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
+
+    check_log()
 
 
 if __name__ == '__main__':
