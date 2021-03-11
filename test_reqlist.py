@@ -44,6 +44,27 @@ def left_join_files(left, right, ref):
     dq.file_match(ref, gl.RL_OUT_JOIN)
 
 
+def check_log():
+
+    check_list = [
+        'Log file initialised',
+        'Python version:',
+        'Error: right array is void',
+        'Error: query must contain @@IN@@',
+        'Executing queries (thread no. 1)',
+        'Error: the input file C:/Py/TMP/test/reqlist/in_missing_header.csv must have a header',
+        'Make sure the first elements of the first two lines are of different lengths',
+        '5 queries executed in * ms. 5 queries executed in total (thread no. 1).',
+        'All queries executed for thread no. 2 (1 000 lines written)',
+        'TEST_RESTART: Automatic stop (thread no.',
+        'Work in progress detected. Kill? (y/n)',
+        'Restarting from query no. * for thread no. 1',
+        'Restarting from query no. * for thread no. 6',
+        'Thread no. * had finished its run',
+    ]
+    com.check_log(check_list)
+
+
 def test_reqlist():
     com.init_log('test_reqlist', True)
     com.mkdirs(gl.RL_TMP, True)
@@ -87,9 +108,12 @@ def test_reqlist():
 
     # Test interruption other threads finished
     com.mkdirs(gl.RL_TMP, True)
+    com.log_print()
     reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
     dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
+
+    check_log()
 
 
 def reqlist_interrupted(inp, out, query, sleep=False, cnx=3, elt=100):

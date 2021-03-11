@@ -2,6 +2,7 @@ import sys
 
 from common import g
 from common import string
+from common import file
 from time import time
 from datetime import datetime
 
@@ -13,6 +14,21 @@ def write_log(str_in):
     s = str(str_in)
     with open(g.paths['LOG'] + g.LOG_FILE, 'a', encoding='utf-8') as in_file:
         in_file.write(s + '\n')
+
+
+def check_log(inp):
+
+    log('check_log...')
+    txt = file.load_txt(g.paths['LOG'] + g.LOG_FILE, False)
+    if isinstance(inp, str):
+        assert string.like(txt, inp)
+        return
+
+    for elt in inp:
+        assert string.like(txt, elt)
+
+    log('check_log ok')
+    log_print()
 
 
 def log_print(str_in='', nb_tab=0, c_out=True):

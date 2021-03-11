@@ -1,4 +1,16 @@
-import common as com
+# import common as com
+import re
 
-script = com.load_txt('sql/scripts/fix_tnslsnr.sql', False)
-com.run_sqlplus(script)
+str1 = 'Thread no. * had finished its run'
+str2 = 'Thread no. 1 had finished its run'
+
+str1 = re.escape(str1)
+str1 = str1.replace(r'\*', '(.*)')
+print(str1)
+
+m = re.search(str1, str2)
+out = False
+if m:
+    out = True
+
+print(out)
