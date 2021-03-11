@@ -1,4 +1,5 @@
 import common as com
+import test.check_log as cl
 
 from common import g
 from os.path import exists
@@ -36,24 +37,12 @@ def send_notif():
     com.log_print()
 
 
-def check_log():
-
-    check_list = [
-        "Log file initialised",
-        "Python version:",
-        "Testing common.send_notif",
-        "Testing common.mail",
-        "Testing common.string.get_duration",
-    ]
-    com.check_log(check_list)
-
-
 def test_common():
     com.init_log('test_common', True)
     send_notif()
     mail()
     get_duration()
-    check_log()
+    com.check_log(cl.CO)
 
 
 if __name__ == '__main__':

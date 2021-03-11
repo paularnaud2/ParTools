@@ -1,6 +1,6 @@
-# main-----------------------------------------------------------------------
+# Main-----------------------------------------------------------------------
 
-# basically where you want your log files and temporary files to be outputed
+# Basically where you want your log files and temporary files to be outputed
 ROOT_PATH = 'C:/Py/'
 
 # DEBUG = True enables thread decorator in common.deco
@@ -10,10 +10,9 @@ DEBUG = True
 
 # sql------------------------------------------------------------------------
 
-# path of your Oracle instant client
-# the nb of bit has to match your python version)
+# Path of your Oracle instant client (the nb of bit has to match your python version)
 ORACLE_CLIENT = 'C:/instantclient_19_6/'
 
-# test----------------------------------------------------------------------
+# Test----------------------------------------------------------------------
 TEST_ENV = 'LOCAL'
-TEST_DB = 'SYSTEM'
+TEST_DB = ''

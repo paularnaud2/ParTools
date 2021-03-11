@@ -1,5 +1,7 @@
 import common as com
 
+from test import gl
+
 
 def ttry(f, e_ref, *args, **kwargs):
     exception_occured = False
@@ -11,3 +13,11 @@ def ttry(f, e_ref, *args, **kwargs):
 
     assert exception_occured
     com.log_print()
+
+
+def is_test_db_defined(test_name):
+    if not gl.SQL_DB:
+        com.log(f"TEST_DB is not defined in conf_main.py. {test_name} aborted")
+        return False
+    else:
+        return True

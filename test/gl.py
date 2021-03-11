@@ -6,7 +6,7 @@ import sql.gl as sql
 
 from common import g
 
-# main
+# Main
 TEST = 'test/'
 OUT_DUP_TMP = g.paths['TMP'] + tools.TMP_FOLDER + toolDup.TMP_OUT
 

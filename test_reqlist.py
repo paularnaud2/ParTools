@@ -2,10 +2,12 @@ import dq
 import time
 import common as com
 import reqlist as rl
+import test.check_log as cl
 
 from common import g
 from test import gl
 from test import ttry
+from test import is_test_db_defined
 from test_sql import upload
 
 from multiprocessing import Process
@@ -44,52 +46,29 @@ def left_join_files(left, right, ref):
     dq.file_match(ref, gl.RL_OUT_JOIN)
 
 
-def check_log():
-
-    check_list = [
-        "Log file initialised",
-        "Python version:",
-        "Error: right array is void",
-        "Error: query must contain @@IN@@",
-        "Executing queries (thread no. 1)",
-        "Error: the input file * must have a header",
-        "Make sure the first elements of the first two lines are of different lengths",
-        "queries executed in * ms. * queries executed in total (thread no. 1).",
-        "All queries executed for thread no. * (* lines written)",
-        "TEST_RESTART: Automatic stop (thread no. *)",
-        "Work in progress detected. Kill? (y/n)",
-        "n (TEST_RESTART = True)",
-        "Restarting from query no. * for thread no. *",
-        "Thread no. * had finished its run",
-        "Building groups of elements...",
-        "List of elements prepared, it contains * elements",
-        "Group list built: * elements to be processed distributed in * groups (* max per group)",
-        "The * groups will be processed in parallel on * different connection pools (max * groups per thread).",
-        "Executing queries (thread no. 1)...",
-        "End of thread no. 1",
-        "All threads are done",
-        "Checking duplicates on the first column of the output file...",
-        "Examples of duplicates (limited to *):",
-        "[reqlist] left_join_files: start",
-        "[reqlist] left_join_files: end (* ms)",
-        "[dq] file_match: start",
-        "[dq] file_match: end",
-        "[sql] upload: start",
-        "[sql] upload: end (* ms)",
-        "[sql] execute: start",
-        "[sql] execute: end (* ms)",
-        "[reqlist] run_reqList: start",
-        "[reqlist] run_reqList: end (* ms)",
-        "[reqlist] download: start",
-        "[reqlist] download: end (* lines written in * ms)",
-        "[toolDup] find_dup: start",
-        "[toolDup] find_dup: end",
-    ]
-    com.check_log(check_list)
+def reqlist_interrupted(inp, out, query, sleep=False, cnx=3, elt=100):
+    manager = Manager()
+    md = manager.dict()
+    md['STOP'] = False
+    md['LOG_FILE'] = g.LOG_FILE
+    com.log("[reqlist] run_reqList: start", c_out=False)
+    p = Process(target=reqlist, args=(inp, out, query, True, md, cnx, elt))
+    p.start()
+    while not md['STOP']:
+        pass
+    if sleep:
+        # If sleep = True, a bit of time is let to the other threads to finish
+        # their run as it is valuable to test the restart in this case
+        # (more code coverage)
+        time.sleep(0.5)
+    p.terminate()
 
 
 def test_reqlist():
     com.init_log('test_reqlist', True)
+    if not is_test_db_defined('test_reqlist'):
+        return
+
     com.mkdirs(gl.RL_TMP, True)
     com.mkdirs(gl.RL_OUT, True)
     com.log_print()
@@ -136,25 +115,7 @@ def test_reqlist():
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
     dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
 
-    check_log()
-
-
-def reqlist_interrupted(inp, out, query, sleep=False, cnx=3, elt=100):
-    manager = Manager()
-    md = manager.dict()
-    md['STOP'] = False
-    md['LOG_FILE'] = g.LOG_FILE
-    com.log("[reqlist] run_reqList: start", c_out=False)
-    p = Process(target=reqlist, args=(inp, out, query, True, md, cnx, elt))
-    p.start()
-    while not md['STOP']:
-        pass
-    if sleep:
-        # If sleep = True, a bit of time is let to the other threads to finish
-        # their run as it is valuable to test the restart in this case
-        # (more code coverage)
-        time.sleep(0.5)
-    p.terminate()
+    com.check_log(cl.RL)
 
 
 if __name__ == '__main__':

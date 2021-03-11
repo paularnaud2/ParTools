@@ -1,6 +1,7 @@
 import dq
 import common as com
 import toolFilter as f
+import test.check_log as cl
 
 from test import gl
 from toolDup import del_dup
@@ -35,28 +36,6 @@ def split():
     dq.file_match(gl.S_OUT_1, gl.S_OUT_REF_1)
     dq.file_match(gl.S_OUT_2, gl.S_OUT_REF_2)
     dq.file_match(gl.S_OUT_3, gl.S_OUT_REF_3)
-
-
-def check_log():
-
-    check_list = [
-        "Log file initialised",
-        "Python version:",
-        "[toolParseXML] parse_xml: start",
-        "[toolParseXML] parse_xml: end (* lines written in * ms)",
-        "[dq] file_match: start",
-        "[dq] file_match: end",
-        "[toolSplit] split_file: start",
-        "[toolSplit] split_file: end",
-        "[toolDup] find_dup: start",
-        "Examples of duplicates (limited to *):",
-        "List of duplicates saved in ",
-        "[toolDup] find_dup: end",
-        "[toolFilter] filter: start",
-        "lines read in * ms. * lines read in total (* lines written in output list).",
-        "[toolFilter] filter: end (* ms)",
-    ]
-    com.check_log(check_list)
 
 
 def test_tools():
@@ -95,7 +74,7 @@ def test_tools():
     # Test toolFilter
     filter()
 
-    check_log()
+    com.check_log(cl.TO)
 
 
 if __name__ == '__main__':
