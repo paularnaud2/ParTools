@@ -1,6 +1,5 @@
 import re
 import os
-import sys
 import common as com
 import tools.gl as gl
 
@@ -163,7 +162,7 @@ def complete_dict():
             s += " It must be added to MULTI_TAG_LIST."
             com.log(s)
             com.log_print("Execution aborted")
-            sys.exit()
+            exit()
 
 
 def even_dict():

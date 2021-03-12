@@ -1,4 +1,3 @@
-import sys
 import time
 import common as com
 import sql.log as log
@@ -90,8 +89,8 @@ def test_restart(th_nb):
 
     if sleep:
         time.sleep(1)
-        com.log("sys.exit()")
-        sys.exit()
+        com.log("exit()")
+        exit()
 
 
 def get_th_nb():

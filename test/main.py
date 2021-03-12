@@ -17,7 +17,8 @@ def ttry(f, e_ref, *args, **kwargs):
 
 def is_test_db_defined(test_name):
     if not gl.SQL_DB:
-        com.log(f"TEST_DB is not defined in conf_main.py. {test_name} aborted")
+        s = f"TEST_DB is not defined in conf_main.py. {test_name} aborted."
+        com.log(s)
         return False
     else:
         return True

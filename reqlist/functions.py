@@ -1,4 +1,3 @@
-import sys
 import common as com
 import reqlist.gl as gl
 import reqlist.log as log
@@ -99,4 +98,4 @@ def check_field_nb():
         s = f"Warning: queries will take field no. {gl.IN_FIELD_NB}"
         s += " of input file in the IN statement. Continue? (y/n)"
         if com.log_input(s) == 'n':
-            sys.exit()
+            exit()

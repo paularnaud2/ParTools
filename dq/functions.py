@@ -1,4 +1,3 @@
-import sys
 import dq.gl as gl
 import common as com
 
@@ -131,6 +130,6 @@ def split_needed():
         com.log_print('y (TEST_PROMPT_SPLIT = True)')
         return True
     if com.log_input(s) == "n":
-        sys.exit()
+        exit()
 
     return True

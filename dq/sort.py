@@ -1,4 +1,3 @@
-import sys
 import common as com
 import dq.gl as gl
 
@@ -91,4 +90,4 @@ def prompt_dup_key(n_dup_key):
         s = f"List of key duplicates written in file {gl.OUT_DUP_KEY_FILE}"
         com.log(s)
     if command == 'a' or command == 'b':
-        sys.exit()
+        exit()

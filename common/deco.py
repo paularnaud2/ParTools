@@ -21,9 +21,7 @@ def log_exeptions(f):
                 log_input("Execution aborted")
                 os._exit(1)
 
-    if hasattr(cfg, 'DEBUG'):
-        if cfg.DEBUG:
-            return new
-        else:
-            return f
-    return new
+    if cfg.DEBUG:
+        return new
+    else:
+        return f

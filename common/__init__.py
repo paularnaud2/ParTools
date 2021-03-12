@@ -1,3 +1,10 @@
+from os.path import exists
+from shutil import copyfile
+if not exists('conf_main.py'):
+    copyfile('conf_main_default.py', 'conf_main.py')
+if not exists('conf_oracle.py'):
+    copyfile('conf_oracle_default.py', 'conf_oracle.py')
+
 from .mail import mail
 from .deco import log_exeptions
 
