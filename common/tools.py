@@ -81,5 +81,6 @@ def run_sqlplus(script):
     (stdout, stderr) = p.communicate(script.encode('utf-8'))
 
     out = stdout.decode('cp1252', errors="ignore")
+    # out = stdout.decode('cp850', errors="ignore")
 
     print(out)

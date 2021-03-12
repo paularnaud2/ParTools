@@ -1,6 +1,6 @@
 import os
-import sql
 import dq
+import sql
 import common as com
 import test.check_log as cl
 

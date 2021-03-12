@@ -1,10 +1,11 @@
-import conf_main as cfg
 import common as com
 import sql.gl as gl
 import cx_Oracle as cx
+import conf_main as cfg
 
-from conf_oracle import conf
+from os.path import exists
 from threading import RLock
+from conf_oracle import conf
 from sql.iutd import is_up_to_date
 
 verrou = RLock()
@@ -14,8 +15,9 @@ def connect(ENV, DB):
 
     init_instant_client()
     if (ENV, DB) not in conf:
-        s = f"DB '{DB}' of ENV '{ENV}' doesn't seem to be defined."
+        s = f"Error: DB '{DB}' of ENV '{ENV}' doesn't seem to be defined."
         s += " Pease check your conf_oracle.py file."
+        com.log(s)
         raise Exception(s)
     cnx_str = conf[(ENV, DB)]
     com.log(f"Connecting to DB '{DB}' of '{ENV}' environment ({cnx_str})")
@@ -48,5 +50,11 @@ def init_instant_client():
         if gl.client_is_init is False:
             com.log("Initialising Oracle client...")
             gl.client_is_init = True
+            if not exists(cfg.ORACLE_CLIENT):
+                s = "Error: The Oracle instant client path specified in conf_main.py"
+                s += f" (ORACLE_CLIENT = {cfg.ORACLE_CLIENT}) doesn't exist."
+                s += " Please enter a valid path for the Oracle instant client."
+                com.log(s)
+                raise Exception(s)
             cx.init_oracle_client(cfg.ORACLE_CLIENT)
             com.log("Client Oracle initialised")

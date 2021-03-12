@@ -1,6 +1,6 @@
 import dq
-import common as com
 import dq.gl as qgl
+import common as com
 import test.check_log as cl
 
 from test import gl

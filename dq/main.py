@@ -1,6 +1,7 @@
 import os
-import dq.gl as gl
 import common as com
+
+import dq.gl as gl
 
 from time import time
 from dq.init import init_dq

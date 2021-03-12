@@ -1,6 +1,7 @@
+import common as com
+
 import sql.rg as rg
 import sql.gl as gl
-import common as com
 
 from time import time
 from os import startfile

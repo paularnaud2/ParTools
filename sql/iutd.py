@@ -1,3 +1,4 @@
+import sys
 import common as com
 
 from datetime import datetime
@@ -56,7 +57,7 @@ def compare_dates(d_bdd, d_now):
             com.log_print(s)
             com.log_print('y (TEST_IUTD = True)')
         elif com.log_input(s) == 'n':
-            exit()
+            sys.exit()
 
     com.log_print('|')
 

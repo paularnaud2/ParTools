@@ -1,10 +1,10 @@
+from common import g
+
 import toolDup
 import conf_main as cfg
 import tools.gl as tools
 import reqlist.gl as rl
 import sql.gl as sql
-
-from common import g
 
 # Main
 TEST = 'test/'

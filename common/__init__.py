@@ -1,3 +1,4 @@
+# conf_main and conf_oracle auto-init
 from os.path import exists
 from shutil import copyfile
 if not exists('conf_main.py'):
@@ -5,6 +6,16 @@ if not exists('conf_main.py'):
 if not exists('conf_oracle.py'):
     copyfile('conf_oracle_default.py', 'conf_oracle.py')
 
+# Check if requirements have been installed
+try:
+    import yapf
+except Exception:
+    s = "Error: required packages have not been installed."
+    s += " Please run the following command:\n"
+    s += "pip install -r requirements.txt"
+    raise Exception(s)
+
+# Imports for package common
 from .mail import mail
 from .deco import log_exeptions
 

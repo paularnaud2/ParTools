@@ -7,7 +7,7 @@ ROOT_PATH = 'C:/Py/'
 # it basically temrinate the programm if one of the threads
 # (or the main thread) throws an exeption and print the exception (full trace)
 # in the current log file.
-# Warning: DEBUG = True will also male pytest fail!
+# Warning: DEBUG = True will make pytest fail!
 DEBUG = False
 
 # sql--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ DEBUG = False
 # (the nb of bit has to match your python version)
 ORACLE_CLIENT = 'C:/instantclient_19_6/'
 
-# Test-------------------------------------------------------------------------
+# test-------------------------------------------------------------------------
 
 # Default test environment is set to local. You can rename it as you wish,
 # it just has to match with ENV_NAME of conf_oracle.py
@@ -27,4 +27,6 @@ TEST_ENV = 'LOCAL'
 # Note also that as with TEST_ENV, the name of the TEST_DB has to be
 # set in conf_oracle.py so that the duplet (TEST_ENV, TEST_DB) has a defined
 # connexion string
-TEST_DB = 'XE'
+# Set TEST_DB to '' if you want SQL tests (test_sql and test_reqlist)
+# to be skipped
+TEST_DB = ''
