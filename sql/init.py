@@ -16,16 +16,12 @@ def init_gl():
     gl.IUTD_DIR = TMP_DIR + gl.IUTD_FILE
     gl.TMP_FILE_CHUNK = TMP_DIR + gl.CHUNK_FILE
 
-    gl.conf = {}
-    gl.conf_env = {}
-    gl.bools = {}
-    gl.bools['RANGE_QUERY'] = False
-    gl.bools["COUNT"] = False
-    gl.counters = {}
+    gl.RANGE_QUERY = False
+    gl.COUNT = False
     gl.out_files = {}
     gl.th_dic = {}
 
-    gl.counters["row"] = 0
+    gl.c_row = 0
 
 
 def init_tmp_dir():

@@ -20,7 +20,7 @@ def sort_file(in_file_dir, out_file_dir, prompt=False, nb=0):
     init_stf(in_file_dir, out_file_dir)
     gen_sorted_temp_files(in_file_dir, out_file_dir)
     com.log_print('|')
-    nb_files = gl.counters["file"]
+    nb_files = gl.c_file
     if nb_files > 1:
         s = f"Generating sorted output file from {nb_files} sorted temporary files..."
         com.log(s)
@@ -41,7 +41,7 @@ def finish(out_file_dir, prompt, nb, start_time):
 
     n_dup_key = len(gl.dup_key_list)
     n_dup = len(gl.dup_list)
-    bn1 = com.big_number(gl.counters["tot_written_lines_out"])
+    bn1 = com.big_number(gl.c_tot_out)
     bn2 = com.big_number(n_dup)
     s = f"Output file {out_file_dir} successfully generated"
     s += f" ({bn1} lines written, {bn2} duplicates removed)."

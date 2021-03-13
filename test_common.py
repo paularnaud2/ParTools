@@ -40,9 +40,9 @@ def send_notif():
 def test_common():
     com.init_log('test_common', True)
     send_notif()
-    mail()
     get_duration()
-    com.check_log(cl.CO)
+    # mail()
+    # com.check_log(cl.CO)
 
 
 if __name__ == '__main__':

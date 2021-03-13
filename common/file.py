@@ -45,7 +45,6 @@ def get_file_list(in_dir):
 
 
 def load_txt(in_dir, list_out=True):
-    g.counters["txt_read"] = 0
     if list_out:
         out = []
     else:
@@ -57,7 +56,6 @@ def load_txt(in_dir, list_out=True):
                 out.append(line.strip('\n'))
             else:
                 out += line
-            g.counters["txt_read"] += 1
 
     return out
 

@@ -9,7 +9,6 @@ VAR_DEL = '@@'
 DEFAULT_FIELD = "FIELD"
 MAX_EXAMPLE_PRINT = 5
 
-counters = {}
 verrou = RLock()
 
 # Exceptions

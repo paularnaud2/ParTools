@@ -57,11 +57,11 @@ def set_dirs():
 
 def init_stf(in_file_dir, out_file_dir):
 
-    gl.counters["file"] = 0
-    gl.counters["row_max"] = 0
-    gl.counters["iter"] = 0
+    gl.c_file = 0
+    gl.c_row_max = 0
+    gl.c_iter = 0
 
-    gl.bool["dup_key"] = False
+    gl.DUP_KEY = False
 
     gl.prev_elt = []
     gl.cur_list = []
@@ -87,10 +87,10 @@ def init_compare(in_file_1, in_file_2):
 
     init_equal_diff_bool()
 
-    gl.counters["c1"] = 1
-    gl.counters["c2"] = 1
-    gl.counters["out"] = 1
-    gl.counters["diff"] = 0
+    gl.c_1 = 1
+    gl.c_2 = 1
+    gl.c_out = 1
+    gl.c_diff = 0
 
     gl.msg = "{bn_1} lines read in {dstr}."
     gl.msg += " {bn_2} lines read in total and {bn_3}"
@@ -110,23 +110,23 @@ def init_compare(in_file_1, in_file_2):
 def init_equal_diff_bool():
 
     if gl.EQUAL_OUT:
-        if gl.counters["sf_read"] <= gl.MAX_ROW_EQUAL_OUT:
-            gl.bool["EQUAL"] = True
-            gl.bool["DIFF"] = gl.DIFF_OUT
+        if gl.c_sf_read <= gl.MAX_ROW_EQUAL_OUT:
+            gl.EQUAL = True
+            gl.DIFF = gl.DIFF_OUT
         else:
             bn = com.big_number(gl.MAX_ROW_EQUAL_OUT)
             s = f"Warning: file to be compared have more than {bn} lines"
             s += " EQUAL_OUT paramter is set to True."
             s += "\nDo you want to write matching lines in output file ? (y/n)"
             if com.log_input(s) == "y":
-                gl.bool["EQUAL"] = True
-                gl.bool["DIFF"] = gl.DIFF_OUT
+                gl.EQUAL = True
+                gl.DIFF = gl.DIFF_OUT
             else:
-                gl.bool["EQUAL"] = False
-                gl.bool["DIFF"] = True
+                gl.EQUAL = False
+                gl.DIFF = True
     else:
-        gl.bool["EQUAL"] = False
-        gl.bool["DIFF"] = True
+        gl.EQUAL = False
+        gl.DIFF = True
 
 
 def del_tmp_files():
@@ -144,10 +144,10 @@ def del_tmp_files():
 def init_msf():
 
     gl.prev_elt = []
-    gl.counters["tot_written_lines_out"] = 1
-    gl.counters["row_max"] = floor(gl.MAX_ROW_LIST / gl.counters["file"])
-    if gl.counters["row_max"] == 0:
-        gl.counters["row_max"] = 1
+    gl.c_tot_out = 1
+    gl.c_row_max = floor(gl.MAX_ROW_LIST / gl.c_file)
+    if gl.c_row_max == 0:
+        gl.c_row_max = 1
     init_array_list()
 
 
@@ -155,11 +155,11 @@ def init_array_list():
 
     counter = 1
     gl.array_list = [[]]
-    while counter < gl.counters["file"]:
+    while counter < gl.c_file:
         counter += 1
         gl.array_list.append([])
 
-    nb = gl.counters["row_max"]
+    nb = gl.c_row_max
     s = "Buffer array initialised."
     s += f" It can hold a maximum of {nb} lines."
     com.log(s)

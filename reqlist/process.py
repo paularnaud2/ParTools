@@ -12,11 +12,11 @@ verrou = RLock()
 
 def process_grp(c, grp, th_nb=1):
 
-    th_name = com.gen_sl_detail(th_nb=th_nb, multi_th=gl.bools['MULTI_TH'])
+    th_name = com.gen_sl_detail(th_nb=th_nb, multi_th=gl.MULTI_TH)
     if not file.tmp_init(th_name, th_nb):
         return
     with verrou:
-        gl.counters[th_nb] = 0
+        gl.c[th_nb] = 0
     query_nb = 0
 
     log.start_exec(th_nb)
@@ -45,7 +45,7 @@ def process_query(c, query, query_nb, th_name, th_nb):
 
     file.tmp_update(res, th_name, query_nb, c)
     with verrou:
-        gl.counters[th_nb] += len(res)
+        gl.c[th_nb] += len(res)
 
 
 def test_restart(query_nb, th_nb):
@@ -53,7 +53,7 @@ def test_restart(query_nb, th_nb):
         return
     sleep = False
     with verrou:
-        if query_nb == gl.counters['N_STOP'] and not gl.MD['STOP']:
+        if query_nb == gl.n_stop and not gl.MD['STOP']:
             s = f"TEST_RESTART: Automatic stop (thread no. {th_nb})\n"
             com.log(s)
             # A STOP flag is sent through the manager dict to the main process in order

@@ -27,9 +27,9 @@ def comp(in1, in2, out):
 
 def finish(out_file_dir):
 
-    nb_out = com.big_number(gl.counters["out"])
-    nb_1 = com.big_number(gl.counters["c1"])
-    nb_2 = com.big_number(gl.counters["c2"])
+    nb_out = com.big_number(gl.c_out)
+    nb_1 = com.big_number(gl.c_1)
+    nb_2 = com.big_number(gl.c_2)
     s = f"Output file successfully generated in {out_file_dir}\n"
     s += f"\t\t{nb_1} lines read in file 1\n"
     s += f"\t\t{nb_2} lines read in file 2\n"
@@ -41,20 +41,20 @@ def compare_equal(line_1_list, line_2_list, in_file_1, in_file_2, out_file):
 
     while compare_elt(line_1_list, line_2_list) == "=":
         if line_1_list != line_2_list:
-            gl.counters["diff"] += 1
-            if gl.bool["DIFF"]:
+            gl.c_diff += 1
+            if gl.DIFF:
                 line_diff = compare_line(line_1_list, line_2_list)
                 com.write_csv_line(line_diff, out_file)
-                gl.counters["out"] += 1
-        elif gl.bool["EQUAL"]:
+                gl.c_out += 1
+        elif gl.EQUAL:
             line_1_list.append(gl.EQUAL_LABEL)
             com.write_csv_line(line_1_list, out_file)
-            gl.counters["out"] += 1
+            gl.c_out += 1
         line_1_list = read_list(in_file_1)
-        gl.counters["c1"] += 1
+        gl.c_1 += 1
         line_2_list = read_list(in_file_2)
-        gl.counters["c2"] += 1
-        com.step_log(gl.counters["c1"], gl.SL_STEP, gl.msg, gl.counters["out"])
+        gl.c_2 += 1
+        com.step_log(gl.c_1, gl.SL_STEP, gl.msg, gl.c_out)
 
     return (line_1_list, line_2_list)
 
@@ -77,14 +77,14 @@ def compare_line(line_1_list, line_2_list):
 def compare_inf(line_1_list, line_2_list, in_file_1, out_file):
 
     while compare_elt(line_1_list, line_2_list) == "<":
-        gl.counters["diff"] += 1
-        if gl.bool["DIFF"]:
+        gl.c_diff += 1
+        if gl.DIFF:
             line_1_list.append(gl.LABEL_1)
             com.write_csv_line(line_1_list, out_file)
-            gl.counters["out"] += 1
+            gl.c_out += 1
         line_1_list = read_list(in_file_1)
-        gl.counters["c1"] += 1
-        com.step_log(gl.counters["c1"], gl.SL_STEP, gl.msg, gl.counters["out"])
+        gl.c_1 += 1
+        com.step_log(gl.c_1, gl.SL_STEP, gl.msg, gl.c_out)
 
     return (line_1_list, line_2_list)
 
@@ -92,12 +92,12 @@ def compare_inf(line_1_list, line_2_list, in_file_1, out_file):
 def compare_sup(line_1_list, line_2_list, in_file_2, out_file):
 
     while compare_elt(line_1_list, line_2_list) == ">":
-        gl.counters["diff"] += 1
-        if gl.bool["DIFF"]:
+        gl.c_diff += 1
+        if gl.DIFF:
             line_2_list.append(gl.LABEL_2)
             com.write_csv_line(line_2_list, out_file)
-            gl.counters["out"] += 1
+            gl.c_out += 1
         line_2_list = read_list(in_file_2)
-        gl.counters["c2"] += 1
+        gl.c_2 += 1
 
     return (line_1_list, line_2_list)

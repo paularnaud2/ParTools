@@ -15,7 +15,7 @@ verrou = RLock()
 
 
 def process_range_list(range_list, rg_file_name):
-    gl.counters['QUERY_RANGE'] = 0
+    gl.c_query_rg = 0
     init_th_dict()
     gl.sem = Semaphore(gl.MAX_DB_CNX)
     if range_list == ['MONO']:
@@ -47,7 +47,7 @@ def lauch_threads(range_list, rg_file_name):
 @com.log_exeptions
 def process_range(elt='MONO', rg_file_name=''):
     with gl.sem:
-        gl.counters['QUERY_RANGE'] += 1
+        gl.c_query_rg += 1
         cur_th = get_th_nb()
         cnx = gl.cnx_dict[cur_th]
         elt_query = elt.replace("'", "''")
@@ -78,7 +78,7 @@ def test_restart(th_nb):
         return
     sleep = False
     with verrou:
-        if gl.counters["row"] > gl.MD['N_STOP'] and not gl.MD['STOP']:
+        if gl.c_row > gl.MD['N_STOP'] and not gl.MD['STOP']:
             s = f"TEST_RESTART: Automatic stop (thread no. {th_nb})\n"
             com.log(s)
             # A STOP flag is sent through the manager dict to the main process in order

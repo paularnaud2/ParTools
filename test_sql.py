@@ -4,12 +4,13 @@ import sql
 import common as com
 import test.check_log as cl
 
-from test import gl
-from test import ttry
-from test import is_test_db_defined
 from time import sleep
 from common import g
 from sql.connect import connect
+
+from test import gl
+from test import ttry
+from test import is_test_db_defined
 
 from multiprocessing import Process
 from multiprocessing import Manager

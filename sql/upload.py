@@ -31,12 +31,12 @@ def upload(**params):
             if len(line_list) == 1:
                 line_list = line_list[0]
             gl.data.append(line_list)
-            gl.counters['main'] += 1
-            if gl.counters['main'] % gl.NB_MAX_ELT_INSERT == 0:
+            gl.c_main += 1
+            if gl.c_main % gl.NB_MAX_ELT_INSERT == 0:
                 insert(script)
                 send_chunk_duration(st_insert)
 
-    if gl.counters['main'] % gl.NB_MAX_ELT_INSERT != 0:
+    if gl.c_main % gl.NB_MAX_ELT_INSERT != 0:
         insert(script)
 
     finish_this(start_time)
@@ -53,7 +53,7 @@ def prepare_bdd():
 def finish_this(start_time):
     gl.cnx.close()
     os.remove(gl.TMP_FILE_CHUNK)
-    bn = com.big_number(gl.counters['main'])
+    bn = com.big_number(gl.c_main)
     dstr = com.get_duration_string(start_time)
     com.log(f"{bn} lines exported")
     com.log(f"[sql] upload: end ({dstr})")
@@ -64,8 +64,8 @@ def init(params):
     sql.init()
 
     gl.ref_chunk = 0
-    gl.counters['main'] = 0
-    gl.counters['chunk'] = 0
+    gl.c_main = 0
+    gl.c_chunk = 0
     gl.cnx = connect(ENV=gl.ENV, DB=gl.DB)
     gl.c = gl.cnx.cursor()
     gl.data = []
@@ -81,20 +81,20 @@ def get_script():
 
 def insert(script):
 
-    if gl.counters['chunk'] >= gl.ref_chunk:
+    if gl.c_chunk >= gl.ref_chunk:
         gl.data = [tuple(line) for line in gl.data]
         gl.c.executemany(script, gl.data)
-        gl.counters['chunk'] += 1
-        snc = str(gl.counters['chunk'])
+        gl.c_chunk += 1
+        snc = str(gl.c_chunk)
         com.save_csv([f"{snc}_COMMIT_RUNNING"], gl.TMP_FILE_CHUNK)
         gl.cnx.commit()
         com.save_csv([snc], gl.TMP_FILE_CHUNK)
-        sn = com.big_number(gl.counters['main'])
+        sn = com.big_number(gl.c_main)
         com.log(f"{sn} lines inserted in total")
         gl.c.close()
         gl.c = gl.cnx.cursor()
     else:
-        gl.counters['chunk'] += 1
+        gl.c_chunk += 1
 
     gl.data = []
 

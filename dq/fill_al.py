@@ -6,13 +6,13 @@ import common as com
 def fill_array_list():
     # Filling buffer array with tmp files
 
-    gl.counters["iter"] += 1
+    gl.c_iter += 1
     s = "Filling buffer array - Iteration no. {}"
-    com.log(s.format(gl.counters["iter"]))
-    gl.counters['col'] = 0
-    while gl.counters['col'] < gl.counters['file']:
-        gl.counters['col'] += 1
-        n = gl.counters['col']
+    com.log(s.format(gl.c_iter))
+    gl.c_col = 0
+    while gl.c_col < gl.c_file:
+        gl.c_col += 1
+        n = gl.c_col
         com.log(f"Reading tmp file no. {n}...", 1)
         tmp_file_dir = f"{gl.TMP_DIR}tmp_{n}{gl.FILE_TYPE}"
         if n > 1:
@@ -49,10 +49,10 @@ def write_tmp_file_in_array(tmp_file_list):
     # Writing part of a tmp file in buffer array so that
     # it's length reaches at most counters["row_max"]
 
-    cur_rm = min(len(tmp_file_list), gl.counters["row_max"])
+    cur_rm = min(len(tmp_file_list), gl.c_row_max)
     counter = 0
-    cur_l = gl.array_list[gl.counters['col'] - 1]
-    while counter < cur_rm and len(cur_l) < gl.counters["row_max"]:
+    cur_l = gl.array_list[gl.c_col - 1]
+    while counter < cur_rm and len(cur_l) < gl.c_row_max:
         counter += 1
         cur_l.append(com.csv_to_list(tmp_file_list[counter - 1]))
     return counter
@@ -68,4 +68,4 @@ def rewrite_tmp_file(tmp_file_list, tmp_file_dir, n_written_rows):
     else:
         # If void, tmp file is deleted
         os.remove(tmp_file_dir)
-        com.log(f"Deleting temporary file no. {gl.counters['col']}")
+        com.log(f"Deleting temporary file no. {gl.c_col}")

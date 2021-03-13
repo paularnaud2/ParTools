@@ -9,10 +9,10 @@ def group_by():
     if len(vol_fields) == 0:
         return
     else:
-        gl.bools["COUNT"] = True
+        gl.COUNT = True
         vol_field = vol_fields[0]
 
-    if not gl.bools["MERGE_OK"] or not gl.bools['RANGE_QUERY']:
+    if not gl.MERGE_OK or not gl.RANGE_QUERY:
         return
 
     com.log('Group by on output file...')

@@ -78,11 +78,11 @@ def compare_files(in_1, in_2, out):
     com.gen_header(in_1, gl.COMPARE_FIELD, out)
     compare_sorted_files(in_1, in_2, out)
 
-    if gl.counters["diff"] == 0:
+    if gl.c_diff == 0:
         com.log("Files match")
         out = True
     else:
-        bn = com.big_number(gl.counters["diff"])
+        bn = com.big_number(gl.c_diff)
         com.log(f"{bn} differences found")
         out = False
 

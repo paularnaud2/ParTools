@@ -25,7 +25,7 @@ def write_rows(cursor, rg_name='MONO', th_name='DEFAULT', th_nb=0):
             iter = write_row(row, out_file, rg_name)
             i += iter
             with verrou:
-                gl.counters["row"] += iter
+                gl.c_row += iter
             com.step_log(i, gl.SL_STEP, th_name=th_name)
 
     rename(gl.out_files[rg_name + gl.EC], gl.out_files[rg_name])

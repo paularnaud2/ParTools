@@ -50,17 +50,17 @@ def write_min_elt(min_elt, out_file):
     prev_key = gl.prev_elt[gl.COMPARE_FIELD_NB - 1]
 
     if cur_key != prev_key:
-        gl.bool["dup_key"] = False
+        gl.DUP_KEY = False
         com.write_csv_line(min_elt, out_file)
-        gl.counters["tot_written_lines_out"] += 1
-        com.step_log(gl.counters["tot_written_lines_out"], gl.SL_STEP)
+        gl.c_tot_out += 1
+        com.step_log(gl.c_tot_out, gl.SL_STEP)
         gl.prev_elt = min_elt
     elif check_dup(min_elt):
         # Pure duplicates are not written in output file
         # But key duplicates are (lines differ but key equal)
         com.write_csv_line(min_elt, out_file)
-        gl.counters["tot_written_lines_out"] += 1
-        com.step_log(gl.counters["tot_written_lines_out"], gl.SL_STEP)
+        gl.c_tot_out += 1
+        com.step_log(gl.c_tot_out, gl.SL_STEP)
 
 
 def check_dup(elt):
@@ -70,16 +70,16 @@ def check_dup(elt):
         return False
     else:
         # Key duplicates are also written in a specific list
-        if not gl.bool["dup_key"]:
+        if not gl.DUP_KEY:
             gl.dup_key_list.append(gl.prev_elt)
-            gl.bool["dup_key"] = True
+            gl.DUP_KEY = True
         gl.dup_key_list.append(elt)
         return True
 
 
 def temp_files():
     counter = 0
-    while counter < gl.counters["file"]:
+    while counter < gl.c_file:
         counter += 1
         tmp_file_dir = gl.TMP_DIR + "tmp_" + str(counter) + gl.FILE_TYPE
         if exists(tmp_file_dir):
@@ -115,7 +115,7 @@ def check_split(in_dir):
 
 
 def split_needed():
-    n_line = gl.counters["out"]
+    n_line = gl.c_out
     n_out_files = ceil(n_line / gl.MAX_LINE_SPLIT)
     if n_out_files == 1:
         return False

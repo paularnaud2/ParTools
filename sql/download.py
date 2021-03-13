@@ -22,7 +22,7 @@ def download(**params):
     range_list = rg.gen_range_list(rg_file_name)
     range_list = rg.restart(range_list)
     process_range_list(range_list, rg_file_name)
-    if gl.MERGE_RG_FILES or not gl.bools['RANGE_QUERY']:
+    if gl.MERGE_RG_FILES or not gl.RANGE_QUERY:
         rg.merge_tmp_files()
         group_by()
     else:
@@ -33,17 +33,17 @@ def download(**params):
 
 def finish(start_time):
 
-    n = gl.counters["row"]
+    n = gl.c_row
     bn = com.big_number(n)
     s = f"Data fetched from {gl.DB} ({bn} lines written)"
     com.log(s)
 
-    if gl.bools["MERGE_OK"]:
+    if gl.MERGE_OK:
         out_dir = gl.OUT_FILE
         com.log(f"Output file {out_dir} successfully filled out")
         a = n < gl.MAX_CHECK_DUP and n > 0
 
-        if a and gl.CHECK_DUP and not gl.bools["COUNT"]:
+        if a and gl.CHECK_DUP and not gl.COUNT:
             s = "Verifying duplicates on the first column of the output file..."
             com.log(s)
             com.log_print('|')

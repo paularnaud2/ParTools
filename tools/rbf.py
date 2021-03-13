@@ -1,14 +1,16 @@
-from common import *
+import common as com
 import tools.gl as gl
 
 ""
 LINE_PER_LINE = True
 IN_FILE = 'C:/Py/IN/Extract_LTE_GKO_20200814.csv'
+BUFFER_SIZE = 150
 N_READ = 30
 ""
 """
 LINE_PER_LINE = True
 IN_FILE = 'C:/Py/IN/Tests/R04'
+BUFFER_SIZE = 150
 N_READ = 30
 """
 """
@@ -26,23 +28,20 @@ N_READ = 5
 
 
 def read_big_file():
-
     init()
-
     with open(IN_FILE, 'r', encoding='utf-8', errors='ignore') as in_file:
-
         line = read_file(in_file)
         print(line.strip("\n"))
         while line != "":
             line = read_file(in_file)
             print(line.strip("\n"))
-            gl.counters["read"] += 1
+            gl.c_read += 1
             if check_counter(in_file):
                 continue
             else:
                 break
 
-    log("Fin")
+    com.log("Fin")
 
 
 def read_file(in_file):
@@ -51,15 +50,15 @@ def read_file(in_file):
         line = in_file.readline()
     else:
         line = in_file.read(BUFFER_SIZE)
-    gl.counters["main"] += 1
+    gl.c_main += 1
 
     return line
 
 
 def check_counter(in_file):
 
-    if gl.counters["read"] % N_READ == 0:
-        command = input(gl.txt["prompt"])
+    if gl.c_read % N_READ == 0:
+        command = input(gl.s_prompt)
         print("")
         if len(command) > 0:
             if command == 'q':
@@ -78,7 +77,7 @@ def goto_eof(in_file):
     while line != "":
         line = read_file(in_file)
 
-    bn = big_number(gl.counters["main"] - 1)
+    bn = com.big_number(gl.c_main - 1)
     if LINE_PER_LINE:
         s = "Fin du fichier atteint. {} lignes parcourues."
         s = s.format(bn)
@@ -99,10 +98,10 @@ def skip(nb, in_file):
 
 def init():
 
-    log("Package tools - Lecture de fichier\n", print_date=True)
+    com.log("Package tools - Lecture de fichier\n", print_date=True)
 
-    gl.counters["main"] = 0
-    gl.counters["read"] = 1
+    gl.c_main = 0
+    gl.c_read = 1
 
     txt = '\n' + "c -> continuer"
     txt += '\n' + "q -> quitter"
@@ -111,4 +110,4 @@ def init():
         txt += '\n' + "ou entrer le nombre de lignes à passer"
     else:
         txt += '\n' + "ou entrer le nombre de buffers à passer"
-    gl.txt["prompt"] = txt
+    gl.s_prompt = txt

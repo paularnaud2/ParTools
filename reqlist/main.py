@@ -85,9 +85,8 @@ def init_globals():
     gl.OUT_SQL = TMP_DIR + gl.OUT_SQL_FILE
     gl.TMP_PATH = TMP_DIR + gl.DB + '/'
 
-    gl.counters = {}
-    gl.bools = {}
-    gl.bools['MULTI_TH'] = False
+    gl.c = {}
+    gl.MULTI_TH = False
     gl.tmp_file = {}
     gl.ec_query_nb = {}
     gl.start_time = time()

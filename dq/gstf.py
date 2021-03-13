@@ -15,13 +15,13 @@ def gen_sorted_temp_files(in_file_dir, out_file_dir):
         first_line = in_file.readline()
         if not has_header:
             gl.cur_list.append(com.csv_to_list(first_line))
-        gl.counters["sf_read"] = 1
+        gl.c_sf_read = 1
         for line in in_file:
-            gl.counters["sf_read"] += 1
+            gl.c_sf_read += 1
             gl.cur_list.append(com.csv_to_list(line))
             s = "lines read"
-            com.step_log(gl.counters["sf_read"], gl.SL_STEP, s)
-            check_max_row(gl.counters["sf_read"])
+            com.step_log(gl.c_sf_read, gl.SL_STEP, s)
+            check_max_row(gl.c_sf_read)
     gen_last_file(out_file_dir)
     del gl.cur_list
 
@@ -29,9 +29,9 @@ def gen_sorted_temp_files(in_file_dir, out_file_dir):
 def gen_last_file(out_file_dir):
     # Generation of the last temporary file
 
-    gl.counters["file"] += 1
-    if gl.counters["file"] == 1:
-        bn = com.big_number(gl.counters["sf_read"])
+    gl.c_file += 1
+    if gl.c_file == 1:
+        bn = com.big_number(gl.c_sf_read)
         s = f"Input file entirely read ({bn} lines)."
         s += " Sorting current list..."
         com.log(s)
@@ -45,24 +45,24 @@ def gen_last_file(out_file_dir):
         if len(gl.cur_list) > 0:
             s = "Input file entirely read ({} lines)."
             s += " Sorting last current list..."
-            com.log(s.format(com.big_number(gl.counters["sf_read"])))
+            com.log(s.format(com.big_number(gl.c_sf_read)))
             gl.cur_list.sort()
             s = "Last current list sorted. Generating last temporary file"
-            s += f" (no. {gl.counters['file']})..."
+            s += f" (no. {gl.c_file})..."
             com.log(s.format())
             gen_temp_file()
             s = "Temporary file successfully generated"
             com.log(s)
         else:
-            gl.counters["file"] -= 1
-        com.log(f"{gl.counters['file']} temporary files created")
+            gl.c_file -= 1
+        com.log(f"{gl.c_file} temporary files created")
 
 
 def gen_out_file(out_file_dir):
     # Generating output file in the case of only one temporary list
 
     with open(out_file_dir, 'a', encoding='utf-8') as out_file:
-        gl.counters["tot_written_lines_out"] = 1
+        gl.c_tot_out = 1
         com.init_sl_time()
         init_prev_elt(gl.cur_list)
         for elt in gl.cur_list:
@@ -74,14 +74,14 @@ def check_max_row(counter):
     # fixed limit in module (MAX_ROW_LIST) gl to avoid a memory error
 
     if counter % gl.MAX_ROW_LIST == 0:
-        gl.counters["file"] += 1
+        gl.c_file += 1
         bn = com.big_number(gl.MAX_ROW_LIST)
-        list_nb = gl.counters["file"]
+        list_nb = gl.c_file
         s = f"Maximum number of lines reached ({bn} lines) for list"
         s += f" no. {list_nb}, sorting..."
         com.log(s)
         gl.cur_list.sort()
-        tmp_nb = gl.counters["file"]
+        tmp_nb = gl.c_file
         s = "Current list sorted. Generating temporary file"
         s += f" no. {tmp_nb}..."
         com.log(s.format())
@@ -95,6 +95,6 @@ def check_max_row(counter):
 def gen_temp_file():
     # Generating one temporary file
 
-    file_nb = gl.counters["file"]
+    file_nb = gl.c_file
     tmp_file_dir = f"{gl.TMP_DIR}tmp_{file_nb}{gl.FILE_TYPE}"
     com.save_csv(gl.cur_list, tmp_file_dir)

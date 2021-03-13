@@ -3,7 +3,7 @@ import reqlist.gl as gl
 
 
 def start_exec(th_nb):
-    if gl.bools['MULTI_TH'] is True:
+    if gl.MULTI_TH is True:
         s = f"Executing queries (thread no. {th_nb})..."
     else:
         s = "Executing queries..."
@@ -19,7 +19,7 @@ def gen_group_list(elt_list, group_list):
 
 
 def get_sql_array_finish(th_nb):
-    n_rows = gl.counters[th_nb]
+    n_rows = gl.c[th_nb]
     s_th = ''
     if gl.MAX_DB_CNX > 1:
         s_th = f" for thread no. {th_nb}"

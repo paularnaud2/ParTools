@@ -21,15 +21,15 @@ def get_rg_file_name(in_str):
 
 def gen_range_list(rg_file_name):
     if rg_file_name != '':
-        gl.bools['RANGE_QUERY'] = True
+        gl.RANGE_QUERY = True
         range_dir = gl.RANGE_PATH + rg_file_name + gl.FILE_TYPE
         range_list = com.load_txt(range_dir)
         com.log(f"Range query detected. Base query:\n{gl.query}\n;")
     else:
-        gl.bools['RANGE_QUERY'] = False
+        gl.RANGE_QUERY = False
         range_list = ['MONO']
 
-    gl.MULTI_TH = gl.bools['RANGE_QUERY'] and gl.MAX_DB_CNX > 1
+    gl.MULTI_TH = gl.RANGE_QUERY and gl.MAX_DB_CNX > 1
     return range_list
 
 
@@ -39,7 +39,7 @@ def restart(range_list):
     if a == 0:
         return range_list
 
-    if gl.bools['RANGE_QUERY'] is False:
+    if gl.RANGE_QUERY is False:
         com.mkdirs(gl.TMP_PATH, True)
         return range_list
 
@@ -76,7 +76,7 @@ def modify_restart(range_list, file_list):
 
 def move_tmp_folder():
 
-    gl.bools["MERGE_OK"] = False
+    gl.MERGE_OK = False
     out_dir = gl.OUT_RG_DIR
 
     com.mkdirs(out_dir, True)
@@ -111,7 +111,7 @@ def merge_tmp_files():
 
 
 def init_merge():
-    gl.bools["MERGE_OK"] = True
+    gl.MERGE_OK = True
     file_list = com.get_file_list(gl.TMP_PATH)
     out_file = gl.OUT_FILE
     if check_ec(file_list) or check_mono(file_list, out_file):
@@ -131,7 +131,7 @@ def check_ec(file_list):
             s = f"EC file found ({elt})."
             s += " Meging of temporary files aborted."
             com.log(s)
-            gl.bools["MERGE_OK"] = False
+            gl.MERGE_OK = False
             return True
     return False
 

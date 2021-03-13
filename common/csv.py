@@ -14,13 +14,11 @@ def get_csv_fields_dict(in_dir):
 
 
 def load_csv(in_dir):
-    g.counters["csv_read"] = 0
     out_list = []
     with open(in_dir, 'r', encoding='utf-8') as in_file:
         for line in in_file:
             line_list = csv_to_list(line)
             out_list.append(line_list)
-            g.counters["csv_read"] += 1
 
     return out_list
 

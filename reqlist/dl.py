@@ -28,7 +28,7 @@ def download(query_file):
     file.gen_out_file()
 
     com.delete_folder(gl.TMP_PATH)
-    n = sum([gl.counters[elt] for elt in gl.counters])
+    n = sum([gl.c[elt] for elt in gl.c])
     bn = com.big_number(n)
     dstr = com.get_duration_string(start_time)
     com.log(f"[reqlist] download: end ({bn} lines written in {dstr})")
@@ -42,7 +42,7 @@ def init(query_file):
 
     sql.init()
     gl.header = ''
-    gl.counters = {}
+    gl.c = {}
 
 
 def launch_threads(group_array):
@@ -92,14 +92,14 @@ def split_group_list():
 
     n = len(gl.group_list)
     if n > 1:
-        gl.bools['MULTI_TH'] = True
+        gl.MULTI_TH = True
         bn = com.big_number(n)
         s = f"The {bn} groups will be processed in parallel on"
         s += f" {len(array_out)} different connection pools"
         s = s + f" (max {n_max} groups per thread)."
         if gl.TEST_RESTART:
             # automatic stop when a thread reaches 80% of it's progress
-            gl.counters['N_STOP'] = ceil(n_max * 0.8)
+            gl.n_stop = ceil(n_max * 0.8)
         com.log(s)
 
     return array_out
