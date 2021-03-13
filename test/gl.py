@@ -133,6 +133,7 @@ S_OUT_REF_3 = TEST_TOOL + 'split_out_ref_3.csv'
 # test dup
 DUP_IN = TEST_TOOL + 'dup_in.csv'
 DUP_OUT = TOOLS_OUT + 'out_dup.csv'
+SHUF_OUT = TOOLS_OUT + 'out_shuf.csv'
 DUP_OUT_REF = TEST_TOOL + 'dup_out_ref.csv'
 DEL_DUP_OUT_REF = TEST_TOOL + 'del_dup_out_ref.csv'
 DUP_COL_IN = TEST_TOOL + 'dup_col_in.csv'

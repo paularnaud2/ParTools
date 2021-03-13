@@ -22,6 +22,8 @@ TO = [
     "[toolFilter] filter: start",
     "lines read in * ms. * lines read in total (* lines written in output list).",
     "[toolFilter] filter: end (* ms)",
+    "[toolShuf] shuffle_csv: start",
+    "[toolShuf] shuffle_csv: end",
 ]
 
 DQ = [

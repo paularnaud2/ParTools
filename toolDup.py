@@ -49,16 +49,16 @@ def del_dup(in_dir, out_dir, open_out=False):
 
 def shuffle_csv(in_dir, out_dir, open_out=False):
     com.log("[toolShuf] shuffle_csv: start")
-    cur_list = com.load_csv(gl.IN_FILE)
+    cur_list = com.load_csv(in_dir)
     if com.has_header(cur_list):
         header = cur_list[0]
         cur_list = cur_list[1:]
     shuffle(cur_list)
     cur_list = [header] + cur_list
-    com.save_csv(cur_list, gl.OUT_FILE)
-    com.log(f"Shuffled csv file saved in {gl.OUT_FILE}")
+    com.save_csv(cur_list, out_dir)
+    com.log(f"Shuffled csv file saved in {out_dir}")
     if open_out:
-        os.startfile(gl.OUT_FILE)
+        os.startfile(out_dir)
     com.log("[toolShuf] shuffle_csv: end")
 
 

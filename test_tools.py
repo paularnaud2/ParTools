@@ -7,6 +7,7 @@ from test import gl
 from toolDup import del_dup
 from toolDup import find_dup
 from toolDup import find_dup_list
+from toolDup import shuffle_csv
 from toolSplit import split_file
 from toolParseXML import parse_xml
 
@@ -60,8 +61,10 @@ def test_tools():
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
-    # Test toolDup - del_dup
-    del_dup(gl.DUP_IN, gl.DUP_OUT)
+    # Test toolDup - del_dup + shuffle
+    shuffle_csv(gl.DUP_IN, gl.SHUF_OUT)
+    com.log_print()
+    del_dup(gl.SHUF_OUT, gl.DUP_OUT)
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DEL_DUP_OUT_REF)
 
