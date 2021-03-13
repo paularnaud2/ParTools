@@ -1,13 +1,17 @@
+# This script allows you to split a file into multiple file (e.g. if it is too
+# big to be opened with an app such as Excel)
+
 import re
 import common as com
-import tools.gl as gl
 
+from tools import gl
+from common import g
 from os import remove
 
 
 def init_var(params):
     # Input variables default values
-    gl.IN_DIR = 'C:/Py/IN/Enedis_APR_20201030_092105813.xml'
+    gl.IN_DIR = g.paths['IN'] + "in.csv"
     gl.OUT_DIR = ''
     gl.MAX_LINE = 2 * 10**3
     gl.MAX_FILE_NB = 3

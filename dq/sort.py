@@ -12,7 +12,7 @@ from dq.fill_al import fill_array_list
 from dq.empty_al import empty_array_list
 
 
-def sort_file(in_file_dir, out_file_dir, prompt=False, nb=0):
+def sort_big_file(in_file_dir, out_file_dir, prompt=False, nb=0):
     # nb variable is used to differentiate input file when main run is dq
 
     com.log(f"[dq] sort_file: start ({in_file_dir})")

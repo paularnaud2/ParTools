@@ -12,13 +12,14 @@ from reqlist.join import left_join_arrays
 @com.log_exeptions
 def run_reqList(**params):
     init(params)
+    start_time = time()
     if not gl.SQUEEZE_SQL:
         download(gl.QUERY_FILE)
 
     if not gl.SQUEEZE_JOIN:
         left_join_files()
 
-    finish()
+    finish(start_time)
 
 
 def left_join_files(ldir='', rdir='', out='', debug=False):
@@ -50,14 +51,14 @@ def left_join_files(ldir='', rdir='', out='', debug=False):
     com.log_print('|')
 
 
-def finish():
+def finish(start_time):
     if gl.CHECK_DUP:
         s = "Checking duplicates on the first column of the output file..."
         com.log(s)
         find_dup(gl.OUT_FILE, col=1)
         com.log_print('|')
 
-    (dms, dstr) = com.get_duration_string(gl.start_time, True)
+    (dms, dstr) = com.get_duration_string(start_time, True)
     s = f"run_reqList: end ({dstr})"
     com.log("[reqlist] " + s)
     if gl.SEND_NOTIF:
@@ -89,4 +90,3 @@ def init_globals():
     gl.MULTI_TH = False
     gl.tmp_file = {}
     gl.ec_query_nb = {}
-    gl.start_time = time()

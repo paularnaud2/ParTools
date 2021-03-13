@@ -1,6 +1,6 @@
 from common import g
 
-import toolDup
+import tools.gl as gt
 import conf_main as cfg
 import tools.gl as tools
 import reqlist.gl as rl
@@ -8,7 +8,7 @@ import sql.gl as sql
 
 # Main
 TEST = 'test/'
-OUT_DUP_TMP = g.paths['TMP'] + tools.TMP_FOLDER + toolDup.TMP_OUT
+OUT_DUP_TMP = g.paths['TMP'] + tools.TMP_FOLDER + gt.TMP_OUT
 
 # test_sql
 TEST_SQL = TEST + 'sql/'

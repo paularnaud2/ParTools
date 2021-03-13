@@ -8,7 +8,7 @@ from dq.init import init_dq
 from dq.init import init_compare_files
 from toolDup import del_dup_list
 from dq.csf import compare_sorted_files
-from dq.sort import sort_file
+from dq.sort import sort_big_file
 from dq.functions import check_split
 from dq.functions import compare_headers
 
@@ -18,8 +18,8 @@ def run_dq(**params):
     com.check_header(dirs["in1"])
     com.check_header(dirs["in2"])
     compare_headers(dirs["in1"], dirs["in2"])
-    sort_file(dirs["in1"], dirs["out1"], True, 1)
-    sort_file(dirs["in2"], dirs["out2"], True, 2)
+    sort_big_file(dirs["in1"], dirs["out1"], True, 1)
+    sort_big_file(dirs["in2"], dirs["out2"], True, 2)
     if not compare_files(dirs["out1"], dirs["out2"], dirs["out"]):
         com.log_print('|')
         check_split(dirs["out"])

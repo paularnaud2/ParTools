@@ -1,11 +1,11 @@
 # Main-------------------------------------------------------------------------
 
-# Basically where you want your log files and temporary files to be outputed
+# Basically where you want your log files and temporary files to be outputted
 ROOT_PATH = 'C:/Py/'
 
 # DEBUG = True enables function decorator in common.deco
-# it basically temrinate the programm if one of the threads
-# (or the main thread) throws an exeption and print the exception (full trace)
+# it basically terminates the program if one of the threads
+# (or the main thread) throws an exception and prints the exception (full trace)
 # in the current log file.
 # Warning: DEBUG = True will make pytest fail!
 DEBUG = False

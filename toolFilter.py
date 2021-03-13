@@ -1,15 +1,18 @@
+# This script allows you to filter and/or extract columns from a csv file
+
 import os
 import common as com
-import tools.gl as gl
 
+from common import g
 from time import time
+from tools import gl
 
 
 def init_vars(params):
     # Input variables default values
-    gl.IN_FILE = 'C:/Py/IN/in.csv'
-    gl.IN_FILE = 'test/sql/in.csv'
-    gl.OUT_FILE = 'C:/Py/OUT/out_filtered.csv'
+    gl.IN_FILE = g.paths['IN'] + "in.csv"
+    gl.IN_FILE = "test/sql/in.csv"
+    gl.OUT_FILE = g.paths['OUT'] + "out_filtered.csv"
     gl.FILTER = False
     gl.EXTRACT_COL = True
     gl.OPEN_OUT_FILE = False
