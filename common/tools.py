@@ -31,17 +31,17 @@ def list_to_dict(list_in, separator='='):
     return out
 
 
-def init_params(mod, params):
-    if 'MD' in params:
-        if 'LOG_FILE' in params['MD']:
+def init_kwargs(mod, kwargs):
+    if 'MD' in kwargs:
+        if 'LOG_FILE' in kwargs['MD']:
             g.LOG_FILE_INITIALISED = True
-            g.LOG_FILE = params['MD']['LOG_FILE']
+            g.LOG_FILE = kwargs['MD']['LOG_FILE']
 
-    if len(params) > 0:
-        log(f"Initialising parameters: {params}")
-        for key in params:
+    if len(kwargs) > 0:
+        log(f"Initialising parameters: {kwargs}")
+        for key in kwargs:
             mod.__getattribute__(key)
-            mod.__setattr__(key, params[key])
+            mod.__setattr__(key, kwargs[key])
 
 
 def run_cmd(cmd, input=''):

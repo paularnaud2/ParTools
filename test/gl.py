@@ -30,8 +30,8 @@ SQL_QUERY_COUNT_1 = TEST_SQL + 'count_1.sql'
 SQL_QUERY_COUNT_1_RG = TEST_SQL + 'count_1_rg.sql'
 SQL_QUERY_COUNT_2 = TEST_SQL + 'count_2.sql'
 SQL_QUERY_COUNT_2_RG = TEST_SQL + 'count_2_rg.sql'
-SQL_IN_FILE = TEST_SQL + 'in.csv'
-SQL_IN_FILE_MH = TEST_SQL + 'in_missing_header.csv'
+SQL_IN = TEST_SQL + 'in.csv'
+SQL_IN_MH = TEST_SQL + 'in_missing_header.csv'
 SQL_OUT_DUP_REF = TEST_SQL + 'out_dup_ref.csv'
 SQL_DL_OUT = SQL_OUT + 'out.csv'
 SQL_DL_OUT_COUNT = SQL_OUT + 'out_count.csv'
@@ -113,16 +113,16 @@ REF_DUP3 = 'out_ref_dup_31.csv'
 OUT3 = '3'
 OUT_SPLIT_3 = '3_3'
 
-# test tools
+# test_tools
 TEST_TOOL = TEST + tools.TMP_FOLDER
 TOOLS_OUT = g.paths['TMP'] + TEST_TOOL
 
-# test XML
+# XML
 XML_IN = TEST_TOOL + 'xml_in.xml'
 XML_OUT = TOOLS_OUT + 'out_xml.csv'
 XML_OUT_REF = TEST_TOOL + 'xml_out_ref.csv'
 
-# test split
+# Split
 S_OUT_1 = TOOLS_OUT + 'in_1.csv'
 S_OUT_2 = TOOLS_OUT + 'in_2.csv'
 S_OUT_3 = TOOLS_OUT + 'in_3.csv'
@@ -130,7 +130,7 @@ S_OUT_REF_1 = TEST_TOOL + 'split_out_ref_1.csv'
 S_OUT_REF_2 = TEST_TOOL + 'split_out_ref_2.csv'
 S_OUT_REF_3 = TEST_TOOL + 'split_out_ref_3.csv'
 
-# test dup
+# Dup
 DUP_IN = TEST_TOOL + 'dup_in.csv'
 DUP_OUT = TOOLS_OUT + 'out_dup.csv'
 SHUF_OUT = TOOLS_OUT + 'out_shuf.csv'
@@ -139,6 +139,12 @@ DEL_DUP_OUT_REF = TEST_TOOL + 'del_dup_out_ref.csv'
 DUP_COL_IN = TEST_TOOL + 'dup_col_in.csv'
 DUP_COL_REF = TEST_TOOL + 'dup_out_ref_2.csv'
 
-# test filter
+# Filter
 FLT_OUT = TOOLS_OUT + 'filter_out.csv'
 FLT_OUT_REF = TEST_TOOL + 'filter_out_ref.csv'
+
+# BF
+LOOK_FOR = '22173227102607'
+SEARCH_BF_OUT = TOOLS_OUT + 'search_bf_out.csv'
+SEARCH_BF_OUT_REF = TEST_TOOL + 'search_bf_out_ref.csv'
+SORT_BF_OUT = TOOLS_OUT + 'sort_bf_out.csv'

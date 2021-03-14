@@ -49,7 +49,7 @@ def finish_sbf(start_time):
         com.log(s)
 
     dstr = com.get_duration_string(start_time)
-    com.log(f"[toolSBF] search_big_file: end ({dstr})")
+    com.log(f"[toolBF] search_big_file: end ({dstr})\n")
 
 
 def finish_xml(start_time):

@@ -9,6 +9,7 @@ if not exists('conf_oracle.py'):
 # Check if requirements have been installed
 try:
     import yapf
+    import rope
 except Exception:
     s = "Error: required packages have not been installed."
     s += " Please run the following command:\n"
@@ -22,7 +23,7 @@ from .deco import log_exeptions
 from .tools import run_cmd
 from .tools import run_sqlplus
 from .tools import send_notif
-from .tools import init_params
+from .tools import init_kwargs
 
 from .log import log
 from .log import step_log

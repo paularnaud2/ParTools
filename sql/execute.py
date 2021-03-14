@@ -9,10 +9,10 @@ from sql.functions import get_final_script
 
 
 @com.log_exeptions
-def execute(**params):
+def execute(**kwargs):
     com.log('[sql] execute: start')
     start_time = time()
-    com.init_params(gl, params)
+    com.init_kwargs(gl, kwargs)
     init()
     script = get_final_script(gl.SCRIPT_FILE)
     cnx = connect(ENV=gl.ENV, DB=gl.DB)

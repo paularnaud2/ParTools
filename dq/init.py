@@ -8,10 +8,10 @@ from math import floor
 from dq.functions import read_list
 
 
-def init_dq(params):
+def init_dq(kwargs):
     com.log("[dq] run_dq: start")
     start_time = time()
-    com.init_params(gl, params)
+    com.init_kwargs(gl, kwargs)
     init_tmp_dir()
     dirs = set_dirs()
     s = f"run_dq job initialised. Input files {dirs['in1']} and {dirs['in2']}"

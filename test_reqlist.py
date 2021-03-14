@@ -79,8 +79,8 @@ def test_reqlist():
     left_join_files(gl.RL_LEFT_3, gl.RL_RIGHT_3, gl.RL_OUT_JOIN_REF_3)
 
     com.log('Preparing DB------------------------------------------')
-    upload(gl.SQL_IN_FILE)
-    arr = com.load_csv(gl.SQL_IN_FILE)
+    upload(gl.SQL_IN)
+    arr = com.load_csv(gl.SQL_IN)
     arr = [elt[0] for elt in arr]
     com.save_csv(arr, gl.RL_IN_1)
 
@@ -98,7 +98,7 @@ def test_reqlist():
     # Test nominal conditions
     reqlist(gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_1, cnx=1)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_2, gl.RL_QUERY_2)
-    dq.file_match(gl.SQL_IN_FILE, gl.RL_OUT_2, del_dup=True)
+    dq.file_match(gl.SQL_IN, gl.RL_OUT_2, del_dup=True)
     dq.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
 
     # Test interruption other threads not finished

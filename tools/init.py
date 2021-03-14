@@ -27,13 +27,13 @@ def init_rbf():
     gl.c_main = 0
     gl.c_read = 1
 
-    txt = '\n' + "c -> continue"
+    txt = '\n' + "Enter -> continue"
     txt += '\n' + "q -> quit"
     txt += '\n' + "e -> go to EOF"
     if gl.LINE_PER_LINE:
-        txt += '\n' + "or enter the number of lines to skip\n"
+        txt += '\n' + "or enter the number of lines to skip"
     else:
-        txt += '\n' + "or enter the number of buffers to skip\n"
+        txt += '\n' + "or enter the number of buffers to skip"
     gl.s_prompt = txt
 
 
@@ -50,5 +50,4 @@ def init_sbf():
     else:
         gl.s_sl = "{bn_1} buffers of {bn_3} characters read in {dstr}"
 
-    s = f"Searching string '{gl.LOOK_FOR}' in file '{gl.IN_FILE}'..."
-    com.log(s)
+    gl.s_init = f"Searching string '{gl.LOOK_FOR}' in file '{gl.IN_FILE}'..."

@@ -10,6 +10,16 @@ from tools.finish import finish_xml
 from tools.xml import gen_img_dict
 from tools.xml import save_img_dict
 
+# Input variables default values
+gl.IN_DIR = g.paths['IN'] + "in.xml"
+gl.IN_DIR = "test/tools/xml_in.xml"
+gl.OUT_DIR = g.paths['OUT'] + "out.csv"
+
+gl.OPEN_OUT_FILE = False
+
+gl.SL_STEP_READ = 1000 * 10**3
+gl.SL_STEP_WRITE = 100 * 10**3
+
 # Const
 gl.MULTI_TAG_LIST = [
     'libelle',
@@ -22,28 +32,17 @@ gl.MULTI_TAG_LIST = [
 ]
 gl.RE_EXP_TAG_ELT = '<(.*)>(.*)</(.*)>'
 gl.RE_EXP_SUB_TAG = r'<(\w[^<]*\w)>$'
-gl.SL_STEP_READ = 1000 * 10**3
-gl.SL_STEP_WRITE = 100 * 10**3
+
+# Global variables
+gl.FIRST_TAG = ''
+gl.SUB_TAG = ''
+gl.N_ROW = 0
 
 
-def init(params):
-    # Input variables default values
-    gl.IN_DIR = g.paths['IN'] + "in.xml"
-    gl.IN_DIR = "test/tools/xml_in.xml"
-    gl.OUT_DIR = g.paths['OUT'] + "out.csv"
-    gl.OPEN_OUT_FILE = False
-    com.init_params(gl, params)
-
-    # Global variables
-    gl.FIRST_TAG = ''
-    gl.SUB_TAG = ''
-    gl.N_ROW = 0
-
-
-def parse_xml(**params):
+def parse_xml(**kwargs):
     com.log("[toolParseXML] parse_xml: start")
     start_time = time()
-    init(params)
+    com.init_kwargs(gl, kwargs)
     gen_img_dict()
     save_img_dict()
     finish_xml(start_time)

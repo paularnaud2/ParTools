@@ -12,7 +12,7 @@ from dq.fill_al import fill_array_list
 from dq.empty_al import empty_array_list
 
 
-def sort_big_file(in_file_dir, out_file_dir, prompt=False, nb=0):
+def sort_big_file(in_file_dir, out_file_dir, prompt=False, nb=0, main=False):
     # nb variable is used to differentiate input file when main run is dq
 
     com.log(f"[dq] sort_file: start ({in_file_dir})")
@@ -26,7 +26,8 @@ def sort_big_file(in_file_dir, out_file_dir, prompt=False, nb=0):
         com.log(s)
         merge_sorted_files(out_file_dir)
     finish(out_file_dir, prompt, nb, start_time)
-    com.log_print('|')
+    if not main:
+        com.log_print('|')
 
 
 def merge_sorted_files(out_file_dir):

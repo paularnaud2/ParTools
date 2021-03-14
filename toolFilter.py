@@ -7,32 +7,29 @@ from common import g
 from time import time
 from tools import gl
 
+# Input variables default values
+gl.IN_FILE = g.paths['IN'] + "in.csv"
+gl.IN_FILE = "test/sql/in.csv"
+gl.OUT_FILE = g.paths['OUT'] + "out_filtered.csv"
+gl.COL_LIST = ['PRM', 'AFFAIRE']
 
-def init_vars(params):
-    # Input variables default values
-    gl.IN_FILE = g.paths['IN'] + "in.csv"
-    gl.IN_FILE = "test/sql/in.csv"
-    gl.OUT_FILE = g.paths['OUT'] + "out_filtered.csv"
-    gl.FILTER = False
-    gl.EXTRACT_COL = True
-    gl.OPEN_OUT_FILE = False
-    gl.TEST_FILTER = False
-    gl.COL_LIST = ['PRM', 'AFFAIRE']
-    gl.SL_STEP = 500 * 10**3
-    com.init_params(gl, params)
+gl.FILTER = False
+gl.EXTRACT_COL = True
+gl.OPEN_OUT_FILE = False
+gl.TEST_FILTER = False
+gl.SL_STEP = 500 * 10**3
 
-    # Global variables
-    gl.n_r = 0
-    gl.n_o = 0
-    gl.out_list = []
-    com.init_sl_time()
-    gl.fields = com.get_csv_fields_dict(gl.IN_FILE)
+# Const
+gl.s = "{bn_1} lines read in {dstr}. {bn_2} lines read in total "
+gl.s += "({bn_3} lines written in output list)."
 
 
-def filter(**params):
+def filter(**kwargs):
     com.log("[toolFilter] filter: start")
     start_time = time()
-    init(params)
+    com.init_kwargs(gl, kwargs)
+    init_globals()
+    com.log(f"Filtering file '{gl.IN_FILE}'...")
     with open(gl.IN_FILE, 'r', encoding='utf-8') as in_file:
         process_header(in_file)
         line = in_file.readline()
@@ -42,12 +39,12 @@ def filter(**params):
     finish(start_time)
 
 
-def init(params):
-    init_vars(params)
-
-    com.log(f"Filtering file '{gl.IN_FILE}'...")
-    gl.s = "{bn_1} lines read in {dstr}. {bn_2} lines read in total "
-    gl.s += "({bn_3} lines written in output list)."
+def init_globals():
+    gl.n_r = 0
+    gl.n_o = 0
+    gl.out_list = []
+    com.init_sl_time()
+    gl.fields = com.get_csv_fields_dict(gl.IN_FILE)
 
 
 def process_header(in_file):

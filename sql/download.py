@@ -12,10 +12,10 @@ from sql.process import process_range_list
 
 
 @com.log_exeptions
-def download(**params):
+def download(**kwargs):
     com.log('[sql] download: start')
     start_time = time()
-    com.init_params(gl, params)
+    com.init_kwargs(gl, kwargs)
     init()
 
     rg_file_name = rg.get_rg_file_name(gl.query)

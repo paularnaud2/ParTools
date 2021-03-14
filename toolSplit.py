@@ -8,24 +8,18 @@ from tools import gl
 from common import g
 from os import remove
 
-
-def init_var(params):
-    # Input variables default values
-    gl.IN_DIR = g.paths['IN'] + "in.csv"
-    gl.OUT_DIR = ''
-    gl.MAX_LINE = 2 * 10**3
-    gl.MAX_FILE_NB = 3
-    gl.ADD_HEADER = True
-    com.init_params(gl, params)
-
-    # Global variables
-    gl.QUIT = False
-    gl.N_OUT = 0
+# Input variables default values
+gl.IN_DIR = g.paths['IN'] + "in.csv"
+gl.OUT_DIR = ''
+gl.MAX_LINE = 2 * 10**3
+gl.MAX_FILE_NB = 3
+gl.ADD_HEADER = True
 
 
-def split_file(**params):
+def split_file(**kwargs):
     com.log("[toolSplit] split_file: start")
-    init_var(params)
+    com.init_kwargs(gl, kwargs)
+    init_globals()
     (file_dir, file_name, ext) = split_in_dir()
     gl.header = com.get_header(gl.IN_DIR)
     with open(gl.IN_DIR, 'r', encoding='utf-8') as in_file:
@@ -37,6 +31,11 @@ def split_file(**params):
 
     com.log("[toolSplit] split_file: end")
     com.log_print()
+
+
+def init_globals():
+    gl.QUIT = False
+    gl.N_OUT = 0
 
 
 def split_in_dir():

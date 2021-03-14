@@ -33,7 +33,7 @@ def prepare_iutp(sf):
 
 
 def upload(inp, tr=False, md=''):
-    execute_params = {
+    execute_kwargs = {
         'ENV': gl.SQL_ENV,
         'DB': gl.SQL_DB,
         'SCRIPT_FILE': gl.SQL_CREATE_TABLE,
@@ -46,7 +46,7 @@ def upload(inp, tr=False, md=''):
     sql.upload(
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
-        EXECUTE_PARAMS=execute_params,
+        EXECUTE_PARAMS=execute_kwargs,
         SCRIPT_FILE=gl.SQL_INSERT_TABLE,
         VAR_DICT={'TABLE_NAME': gl.SQL_TABLE_NAME},
         UPLOAD_IN=inp,
@@ -83,7 +83,7 @@ def upload_interrupted():
     md['T'] = False
     md['LOG_FILE'] = g.LOG_FILE
     com.log("[sql] upload: start", c_out=False)
-    p = Process(target=upload, args=(gl.SQL_IN_FILE, True, md))
+    p = Process(target=upload, args=(gl.SQL_IN, True, md))
     p.start()
     while not md['T']:
         pass
@@ -147,10 +147,10 @@ def test_sql():
 
     com.log('Test upload-------------------------------------------')
     # Test missing header in input file
-    ttry(upload, g.E_MH, gl.SQL_IN_FILE_MH)
+    ttry(upload, g.E_MH, gl.SQL_IN_MH)
     # Test upload with interruption
     upload_interrupted()
-    upload(gl.SQL_IN_FILE, tr=True)
+    upload(gl.SQL_IN, tr=True)
 
     com.log('Test download------------------------------------------')
     # Test download no output
@@ -159,7 +159,7 @@ def test_sql():
     # Test download standard
     reset()
     download(gl.SQL_QUERY, gl.SQL_DL_OUT)
-    dq.file_match(gl.SQL_IN_FILE, gl.SQL_DL_OUT)
+    dq.file_match(gl.SQL_IN, gl.SQL_DL_OUT)
     dq.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
 
     # Test download RG with merge

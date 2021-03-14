@@ -13,8 +13,8 @@ from dq.functions import check_split
 from dq.functions import compare_headers
 
 
-def run_dq(**params):
-    (start_time, dirs) = init_dq(params)
+def run_dq(**kwargs):
+    (start_time, dirs) = init_dq(kwargs)
     com.check_header(dirs["in1"])
     com.check_header(dirs["in2"])
     compare_headers(dirs["in1"], dirs["in2"])

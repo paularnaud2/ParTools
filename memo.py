@@ -221,9 +221,9 @@ with open('donnees', 'rb') as fichier:
 import sys
 sys.exit() # arrêter un script
 gl = __import__('reqlist.' + gl_file, fromlist=[None]) # importer un sous module avec la fonction spéciale __import__
-def run_reqList(**params): # les noms/valeurs sont convertis en dictionnaire params
+def run_reqList(**kwargs): # les noms/valeurs sont convertis en dictionnaire kwargs
 a = gl.__getattribute__(key) # récupérer un attribut depuis une string
-gl.__setattr__(key, params[key]) # valoriser un attribut depuis une string
+gl.__setattr__(key, kwargs[key]) # valoriser un attribut depuis une string
 # Execution d'un fichier python (code venant de flask/config
 with open(filename, mode="rb") as config_file:
                 exec(compile(config_file.read(), filename, "exec"), d.__dict__)

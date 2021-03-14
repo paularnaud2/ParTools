@@ -17,15 +17,19 @@ def read_file(in_file):
 def check_counter(in_file):
 
     if gl.c_read % gl.N_READ == 0:
-        command = input(gl.s_prompt)
+        if gl.TEST:
+            com.log_print(gl.s_prompt)
+            com.log_print('e (TEST = True)')
+            command = 'e'
+        else:
+            command = com.log_input(gl.s_prompt)
         com.log_print()
-        if len(command) > 0:
-            if command == 'q':
-                return False
-            if command == 'e':
-                goto_eof(in_file)
-            if command[0].isdigit():
-                skip(command, in_file)
+        if command == 'q':
+            return False
+        if command == 'e':
+            goto_eof(in_file)
+        if command[0].isdigit():
+            skip(command, in_file)
 
     return True
 

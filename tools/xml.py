@@ -20,7 +20,7 @@ def gen_img_dict():
             fill_parse_dict(line)
 
     even_dict()
-    com.log('Parse dictionary generated')
+    com.log(f"Parse dictionary generated ({gl.N_READ} lines processed)")
 
 
 def save_img_dict():

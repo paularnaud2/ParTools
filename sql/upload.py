@@ -12,13 +12,13 @@ from sql.execute import execute
 
 
 @com.log_exeptions
-def upload(**params):
+def upload(**kwargs):
     com.log('[sql] upload: start')
     start_time = time()
-    init(params)
+    init(kwargs)
     if not check_restart():
         prepare_bdd()
-        init(params)
+        init(kwargs)
     script = get_script()
     com.check_header(gl.UPLOAD_IN)
     st_insert = time()
@@ -59,8 +59,8 @@ def finish_this(start_time):
     com.log(f"[sql] upload: end ({dstr})")
 
 
-def init(params):
-    com.init_params(gl, params)
+def init(kwargs):
+    com.init_kwargs(gl, kwargs)
     sql.init()
 
     gl.ref_chunk = 0

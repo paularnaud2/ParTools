@@ -20,7 +20,6 @@ gl.OUT_DEL_DUP = g.paths['OUT'] + "out_del_dup.csv"
 
 # Const
 gl.TMP_OUT = 'out_dup.csv'
-gl.MAX_DUP_PRINT = 5
 
 
 def find_dup(in_dir, out_dir='', open_out=False, col=0):

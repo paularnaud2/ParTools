@@ -10,8 +10,8 @@ from reqlist.join import left_join_arrays
 
 
 @com.log_exeptions
-def run_reqList(**params):
-    init(params)
+def run_reqList(**kwargs):
+    init(kwargs)
     start_time = time()
     if not gl.SQUEEZE_SQL:
         download(gl.QUERY_FILE)
@@ -68,9 +68,9 @@ def finish(start_time):
         startfile(gl.OUT_FILE)
 
 
-def init(params):
+def init(kwargs):
     com.log("[reqlist] run_reqList: start")
-    com.init_params(gl, params)
+    com.init_kwargs(gl, kwargs)
     init_globals()
     com.check_header(gl.IN_FILE)
     com.log(f"Loading input array from '{gl.IN_FILE}'...")
