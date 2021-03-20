@@ -5,7 +5,7 @@ from time import time
 from common import g
 
 
-def like(in_str, like_string):
+def like(in_str, like_string, match_output=False):
     # Oracle equivalent of LIKE operator but with '*' instead of '%'
     # Outputs boolean str LIKE like_string
     # Example: like('Hello World', 'He*o w*d') => True
@@ -16,11 +16,10 @@ def like(in_str, like_string):
     like_string = re.escape(like_string)
     like_string = like_string.replace(r'\*', '(.*)')
     m = re.search(like_string, in_str)
-    out = False
-    if m:
-        out = True
+    if not m:
+        return False
 
-    return out
+    return m.group(0)
 
 
 def get_duration_ms(start_time, end_time=''):

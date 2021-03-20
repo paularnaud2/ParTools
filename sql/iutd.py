@@ -49,7 +49,7 @@ def compare_dates(d_bdd, d_now):
     if d_bdd == d_now:
         com.log("IUTD check OK")
     else:
-        s = f"Warning: conf of DB {gl.DB} don't seem to be up to date:"
+        s = f"Warning: conf of DB '{gl.DB}' don't seem to be up to date:"
         s += f"\nDB date: {d_bdd}"
         s += f"\nToday's date: {d_now}"
         s += "\nContinue? (y/n)"

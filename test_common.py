@@ -1,21 +1,6 @@
 import common as com
 import test.check_log as cl
 
-from common import g
-from os.path import exists
-
-
-def mail():
-    mail_conf = g.paths['MAIL'] + 'conf.txt'
-    com.log("Testing common.mail-----------------------------------------")
-    if exists(mail_conf):
-        com.mail('test')
-    else:
-        s = f"Conf file '{mail_conf}' missing."
-        s += " common.mail counldn't be tested."
-        com.log(s)
-    com.log_print()
-
 
 def get_duration():
     com.log("Testing common.string.get_duration--------------------------")
@@ -41,8 +26,7 @@ def test_common():
     com.init_log('test_common', True)
     send_notif()
     get_duration()
-    # mail()
-    # com.check_log(cl.CO)
+    com.check_log(cl.CO)
 
 
 if __name__ == '__main__':

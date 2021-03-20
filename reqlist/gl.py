@@ -36,4 +36,4 @@ QN = '_QN'
 VAR_DICT = {}
 
 # Process manager
-MD = ''
+MD = None

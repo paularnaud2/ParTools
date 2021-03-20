@@ -1,9 +1,7 @@
 import conf_main as cfg
 
-IN_FILE_NAME_1 = 'SGE'
-IN_FILE_NAME_2 = 'GINKO'
-# IN_FILE_1 = 'OLD'
-# IN_FILE_2 = 'NEW'
+IN_FILE_NAME_1 = 'OLD'
+IN_FILE_NAME_2 = 'NEW'
 
 MAX_ROW_LIST = 12 * 10**6
 SL_STEP = 5 * 10**6

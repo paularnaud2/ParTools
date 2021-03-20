@@ -3,11 +3,13 @@ from .file import mkdirs
 from threading import RLock
 
 # Misc
-MIN_DUR_NOTIF_TRIGGER = 30
 CSV_SEPARATOR = ';'
 VAR_DEL = '@@'
 DEFAULT_FIELD = "FIELD"
+LIKE_MATCH_OUT = "like_match_out.csv"
+
 MAX_EXAMPLE_PRINT = 5
+MIN_DUR_NOTIF_TRIGGER = 30
 
 verrou = RLock()
 
@@ -32,7 +34,6 @@ paths['IN'] = cfg.ROOT_PATH + 'IN/'
 paths['OUT'] = cfg.ROOT_PATH + 'OUT/'
 paths['TMP'] = cfg.ROOT_PATH + 'TMP/'
 paths['LOG'] = cfg.ROOT_PATH + 'LOG/'
-paths['MAIL'] = cfg.ROOT_PATH + 'MAIL/'
 
 
 def init_directories():

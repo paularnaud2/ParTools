@@ -68,7 +68,7 @@ def count_lines(in_dir):
     return i
 
 
-def save_list(list, out_file_dir):
+def save_list(list, out_file_dir, att='w'):
     with open(out_file_dir, 'w', encoding='utf-8') as out_file:
         for elt in list:
             out_file.write(str(elt).strip("\n") + '\n')

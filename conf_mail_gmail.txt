@@ -1,0 +1,6 @@
+HOST=smtp.gmail.com
+PORT=465
+USER=username@gmail.com
+PWD=********
+SENDER=Fistname Lastname <username@gmail.com>
+FROM=Fistname Lastname <username@gmail.com>

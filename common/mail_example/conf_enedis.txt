@@ -1,3 +1,0 @@
-HOST=mailhost.der.edf.fr
-SENDER=ARNAUD Paul - externe <paul-externe.arnaud@enedis.fr>
-FROM=ARNAUD Paul - externe <paul-externe.arnaud@enedis.fr>

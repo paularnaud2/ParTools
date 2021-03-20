@@ -17,13 +17,13 @@ except Exception:
     raise Exception(s)
 
 # Imports for package common
-from .mail import mail
 from .deco import log_exeptions
 
 from .tools import run_cmd
 from .tools import run_sqlplus
 from .tools import send_notif
 from .tools import init_kwargs
+from .tools import list_to_dict
 
 from .log import log
 from .log import step_log

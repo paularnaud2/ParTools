@@ -50,4 +50,4 @@ UPLOAD_IN = g.paths['OUT'] + 'OUT/in.csv'
 CHUNK_FILE = 'chunk.txt'
 
 # Process manager
-MD = ''
+MD = None
