@@ -1,0 +1,40 @@
+{
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": true,
+  "git.confirmSync": false,
+  "window.zoomLevel": 0,
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "python.linting.flake8Args": [
+    "--ignore=W503,W504,E501"
+  ],
+  "git.enableSmartCommit": true,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "python.formatting.provider": "yapf",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[json]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace"
+  },
+  "[python]": {
+    "editor.defaultFormatter": null,
+    "editor.tabSize": 4
+  },
+  "[xml]": { "editor.defaultFormatter": "DotJoshJohnson.xml" },
+  "scm.diffDecorations": "gutter",
+  "diffEditor.ignoreTrimWhitespace": true,
+  "search.useReplacePreview": false,
+  "workbench.editor.wrapTabs": true,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ]
+}
