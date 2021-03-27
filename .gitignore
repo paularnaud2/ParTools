@@ -8,3 +8,4 @@ conf_oracle.py
 conf_mail.txt
 htmlcov
 mail/mails
+venv/
