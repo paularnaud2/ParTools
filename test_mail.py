@@ -6,6 +6,7 @@ from os.path import exists
 
 
 def test_mail():
+    com.init_log('test_mail', True)
     com.log("Testing mail.mail-----------------------------------------")
     if exists(gl.CONF_FILE):
         mail('test')
