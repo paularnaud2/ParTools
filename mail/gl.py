@@ -1,4 +1,4 @@
-CONF_FILE = 'conf_mail.txt'
+CONF_FILE = '_conf_mail.txt'
 MAIL_PATH = 'mail/mails/'
 
 S_MISSING_CONF = f"The email couldn't be sent because \

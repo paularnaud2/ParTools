@@ -1,4 +1,5 @@
 import common as com
+import warnings
 
 from mail import gl
 from mail import mail
@@ -12,6 +13,7 @@ def test_mail():
         mail('test')
     else:
         com.log(gl.S_MISSING_CONF)
+        warnings.warn(gl.S_MISSING_CONF)
     com.log_print()
 
 

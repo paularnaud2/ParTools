@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 
 
 def conf():
-    conf_dir = 'conf_mail.txt'
+    conf_dir = '_conf_mail.txt'
     if not exists(conf_dir):
         com.log(gl.S_MISSING_CONF)
         raise Exception(gl.S_MISSING_CONF)

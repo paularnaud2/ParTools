@@ -1,5 +1,6 @@
 import os
 import common as com
+import common.sTools as st
 
 import dq.gl as gl
 
@@ -31,7 +32,7 @@ def finish_dq(start_time, dirs):
     (dms, dstr) = com.get_duration_string(start_time, True)
     s = f"[dq] run_dq: end ({dstr})"
     com.log(s)
-    com.send_notif(s, "dq", dms)
+    st.send_notif(s, "dq", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
         os.startfile(dirs["out"])

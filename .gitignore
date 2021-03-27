@@ -3,9 +3,7 @@ _old/
 ~$*.xlsm
 .vscode/.ropeproject/objectdb
 .coverage
-conf_main.py
-conf_oracle.py
-conf_mail.txt
+_conf*
 htmlcov
 mail/mails
 venv/

@@ -1,7 +1,7 @@
 from common import g
 
 import tools.gl as gt
-import conf_main as cfg
+import _conf_main as cfg
 import tools.gl as tools
 import reqlist.gl as rl
 import sql.gl as sql

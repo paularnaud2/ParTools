@@ -1,4 +1,5 @@
 import common as com
+import common.sTools as st
 import test.check_log as cl
 
 
@@ -18,7 +19,7 @@ def get_duration():
 
 def send_notif():
     com.log("Testing common.send_notif-----------------------------------")
-    com.send_notif('Notification test', 'Test', ndur=2)
+    st.send_notif('Notification test', 'Test', ndur=2)
     com.log_print()
 
 

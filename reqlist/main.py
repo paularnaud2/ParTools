@@ -1,4 +1,6 @@
 import common as com
+import common.sTools as st
+
 import reqlist.gl as gl
 
 from common import g
@@ -62,7 +64,7 @@ def finish(start_time):
     s = f"run_reqList: end ({dstr})"
     com.log("[reqlist] " + s)
     if gl.SEND_NOTIF:
-        com.send_notif(s, "reqlist", dms)
+        st.send_notif(s, "reqlist", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
         startfile(gl.OUT_FILE)

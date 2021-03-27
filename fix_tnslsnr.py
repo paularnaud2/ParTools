@@ -1,4 +1,4 @@
-import common as com
+import common.sTools as st
 
 script = com.load_txt('sql/scripts/fix_tnslsnr.sql', False)
-com.run_sqlplus(script)
+st.run_sqlplus(script)

@@ -1,11 +1,11 @@
 import common as com
 import sql.gl as gl
 import cx_Oracle as cx
-import conf_main as cfg
+import _conf_main as cfg
 
 from os.path import exists
 from threading import RLock
-from conf_oracle import conf
+from _conf_oracle import conf
 from sql.iutd import is_up_to_date
 
 verrou = RLock()

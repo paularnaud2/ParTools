@@ -1,4 +1,5 @@
 import common as com
+import common.sTools as st
 
 import sql.rg as rg
 import sql.gl as gl
@@ -57,4 +58,4 @@ def finish(start_time):
     com.log("[sql] " + s)
     com.log_print()
     if gl.SEND_NOTIF:
-        com.send_notif(s, "sql", dms)
+        st.send_notif(s, "sql", dms)

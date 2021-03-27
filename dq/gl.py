@@ -1,4 +1,4 @@
-import conf_main as cfg
+import _conf_main as cfg
 
 IN_FILE_NAME_1 = 'OLD'
 IN_FILE_NAME_2 = 'NEW'

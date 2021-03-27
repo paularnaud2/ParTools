@@ -1,10 +1,10 @@
 # conf_main and conf_oracle auto-init
 from os.path import exists
 from shutil import copyfile
-if not exists('conf_main.py'):
-    copyfile('conf_main_default.py', 'conf_main.py')
-if not exists('conf_oracle.py'):
-    copyfile('conf_oracle_default.py', 'conf_oracle.py')
+if not exists('_conf_main.py'):
+    copyfile('conf_main_default.py', '_conf_main.py')
+if not exists('_conf_oracle.py'):
+    copyfile('conf_oracle_default.py', '_conf_oracle.py')
 
 # Check if requirements have been installed
 try:
@@ -19,9 +19,6 @@ except Exception:
 # Imports for package common
 from .deco import log_exeptions
 
-from .tools import run_cmd
-from .tools import run_sqlplus
-from .tools import send_notif
 from .tools import init_kwargs
 from .tools import list_to_dict
 

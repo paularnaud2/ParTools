@@ -1,6 +1,6 @@
 import os
 import traceback
-import conf_main as cfg
+import _conf_main as cfg
 
 from common import g
 from .log import log
