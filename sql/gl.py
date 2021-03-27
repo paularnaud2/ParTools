@@ -1,6 +1,7 @@
 from common import g
 from datetime import datetime
 
+# Default const
 ENV = 'LOCAL'
 DB = 'XE'
 
@@ -22,12 +23,14 @@ TEST_RESTART = False
 TEST_IUTD = False
 
 FILE_TYPE = '.csv'
-TMP_FOLDER = 'sql/'
-IUTD_FILE = 'last_iutd_check.csv'
-RANGE_PATH = 'sql/ranges/'
-QUERY_PATH = 'sql/queries/'
 EC = '_EC'
 RANGE_FIELD = "RANGE"
+
+TMP_FOLDER = 'sql/'
+RANGE_PATH = 'sql/ranges/'
+QUERY_PATH = 'sql/queries/'
+
+IUTD_FILE = 'last_iutd_check.csv'
 
 # Data bases in this list will be checked by the is_up_to_date function
 IUTD_LIST = ['SGE']

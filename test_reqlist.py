@@ -9,6 +9,7 @@ from test import gl
 from test import ttry
 from test import is_test_db_defined
 from test_sql import upload
+from test_sql import clean_db
 
 from multiprocessing import Process
 from multiprocessing import Manager
@@ -28,7 +29,7 @@ def reqlist(in_file,
         QUERY_FILE=query_file,
         IN_FILE=in_file,
         OUT_FILE=out_file,
-        VAR_DICT={'TABLE_NAME': gl.SQL_TABLE_NAME},
+        VAR_DICT={'TABLE_NAME': gl.SQL_T_TEST},
         MAX_DB_CNX=cnx,
         NB_MAX_ELT_IN_STATEMENT=elt,
         SL_STEP_QUERY=5,
@@ -114,6 +115,9 @@ def test_reqlist():
     reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
     reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
     dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
+
+    # Cleaning DB
+    clean_db([gl.SQL_T_TEST])
 
     com.check_log(cl.RL)
 

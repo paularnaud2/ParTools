@@ -24,7 +24,12 @@ def execute(**kwargs):
         com.log("Proc executed")
     else:
         command_list = script.split(';\n')
-        for command in command_list[:-1]:
+        n = len(command_list)
+        if command_list[n - 1]:
+            command_list[n - 1] = command_list[n - 1].strip(';')
+        else:
+            command_list = command_list[:-1]
+        for command in command_list:
             com.log("Executing command:")
             com.log_print(command)
             c.execute(command)

@@ -22,6 +22,7 @@ def prepare_iutp(sf):
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         SCRIPT_FILE=gl.SQL_CREATE_TABLE_IUTD,
+        VAR_DICT={'TABLE_NAME': gl.SQL_T_IUTD},
         PROC=True,
     )
     sql.execute(
@@ -32,13 +33,30 @@ def prepare_iutp(sf):
     )
 
 
+def clean_db(list_in):
+    com.log("Cleaning DB...")
+    for t in list_in:
+        drop_table(t)
+    com.log("DB cleaned\n")
+
+
+def drop_table(table_name):
+    sql.execute(
+        ENV=gl.SQL_ENV,
+        DB=gl.SQL_DB,
+        SCRIPT_FILE=gl.SQL_DROP_TABLE,
+        VAR_DICT={'TABLE_NAME': table_name},
+        PROC=False,
+    )
+
+
 def upload(inp, tr=False, md=''):
     execute_kwargs = {
         'ENV': gl.SQL_ENV,
         'DB': gl.SQL_DB,
         'SCRIPT_FILE': gl.SQL_CREATE_TABLE,
         'VAR_DICT': {
-            'TABLE_NAME': gl.SQL_TABLE_NAME
+            'TABLE_NAME': gl.SQL_T_TEST
         },
         'PROC': True,
     }
@@ -48,7 +66,7 @@ def upload(inp, tr=False, md=''):
         DB=gl.SQL_DB,
         EXECUTE_PARAMS=execute_kwargs,
         SCRIPT_FILE=gl.SQL_INSERT_TABLE,
-        VAR_DICT={'TABLE_NAME': gl.SQL_TABLE_NAME},
+        VAR_DICT={'TABLE_NAME': gl.SQL_T_TEST},
         UPLOAD_IN=inp,
         NB_MAX_ELT_INSERT=gl.SQL_MAX_ELT_INSERT,
         TEST_RESTART=tr,
@@ -62,7 +80,7 @@ def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=''):
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         QUERY_FILE=query,
-        VAR_DICT={'TABLE_NAME': gl.SQL_TABLE_NAME},
+        VAR_DICT={'TABLE_NAME': gl.SQL_T_TEST},
         OUT_FILE=out,
         OUT_RG_DIR=gl.SQL_DL_OUT_RG_FOLDER,
         MAX_DB_CNX=cnx,
@@ -185,6 +203,9 @@ def test_sql():
     dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
     download(gl.SQL_QUERY_COUNT_2_RG, gl.SQL_DL_OUT_COUNT)
     dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
+
+    # Cleaning DB
+    clean_db([gl.SQL_T_TEST, gl.SQL_T_IUTD])
 
     com.check_log(cl.SQ)
 
