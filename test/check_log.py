@@ -93,7 +93,7 @@ SQ = [
     "The date found in the check file doesn't match the current date",
     "Error: the input file * must have a header",
     "Make sure the first elements of the first two lines are of different lengths",
-    "Automatic stop (upload_interrupted)",
+    "Subprocess terminated (upload_interrupted)",
     "Injection running detected. Restart? (y/n)",
     "y (TEST_RESTART = True)",
     "* lines written in * ms. * lines written in total.",

@@ -105,10 +105,12 @@ def upload_interrupted():
     p.start()
     while not md['T']:
         pass
+    com.log("Duration received")
     t = md['T'] / 1000
     sleep(t)
+    com.log("Terminating subprocess...")
     p.terminate()
-    com.log("Automatic stop (upload_interrupted)\n")
+    com.log("Subprocess terminated (upload_interrupted)\n")
 
 
 def download_interrupted(query, out):

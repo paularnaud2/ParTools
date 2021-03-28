@@ -21,7 +21,6 @@ def upload(**kwargs):
         init(kwargs)
     script = get_script()
     com.check_header(gl.UPLOAD_IN)
-    st_insert = time()
     with open(gl.UPLOAD_IN, 'r', encoding='utf-8') as in_file:
         com.log(f"Input file {gl.UPLOAD_IN} opened")
         # First line is dismissed (header)
@@ -33,8 +32,10 @@ def upload(**kwargs):
             gl.data.append(line_list)
             gl.c_main += 1
             if gl.c_main % gl.NB_MAX_ELT_INSERT == 0:
+                st_insert = time()
                 insert(script)
-                send_chunk_duration(st_insert)
+                if gl.c_main // gl.NB_MAX_ELT_INSERT == 2:
+                    send_chunk_duration(st_insert)
 
     if gl.c_main % gl.NB_MAX_ELT_INSERT != 0:
         insert(script)
@@ -104,7 +105,9 @@ def send_chunk_duration(start):
         return
 
     if not gl.MD['T']:
-        gl.MD['T'] = com.get_duration_ms(start)
+        (dms, dstr) = com.get_duration_string(start, True)
+        com.log(f"Sending duration to master process ({dstr})...")
+        gl.MD['T'] = dms
 
 
 def check_restart():
