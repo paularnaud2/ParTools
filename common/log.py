@@ -1,4 +1,5 @@
 import sys
+import warnings
 
 from common import g
 from common import string
@@ -21,15 +22,21 @@ def check_log(in_list, log_match=False):
     log('check_log...')
     lp = g.paths['LOG'] + g.LOG_FILE
     txt = file.load_txt(lp, False)
+    n_w = 0
     for elt in in_list:
         m = string.like(txt, elt)
         if not m:
-            log(f"Expression '{elt}' couldn't be found in log file {lp}")
-            assert False
+            n_w += 1
+            s = f"Expression '{elt}' couldn't be found in log file {lp}"
+            log(s, c_out=False)
+            warnings.warn(s)
         elif str(m) != 'True' and log_match:
             log_print(m)
 
-    log('check_log ok')
+    if n_w == 0:
+        log('check_log ok')
+    else:
+        log(f'check_log ko ({n_w} warnings)')
     log_print()
 
 
