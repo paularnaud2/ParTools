@@ -5,16 +5,17 @@
   "breadcrumbs.enabled": true,
   "git.confirmSync": false,
   "window.zoomLevel": 0,
-  "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": false,
   "workbench.startupEditor": "newUntitledFile",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": [
-    "--ignore=W503,W504,E501"
+    "--ignore=W503,W504,E501",
+    "--exclude=__init__.py"
   ],
+  "python.formatting.provider": "yapf",
   "git.enableSmartCommit": true,
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "python.formatting.provider": "yapf",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[json]": {
     "editor.quickSuggestions": {
@@ -36,5 +37,13 @@
       "viewType": "jupyter.notebook.ipynb",
       "filenamePattern": "*.ipynb"
     }
+  ],
+  "gitlens.currentLine.enabled": false,
+  "git.useCommitInputAsStashMessage": true,
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "stash-push:command",
+    "switch:command",
+    "branch-create:command"
   ]
 }
