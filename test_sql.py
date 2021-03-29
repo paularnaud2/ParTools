@@ -22,7 +22,7 @@ def prepare_iutp(sf):
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         SCRIPT_FILE=gl.SQL_CREATE_TABLE_IUTD,
-        VAR_DICT={'TABLE_NAME': gl.SQL_T_IUTD},
+        VAR_DICT={"TABLE_NAME": gl.SQL_T_IUTD},
         PROC=True,
     )
     sql.execute(
@@ -45,20 +45,20 @@ def drop_table(table_name):
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         SCRIPT_FILE=gl.SQL_DROP_TABLE,
-        VAR_DICT={'TABLE_NAME': table_name},
+        VAR_DICT={"TABLE_NAME": table_name},
         PROC=False,
     )
 
 
-def upload(inp, tr=False, md=''):
+def upload(inp, tr=False, md=""):
     execute_kwargs = {
-        'ENV': gl.SQL_ENV,
-        'DB': gl.SQL_DB,
-        'SCRIPT_FILE': gl.SQL_CREATE_TABLE,
-        'VAR_DICT': {
-            'TABLE_NAME': gl.SQL_T_TEST
+        "ENV": gl.SQL_ENV,
+        "DB": gl.SQL_DB,
+        "SCRIPT_FILE": gl.SQL_CREATE_TABLE,
+        "VAR_DICT": {
+            "TABLE_NAME": gl.SQL_T_TEST
         },
-        'PROC': True,
+        "PROC": True,
     }
 
     sql.upload(
@@ -66,7 +66,7 @@ def upload(inp, tr=False, md=''):
         DB=gl.SQL_DB,
         EXECUTE_PARAMS=execute_kwargs,
         SCRIPT_FILE=gl.SQL_INSERT_TABLE,
-        VAR_DICT={'TABLE_NAME': gl.SQL_T_TEST},
+        VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
         UPLOAD_IN=inp,
         NB_MAX_ELT_INSERT=gl.SQL_MAX_ELT_INSERT,
         TEST_RESTART=tr,
@@ -74,13 +74,13 @@ def upload(inp, tr=False, md=''):
     )
 
 
-def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=''):
+def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
 
     sql.download(
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         QUERY_FILE=query,
-        VAR_DICT={'TABLE_NAME': gl.SQL_T_TEST},
+        VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
         OUT_FILE=out,
         OUT_RG_DIR=gl.SQL_DL_OUT_RG_FOLDER,
         MAX_DB_CNX=cnx,
@@ -96,17 +96,30 @@ def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=''):
 
 
 def upload_interrupted():
+    """This function is used to simulate an unexpected interruption of the
+    sql.upload function.
+
+    md['T'] is the duration of one insert in ms. As the aim is to
+    simulate an unexpected stop, once this duration is received from the
+    subprocess, the main process sleeps for this duration before killing
+    the subprocess. This is belieived to introduce some kind of
+    randomness to the moment where the subprocess is killed (we also
+    wanna test interruption while the the file gl.TMP_FILE_CHUNK  is
+    being written)
+    """
+
     manager = Manager()
     md = manager.dict()
-    md['T'] = False
-    md['LOG_FILE'] = g.LOG_FILE
+    md["T"] = False
+    md["LOG_FILE"] = g.LOG_FILE
     com.log("[sql] upload: start", c_out=False)
     p = Process(target=upload, args=(gl.SQL_IN, True, md))
     p.start()
-    while not md['T']:
+    while not md["T"]:
         pass
     com.log("Duration received")
-    t = md['T'] / 1000
+
+    t = md["T"] / 1000
     sleep(t)
     com.log("Terminating subprocess...")
     p.terminate()
@@ -116,14 +129,14 @@ def upload_interrupted():
 def download_interrupted(query, out):
     manager = Manager()
     md = manager.dict()
-    md['STOP'] = False
-    md['N_STOP'] = 0.8 * 2900
-    md['LOG_FILE'] = g.LOG_FILE
+    md["STOP"] = False
+    md["N_STOP"] = 0.8 * 2900
+    md["LOG_FILE"] = g.LOG_FILE
     com.log("[sql] download: start", c_out=False)
-    d = {'query': query, 'out': out, 'tr': True, 'md': md}
+    d = {"query": query, "out": out, "tr": True, "md": md}
     p = Process(target=download, kwargs=d)
     p.start()
-    while not md['STOP']:
+    while not md["STOP"]:
         pass
     p.terminate()
 
@@ -157,22 +170,22 @@ def reset():
 
 
 def test_sql():
-    com.init_log('test_sql', True)
-    if not is_test_db_defined('test_sql'):
+    com.init_log("test_sql", True)
+    if not is_test_db_defined("test_sql"):
         return
 
-    com.log('Test iutd---------------------------------------------')
+    com.log("Test iutd---------------------------------------------")
     reset()
     iutd()
 
-    com.log('Test upload-------------------------------------------')
+    com.log("Test upload-------------------------------------------")
     # Test missing header in input file
     ttry(upload, g.E_MH, gl.SQL_IN_MH)
     # Test upload with interruption
     upload_interrupted()
     upload(gl.SQL_IN, tr=True)
 
-    com.log('Test download------------------------------------------')
+    com.log("Test download------------------------------------------")
     # Test download no output
     download(gl.SQL_QUERY_NO, gl.SQL_DL_OUT, ti=True)
 
@@ -212,5 +225,5 @@ def test_sql():
     com.check_log(cl.SQ)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_sql()

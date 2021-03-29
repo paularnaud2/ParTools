@@ -1,3 +1,5 @@
+# yapf: disable
+
 conf = {
     # Expected format:
     # ('ENV_NAME', 'DB_NAME'): 'USER/PWD@HOST:PORT/SERVICE_NAME',

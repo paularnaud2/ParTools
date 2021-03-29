@@ -13,7 +13,7 @@ from sql.execute import execute
 
 @com.log_exeptions
 def upload(**kwargs):
-    com.log('[sql] upload: start')
+    com.log("[sql] upload: start")
     start_time = time()
     init(kwargs)
     if not check_restart():
@@ -21,7 +21,7 @@ def upload(**kwargs):
         init(kwargs)
     script = get_script()
     com.check_header(gl.UPLOAD_IN)
-    with open(gl.UPLOAD_IN, 'r', encoding='utf-8') as in_file:
+    with open(gl.UPLOAD_IN, "r", encoding="utf-8") as in_file:
         com.log(f"Input file {gl.UPLOAD_IN} opened")
         # First line is dismissed (header)
         in_file.readline()
@@ -34,8 +34,7 @@ def upload(**kwargs):
             if gl.c_main % gl.NB_MAX_ELT_INSERT == 0:
                 st_insert = time()
                 insert(script)
-                if gl.c_main // gl.NB_MAX_ELT_INSERT == 2:
-                    send_chunk_duration(st_insert)
+                send_chunk_duration(st_insert)
 
     if gl.c_main % gl.NB_MAX_ELT_INSERT != 0:
         insert(script)
@@ -44,10 +43,31 @@ def upload(**kwargs):
     com.log_print()
 
 
+def send_chunk_duration(start):
+    """Sends The duration of one insert to the main process.
+
+    It is not wanted to send the duration of the first insert as it
+    might be longer than expected due to cache mecanisms. Hence, the
+    duration of the second insert is sent to the main process
+    """
+
+    if not gl.MD:
+        return
+
+    # We only send the duration of the second insert
+    if gl.c_main // gl.NB_MAX_ELT_INSERT != 2:
+        return
+
+    if not gl.MD["T"]:
+        (dms, dstr) = com.get_duration_string(start, True)
+        com.log(f"Sending duration to the main process ({dstr})...")
+        gl.MD["T"] = dms
+
+
 def prepare_bdd():
     if gl.EXECUTE_PARAMS:
         com.log("Preparing DB before data injection...")
-        com.log_print('|')
+        com.log_print("|")
         execute(**gl.EXECUTE_PARAMS)
 
 
@@ -100,16 +120,6 @@ def insert(script):
     gl.data = []
 
 
-def send_chunk_duration(start):
-    if not gl.MD:
-        return
-
-    if not gl.MD['T']:
-        (dms, dstr) = com.get_duration_string(start, True)
-        com.log(f"Sending duration to master process ({dstr})...")
-        gl.MD['T'] = dms
-
-
 def check_restart():
     chunk = gl.TMP_FILE_CHUNK
     if os.path.exists(chunk):
@@ -117,7 +127,7 @@ def check_restart():
         if gl.TEST_RESTART:
             com.log(s)
             com.log_print("y (TEST_RESTART = True)")
-        elif com.log_input(s) == 'n':
+        elif com.log_input(s) == "n":
             os.remove(chunk)
             return False
 
