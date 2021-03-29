@@ -15,8 +15,8 @@ def connect(ENV, DB):
 
     init_instant_client()
     if (ENV, DB) not in conf:
-        s = f"Error: DB '{DB}' of ENV '{ENV}' doesn't seem to be defined."
-        s += " Pease check your conf_oracle.py file."
+        s = (f"Error: DB '{DB}' of ENV '{ENV}' doesn't seem to be defined."
+             " Pease check your conf_oracle.py file.")
         com.log(s)
         raise Exception(s)
     cnx_str = conf[(ENV, DB)]
@@ -34,8 +34,8 @@ def gen_cnx_dict(DB, ENV, nb):
     cnx_str = conf[(ENV, DB)]
     gl.cnx_dict = dict()
     i = 1
-    s = f"Creating connections for DB '{DB}' of '{ENV}' environnement"
-    s += f" ({cnx_str})"
+    s = (f"Creating connections for DB '{DB}' of '{ENV}' environnement"
+         f" ({cnx_str})")
     com.log(s)
     while i <= nb:
         com.log(f'Creating connection no. {i}...')
@@ -51,9 +51,10 @@ def init_instant_client():
             com.log("Initialising Oracle client...")
             gl.client_is_init = True
             if not exists(cfg.ORACLE_CLIENT):
-                s = "Error: The Oracle instant client path specified in conf_main.py"
-                s += f" (ORACLE_CLIENT = {cfg.ORACLE_CLIENT}) doesn't exist."
-                s += " Please enter a valid path for the Oracle instant client."
+                s = ("Error: The Oracle instant client path specified in"
+                     f" conf_main.py (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"
+                     " doesn't exist. Please enter a valid path for the"
+                     " Oracle instant client.")
                 com.log(s)
                 raise Exception(s)
             cx.init_oracle_client(cfg.ORACLE_CLIENT)

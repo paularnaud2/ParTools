@@ -32,8 +32,8 @@ def gen_last_file(out_file_dir):
     gl.c_file += 1
     if gl.c_file == 1:
         bn = com.big_number(gl.c_sf_read)
-        s = f"Input file entirely read ({bn} lines)."
-        s += " Sorting current list..."
+        s = (f"Input file entirely read ({bn} lines)."
+             " Sorting current list...")
         com.log(s)
         gl.cur_list.sort()
         s = "Current list sorted. Generating output file..."
@@ -43,12 +43,12 @@ def gen_last_file(out_file_dir):
         com.log(s)
     else:
         if len(gl.cur_list) > 0:
-            s = "Input file entirely read ({} lines)."
-            s += " Sorting last current list..."
+            s = ("Input file entirely read ({} lines)."
+                 " Sorting last current list...")
             com.log(s.format(com.big_number(gl.c_sf_read)))
             gl.cur_list.sort()
-            s = "Last current list sorted. Generating last temporary file"
-            s += f" (no. {gl.c_file})..."
+            s = ("Last current list sorted. Generating last temporary file"
+                 f" (no. {gl.c_file})...")
             com.log(s.format())
             gen_temp_file()
             s = "Temporary file successfully generated"
@@ -77,13 +77,13 @@ def check_max_row(counter):
         gl.c_file += 1
         bn = com.big_number(gl.MAX_ROW_LIST)
         list_nb = gl.c_file
-        s = f"Maximum number of lines reached ({bn} lines) for list"
-        s += f" no. {list_nb}, sorting..."
+        s = (f"Maximum number of lines reached ({bn} lines) for list"
+             f" no. {list_nb}, sorting...")
         com.log(s)
         gl.cur_list.sort()
         tmp_nb = gl.c_file
-        s = "Current list sorted. Generating temporary file"
-        s += f" no. {tmp_nb}..."
+        s = ("Current list sorted. Generating temporary file"
+             f" no. {tmp_nb}...")
         com.log(s.format())
         gen_temp_file()
         s = "Temporary file successfully generated, input file reading goes on..."

@@ -128,8 +128,8 @@ def init_merge():
 def check_ec(file_list):
     for elt in file_list:
         if gl.EC in elt:
-            s = f"EC file found ({elt})."
-            s += " Meging of temporary files aborted."
+            s = (f"EC file found ({elt})."
+                 " Meging of temporary files aborted.")
             com.log(s)
             gl.MERGE_OK = False
             return True

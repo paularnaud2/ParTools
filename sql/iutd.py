@@ -49,10 +49,10 @@ def compare_dates(d_bdd, d_now):
     if d_bdd == d_now:
         com.log("IUTD check OK")
     else:
-        s = f"Warning: conf of DB '{gl.DB}' don't seem to be up to date:"
-        s += f"\nDB date: {d_bdd}"
-        s += f"\nToday's date: {d_now}"
-        s += "\nContinue? (y/n)"
+        s = (f"Warning: conf of DB '{gl.DB}' don't seem to be up to date:"
+             f"\nDB date: {d_bdd}"
+             f"\nToday's date: {d_now}"
+             "\nContinue? (y/n)")
         if gl.TEST_IUTD:
             com.log_print(s)
             com.log_print('y (TEST_IUTD = True)')

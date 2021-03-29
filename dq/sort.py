@@ -44,8 +44,8 @@ def finish(out_file_dir, prompt, nb, start_time):
     n_dup = len(gl.dup_list)
     bn1 = com.big_number(gl.c_tot_out)
     bn2 = com.big_number(n_dup)
-    s = f"Output file {out_file_dir} successfully generated"
-    s += f" ({bn1} lines written, {bn2} duplicates removed)."
+    s = (f"Output file {out_file_dir} successfully generated"
+         f" ({bn1} lines written, {bn2} duplicates removed).")
     com.log(s)
     if n_dup > 0:
         if nb != 0:
@@ -75,11 +75,11 @@ def prompt_dup_key(n_dup_key):
     com.log(s)
     com.log_example(gl.dup_key_list)
 
-    s = "\nFile comparison may not work correctly. Here are your options:"
-    s += "\na -> save duplicates list and quit"
-    s += "\nb -> quit without saving duplicates list"
-    s += "\nc -> save duplicates list and continue"
-    s += "\nd -> continue without saving duplicates list"
+    s = ("\nFile comparison may not work correctly. Here are your options:"
+         "\na -> save duplicates list and quit"
+         "\nb -> quit without saving duplicates list"
+         "\nc -> save duplicates list and continue"
+         "\nd -> continue without saving duplicates list")
     if gl.TEST_PROMPT_DK:
         com.log_print(s)
         com.log_print('c (TEST_PROMPT_DK = True)')

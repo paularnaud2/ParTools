@@ -110,8 +110,8 @@ def complete_dict():
             gl.parse_dict[tag].append('')
         elif n >= gl.N_ROW and tag != gl.FIRST_TAG:
             id = gl.parse_dict[gl.FIRST_TAG][gl.N_ROW - 2]
-            s = f"Warning: tag '{tag}' appears more than once (id = {id})."
-            s += " It must be added to MULTI_TAG_LIST."
+            s = (f"Warning: tag '{tag}' appears more than once (id = {id})."
+                 " It must be added to MULTI_TAG_LIST.")
             com.log(s)
             com.log_print("Execution aborted")
             sys.exit()

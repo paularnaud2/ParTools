@@ -119,8 +119,8 @@ def search_cur_list():
             gl.FOUND = True
             return True
     bn = com.big_number(gl.c_main)
-    s = f"Temp list no. {gl.c_list} search over, string not found"
-    s += f" ({bn} lines read in total)"
+    s = (f"Temp list no. {gl.c_list} search over, string not found"
+         f" ({bn} lines read in total)")
     com.log(s, 1)
     return False
 
@@ -131,9 +131,9 @@ def found_msg(i, j):
     bni = com.big_number(i)
     bn = com.big_number(gl.c_main)
     if gl.LINE_PER_LINE:
-        s = f"String found in line no. {bni} of list no. {gl.c_list}"
-        s += f" (global line no. {bn}) in col {j + 1}!"
+        s = (f"String found in line no. {bni} of list no. {gl.c_list}"
+             f" (global line no. {bn}) in col {j + 1}!")
     else:
-        s = f"String found in buffer no. {bn}"
-        s += f" (buffer list no. {gl.c_list}) in col {j + 1}!"
+        s = (f"String found in buffer no. {bn}"
+             f" (buffer list no. {gl.c_list}) in col {j + 1}!")
     com.log(s)

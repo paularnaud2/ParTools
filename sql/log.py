@@ -42,8 +42,8 @@ def write_rows_finish(rg_name, i, cnx_nb):
         s = f"All lines written for range {rg_name} ({bn} lines written)"
         com.log(s)
     else:
-        s = f"All lines written for range {rg_name}"
-        s += f" ({bn} lines written, connection no. {cnx_nb})"
+        s = (f"All lines written for range {rg_name}"
+             f" ({bn} lines written, connection no. {cnx_nb})")
         com.log(s)
 
 

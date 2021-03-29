@@ -30,10 +30,10 @@ def finish(out_file_dir):
     nb_out = com.big_number(gl.c_out)
     nb_1 = com.big_number(gl.c_1)
     nb_2 = com.big_number(gl.c_2)
-    s = f"Output file successfully generated in {out_file_dir}\n"
-    s += f"\t\t{nb_1} lines read in file 1\n"
-    s += f"\t\t{nb_2} lines read in file 2\n"
-    s += f"\t\t{nb_out} lines written in output file"
+    s = (f"Output file successfully generated in {out_file_dir}\n"
+         f"\t\t{nb_1} lines read in file 1\n"
+         f"\t\t{nb_2} lines read in file 2\n"
+         f"\t\t{nb_out} lines written in output file")
     com.log(s)
 
 

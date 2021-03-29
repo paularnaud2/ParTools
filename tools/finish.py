@@ -44,8 +44,8 @@ def finish_sbf(start_time):
             os.startfile(gl.OUT_FILE)
     else:
         bn = com.big_number(gl.c_main)
-        s = f"EOF reached ({bn} lines, {gl.c_list} temporary lists)"
-        s += f", string '{gl.LOOK_FOR}' not found"
+        s = (f"EOF reached ({bn} lines, {gl.c_list} temporary lists)"
+             f", string '{gl.LOOK_FOR}' not found")
         com.log(s)
 
     dstr = com.get_duration_string(start_time)

@@ -14,8 +14,8 @@ def init_dq(kwargs):
     com.init_kwargs(gl, kwargs)
     init_tmp_dir()
     dirs = set_dirs()
-    s = f"run_dq job initialised. Input files {dirs['in1']} and {dirs['in2']}"
-    s += " are going to be sorted and compared."
+    s = (f"run_dq job initialised. Input files {dirs['in1']} and {dirs['in2']}"
+         " are going to be sorted and compared.")
     com.log(s)
     com.log_print('|')
 
@@ -115,9 +115,9 @@ def init_equal_diff_bool():
             gl.DIFF = gl.DIFF_OUT
         else:
             bn = com.big_number(gl.MAX_ROW_EQUAL_OUT)
-            s = f"Warning: file to be compared have more than {bn} lines"
-            s += " EQUAL_OUT paramter is set to True."
-            s += "\nDo you want to write matching lines in output file ? (y/n)"
+            s = (f"Warning: file to be compared have more than {bn} lines"
+                 " and EQUAL_OUT paramter is set to True.\n"
+                 "Do you want to write matching lines in output file ? (y/n)")
             if com.log_input(s) == "y":
                 gl.EQUAL = True
                 gl.DIFF = gl.DIFF_OUT
@@ -160,6 +160,5 @@ def init_array_list():
         gl.array_list.append([])
 
     nb = gl.c_row_max
-    s = "Buffer array initialised."
-    s += f" It can hold a maximum of {nb} lines."
+    s = (f"Buffer array initialised. It can hold a maximum of {nb} lines.")
     com.log(s)

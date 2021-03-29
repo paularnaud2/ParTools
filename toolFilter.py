@@ -20,8 +20,8 @@ gl.TEST_FILTER = False
 gl.SL_STEP = 500 * 10**3
 
 # Const
-gl.s = "{bn_1} lines read in {dstr}. {bn_2} lines read in total "
-gl.s += "({bn_3} lines written in output list)."
+gl.s = ("{bn_1} lines read in {dstr}. {bn_2} lines read in total "
+        "({bn_3} lines written in output list).")
 
 
 def filter(**kwargs):
@@ -70,8 +70,8 @@ def finish(start_time):
     com.log("Filtering over")
     bn1 = com.big_number(gl.n_r)
     bn2 = com.big_number(gl.n_o)
-    s = f"{bn1} lines read in the input file and"
-    s += f" {bn2} lines to be written in the output file"
+    s = (f"{bn1} lines read in the input file and"
+         f" {bn2} lines to be written in the output file")
     com.log(s)
 
     com.log("Writing output file...")

@@ -10,8 +10,8 @@ from toolSplit import split_file
 
 def check_header(inp):
     if not com.has_header(inp):
-        s = f"Error: missing header in file '{inp}'."
-        s += " Input files must have a header."
+        s = (f"Error: missing header in file '{inp}'."
+             " Input files must have a header.")
         com.log(s)
         raise Exception(g.E_MH)
 
@@ -22,8 +22,8 @@ def compare_headers(in1, in2):
     line2 = com.get_header(in2)
 
     if line1 != line2:
-        s = f"Error: files {in1} and {in2} don't have the same header."
-        s += " Input files must have the same header."
+        s = (f"Error: files {in1} and {in2} don't have the same header."
+             " Input files must have the same header.")
         com.log(s)
         raise Exception(g.E_DH)
 
@@ -123,9 +123,9 @@ def split_needed():
     n_line_2 = n_line + n_out_files - 1
     n_out_files = ceil(n_line_2 / gl.MAX_LINE_SPLIT)
     bn = com.big_number(gl.MAX_LINE_SPLIT)
-    s = f"Input file has more than {bn} lines."
-    s += f" It will be splitted in {n_out_files} files "
-    s += f"(max file nb set to {gl.MAX_FILE_NB_SPLIT}). Continue? (y/n)"
+    s = (f"Input file has more than {bn} lines."
+         f" It will be splitted in {n_out_files} files "
+         f"(max file nb set to {gl.MAX_FILE_NB_SPLIT}). Continue? (y/n)")
     if gl.TEST_PROMPT_SPLIT:
         com.log(s)
         com.log_print('y (TEST_PROMPT_SPLIT = True)')

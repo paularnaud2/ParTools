@@ -94,9 +94,9 @@ def split_group_list():
     if n > 1:
         gl.MULTI_TH = True
         bn = com.big_number(n)
-        s = f"The {bn} groups will be processed in parallel on"
-        s += f" {len(array_out)} different connection pools"
-        s = s + f" (max {n_max} groups per thread)."
+        s = (f"The {bn} groups will be processed in parallel on"
+             f" {len(array_out)} different connection pools"
+             f" (max {n_max} groups per thread).")
         if gl.TEST_RESTART:
             # automatic stop when a thread reaches 80% of it's progress
             gl.n_stop = ceil(n_max * 0.8)

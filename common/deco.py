@@ -15,8 +15,7 @@ def log_exeptions(f):
             return f(*arg, **kwargs)
         except Exception:
             with g.verrou:
-                s = "An error occured:\n"
-                s += traceback.format_exc()
+                s = "An error occured:\n" + traceback.format_exc()
                 log(s)
                 log_input("Execution aborted")
                 os._exit(1)

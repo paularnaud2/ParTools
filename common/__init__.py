@@ -11,9 +11,9 @@ try:
     import yapf
     import rope
 except Exception:
-    s = "Error: required packages have not been installed."
-    s += " Please run the following command:\n"
-    s += "pip install -r requirements.txt"
+    s = ("Error: required packages have not been installed."
+         " Please run the following command:\n"
+         "pip install -r requirements.txt")
     raise Exception(s)
 
 # Imports for package common
