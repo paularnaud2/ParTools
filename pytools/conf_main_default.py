@@ -1,7 +1,7 @@
 # Main-------------------------------------------------------------------------
 
 # Basically where you want your log files and temporary files to be outputted
-ROOT_PATH = 'C:/Py/'
+ROOT_PATH = 'C:/PyTools/'
 
 # DEBUG = True enables function decorator in common.deco
 # it basically terminates the program if one of the threads
