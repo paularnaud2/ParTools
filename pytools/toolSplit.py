@@ -1,0 +1,84 @@
+# This script allows you to split a file into multiple file (e.g. if it is too
+# big to be opened with an app such as Excel)
+
+import re
+from os import remove
+
+import pytools.common as com
+import pytools.common.g as g
+
+from pytools.tools import gl
+
+# Input variables default values
+gl.IN_DIR = g.paths['IN'] + "in.csv"
+gl.OUT_DIR = ''
+gl.MAX_LINE = 2 * 10**3
+gl.MAX_FILE_NB = 3
+gl.ADD_HEADER = True
+
+
+def split_file(**kwargs):
+    com.log("[toolSplit] split_file: start")
+    com.init_kwargs(gl, kwargs)
+    init_globals()
+    (file_dir, file_name, ext) = split_in_dir()
+    gl.header = com.get_header(gl.IN_DIR)
+    with open(gl.IN_DIR, 'r', encoding='utf-8') as in_file:
+        while True:
+            gl.N_OUT += 1
+            out_dir = f'{file_dir}/{file_name}_{gl.N_OUT}.{ext}'
+            if not gen_split_out(out_dir, in_file):
+                break
+
+    com.log("[toolSplit] split_file: end")
+    com.log_print()
+
+
+def init_globals():
+    gl.QUIT = False
+    gl.N_OUT = 0
+
+
+def split_in_dir():
+    exp = r'(.*)/(\w*).(\w*)$'
+    m = re.search(exp, gl.IN_DIR)
+    (file_dir, file_name, ext) = (m.group(1), m.group(2), m.group(3))
+    if gl.OUT_DIR:
+        file_dir = gl.OUT_DIR
+
+    return (file_dir, file_name, ext)
+
+
+def gen_split_out(split_dir, in_file):
+
+    with open(split_dir, 'w', encoding='utf-8') as file:
+        i = 0
+        if gl.N_OUT > 1 and gl.ADD_HEADER:
+            file.write(gl.header + '\n')
+            i = 1
+        in_line = 'init'
+        while i < gl.MAX_LINE and in_line != '':
+            i += 1
+            in_line = in_file.readline()
+            file.write(in_line)
+
+    file_nb = gl.N_OUT
+    s = f"Splitted file no. {file_nb} ({split_dir}) successfully generated"
+    if in_line == '':
+        if i == 2 and gl.ADD_HEADER:
+            remove(split_dir)
+        else:
+            com.log(s)
+        return False
+
+    com.log(s)
+
+    if gl.N_OUT >= gl.MAX_FILE_NB:
+        com.log(f"Maximum number of files reached ({gl.MAX_FILE_NB})")
+        return False
+
+    return True
+
+
+if __name__ == '__main__':
+    split_file()

@@ -1,0 +1,77 @@
+import pytools.common as com
+import pytools.common.g as g
+import pytools.dq as dq
+
+import pytools.test.check_log as cl
+
+from pytools.test import gl
+from pytools.test import ttry
+from pytools.test import is_test_db_defined
+
+from pytools.test.sql import iutd
+from pytools.test.sql import reset
+from pytools.test.sql import upload
+from pytools.test.sql import download
+from pytools.test.sql import clean_db
+from pytools.test.sql import upload_interrupted
+from pytools.test.sql import download_interrupted
+
+
+def test_sql():
+    com.init_log("test_sql", True)
+    if not is_test_db_defined("test_sql"):
+        return
+
+    com.log("Test iutd---------------------------------------------")
+    reset()
+    iutd()
+
+    com.log("Test upload-------------------------------------------")
+    # Test missing header in input file
+    ttry(upload, g.E_MH, gl.SQL_IN_MH)
+    # Test upload with interruption
+    upload_interrupted()
+    upload(gl.SQL_IN, tr=True)
+
+    com.log("Test download------------------------------------------")
+    # Test download no output
+    download(gl.SQL_QUERY_NO, gl.SQL_DL_OUT, ti=True)
+
+    # Test download standard
+    reset()
+    download(gl.SQL_QUERY, gl.SQL_DL_OUT)
+    dq.file_match(gl.SQL_IN, gl.SQL_DL_OUT)
+    dq.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
+
+    # Test download RG with merge
+    download_interrupted(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG)
+    download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, tr=True, sl=50)
+    dq.file_match(gl.SQL_DL_OUT, gl.SQL_DL_OUT_RG)
+
+    # Test download RG without merge
+    reset()
+    download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, merge=False, cnx=1, sl=50)
+    dq.file_match(gl.SQL_RG_REF, gl.SQL_RG_COMP)
+
+    # Test count simple
+    reset()
+    download(gl.SQL_QUERY_COUNT_1, gl.SQL_DL_OUT_COUNT)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
+    download(gl.SQL_QUERY_COUNT_1_RG, gl.SQL_DL_OUT_COUNT)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
+
+    # Test count group by
+    reset()
+    download(gl.SQL_QUERY_COUNT_2, gl.SQL_DL_OUT_COUNT)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
+    download(gl.SQL_QUERY_COUNT_2_RG, gl.SQL_DL_OUT_COUNT)
+    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
+
+    # Cleaning DB
+    clean_db([gl.SQL_T_TEST, gl.SQL_T_IUTD])
+
+    com.check_log(cl.SQ)
+
+
+if __name__ == "__main__":
+    test_sql()
