@@ -3,8 +3,8 @@ from os.path import exists
 from threading import RLock
 
 import pytools.common as com
-import pytools._conf_main as cfg
-from pytools._conf_oracle import conf
+import conf._conf_main as cfg
+from conf._conf_oracle import conf
 
 from . import gl
 from .iutd import is_up_to_date

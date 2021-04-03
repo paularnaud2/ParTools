@@ -1,7 +1,7 @@
 # Main-------------------------------------------------------------------------
 
 # Basically where you want your log files and temporary files to be outputted
-ROOT_PATH = 'C:/PyTools/'
+ROOT_PATH = 'IO/'
 
 # DEBUG = True enables function decorator in common.deco
 # it basically terminates the program if one of the threads
@@ -28,5 +28,5 @@ TEST_ENV = 'LOCAL'
 # set in conf_oracle.py so that the duplet (TEST_ENV, TEST_DB) has a defined
 # connexion string
 # Set TEST_DB to '' if you want SQL tests (test_sql and test_reqlist)
-# to be skipped
+# to be skipped (though a warning will be thrown is this case)
 TEST_DB = ''

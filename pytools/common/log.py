@@ -38,7 +38,6 @@ def check_log(in_list, log_match=False):
         log('check_log ok')
     else:
         log(f'check_log ko ({n_w} warnings)')
-    log_print()
 
 
 def log_print(str_in='', nb_tab=0, c_out=True):

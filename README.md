@@ -12,3 +12,5 @@ You can mainly use them for:
 - Filtering potentially big file with flexible conditions (toolFilter)
 - Splitting potentially big files (toolSplit)
 - Sending mails (mail)
+
+## Quickstart

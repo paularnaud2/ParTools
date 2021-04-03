@@ -1,5 +1,5 @@
-# This script allows you to shuffle, sort as well as find and/or remove
-# duplicates in a csv file or a list
+"""This script allows you to shuffle, sort as well as find and/or remove
+duplicates in a csv file or a list."""
 
 import os
 from random import shuffle

@@ -1,5 +1,5 @@
 from threading import RLock
-import pytools._conf_main as cfg
+import conf._conf_main as cfg
 from .file import mkdirs
 
 # Misc

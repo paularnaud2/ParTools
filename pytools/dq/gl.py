@@ -1,4 +1,4 @@
-import pytools._conf_main as cfg
+import conf._conf_main as cfg
 
 IN_FILE_NAME_1 = 'OLD'
 IN_FILE_NAME_2 = 'NEW'

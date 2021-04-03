@@ -8,3 +8,5 @@ htmlcov
 mail/mails
 venv/
 *.egg-info/
+.old/
+IO/

@@ -1,4 +1,4 @@
-CONF_FILE = 'pytools/_conf_mail.txt'
+CONF_FILE = 'conf/_conf_mail.txt'
 MAIL_PATH = 'pytools/mail/mails/'
 
 S_MISSING_CONF = f"The email couldn't be sent because \
