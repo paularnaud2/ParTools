@@ -1,7 +1,7 @@
 CO = [
     "Log file initialised",
     "Python version:",
-    "Testing common.send_notif",
+    "Testing common.msg_box",
     "Testing common.string.get_duration",
 ]
 

@@ -17,15 +17,15 @@ def get_duration():
     com.log_print()
 
 
-def send_notif():
-    com.log("Testing common.send_notif-----------------------------------")
-    st.send_notif('Notification test', 'Test', ndur=2)
+def msg_box():
+    com.log("Testing common.msg_box-----------------------------------")
+    st.msg_box('Message box test', 'Test')
     com.log_print()
 
 
 def test_common():
     com.init_log('test_common', True)
-    send_notif()
+    msg_box()
     get_duration()
     com.check_log(cl.CO)
 

@@ -1,20 +1,5 @@
-# conf_main and conf_oracle auto-init
-from os.path import exists
-from shutil import copyfile
-if not exists('pytools/_conf_main.py'):
-    copyfile('pytools/conf_main_default.py', 'pytools/_conf_main.py')
-if not exists('pytools/_conf_oracle.py'):
-    copyfile('pytools/conf_oracle_default.py', 'pytools/_conf_oracle.py')
-
-# Check if requirements have been installed
-try:
-    import yapf
-    import rope
-except Exception:
-    s = ("Error: required packages have not been installed."
-         " Please run the following command:\n"
-         "pip install -r requirements.txt")
-    raise Exception(s)
+# Check install
+from . import ci
 
 # Imports for package common
 from .deco import log_exeptions

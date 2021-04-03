@@ -32,7 +32,7 @@ def finish_dq(start_time, dirs):
     (dms, dstr) = com.get_duration_string(start_time, True)
     s = f"[dq] run_dq: end ({dstr})"
     com.log(s)
-    st.send_notif(s, "dq", dms)
+    st.msg_box(s, "dq", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
         os.startfile(dirs["out"])

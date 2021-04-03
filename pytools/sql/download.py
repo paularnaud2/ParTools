@@ -61,4 +61,4 @@ def finish(start_time):
     com.log("[sql] " + s)
     com.log_print()
     if gl.SEND_NOTIF:
-        st.send_notif(s, "sql", dms)
+        st.msg_box(s, "sql", dms)

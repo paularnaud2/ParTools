@@ -1,27 +1,22 @@
 import subprocess
-
-from win10toast import ToastNotifier
+from multiprocessing import Process
+from tkinter.messagebox import showinfo
 
 from . import g
 from .log import log
 from .log import log_print
 
 
-def send_notif(msg, package='common', jdur=0, ndur=10):
+def msg_box(msg, package='common', jdur=0):
 
     if jdur != 0:
         jdur = jdur / 1000
         if jdur < g.MIN_DUR_NOTIF_TRIGGER:
             return
 
-    toaster = ToastNotifier()
-    toaster.show_toast(
-        "Python - " + package,
-        msg,
-        duration=ndur,
-        threaded=True,
-    )
-    log("Windows notification sent")
+    title = "Python - " + package
+    p = Process(target=showinfo, args=(title, msg))
+    p.start()
 
 
 def run_cmd(cmd, input=''):

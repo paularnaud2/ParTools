@@ -64,7 +64,7 @@ def finish(start_time):
     s = f"run_reqList: end ({dstr})"
     com.log("[reqlist] " + s)
     if gl.SEND_NOTIF:
-        st.send_notif(s, "reqlist", dms)
+        st.msg_box(s, "reqlist", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
         startfile(gl.OUT_FILE)
