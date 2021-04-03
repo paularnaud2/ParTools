@@ -7,3 +7,4 @@ _conf*
 htmlcov
 mail/mails
 venv/
+*.egg-info/
