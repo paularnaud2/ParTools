@@ -1,51 +1,30 @@
-# This script allows you to filter and/or extract columns from a csv file
-
-import os
 from time import time
 
 import pytools.common as com
-import pytools.common.g as g
-
 from pytools.tools import gl
 
-# Input variables default values
-gl.IN_FILE = g.paths['IN'] + "in.csv"
-gl.IN_FILE = "test/sql/in.csv"
-gl.OUT_FILE = g.paths['OUT'] + "out_filtered.csv"
-gl.COL_LIST = ['PRM', 'AFFAIRE']
 
-gl.FILTER = False
-gl.EXTRACT_COL = True
-gl.OPEN_OUT_FILE = False
-gl.TEST_FILTER = False
-gl.SL_STEP = 500 * 10**3
-
-# Const
-gl.s = ("{bn_1} lines read in {dstr}. {bn_2} lines read in total "
-        "({bn_3} lines written in output list).")
-
-
-def filter(**kwargs):
+def filter(in_dir, out_dir, **kwargs):
     com.log("[toolFilter] filter: start")
     start_time = time()
     com.init_kwargs(gl, kwargs)
-    init_globals()
-    com.log(f"Filtering file '{gl.IN_FILE}'...")
-    with open(gl.IN_FILE, 'r', encoding='utf-8') as in_file:
+    init_globals(in_dir)
+    com.log(f"Filtering file '{in_dir}'...")
+    with open(in_dir, 'r', encoding='utf-8') as in_file:
         process_header(in_file)
         line = in_file.readline()
         while line:
             process_line(line)
             line = in_file.readline()
-    finish(start_time)
+    finish(out_dir, start_time)
 
 
-def init_globals():
+def init_globals(in_dir):
     gl.n_r = 0
     gl.n_o = 0
     gl.out_list = []
     com.init_sl_time()
-    gl.fields = com.get_csv_fields_dict(gl.IN_FILE)
+    gl.fields = com.get_csv_fields_dict(in_dir)
 
 
 def process_header(in_file):
@@ -67,7 +46,7 @@ def process_line(line):
     com.step_log(gl.n_r, gl.SL_STEP, what=gl.s, nb=gl.n_o)
 
 
-def finish(start_time):
+def finish(out_dir, start_time):
     com.log("Filtering over")
     bn1 = com.big_number(gl.n_r)
     bn2 = com.big_number(gl.n_o)
@@ -76,29 +55,24 @@ def finish(start_time):
     com.log(s)
 
     com.log("Writing output file...")
-    com.save_csv(gl.out_list, gl.OUT_FILE)
-    s = f"Output file saved in {gl.OUT_FILE}"
+    com.save_csv(gl.out_list, out_dir)
+    s = f"Output file saved in {out_dir}"
     com.log(s)
     dstr = com.get_duration_string(start_time)
     com.log(f"[toolFilter] filter: end ({dstr})")
     com.log_print()
     if gl.OPEN_OUT_FILE:
-        os.startfile(gl.OUT_FILE)
+        com.startfile(out_dir)
 
 
-def filter_line(in_list):
-    if gl.FILTER is False:
+def filter_line(line_list):
+    if not gl.FF:
         return True
 
-    # lines for which cond = True are written in the output file
-    if gl.TEST_FILTER:
-        cond = in_list[gl.fields['PRM']].find('01') == 0
-    else:
-        cond = True  # enter your conditions here
-    if cond:
-        return True
-    else:
-        return False
+    # Lines for which cond = True are written in the output file
+    cond = gl.FF(line_list)
+
+    return cond
 
 
 def extract_col(line):
@@ -107,7 +81,3 @@ def extract_col(line):
 
     new_line = [line[gl.fields[elt]] for elt in gl.COL_LIST]
     return new_line
-
-
-if __name__ == '__main__':
-    filter(OPEN_OUT_FILE=True)

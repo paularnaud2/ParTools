@@ -27,6 +27,7 @@ from .file import mkdirs
 from .file import load_txt
 from .file import save_list
 from .file import read_file
+from .file import startfile
 from .file import merge_files
 from .file import count_lines
 from .file import delete_folder

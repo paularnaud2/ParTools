@@ -1,8 +1,8 @@
 import pytools.common as com
 
 from pytools.common import g
-from pytools.toolDup import del_dup_list
-from pytools.toolDup import find_dup_list
+from pytools.tools.dup import del_dup_list
+from pytools.tools.dup import find_dup_list
 
 from . import gl
 

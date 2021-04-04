@@ -1,9 +1,8 @@
-import os
 from time import time
 
 import pytools.common as com
 import pytools.common.sTools as st
-from pytools.toolDup import del_dup_list
+from pytools.tools.dup import del_dup_list
 
 from . import gl
 from .init import init_dq
@@ -35,7 +34,7 @@ def finish_dq(start_time, dirs):
     st.msg_box(s, "dq", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
-        os.startfile(dirs["out"])
+        com.startfile(dirs["out"])
 
 
 def file_match(in1, in2, del_dup=False, compare=False, err=True, out=''):
@@ -66,7 +65,7 @@ def file_match(in1, in2, del_dup=False, compare=False, err=True, out=''):
         com.log_print('|')
 
     if not res and err:
-        os.startfile(gl.OUT_DIR)
+        com.startfile(gl.OUT_DIR)
         assert res is True
 
     com.log("[dq] file_match: end")

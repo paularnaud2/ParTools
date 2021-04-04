@@ -1,11 +1,13 @@
-from os import listdir
-from os import makedirs
-from os.path import join
-from os.path import isfile
-from os.path import exists
+import os
+import os.path as p
 from shutil import rmtree
 
 from .log import log
+
+
+def startfile(in_dir):
+    # Same as os.startfile but with absolute path (more robust)
+    os.startfile(os.path.abspath(in_dir))
 
 
 def delete_folder(dir):
@@ -14,11 +16,11 @@ def delete_folder(dir):
 
 
 def mkdirs(dir, delete=False):
-    if exists(dir) and not delete:
+    if p.exists(dir) and not delete:
         return
-    if exists(dir) and delete:
+    if p.exists(dir) and delete:
         delete_folder(dir)
-    makedirs(dir)
+    os.makedirs(dir)
     log(f"Folder {dir} created")
 
 
@@ -36,7 +38,8 @@ def merge_files(in_dir, out_dir, remove_header=False):
 
 def get_file_list(in_dir):
     try:
-        file_list = [f for f in listdir(in_dir) if isfile(join(in_dir, f))]
+        dirs = os.listdir(in_dir)
+        file_list = [f for f in dirs if p.isfile(p.join(in_dir, f))]
     except FileNotFoundError:
         return []
 

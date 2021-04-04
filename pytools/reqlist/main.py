@@ -1,10 +1,9 @@
 from time import time
-from os import startfile
 
 import pytools.common.g as g
 import pytools.common as com
 import pytools.common.sTools as st
-from pytools.toolDup import find_dup
+from pytools.tools.dup import find_dup
 
 from . import gl
 from .dl import download
@@ -67,7 +66,7 @@ def finish(start_time):
         st.msg_box(s, "reqlist", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
-        startfile(gl.OUT_FILE)
+        com.startfile(gl.OUT_FILE)
 
 
 def init(kwargs):

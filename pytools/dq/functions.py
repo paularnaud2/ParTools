@@ -4,7 +4,7 @@ from os.path import exists
 
 import pytools.common as com
 import pytools.common.g as g
-from pytools.toolSplit import split_file
+from pytools.tools.split import split_file
 
 from . import gl
 
@@ -107,8 +107,7 @@ def check_split(in_dir):
 
     if split_needed():
         split_file(
-            IN_DIR=in_dir,
-            OUT_DIR='',
+            in_dir,
             MAX_LINE=gl.MAX_LINE_SPLIT,
             MAX_FILE_NB=gl.MAX_FILE_NB_SPLIT,
             ADD_HEADER=True,

@@ -1,25 +1,10 @@
-"""This script allows you to shuffle, sort as well as find and/or remove
-duplicates in a csv file or a list."""
-
-import os
 from random import shuffle
 
 import pytools.common as com
-import pytools.common.g as g
 
-from pytools.tools import gl
 from pytools.tools.init import init_find_dup
 from pytools.tools.finish import finish_find_dup
 from pytools.tools.finish import finish_del_dup
-
-# Input variables default values
-gl.IN_FILE = g.paths['IN'] + "in.csv"
-gl.OUT_FILE_SHUF = g.paths['OUT'] + "out.csv"
-gl.OUT_FIND_DUP = g.paths['OUT'] + "out_find_dup.csv"
-gl.OUT_DEL_DUP = g.paths['OUT'] + "out_del_dup.csv"
-
-# Const
-gl.TMP_OUT = 'out_dup.csv'
 
 
 def find_dup(in_dir, out_dir='', open_out=False, col=0):
@@ -57,7 +42,7 @@ def shuffle_csv(in_dir, out_dir, open_out=False):
     com.save_csv(cur_list, out_dir)
     com.log(f"Shuffled csv file saved in {out_dir}")
     if open_out:
-        os.startfile(out_dir)
+        com.startfile(out_dir)
     com.log("[toolShuf] shuffle_csv: end")
 
 
@@ -100,9 +85,3 @@ def del_dup_list(in_list):
             old_elt = elt
 
     return out_list
-
-
-if __name__ == '__main__':
-    find_dup(gl.IN_FILE, gl.OUT_FIND_DUP, True)
-    del_dup(gl.IN_FILE, gl.OUT_DEL_DUP, True)
-    shuffle_csv(gl.IN_FILE, gl.OUT_FILE_SHUF, True)

@@ -1,9 +1,8 @@
 from time import time
-from os import startfile
 
 import pytools.common as com
 import pytools.common.sTools as st
-from pytools.toolDup import find_dup
+from pytools.tools.dup import find_dup
 
 from . import rg
 from . import gl
@@ -53,7 +52,7 @@ def finish(start_time):
             com.log_print('|')
             find_dup(out_dir, col=1)
         if gl.OPEN_OUT_FILE:
-            startfile(out_dir)
+            com.startfile(out_dir)
 
     com.log_print('|')
     (dms, dstr) = com.get_duration_string(start_time, True)

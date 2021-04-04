@@ -37,7 +37,7 @@ def init_rbf():
     gl.s_prompt = txt
 
 
-def init_sbf():
+def init_sbf(in_dir, look_for):
 
     gl.FOUND = False
     gl.EOF = False
@@ -45,9 +45,10 @@ def init_sbf():
     gl.c_list = 0
     gl.c_cur_row = 0
     gl.cur_list = []
+    gl.LOOK_FOR = look_for
     if gl.LINE_PER_LINE:
         gl.s_sl = "{bn_1} lines read in {dstr}"
     else:
         gl.s_sl = "{bn_1} buffers of {bn_3} characters read in {dstr}"
 
-    gl.s_init = f"Searching string '{gl.LOOK_FOR}' in file '{gl.IN_FILE}'..."
+    gl.s_init = f"Searching string '{gl.LOOK_FOR}' in file '{in_dir}'..."

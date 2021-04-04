@@ -9,4 +9,5 @@ mail/mails
 venv/
 *.egg-info/
 .old/
+.pytest_cache/
 IO/

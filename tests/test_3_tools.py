@@ -1,21 +1,21 @@
 import pytools.common as com
 import pytools.dq as dq
-import pytools.toolFilter as f
-import pytools.toolBF as toolBF
-import pytools.toolParseXML as xml
+import pytools.tools.filter as f
+import pytools.tools.bf as bf
+import pytools.tools.xml as xml
 import pytools.test.check_log as cl
 
 from pytools.test import gl
-from pytools.toolDup import find_dup
-from pytools.toolDup import del_dup
-from pytools.toolDup import find_dup_list
-from pytools.toolDup import shuffle_csv
-from pytools.toolSplit import split_file
+from pytools.tools.dup import find_dup
+from pytools.tools.dup import del_dup
+from pytools.tools.dup import find_dup_list
+from pytools.tools.dup import shuffle_csv
+from pytools.tools.split import split_file
 
 
 def read_big_file():
-    toolBF.read_big_file(
-        IN_FILE=gl.SQL_IN,
+    bf.read_big_file(
+        gl.SQL_IN,
         LINE_PER_LINE=True,
         OPEN_OUT_FILE=False,
         TEST=True,
@@ -25,10 +25,10 @@ def read_big_file():
 
 
 def search_big_file():
-    toolBF.search_big_file(
-        IN_FILE=gl.SQL_IN,
-        OUT_FILE=gl.SEARCH_BF_OUT,
-        LOOK_FOR=gl.LOOK_FOR,
+    bf.search_big_file(
+        gl.SQL_IN,
+        gl.SEARCH_BF_OUT,
+        gl.LOOK_FOR,
         LINE_PER_LINE=True,
         OPEN_OUT_FILE=False,
         TEST=True,
@@ -41,22 +41,30 @@ def search_big_file():
 
 def filter():
     f.filter(
-        IN_FILE=gl.SQL_IN,
-        OUT_FILE=gl.FLT_OUT,
-        FILTER=True,
-        TEST_FILTER=True,
+        gl.SQL_IN,
+        gl.FLT_OUT,
+        COL_LIST=['PRM', 'AFFAIRE'],
+        FF=filter_function,
         EXTRACT_COL=True,
         OPEN_OUT_FILE=False,
-        COL_LIST=['PRM', 'AFFAIRE'],
         SL_STEP=500,
     )
     dq.file_match(gl.FLT_OUT, gl.FLT_OUT_REF)
 
 
+def filter_function(line_list):
+    # Lines for which this function returns True will be written in the output file
+    # If not filter function is given in input (ie. gl.FF is not defined),
+    # no filter will be applied.
+    cond = line_list[2].find('01') == 0
+
+    return cond
+
+
 def split():
     split_file(
-        IN_DIR=gl.SQL_IN,
-        OUT_DIR=gl.TOOLS_OUT,
+        gl.SQL_IN,
+        gl.TOOLS_OUT,
         MAX_LINE=1000,
         MAX_FILE_NB=3,
         ADD_HEADER=True,
@@ -67,10 +75,10 @@ def split():
 
 
 def parse_xml():
-
     xml.parse_xml(
-        IN_DIR=gl.XML_IN,
-        OUT_DIR=gl.XML_OUT,
+        gl.XML_IN,
+        gl.XML_OUT,
+        OPEN_OUT_FILE=False,
         SL_STEP_READ=10,
         SL_STEP_WRITE=2,
     )
@@ -117,7 +125,7 @@ def test_tools():
     # Test BF
     read_big_file()
     search_big_file()
-    toolBF.sort_big_file(gl.SQL_IN, gl.SORT_BF_OUT)
+    bf.sort_big_file(gl.SQL_IN, gl.SORT_BF_OUT)
     dq.file_match(gl.SQL_IN, gl.SORT_BF_OUT, del_dup=True)
 
     com.check_log(cl.TO)

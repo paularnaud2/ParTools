@@ -1,32 +1,20 @@
-# This script allows you to split a file into multiple file (e.g. if it is too
-# big to be opened with an app such as Excel)
-
 import re
 from os import remove
 
 import pytools.common as com
-import pytools.common.g as g
-
 from pytools.tools import gl
 
-# Input variables default values
-gl.IN_DIR = g.paths['IN'] + "in.csv"
-gl.OUT_DIR = ''
-gl.MAX_LINE = 2 * 10**3
-gl.MAX_FILE_NB = 3
-gl.ADD_HEADER = True
 
-
-def split_file(**kwargs):
+def split_file(in_dir, out_dir='', **kwargs):
     com.log("[toolSplit] split_file: start")
     com.init_kwargs(gl, kwargs)
     init_globals()
-    (file_dir, file_name, ext) = split_in_dir()
-    gl.header = com.get_header(gl.IN_DIR)
-    with open(gl.IN_DIR, 'r', encoding='utf-8') as in_file:
+    (file_dir, file_name, ext) = split_in_dir(in_dir, out_dir)
+    gl.header = com.get_header(in_dir)
+    with open(in_dir, 'r', encoding='utf-8') as in_file:
         while True:
             gl.N_OUT += 1
-            out_dir = f'{file_dir}/{file_name}_{gl.N_OUT}.{ext}'
+            out_dir = f'{file_dir}{file_name}_{gl.N_OUT}.{ext}'
             if not gen_split_out(out_dir, in_file):
                 break
 
@@ -39,12 +27,13 @@ def init_globals():
     gl.N_OUT = 0
 
 
-def split_in_dir():
+def split_in_dir(in_dir, out_dir):
     exp = r'(.*)/(\w*).(\w*)$'
-    m = re.search(exp, gl.IN_DIR)
+    m = re.search(exp, in_dir)
     (file_dir, file_name, ext) = (m.group(1), m.group(2), m.group(3))
-    if gl.OUT_DIR:
-        file_dir = gl.OUT_DIR
+    file_dir += '/'
+    if out_dir:
+        file_dir = out_dir
 
     return (file_dir, file_name, ext)
 
@@ -78,7 +67,3 @@ def gen_split_out(split_dir, in_file):
         return False
 
     return True
-
-
-if __name__ == '__main__':
-    split_file()
