@@ -48,7 +48,7 @@ SQL_RG_COMP = SQL_DL_OUT_RG_FOLDER + '01.csv'
 SQL_MAX_ELT_INSERT = 200
 
 # test_reqlist
-TEST_RL = TEST + 'reqlist/'
+TEST_RL = TEST + 'reqlist/files/'
 TEST_RL_OUT = TEST_OUT + 'reqlist/'
 RL_OUT = g.paths['TMP'] + TEST_RL_OUT
 RL_TMP = g.paths['TMP'] + rl.TMP_FOLDER
@@ -81,7 +81,7 @@ RL_RIGHT_3 = TEST_RL + 'right_3.csv'
 RL_OUT_JOIN_REF_3 = TEST_RL + 'join_ref_3.csv'
 
 # test_dq
-TEST_DQ = TEST + 'dq/'
+TEST_DQ = TEST + 'dq/files/'
 TEST_DQ_OUT = TEST_OUT + 'dq/'
 DQ_OUT = g.paths['TMP'] + TEST_DQ_OUT
 
@@ -120,8 +120,8 @@ OUT3 = '3'
 OUT_SPLIT_3 = '3_3'
 
 # test_tools
-TEST_TOOL = TEST + tools.TMP_FOLDER
-TEST_TOOL_OUT = TEST_OUT + tools.TMP_FOLDER
+TEST_TOOL = TEST + 'tools/files/'
+TEST_TOOL_OUT = TEST_OUT + 'tools/'
 TOOLS_OUT = g.paths['TMP'] + TEST_TOOL_OUT
 
 # XML

@@ -1,5 +1,4 @@
 # This script aims to solve problems with local TNS listener
-
 import pytools.common.sTools as st
 
 script = (
