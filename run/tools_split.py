@@ -8,4 +8,4 @@ in_dir = g.paths['IN'] + "in.csv"
 in_dir = "pytools/test/sql/files/in.csv"
 out_dir = g.paths['OUT']
 
-split.split_file(in_dir, out_dir)
+split.split_file(in_dir, out_dir, MAX_LINE=1000)

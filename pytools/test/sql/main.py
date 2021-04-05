@@ -7,7 +7,7 @@ def upload(inp, tr=False, md=""):
     execute_kwargs = {
         "ENV": gl.SQL_ENV,
         "DB": gl.SQL_DB,
-        "SCRIPT_FILE": gl.SQL_CREATE_TABLE,
+        "SCRIPT_IN": gl.SQL_CREATE_TABLE,
         "VAR_DICT": {
             "TABLE_NAME": gl.SQL_T_TEST
         },
@@ -18,7 +18,7 @@ def upload(inp, tr=False, md=""):
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         EXECUTE_PARAMS=execute_kwargs,
-        SCRIPT_FILE=gl.SQL_INSERT_TABLE,
+        SCRIPT_IN=gl.SQL_INSERT_TABLE,
         VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
         UPLOAD_IN=inp,
         NB_MAX_ELT_INSERT=gl.SQL_MAX_ELT_INSERT,
@@ -32,7 +32,7 @@ def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
     sql.download(
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
-        QUERY_FILE=query,
+        QUERY_IN=query,
         VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
         OUT_FILE=out,
         OUT_RG_DIR=gl.SQL_DL_OUT_RG_FOLDER,
@@ -66,7 +66,7 @@ def drop_table(table_name):
     sql.execute(
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
-        SCRIPT_FILE=gl.SQL_DROP_TABLE,
+        SCRIPT_IN=gl.SQL_DROP_TABLE,
         VAR_DICT={"TABLE_NAME": table_name},
         PROC=False,
     )

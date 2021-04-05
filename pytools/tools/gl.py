@@ -1,4 +1,5 @@
 TMP_FOLDER = 'tools/'
+OPEN_OUT_FILE = True
 
 # Dup----------------------------------------------------------------
 TMP_OUT = 'out_dup.csv'
@@ -18,14 +19,12 @@ MULTI_TAG_LIST = [
     'telephone2Num',
     'adresseEmail',
 ]
-OPEN_OUT_FILE = True
 SL_STEP_READ = 1000 * 10**3
 SL_STEP_WRITE = 100 * 10**3
 
 # BF-----------------------------------------------------------------
 # Optional input defaults
 LINE_PER_LINE = True
-OPEN_OUT_FILE = True
 TEST = False
 N_READ = 10
 PRINT_SIZE = 10
@@ -40,7 +39,6 @@ s = ("{bn_1} lines read in {dstr}."
 
 # Optional input defaults
 EXTRACT_COL = True
-OPEN_OUT_FILE = True
 SL_STEP = 500 * 10**3
 
 # Globals

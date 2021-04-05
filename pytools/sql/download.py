@@ -59,5 +59,5 @@ def finish(start_time):
     s = f"download: end ({dstr})"
     com.log("[sql] " + s)
     com.log_print()
-    if gl.SEND_NOTIF:
+    if gl.MSG_BOX_END:
         st.msg_box(s, "sql", dms)

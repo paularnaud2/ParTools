@@ -1,4 +1,4 @@
-import conf._conf_main as cfg
+from pytools.common import g
 
 IN_FILE_NAME_1 = 'OLD'
 IN_FILE_NAME_2 = 'NEW'
@@ -18,8 +18,8 @@ DIFF_OUT = False
 EQUAL_LABEL = 'E'
 
 FILE_TYPE = '.csv'
-IN_DIR = cfg.ROOT_PATH + 'OUT/'
-OUT_DIR = cfg.ROOT_PATH + 'OUT/'
+IN_DIR = g.paths['OUT']
+OUT_DIR = g.paths['OUT']
 OUT_FILE_NAME = 'dq_out'
 OUT_DUP_FILE_NAME = 'dq_out_dup'
 OUT_E_FILE = 'out_e'

@@ -12,14 +12,14 @@ def prepare_iutd(sf):
     sql.execute(
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
-        SCRIPT_FILE=gl.SQL_CREATE_TABLE_IUTD,
+        SCRIPT_IN=gl.SQL_CREATE_TABLE_IUTD,
         VAR_DICT={"TABLE_NAME": gl.SQL_T_IUTD},
         PROC=True,
     )
     sql.execute(
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
-        SCRIPT_FILE=sf,
+        SCRIPT_IN=sf,
         PROC=False,
     )
 

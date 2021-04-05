@@ -93,7 +93,7 @@ def init(kwargs):
 
 
 def get_script():
-    script = get_final_script(gl.SCRIPT_FILE)
+    script = get_final_script(gl.SCRIPT_IN)
     log.script(script)
     log.inject()
 

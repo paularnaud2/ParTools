@@ -15,7 +15,7 @@ def run_reqList(**kwargs):
     init(kwargs)
     start_time = time()
     if not gl.SQUEEZE_SQL:
-        download(gl.QUERY_FILE)
+        download(gl.QUERY_IN)
 
     if not gl.SQUEEZE_JOIN:
         left_join_files()
@@ -62,7 +62,7 @@ def finish(start_time):
     (dms, dstr) = com.get_duration_string(start_time, True)
     s = f"run_reqList: end ({dstr})"
     com.log("[reqlist] " + s)
-    if gl.SEND_NOTIF:
+    if gl.MSG_BOX_END:
         st.msg_box(s, "reqlist", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:

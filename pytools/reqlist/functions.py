@@ -55,8 +55,11 @@ def gen_group(elt_list):
     return in_st
 
 
-def set_query_var(query_file):
-    query = com.read_file(query_file)
+def set_query_var(query_in):
+    if com.like(query_in, "*.sql"):
+        query = com.read_file(query_in)
+    else:
+        query = query_in
     query = query.strip('\r\n;')
     query = com.replace_from_dict(query, gl.VAR_DICT)
     check_var(query)

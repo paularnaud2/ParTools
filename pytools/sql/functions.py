@@ -11,14 +11,20 @@ verrou = RLock()
 
 
 def get_query():
-    query = com.read_file(gl.QUERY_FILE)
+    if com.like(gl.QUERY_IN, "*.sql"):
+        query = com.read_file(gl.QUERY_IN)
+    else:
+        query = gl.QUERY_IN
     query = query.strip('\r\n;')
     query = com.replace_from_dict(query, gl.VAR_DICT)
     gl.query = query
 
 
-def get_final_script(script_file):
-    script = com.read_file(script_file)
+def get_final_script(script_in):
+    if com.like(script_in, "*.sql"):
+        script = com.read_file(script_in)
+    else:
+        script = script_in
     script = com.replace_from_dict(script, gl.VAR_DICT)
     return script
 

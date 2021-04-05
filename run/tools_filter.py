@@ -19,9 +19,8 @@ def filter_function(line_list):
     return cond
 
 
-f.filter(
-    in_dir,
-    out_dir,
-    COL_LIST=col_list,
-    FF=filter_function,
-)
+if __name__ == '__main__':
+    f.filter(in_dir, out_dir, COL_LIST=col_list, FF=filter_function)
+else:
+    f.gl.OPEN_OUT_FILE = False
+    f.filter(in_dir, out_dir, COL_LIST=col_list, FF=filter_function)

@@ -14,7 +14,7 @@ def execute(**kwargs):
     start_time = time()
     com.init_kwargs(gl, kwargs)
     init()
-    script = get_final_script(gl.SCRIPT_FILE)
+    script = get_final_script(gl.SCRIPT_IN)
     cnx = connect(ENV=gl.ENV, DB=gl.DB)
     c = cnx.cursor()
     if gl.PROC:

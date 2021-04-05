@@ -16,10 +16,10 @@ from .process import process_grp
 verrou = RLock()
 
 
-def download(query_file):
+def download(query_in):
     com.log("[reqlist] download: start")
     start_time = time()
-    init(query_file)
+    init(query_in)
 
     group_array = split_group_list()
     n = len(group_array)
@@ -35,9 +35,9 @@ def download(query_file):
     com.log_print('|')
 
 
-def init(query_file):
+def init(query_in):
     restart()
-    set_query_var(query_file)
+    set_query_var(query_in)
     gen_group_list()
 
     sql.init()

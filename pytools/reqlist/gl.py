@@ -1,14 +1,15 @@
-from datetime import datetime
 from pytools.common import g
 
-ENV = 'LOCAL'
-DB = 'XE'
+# Mandatory inputs
+ENV = ''
+DB = ''
 
-date = datetime.now().strftime("%Y%m%d")
-QUERY_FILE = 'reqlist/queries/e_RL.sql'
-IN_FILE = f"{g.paths['IN']}in.csv"
-OUT_FILE = f"{g.paths['OUT']}export_RL_{DB}_{date}.csv"
+# Optional inputs
+IN_FILE = f"{g.paths['IN']}rl_in.csv"
+OUT_FILE = f"{g.paths['OUT']}rl_out.csv"
+QUERY_IN = 'reqlist/queries/query_in_rl.sql'
 
+# Default const
 MAX_DB_CNX = 8
 SL_STEP_QUERY = 10
 NB_MAX_ELT_IN_STATEMENT = 1000
@@ -18,7 +19,7 @@ SQUEEZE_JOIN = True
 SQUEEZE_SQL = False
 CHECK_DUP = True
 OPEN_OUT_FILE = True
-SEND_NOTIF = True
+MSG_BOX_END = True
 DEBUG_JOIN = False
 TEST_RESTART = False
 

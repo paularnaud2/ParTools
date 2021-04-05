@@ -18,7 +18,7 @@ from pytools.test import is_test_db_defined
 
 def reqlist(in_file,
             out_file,
-            query_file,
+            query,
             test_restart=False,
             md='',
             cnx=3,
@@ -27,7 +27,7 @@ def reqlist(in_file,
     rl.run_reqList(
         ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
-        QUERY_FILE=query_file,
+        QUERY_IN=query,
         IN_FILE=in_file,
         OUT_FILE=out_file,
         VAR_DICT={'TABLE_NAME': gl.SQL_T_TEST},
