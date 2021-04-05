@@ -29,17 +29,17 @@ def iutd():
     sql.gl.TEST_IUTD = True
 
     # Test no iutd file date db ok
-    connect(gl.SQL_ENV, gl.SQL_DB)
+    connect()
 
     # Test iutd file date ok
-    connect(gl.SQL_ENV, gl.SQL_DB)
+    connect()
 
     com.log_print()
     os.remove(sql.gl.IUTD_DIR)
     prepare_iutd(gl.SQL_INSERT_IUTD_KO)
     sql.gl.TEST_IUTD = True
     # Test no iutd file date db ko
-    connect(gl.SQL_ENV, gl.SQL_DB)
+    connect()
     # Test iutd file date ko
-    connect(gl.SQL_ENV, gl.SQL_DB)
+    connect()
     sql.gl.TEST_IUTD = False

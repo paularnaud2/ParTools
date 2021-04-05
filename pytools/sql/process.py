@@ -21,7 +21,7 @@ def process_range_list(range_list, rg_file_name):
     init_th_dict()
     gl.sem = Semaphore(gl.MAX_DB_CNX)
     if range_list == ['MONO']:
-        gen_cnx_dict(gl.DB, gl.ENV, 1)
+        gen_cnx_dict(1)
         process_range()
     else:
         lauch_threads(range_list, rg_file_name)
@@ -30,7 +30,7 @@ def process_range_list(range_list, rg_file_name):
 def lauch_threads(range_list, rg_file_name):
     com.log(f"Ranges to be queried: {range_list}")
     thread_list = []
-    gen_cnx_dict(gl.DB, gl.ENV, gl.MAX_DB_CNX)
+    gen_cnx_dict(gl.MAX_DB_CNX)
     for elt in range_list:
         th = Thread(target=process_range, args=(
             elt,

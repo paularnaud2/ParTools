@@ -87,7 +87,7 @@ def init(kwargs):
     gl.ref_chunk = 0
     gl.c_main = 0
     gl.c_chunk = 0
-    gl.cnx = connect(ENV=gl.ENV, DB=gl.DB)
+    gl.cnx = connect()
     gl.c = gl.cnx.cursor()
     gl.data = []
 

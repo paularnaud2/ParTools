@@ -1,8 +1,9 @@
 from pytools.common import g
 
-# Mandatory inputs
+# Mandatory inputs (ENV + DB from cons/_conf_oracle.py or CNX_STR)
 ENV = ''
 DB = ''
+CNX_STR = ''
 
 # Optional inputs
 OUT_FILE = f"{g.paths['OUT']}sql_out.csv"

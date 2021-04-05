@@ -10,6 +10,8 @@ date = datetime.now().strftime("%Y%m%d")
 
 env = 'LOCAL'
 db = 'XE'
+cnx_str = "PAUL/paul@localhost:1521/XE"
+
 query_in = f'sql/queries/{db}_dl.sql'
 out_file = f"{g.paths['OUT']}sql_{db}_{date}.csv"
 # out_rg_dir = f"{g.paths['OUT']}{db}_OUT_{date}/"
@@ -21,8 +23,9 @@ FROM DUAL
 
 if __name__ == '__main__':
     sql.download(
-        ENV=env,
-        DB=db,
+        # ENV=env,
+        # DB=db,
+        CNX_STR=cnx_str,
         QUERY_IN=query_in,
         OUT_FILE=out_file,
     )

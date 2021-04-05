@@ -23,7 +23,7 @@ def download(query_in):
 
     group_array = split_group_list()
     n = len(group_array)
-    sql.connect.gen_cnx_dict(gl.DB, gl.ENV, n)
+    sql.connect.gen_cnx_dict(n)
     launch_threads(group_array)
     file.gen_out_file()
 
@@ -41,6 +41,9 @@ def init(query_in):
     gen_group_list()
 
     sql.init()
+    sql.gl.ENV = gl.ENV
+    sql.gl.DB = gl.DB
+    sql.gl.CNX_STR = gl.CNX_STR
     gl.header = ''
     gl.c = {}
 

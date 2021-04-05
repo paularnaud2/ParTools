@@ -12,31 +12,42 @@ from .iutd import is_up_to_date
 verrou = RLock()
 
 
-def connect(ENV, DB):
+def connect():
 
     init_instant_client()
-    if (ENV, DB) not in conf:
-        s = (f"Error: DB '{DB}' of ENV '{ENV}' doesn't seem to be defined."
+    if gl.CNX_STR:
+        cnx_str = gl.CNX_STR
+        s = f"Connecting to data base ({cnx_str})..."
+    elif (gl.ENV, gl.DB) not in conf:
+        s = (f"Error: data base '{gl.DB}' of environment '{gl.ENV}'"
+             " doesn't seem to be defined."
              " Pease check your conf_oracle.py file.")
         com.log(s)
         raise Exception(s)
-    cnx_str = conf[(ENV, DB)]
-    com.log(f"Connecting to DB '{DB}' of '{ENV}' environment ({cnx_str})")
+    else:
+        cnx_str = conf[(gl.ENV, gl.DB)]
+        s = (f"Connecting to data base '{gl.DB}' of '{gl.ENV}'"
+             f" environment ({cnx_str})...")
+    com.log(s)
     cnx = cx.connect(cnx_str)
-    com.log(f"Connected to {DB}")
+    com.log("Connected")
     is_up_to_date(cnx)
 
     return cnx
 
 
-def gen_cnx_dict(DB, ENV, nb):
+def gen_cnx_dict(nb):
 
     init_instant_client()
-    cnx_str = conf[(ENV, DB)]
+    if gl.CNX_STR:
+        cnx_str = gl.CNX_STR
+        s = f"Creating connections from {cnx_str}"
+    else:
+        cnx_str = conf[(gl.ENV, gl.DB)]
+        s = (f"Creating connections for DB '{gl.DB}' of '{gl.ENV}'"
+             f" environnement ({cnx_str})")
     gl.cnx_dict = dict()
     i = 1
-    s = (f"Creating connections for DB '{DB}' of '{ENV}' environnement"
-         f" ({cnx_str})")
     com.log(s)
     while i <= nb:
         com.log(f'Creating connection no. {i}...')
