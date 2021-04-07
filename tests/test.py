@@ -1,3 +1,3 @@
-import pytools.common as com
+from pytools.test.sql import connect
 
-com.log("OK")
+connect()

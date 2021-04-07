@@ -54,3 +54,13 @@ CHUNK_FILE = 'chunk.txt'
 
 # Process manager
 MD = None
+
+# Strings
+S_1 = "Connecting to data base ({})..."
+S_2 = "Connecting to data base '{}' of environment '{}' ({})..."
+S_3 = "Connecting to data base {} ({})..."
+
+# Exceptions
+E_1 = "Error: either gl.CNX_STR or gl.DB have to be defined"
+E_2 = "Error: data base '{}' doesn't seem to be defined. Pease check your conf_oracle.py file."
+E_3 = "Error: data base '{}' of environment '{}' doesn't seem to be defined. Pease check your conf_oracle.py file."

@@ -23,7 +23,7 @@ def download(query_in):
 
     group_array = split_group_list()
     n = len(group_array)
-    sql.connect.gen_cnx_dict(n)
+    sql.gen_cnx_dict(n)
     launch_threads(group_array)
     file.gen_out_file()
 

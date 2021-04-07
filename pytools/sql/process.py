@@ -10,8 +10,8 @@ import pytools.common.g as g
 
 from . import gl
 from . import log
-from .functions import write_rows
 from .connect import gen_cnx_dict
+from .functions import write_rows
 
 verrou = RLock()
 

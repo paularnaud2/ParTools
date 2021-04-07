@@ -1,7 +1,5 @@
 import warnings
-
 import pytools.common as com
-
 from . import gl
 
 
@@ -10,7 +8,7 @@ def ttry(f, e_ref, *args, **kwargs):
     try:
         f(*args, **kwargs)
     except Exception as e:
-        assert str(e) == e_ref
+        assert com.like(str(e), e_ref)
         exception_occured = True
 
     assert exception_occured

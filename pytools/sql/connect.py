@@ -27,25 +27,21 @@ def get_cnx_str():
     err = False
     if gl.CNX_STR:
         cnx_str = gl.CNX_STR
-        s = f"Connecting to data base ({cnx_str})..."
+        s = gl.S_1.format(cnx_str)
     elif (gl.DB, gl.ENV) in conf:
         cnx_str = conf[(gl.DB, gl.ENV)]
-        s = (f"Connecting to data base '{gl.DB}' of"
-             f" environment '{gl.ENV}' ({cnx_str})...")
+        s = gl.S_2.format(gl.DB, gl.ENV, cnx_str)
     elif gl.DB in conf:
         cnx_str = conf[gl.DB]
-        s = f"Connecting to data base {gl.DB} ({cnx_str})..."
+        s = s = gl.S_3.format(gl.DB, cnx_str)
     elif not gl.DB:
-        s = ("Error: either gl.CNX_STR or gl.DB have to be defined")
+        s = gl.E_1
         err = True
     elif not gl.ENV and gl.DB not in conf:
-        s = (f"Error: data base '{gl.DB}' doesn't seem to be defined."
-             " Pease check your conf_oracle.py file.")
+        s = gl.E_2.format(gl.DB)
         err = True
     else:
-        s = (f"Error: data base '{gl.DB}' of environment '{gl.ENV}'"
-             " doesn't seem to be defined."
-             " Pease check your conf_oracle.py file.")
+        s = gl.E_3.format(gl.DB, gl.ENV)
         err = True
 
     com.log(s)

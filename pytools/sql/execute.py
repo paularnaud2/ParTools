@@ -3,8 +3,8 @@ from time import time
 import pytools.common as com
 
 from . import gl
-from .init import init
 from .connect import connect
+from .init import init
 from .functions import get_final_script
 
 
