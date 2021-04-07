@@ -16,7 +16,6 @@ TEST_SQL = TEST + 'sql/files/'
 TEST_SQL_OUT = TEST_OUT + 'sql/'
 SQL_OUT = g.paths['TMP'] + TEST_SQL_OUT
 SQL_TMP = g.paths['TMP'] + sql.TMP_FOLDER
-SQL_ENV = cfg.TEST_ENV
 SQL_DB = cfg.TEST_DB
 SQL_T_TEST = 'TEST'
 SQL_T_IUTD = 'TEST_IUTD'

@@ -25,7 +25,6 @@ def reqlist(in_file,
             elt=100):
 
     rl.run_reqList(
-        ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         QUERY_IN=query,
         IN_FILE=in_file,

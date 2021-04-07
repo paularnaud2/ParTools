@@ -2,9 +2,12 @@
 
 conf = {
     # Expected format:
-    # ('ENV_NAME', 'DB_NAME'): 'USER/PWD@HOST:PORT/SERVICE_NAME',
-    # Note that ENV_NAME doesn't play any role in the connexion string,
-    # it is here to differentiate two DB of same name but of different env
+    # 'DB_NAME': 'USER/PWD@HOST:PORT/SERVICE_NAME',
+    # Or
+    # ('DB_NAME', 'ENV_NAME'): 'USER/PWD@HOST:PORT/SERVICE_NAME',
+    # Note that ENV_NAME can be defined to differentiate between two DB of same
+    # name but of different environment.
 
-    ('LOCAL', 'XE'): 'PAUL/paul@localhost:1521/XE',
+    'XE': 'USERNAME/PWD@localhost:1521/XE',
+    ('XE', 'LOCAL'): 'USERNAME/PWD@localhost:1521/XE',
 }

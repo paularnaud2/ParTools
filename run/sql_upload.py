@@ -3,7 +3,6 @@ from pytools.common import init_log
 
 init_log('run_sql.upload')
 
-env = 'LOCAL'
 db = 'XE'
 
 script_in = f'sql/scripts/upload_{db}.sql'
@@ -24,7 +23,6 @@ execute_kwargs = {
 }
 
 sql.upload(
-    ENV=env,
     DB=db,
     SCRIPT_IN=script_in,
     UPLOAD_IN='pytools/test/sql/files/in.csv',

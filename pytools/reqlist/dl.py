@@ -41,8 +41,8 @@ def init(query_in):
     gen_group_list()
 
     sql.init()
-    sql.gl.ENV = gl.ENV
     sql.gl.DB = gl.DB
+    sql.gl.ENV = gl.ENV
     sql.gl.CNX_STR = gl.CNX_STR
     gl.header = ''
     gl.c = {}

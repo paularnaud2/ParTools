@@ -7,9 +7,8 @@ from pytools.reqlist import run_reqList
 
 init_log('run_reqlist')
 
-env = 'LOCAL'
 db = 'XE'
-cnx_str = "PAUL/paul@localhost:1521/XE"
+cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
 date = datetime.now().strftime("%Y%m%d")
 query_in = 'reqlist/queries/e_RL.sql'
@@ -31,9 +30,8 @@ AND AFFAIRE IN @@IN@@
 
 if __name__ == '__main__':
     run_reqList(
-        # ENV=env,
-        # DB=db,
         CNX_STR=cnx_str,
+        # DB=db,
         QUERY_IN=query_in,
         IN_FILE=in_file,
         OUT_FILE=out_file,
@@ -41,8 +39,7 @@ if __name__ == '__main__':
     )
 else:
     run_reqList(
-        # ENV=env,
-        # DB=db,
+        CNX_STR=cnx_str,
         QUERY_IN=query_in,
         IN_FILE=in_file,
         OUT_FILE=out_file,

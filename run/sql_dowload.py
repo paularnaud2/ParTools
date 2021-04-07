@@ -8,9 +8,8 @@ init_log('run_sql.download')
 
 date = datetime.now().strftime("%Y%m%d")
 
-env = 'LOCAL'
 db = 'XE'
-cnx_str = "PAUL/paul@localhost:1521/XE"
+cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
 query_in = f'sql/queries/{db}_dl.sql'
 out_file = f"{g.paths['OUT']}sql_{db}_{date}.csv"
@@ -23,12 +22,11 @@ FROM DUAL
 
 if __name__ == '__main__':
     sql.download(
-        # ENV=env,
-        # DB=db,
-        CNX_STR=cnx_str,
+        # CNX_STR=cnx_str,
+        DB=db,
         QUERY_IN=query_in,
         OUT_FILE=out_file,
     )
 else:
     sql.gl.OPEN_OUT_FILE = False
-    sql.download(ENV='LOCAL', DB='XE', QUERY_IN=query_in, OUT_FILE=out_file)
+    sql.download(DB='XE', QUERY_IN=query_in, OUT_FILE=out_file)

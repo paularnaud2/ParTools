@@ -5,7 +5,6 @@ from pytools.test import gl
 
 def upload(inp, tr=False, md=""):
     execute_kwargs = {
-        "ENV": gl.SQL_ENV,
         "DB": gl.SQL_DB,
         "SCRIPT_IN": gl.SQL_CREATE_TABLE,
         "VAR_DICT": {
@@ -15,7 +14,6 @@ def upload(inp, tr=False, md=""):
     }
 
     sql.upload(
-        ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         EXECUTE_PARAMS=execute_kwargs,
         SCRIPT_IN=gl.SQL_INSERT_TABLE,
@@ -30,7 +28,6 @@ def upload(inp, tr=False, md=""):
 def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
 
     sql.download(
-        ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         QUERY_IN=query,
         VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
@@ -64,7 +61,6 @@ def clean_db(list_in):
 
 def drop_table(table_name):
     sql.execute(
-        ENV=gl.SQL_ENV,
         DB=gl.SQL_DB,
         SCRIPT_IN=gl.SQL_DROP_TABLE,
         VAR_DICT={"TABLE_NAME": table_name},

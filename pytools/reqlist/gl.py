@@ -1,11 +1,11 @@
 from pytools.common import g
 
-# Mandatory inputs (ENV + DB from cons/_conf_oracle.py or CNX_STR)
-ENV = ''
-DB = ''
+# Mandatory inputs (DB from conf/_conf_oracle.py or CNX_STR)
 CNX_STR = ''
+DB = ''
 
 # Optional inputs
+ENV = ''  # See comment in conf/_conf_oracle.py for details
 IN_FILE = f"{g.paths['IN']}rl_in.csv"
 OUT_FILE = f"{g.paths['OUT']}rl_out.csv"
 QUERY_IN = 'reqlist/queries/query_in_rl.sql'
