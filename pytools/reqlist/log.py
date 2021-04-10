@@ -3,7 +3,7 @@ from . import gl
 
 
 def start_exec(th_nb):
-    if gl.MULTI_TH is True:
+    if gl.multi_th is True:
         s = f"Executing queries (thread no. {th_nb})..."
     else:
         s = "Executing queries..."

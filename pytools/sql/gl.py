@@ -3,19 +3,20 @@ from pytools.common import g
 # Mandatory inputs (DB from conf/_conf_oracle.py or CNX_STR)
 CNX_STR = ''
 DB = ''
+OUT_FILE = f"{g.paths['OUT']}sql_out.csv"
+QUERY_IN = 'pytools/sql/queries/query_in.sql'
+QUERY_LIST = []
 
 # Optional inputs
 ENV = ''  # See comment in conf/_conf_oracle.py for details
-OUT_FILE = f"{g.paths['OUT']}sql_out.csv"
 OUT_RG_DIR = f"{g.paths['OUT']}SQL_RG/"
-QUERY_IN = 'pytools/sql/queries/query_in.sql'
 
 # Default const
 SL_STEP = 100000
 MAX_DB_CNX = 10
 MAX_CHECK_DUP = 1 * 10**6
 
-MERGE_RG_FILES = True
+MERGE_FILES = True
 EXPORT_RANGE = False
 CHECK_DUP = True
 OPEN_OUT_FILE = True
@@ -23,6 +24,8 @@ MSG_BOX_END = True
 TEST_RESTART = False
 TEST_IUTD = False
 
+RANGE_NAME = "RANGE"
+VAR_IN = "IN"
 FILE_TYPE = '.csv'
 EC = '_EC'
 RANGE_FIELD = "RANGE"
@@ -34,10 +37,6 @@ IUTD_FILE = 'last_iutd_check.csv'
 
 # Data bases in this list will be checked by the is_up_to_date function
 IUTD_LIST = ['SGE']
-
-# Super globals
-client_is_init = False
-iutd = False
 
 # Settable globales
 VAR_DICT = {}

@@ -5,9 +5,24 @@ import pytools.common as com
 import pytools.common.g as g
 
 from . import gl
+from . import rg
 from . import log
 
 verrou = RLock()
+
+
+def get_query_list():
+
+    get_query()
+    if gl.QUERY_LIST:
+        gl.ql_replace = gl.query == ''
+        return
+
+    if rg.range_query():
+        return
+
+    gl.ql_replace = False
+    gl.QUERY_LIST = [[gl.query, "MONO"]]
 
 
 def get_query():

@@ -9,6 +9,7 @@ import pytools.common as com
 import pytools.common.g as g
 
 from . import gl
+from . import mg
 from . import log
 from .connect import gen_cnx_dict
 from .functions import write_rows
@@ -16,26 +17,24 @@ from .functions import write_rows
 verrou = RLock()
 
 
-def process_range_list(range_list, rg_file_name):
-    gl.c_query_rg = 0
+def process_query_list():
+
+    gl.multi_th = len(gl.QUERY_LIST) > 1 and gl.MAX_DB_CNX > 1
+    gl.c_query = 0
     init_th_dict()
     gl.sem = Semaphore(gl.MAX_DB_CNX)
-    if range_list == ['MONO']:
-        gen_cnx_dict(1)
-        process_range()
-    else:
-        lauch_threads(range_list, rg_file_name)
+    lauch_threads()
+    mg.finish()
 
 
-def lauch_threads(range_list, rg_file_name):
-    com.log(f"Ranges to be queried: {range_list}")
+def lauch_threads():
+    if gl.range_query:
+        com.log(f"Ranges to be queried: {gl.QUERY_LIST}")
     thread_list = []
-    gen_cnx_dict(gl.MAX_DB_CNX)
-    for elt in range_list:
-        th = Thread(target=process_range, args=(
-            elt,
-            rg_file_name,
-        ))
+    n_cnx = min(gl.MAX_DB_CNX, len(gl.QUERY_LIST))
+    gen_cnx_dict(n_cnx)
+    for elt in gl.QUERY_LIST:
+        th = Thread(target=process_ql_elt, args=(elt, ))
         thread_list.append(th)
         th.start()
 
@@ -47,18 +46,21 @@ def lauch_threads(range_list, rg_file_name):
 
 
 @com.log_exeptions
-def process_range(elt='MONO', rg_file_name=''):
+def process_ql_elt(elt):
     with gl.sem:
-        gl.c_query_rg += 1
+        gl.c_query += 1
         cur_th = get_th_nb()
         cnx = gl.cnx_dict[cur_th]
-        elt_query = elt.replace("'", "''")
-        query = gl.query.replace(
-            g.VAR_DEL + rg_file_name + g.VAR_DEL,
-            elt_query,
-        )
+
+        if gl.ql_replace:
+            elt_query = elt[0].replace("'", "''")
+            var = g.VAR_DEL + gl.VAR_IN + g.VAR_DEL
+            query = gl.query.replace(var, elt_query)
+        else:
+            query = elt[0]
+
         c = cnx.cursor()
-        process_query(c, query, elt, cur_th)
+        process_query(c, query, elt[1], cur_th)
         c.close()
         with verrou:
             gl.th_dic[cur_th] = 0
@@ -71,7 +73,7 @@ def process_query(c, query, elt, th_nb):
     test_restart(th_nb)
     log.process_query_finish(elt, th_nb)
     init_out_file(c, elt)
-    th_name = com.gen_sl_detail(elt, th_nb, multi_th=gl.MULTI_TH)
+    th_name = com.gen_sl_detail(elt, th_nb, multi_th=gl.multi_th)
     write_rows(c, elt, th_name, th_nb)
 
 
@@ -111,20 +113,20 @@ def init_th_dict():
         gl.th_dic[i] = 0
 
 
-def init_out_file(cursor, rg_name='MONO'):
+def init_out_file(cursor, file_name):
     # Output file is initialised with cursor description
-    # plus range name is EXPORT_RANGE parameter is set to True
+    # plus range name if EXPORT_RANGE parameter is set to True
 
-    s = gl.TMP_PATH + rg_name + "{}" + gl.FILE_TYPE
+    s = gl.TMP_PATH + file_name + "{}" + gl.FILE_TYPE
     s_ = s.format('')
     s_EC = s.format(gl.EC)
     with verrou:
-        gl.out_files[rg_name] = s_
-        gl.out_files[rg_name + gl.EC] = s_EC
+        gl.out_files[file_name] = s_
+        gl.out_files[file_name + gl.EC] = s_EC
 
     with open(s_EC, 'w', encoding='utf-8') as out_file:
         fields = [elt[0] for elt in cursor.description]
-        if gl.EXPORT_RANGE and rg_name != 'MONO':
-            fields.append("RANGE")
+        if gl.range_query and gl.EXPORT_RANGE:
+            fields.append(gl.RANGE_NAME)
         s = g.CSV_SEPARATOR.join(fields)
         out_file.write(s + '\n')

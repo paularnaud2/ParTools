@@ -12,7 +12,7 @@ def group_by():
         gl.COUNT = True
         vol_field = vol_fields[0]
 
-    if not gl.MERGE_OK or not gl.RANGE_QUERY:
+    if not gl.MERGE_OK or not gl.range_query:
         return
 
     com.log('Group by on output file...')

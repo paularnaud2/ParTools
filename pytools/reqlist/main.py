@@ -88,6 +88,6 @@ def init_globals():
     gl.TMP_PATH = TMP_DIR + gl.DB + '/'
 
     gl.c = {}
-    gl.MULTI_TH = False
+    gl.multi_th = False
     gl.tmp_file = {}
     gl.ec_query_nb = {}

@@ -50,7 +50,7 @@ def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
         OUT_RG_DIR=gl.SQL_DL_OUT_RG_FOLDER,
         MAX_DB_CNX=cnx,
         SL_STEP=sl,
-        MERGE_RG_FILES=merge,
+        MERGE_FILES=merge,
         EXPORT_RANGE=False,
         CHECK_DUP=True,
         OPEN_OUT_FILE=False,

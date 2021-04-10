@@ -5,11 +5,12 @@ from os.path import exists
 import pytools.common as com
 
 from . import gl
+from . import gls
 
 
 def is_up_to_date(cnx):
     if not gl.TEST_IUTD:
-        if gl.DB not in gl.IUTD_LIST or gl.iutd:
+        if gl.DB not in gl.IUTD_LIST or gls.iutd:
             return
 
     com.log(f"IUTD (Is Up To Date) check for DB {gl.DB}")
@@ -25,14 +26,14 @@ def iutd_db(d_now, cnx):
     com.save_csv([d_bdd], gl.IUTD_DIR)
     com.log(f"Check file saved in {gl.IUTD_DIR}")
     compare_dates(d_bdd, d_now)
-    gl.iutd = True
+    gls.iutd = True
 
 
 def iutd_file(d_now):
     if exists(gl.IUTD_DIR):
         d_old = com.load_txt(gl.IUTD_DIR)[0]
         if d_now == d_old:
-            gl.iutd_ok = True
+            gls.iutd = True
             com.log("IUTD check OK")
             return True
         else:

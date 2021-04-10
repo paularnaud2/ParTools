@@ -13,7 +13,7 @@ verrou = RLock()
 
 def process_grp(c, grp, th_nb=1):
 
-    th_name = com.gen_sl_detail(th_nb=th_nb, multi_th=gl.MULTI_TH)
+    th_name = com.gen_sl_detail(th_nb=th_nb, multi_th=gl.multi_th)
     if not file.tmp_init(th_name, th_nb):
         return
     with verrou:

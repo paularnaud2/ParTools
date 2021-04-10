@@ -7,6 +7,7 @@ import conf._conf_main as cfg
 from conf._conf_oracle import conf
 
 from . import gl
+from . import gls
 from .iutd import is_up_to_date
 
 verrou = RLock()
@@ -66,9 +67,9 @@ def gen_cnx_dict(nb):
 
 def init_instant_client():
     with verrou:
-        if gl.client_is_init is False:
+        if gls.client_is_init is False:
             com.log("Initialising Oracle client...")
-            gl.client_is_init = True
+            gls.client_is_init = True
             if not exists(cfg.ORACLE_CLIENT):
                 s = ("Error: The Oracle instant client path specified in"
                      f" conf_main.py (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"

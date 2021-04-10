@@ -95,7 +95,7 @@ def split_group_list():
 
     n = len(gl.group_list)
     if n > 1:
-        gl.MULTI_TH = True
+        gl.multi_th = True
         bn = com.big_number(n)
         s = (f"The {bn} groups will be processed in parallel on"
              f" {len(array_out)} different connection pools"

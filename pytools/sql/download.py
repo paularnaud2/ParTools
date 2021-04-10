@@ -1,36 +1,26 @@
 from time import time
+from importlib import reload
 
 import pytools.common as com
 import pytools.common.sTools as st
 from pytools.tools.dup import find_dup
 
-from . import rg
 from . import gl
-
 from .init import init
-from .groupby import group_by
-from .functions import get_query
-from .process import process_range_list
+from .functions import get_query_list
+from .process import process_query_list
 
 
 @com.log_exeptions
 def download(**kwargs):
     com.log('[sql] download: start')
+    reload(gl)  # reinit globals
     start_time = time()
     com.init_kwargs(gl, kwargs)
+
     init()
-    get_query()
-
-    rg_file_name = rg.get_rg_file_name(gl.query)
-    range_list = rg.gen_range_list(rg_file_name)
-    range_list = rg.restart(range_list)
-    process_range_list(range_list, rg_file_name)
-    if gl.MERGE_RG_FILES or not gl.RANGE_QUERY:
-        rg.merge_tmp_files()
-        group_by()
-    else:
-        rg.move_tmp_folder()
-
+    get_query_list()
+    process_query_list()
     finish(start_time)
 
 

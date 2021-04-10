@@ -28,5 +28,9 @@ if __name__ == '__main__':
         OUT_FILE=out_file,
     )
 else:
-    sql.gl.OPEN_OUT_FILE = False
-    sql.download(DB='XE', QUERY_IN=query_in, OUT_FILE=out_file)
+    sql.download(
+        DB='XE',
+        QUERY_IN=query_in,
+        OUT_FILE=out_file,
+        OPEN_OUT_FILE=False,
+    )

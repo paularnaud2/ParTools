@@ -15,7 +15,7 @@ def init_gl():
     gl.IUTD_DIR = TMP_DIR + gl.IUTD_FILE
     gl.TMP_FILE_CHUNK = TMP_DIR + gl.CHUNK_FILE
 
-    gl.RANGE_QUERY = False
+    gl.range_query = False
     gl.COUNT = False
     gl.out_files = {}
     gl.th_dic = {}
