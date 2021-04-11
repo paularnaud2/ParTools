@@ -17,7 +17,11 @@ def init_kwargs(mod, kwargs):
             g.LOG_FILE = kwargs['MD']['LOG_FILE']
 
     if len(kwargs) > 0:
-        log(f"Initialising parameters: {kwargs}")
+        kwargs_log = {
+            key: str(value)[:g.MAX_LOG_VAR_CHAR]
+            for (key, value) in kwargs.items()
+        }
+        log(f"Initialising parameters: {kwargs_log}")
         for key in kwargs:
             mod.__getattribute__(key)
             mod.__setattr__(key, kwargs[key])

@@ -12,11 +12,10 @@ QUERY_IN = 'reqlist/queries/query_in_rl.sql'
 
 # Default const
 MAX_DB_CNX = 8
-SL_STEP_QUERY = 10
 NB_MAX_ELT_IN_STATEMENT = 1000
 IN_FIELD_NB = 1
 
-SQUEEZE_JOIN = True
+SQUEEZE_JOIN = False
 SQUEEZE_SQL = False
 CHECK_DUP = True
 OPEN_OUT_FILE = True

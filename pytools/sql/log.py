@@ -8,9 +8,9 @@ def process_query_init(elt, query, th_nb):
         com.log("Executing query:")
         com.log_print(query + "\n;")
     elif gl.MAX_DB_CNX == 1:
-        com.log(f"Executing query for range {elt}...")
+        com.log(f"Executing query '{elt}'...")
     else:
-        com.log(f"Executing query for range {elt} (connection no. {th_nb})...")
+        com.log(f"Executing query '{elt}' (connection no. {th_nb})...")
 
 
 def process_query_finish(elt, th_nb):
@@ -18,31 +18,31 @@ def process_query_finish(elt, th_nb):
     if elt == 'MONO':
         com.log("Query executed")
     elif gl.MAX_DB_CNX == 1:
-        com.log(f"Query executed for range {elt}")
+        com.log(f"Query '{elt}' executed")
     else:
-        com.log(f"Query executed for range {elt} (connection no. {th_nb})")
+        com.log(f"Query '{elt}' executed (connection no. {th_nb})")
 
 
-def write_rows_init(rg_name, th_nb):
+def write_rows_init(q_name, th_nb):
 
-    if rg_name == 'MONO':
+    if q_name == 'MONO':
         com.log("Writing lines...")
     elif gl.MAX_DB_CNX == 1 or th_nb == 0:
-        com.log(f"Writing lines for range {rg_name}...")
+        com.log(f"Writing lines for query '{q_name}'...")
     else:
-        s = f"Writing lines for range {rg_name} (connection no. {th_nb})..."
+        s = f"Writing lines for query '{q_name}' (connection no. {th_nb})..."
         com.log(s)
 
 
-def write_rows_finish(rg_name, i, cnx_nb):
+def write_rows_finish(q_name, i, cnx_nb):
     bn = com.big_number(i)
-    if rg_name == 'MONO':
+    if q_name == 'MONO':
         return
     elif gl.MAX_DB_CNX == 1 or cnx_nb == 0:
-        s = f"All lines written for range {rg_name} ({bn} lines written)"
+        s = f"All lines written for query '{q_name}' ({bn} lines written)"
         com.log(s)
     else:
-        s = (f"All lines written for range {rg_name}"
+        s = (f"All lines written for query '{q_name}'"
              f" ({bn} lines written, connection no. {cnx_nb})")
         com.log(s)
 

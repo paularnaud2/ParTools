@@ -10,6 +10,7 @@ LIKE_MATCH_OUT = "like_match_out.csv"
 
 MAX_EXAMPLE_PRINT = 5
 MIN_DUR_NOTIF_TRIGGER = 30
+MAX_LOG_VAR_CHAR = 100
 
 verrou = RLock()
 

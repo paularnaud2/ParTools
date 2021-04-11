@@ -23,6 +23,13 @@ def like(in_str, like_string, match_output=False):
     return m.group(0)
 
 
+def int_to_str(n, length):
+    str_out = str(n)
+    while len(str_out) < length:
+        str_out = '0' + str_out
+    return str_out
+
+
 def get_duration_ms(start_time, end_time=''):
     if end_time == '':
         end_time = time()

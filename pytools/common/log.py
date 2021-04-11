@@ -125,14 +125,14 @@ def init_sl_time(th_name='DEFAULT'):
         g.sl_time_dict[th_name] = time()
 
 
-def gen_sl_detail(rg_name='', th_nb=1, what='range', multi_th=False):
+def gen_sl_detail(q_name='', th_nb=1, multi_th=False):
 
-    th_name = str(rg_name) + '_' + str(th_nb)
+    th_name = str(q_name) + '_' + str(th_nb)
 
-    if rg_name not in ['', 'MONO'] and multi_th is True:
-        detail = f" for {what} {rg_name} (connection no. {th_nb})"
-    elif rg_name not in ['', 'MONO']:
-        detail = f" for {what} {rg_name}"
+    if q_name not in ['', 'MONO'] and multi_th is True:
+        detail = f" for query '{q_name}' (connection no. {th_nb})"
+    elif q_name not in ['', 'MONO']:
+        detail = f" for query '{q_name}'"
     elif multi_th is True:
         detail = f" (thread no. {th_nb})"
     else:

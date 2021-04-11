@@ -10,11 +10,14 @@ def start_exec(th_nb):
     com.log(s)
 
 
-def gen_group_list(elt_list, group_list):
+def gen_query_list(elt_list, group_list):
     bn1 = com.big_number(len(elt_list))
     bn2 = com.big_number(len(group_list))
-    s = (f"Group list built: {bn1} elements to be processed distributed"
-         f" in {bn2} groups ({gl.NB_MAX_ELT_IN_STATEMENT} max per group)")
+    s = (
+        f"Query list built: {bn1} elements to be processed distributed"
+        f" in {bn2} groups ({gl.NB_MAX_ELT_IN_STATEMENT} max per group)."
+        f" They will be processed in parallel by {gl.MAX_DB_CNX} connection pools."
+    )
     com.log(s)
 
 

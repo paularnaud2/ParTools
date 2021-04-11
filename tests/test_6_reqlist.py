@@ -17,6 +17,7 @@ def test_reqlist():
         return
 
     com.mkdirs(gl.RL_TMP, True)
+    com.mkdirs(gl.SQL_TMP, True)
     com.mkdirs(gl.RL_OUT, True)
     com.log_print()
 
@@ -48,18 +49,11 @@ def test_reqlist():
     t.dq.file_match(gl.SQL_IN, gl.RL_OUT_2, del_dup=True)
     t.dq.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
 
-    # Test interruption other threads not finished
+    # Test interruption
     com.mkdirs(gl.RL_TMP, True)
     com.log_print()
-    t.rl_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, cnx=6, elt=10)
-    t.reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True, cnx=6, elt=10)
-    dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
-
-    # Test interruption other threads finished
-    com.mkdirs(gl.RL_TMP, True)
-    com.log_print()
-    t.rl_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
-    t.reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True)
+    t.rl_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, cnx=6)
+    t.reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True, cnx=6)
     dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
 
     # Cleaning DB

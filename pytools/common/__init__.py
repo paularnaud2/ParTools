@@ -20,6 +20,7 @@ from .log import gen_sl_detail
 
 from .string import like
 from .string import big_number
+from .string import int_to_str
 from .string import replace_from_dict
 from .string import get_duration_ms
 from .string import get_duration_string

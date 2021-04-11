@@ -17,7 +17,7 @@ in_file = f"{g.paths['IN']}rl_in.csv"
 out_file = f"{g.paths['OUT']}export_RL_{db}_{date}.csv"
 
 # Creates input file from test file
-arr = com.load_csv('pytools/test/sql/files/in.csv')
+arr = com.load_csv('pytools/test/sql/files/in_lite.csv')
 arr = [elt[0] for elt in arr]
 com.save_csv(arr, in_file)
 
@@ -36,6 +36,10 @@ if __name__ == '__main__':
         IN_FILE=in_file,
         OUT_FILE=out_file,
         VAR_DICT={'TABLE_NAME': 'TEST'},
+        MAX_DB_CNX=3,
+        NB_MAX_ELT_IN_STATEMENT=2,
+        SQUEEZE_JOIN=True,
+        SQUEEZE_SQL=False,
     )
 else:
     run_reqList(

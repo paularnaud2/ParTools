@@ -7,6 +7,7 @@ from pytools.tools.dup import find_dup
 
 from . import gl
 from .init import init
+from .restart import restart
 from .functions import get_query_list
 from .process import process_query_list
 
@@ -20,6 +21,7 @@ def download(**kwargs):
 
     init()
     get_query_list()
+    restart()
     process_query_list()
     finish(start_time)
 

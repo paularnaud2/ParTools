@@ -13,9 +13,9 @@ verrou = RLock()
 
 def get_query_list():
 
-    get_query()
+    gl.query = get_query(gl.QUERY_IN)
     if gl.QUERY_LIST:
-        gl.ql_replace = gl.query == ''
+        gl.ql_replace = not gl.query == ''
         return
 
     if rg.range_query():
@@ -25,14 +25,15 @@ def get_query_list():
     gl.QUERY_LIST = [[gl.query, "MONO"]]
 
 
-def get_query():
-    if com.like(gl.QUERY_IN, "*.sql"):
-        query = com.read_file(gl.QUERY_IN)
+def get_query(query_in):
+    if com.like(query_in, "*.sql"):
+        query_out = com.read_file(query_in)
     else:
-        query = gl.QUERY_IN
-    query = query.strip('\r\n;')
-    query = com.replace_from_dict(query, gl.VAR_DICT)
-    gl.query = query
+        query_out = query_in
+    query_out = query_out.strip('\r\n;')
+    query_out = com.replace_from_dict(query_out, gl.VAR_DICT)
+
+    return query_out
 
 
 def get_final_script(script_in):
@@ -44,24 +45,23 @@ def get_final_script(script_in):
     return script
 
 
-def write_rows(cursor, rg_name='MONO', th_name='DEFAULT', th_nb=0):
+def write_rows(cursor, q_name='MONO', th_name='DEFAULT', th_nb=0):
 
-    log.write_rows_init(rg_name, th_nb)
-    with open(gl.out_files[rg_name + gl.EC], 'a',
-              encoding='utf-8') as out_file:
+    log.write_rows_init(q_name, th_nb)
+    with open(gl.out_files[q_name + gl.EC], 'a', encoding='utf-8') as out_file:
         i = 0
         for row in cursor:
-            iter = write_row(row, out_file, rg_name)
+            iter = write_row(row, out_file, q_name)
             i += iter
             with verrou:
                 gl.c_row += iter
             com.step_log(i, gl.SL_STEP, th_name=th_name)
 
-    rename(gl.out_files[rg_name + gl.EC], gl.out_files[rg_name])
-    log.write_rows_finish(rg_name, i, th_nb)
+    rename(gl.out_files[q_name + gl.EC], gl.out_files[q_name])
+    log.write_rows_finish(q_name, i, th_nb)
 
 
-def write_row(row, out_file, rg_name='MONO'):
+def write_row(row, out_file, q_name='MONO'):
 
     s = com.csv_clean(str(row[0]))
     line_out = s
@@ -74,8 +74,8 @@ def write_row(row, out_file, rg_name='MONO'):
         line_out += g.CSV_SEPARATOR + s
     if line_out.strip(g.CSV_SEPARATOR) == '':
         return 0
-    if gl.EXPORT_RANGE and rg_name != 'MONO':
-        line_out += g.CSV_SEPARATOR + rg_name
+    if gl.EXPORT_RANGE and q_name != 'MONO':
+        line_out += g.CSV_SEPARATOR + q_name
     line_out += '\n'
     out_file.write(line_out)
     return 1

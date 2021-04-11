@@ -1,3 +1,4 @@
+import math
 from time import sleep
 
 from multiprocessing import Process
@@ -43,14 +44,21 @@ def upload_interrupted():
 
 
 def download_interrupted(query, out):
+    init_msg = "[sql] download: start"
+    kwargs = {"query": query, "out": out, "tr": True}
+    interrupt(download, kwargs, init_msg)
+
+
+def interrupt(function, kwargs, init_msg):
     manager = Manager()
     md = manager.dict()
     md["STOP"] = False
-    md["N_STOP"] = 0.8 * 2900
+    md["N_STOP"] = math.floor(0.7 * 2900)
     md["LOG_FILE"] = g.LOG_FILE
-    com.log("[sql] download: start", c_out=False)
-    d = {"query": query, "out": out, "tr": True, "md": md}
-    p = Process(target=download, kwargs=d)
+    com.log(init_msg, c_out=False)
+    kwargs['md'] = md
+
+    p = Process(target=function, kwargs=kwargs)
     p.start()
     while not md["STOP"]:
         pass

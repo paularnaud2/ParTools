@@ -8,14 +8,14 @@ db = 'XE'
 script_in = f'sql/scripts/upload_{db}.sql'
 script_in = 'pytools/test/sql/files/insert_table.sql'
 
-script_in = """
-INSERT INTO TEST (
-AFFAIRE
-, DEM_ID
-, PRM
-)
-VALUES (:1, :2, :3)
-"""
+# script_in = """
+# INSERT INTO TEST (
+# AFFAIRE
+# , DEM_ID
+# , PRM
+# )
+# VALUES (:1, :2, :3)
+# """
 
 execute_kwargs = {
     "SCRIPT_IN": 'pytools/test/sql/files/create_table.sql',

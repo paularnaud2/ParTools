@@ -24,5 +24,5 @@ def init_gl():
 
 
 def init_tmp_dir():
-    gl.TMP_PATH = g.paths['TMP'] + gl.TMP_FOLDER + gl.DB + '/'
+    gl.TMP_PATH = g.paths['TMP'] + gl.TMP_FOLDER + 'restart/'
     com.mkdirs(gl.TMP_PATH)

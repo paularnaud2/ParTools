@@ -29,7 +29,7 @@ def process_query_list():
 
 def lauch_threads():
     if gl.range_query:
-        com.log(f"Ranges to be queried: {gl.QUERY_LIST}")
+        com.log(f"Ranges to be queried: {gl.rg_list}")
     thread_list = []
     n_cnx = min(gl.MAX_DB_CNX, len(gl.QUERY_LIST))
     gen_cnx_dict(n_cnx)
@@ -53,9 +53,8 @@ def process_ql_elt(elt):
         cnx = gl.cnx_dict[cur_th]
 
         if gl.ql_replace:
-            elt_query = elt[0].replace("'", "''")
             var = g.VAR_DEL + gl.VAR_IN + g.VAR_DEL
-            query = gl.query.replace(var, elt_query)
+            query = gl.query.replace(var, elt[0])
         else:
             query = elt[0]
 
@@ -73,7 +72,7 @@ def process_query(c, query, elt, th_nb):
     test_restart(th_nb)
     log.process_query_finish(elt, th_nb)
     init_out_file(c, elt)
-    th_name = com.gen_sl_detail(elt, th_nb, multi_th=gl.multi_th)
+    th_name = com.gen_sl_detail(elt, th_nb, gl.multi_th)
     write_rows(c, elt, th_name, th_nb)
 
 

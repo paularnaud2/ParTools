@@ -4,5 +4,6 @@ from .main import upload
 from .main import download
 from .main import connect
 from .main import clean_db
+from .interrupt import interrupt
 from .interrupt import upload_interrupted
 from .interrupt import download_interrupted
