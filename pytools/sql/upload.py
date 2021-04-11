@@ -1,5 +1,6 @@
 import os
 from time import time
+from importlib import reload
 
 import pytools.common as com
 
@@ -14,6 +15,7 @@ from .execute import execute
 @com.log_exeptions
 def upload(**kwargs):
     com.log("[sql] upload: start")
+    reload(gl)  # reinit globals
     start_time = time()
     init(kwargs)
     if not check_recover():

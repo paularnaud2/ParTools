@@ -12,9 +12,10 @@ def list_to_dict(list_in, separator='='):
 
 def init_kwargs(mod, kwargs):
     if 'MD' in kwargs:
-        if 'LOG_FILE' in kwargs['MD']:
-            g.LOG_FILE_INITIALISED = True
-            g.LOG_FILE = kwargs['MD']['LOG_FILE']
+        if kwargs['MD'] is not None:
+            if 'LOG_FILE' in kwargs['MD']:
+                g.LOG_FILE_INITIALISED = True
+                g.LOG_FILE = kwargs['MD']['LOG_FILE']
 
     if len(kwargs) > 0:
         kwargs_log = {

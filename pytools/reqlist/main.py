@@ -1,4 +1,5 @@
 from time import time
+from importlib import reload
 
 import pytools.common as com
 import pytools.sql as sql
@@ -14,6 +15,8 @@ from .join import left_join_arrays
 
 @com.log_exeptions
 def run_reqList(**kwargs):
+    com.log("[reqlist] run_reqList: start")
+    reload(gl)  # reinit globals
     init(kwargs)
     start_time = time()
     if not gl.SQUEEZE_SQL:

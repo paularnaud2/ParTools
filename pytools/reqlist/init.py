@@ -5,7 +5,6 @@ from . import gl
 
 
 def init(kwargs):
-    com.log("[reqlist] run_reqList: start")
     com.init_kwargs(gl, kwargs)
     init_globals()
     com.check_header(gl.IN_FILE)
