@@ -35,7 +35,6 @@ def upload(inp, tr=False, md=""):
         VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
         UPLOAD_IN=inp,
         NB_MAX_ELT_INSERT=gl.SQL_MAX_ELT_INSERT,
-        RECOVERABLE=True,
         TEST_RECOVER=tr,
         MD=md,
     )
@@ -55,7 +54,6 @@ def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
         EXPORT_RANGE=False,
         CHECK_DUP=True,
         OPEN_OUT_FILE=False,
-        RECOVERABLE=True,
         TEST_RECOVER=tr,
         TEST_IUTD=ti,
         MD=md,

@@ -1,6 +1,7 @@
 import re
 import string
 import random
+import hashlib
 
 from math import floor
 from time import time
@@ -23,6 +24,11 @@ def like(in_str, like_string, match_output=False):
         return False
 
     return m.group(0)
+
+
+def hash(in_str, length=10):
+    out = hashlib.sha512(in_str.encode('utf-8')).hexdigest()[:length]
+    return out
 
 
 def gen_random_string(length=10):

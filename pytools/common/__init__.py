@@ -19,6 +19,7 @@ from .log import init_sl_time
 from .log import gen_sl_detail
 
 from .string import like
+from .string import hash
 from .string import big_number
 from .string import int_to_str
 from .string import replace_from_dict

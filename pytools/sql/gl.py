@@ -21,7 +21,6 @@ EXPORT_RANGE = False
 CHECK_DUP = True
 OPEN_OUT_FILE = True
 MSG_BOX_END = True
-RECOVERABLE = True
 TEST_RECOVER = False
 TEST_IUTD = False
 
@@ -50,7 +49,6 @@ PROC = False
 
 # Upload
 UPLOAD_IN = g.paths['OUT'] + 'sql_out.csv'
-CHUNK_FILE = 'chunk.txt'
 
 # Process manager
 MD = None
