@@ -38,6 +38,7 @@ def download():
         OUT_FILE=gl.OUT_SQL,
         MAX_DB_CNX=gl.MAX_DB_CNX,
         VAR_DICT=gl.VAR_DICT,
+        RECOVERABLE=gl.RECOVERABLE,
         TEST_RECOVER=gl.TEST_RECOVER,
         OPEN_OUT_FILE=False,
         CHECK_DUP=False,

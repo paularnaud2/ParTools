@@ -1,4 +1,6 @@
 import re
+import string
+import random
 
 from math import floor
 from time import time
@@ -21,6 +23,14 @@ def like(in_str, like_string, match_output=False):
         return False
 
     return m.group(0)
+
+
+def gen_random_string(length=10):
+    letters = string.ascii_letters
+    digits = string.digits
+    ln = letters + digits
+    out = ''.join(random.choice(ln) for i in range(length))
+    return out
 
 
 def int_to_str(n, length):

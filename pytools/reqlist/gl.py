@@ -21,6 +21,7 @@ CHECK_DUP = True
 OPEN_OUT_FILE = True
 MSG_BOX_END = True
 DEBUG_JOIN = False
+RECOVERABLE = True
 TEST_RECOVER = False
 
 TMP_FOLDER = 'reqlist/'

@@ -2,10 +2,10 @@ import os
 from time import time
 
 import pytools.common as com
-import pytools.sql as sql
 
 from . import gl
 from . import log
+from .init import init_gl
 from .connect import connect
 from .functions import get_final_script
 from .execute import execute
@@ -73,7 +73,8 @@ def prepare_bdd():
 
 def finish_this(start_time):
     gl.cnx.close()
-    os.remove(gl.TMP_FILE_CHUNK)
+    if gl.RECOVERABLE:
+        os.remove(gl.TMP_FILE_CHUNK)
     bn = com.big_number(gl.c_main)
     dstr = com.get_duration_string(start_time)
     com.log(f"{bn} lines exported")
@@ -82,7 +83,7 @@ def finish_this(start_time):
 
 def init(kwargs):
     com.init_kwargs(gl, kwargs)
-    sql.init()
+    init_gl()
 
     gl.ref_chunk = 0
     gl.c_main = 0
@@ -107,9 +108,11 @@ def insert(script):
         gl.c.executemany(script, gl.data)
         gl.c_chunk += 1
         snc = str(gl.c_chunk)
-        com.save_csv([f"{snc}_COMMIT_RUNNING"], gl.TMP_FILE_CHUNK)
+        if gl.RECOVERABLE:
+            com.save_csv([f"{snc}_COMMIT_RUNNING"], gl.TMP_FILE_CHUNK)
         gl.cnx.commit()
-        com.save_csv([snc], gl.TMP_FILE_CHUNK)
+        if gl.RECOVERABLE:
+            com.save_csv([snc], gl.TMP_FILE_CHUNK)
         sn = com.big_number(gl.c_main)
         com.log(f"{sn} lines inserted in total")
         gl.c.close()
@@ -121,6 +124,10 @@ def insert(script):
 
 
 def check_recover():
+
+    if not gl.RECOVERABLE:
+        return
+
     chunk = gl.TMP_FILE_CHUNK
     if os.path.exists(chunk):
         s = "Injection running detected. Recover? (y/n)"

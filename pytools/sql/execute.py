@@ -4,7 +4,7 @@ import pytools.common as com
 
 from . import gl
 from .connect import connect
-from .init import init
+from .init import init_gl
 from .functions import get_final_script
 
 
@@ -13,7 +13,7 @@ def execute(**kwargs):
     com.log('[sql] execute: start')
     start_time = time()
     com.init_kwargs(gl, kwargs)
-    init()
+    init_gl()
     script = get_final_script(gl.SCRIPT_IN)
     cnx = connect()
     c = cnx.cursor()

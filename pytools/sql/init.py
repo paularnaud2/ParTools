@@ -24,5 +24,9 @@ def init_gl():
 
 
 def init_tmp_dir():
-    gl.TMP_PATH = g.paths['TMP'] + gl.TMP_FOLDER + 'recover/'
+    if gl.RECOVERABLE:
+        tmp = 'recover/'
+    else:
+        tmp = com.gen_random_string() + '/'
+    gl.TMP_PATH = g.paths['TMP'] + gl.TMP_FOLDER + tmp
     com.mkdirs(gl.TMP_PATH)
