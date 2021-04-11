@@ -16,7 +16,7 @@ from pytools.test.sql import clean_db
 from pytools.test.sql import interrupt
 
 
-def reqlist(inp, out, query, tr=False, md='', cnx=3, elt=100):
+def reqlist(inp, out, query, tr=False, md='', cnx=3, elt=200):
 
     rl.run_reqList(
         DB=gl.SQL_DB,
@@ -30,7 +30,7 @@ def reqlist(inp, out, query, tr=False, md='', cnx=3, elt=100):
         SQUEEZE_SQL=False,
         CHECK_DUP=True,
         OPEN_OUT_FILE=False,
-        TEST_RESTART=tr,
+        TEST_RECOVER=tr,
         MD=md,
     )
 

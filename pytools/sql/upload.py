@@ -16,7 +16,7 @@ def upload(**kwargs):
     com.log("[sql] upload: start")
     start_time = time()
     init(kwargs)
-    if not check_restart():
+    if not check_recover():
         prepare_bdd()
         init(kwargs)
     script = get_script()
@@ -120,13 +120,13 @@ def insert(script):
     gl.data = []
 
 
-def check_restart():
+def check_recover():
     chunk = gl.TMP_FILE_CHUNK
     if os.path.exists(chunk):
-        s = "Injection running detected. Restart? (y/n)"
-        if gl.TEST_RESTART:
+        s = "Injection running detected. Recover? (y/n)"
+        if gl.TEST_RECOVER:
             com.log(s)
-            com.log_print("y (TEST_RESTART = True)")
+            com.log_print("y (TEST_RECOVER = True)")
         elif com.log_input(s) == "n":
             os.remove(chunk)
             return False
@@ -136,6 +136,6 @@ def check_restart():
             gl.ref_chunk = int(txt[0])
             return True
         except Exception as e:
-            log.restart_fail(e, chunk, txt)
+            log.recover_fail(e, chunk, txt)
             os.remove(chunk)
             return False

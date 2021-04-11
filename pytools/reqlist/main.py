@@ -38,7 +38,7 @@ def download():
         OUT_FILE=gl.OUT_SQL,
         MAX_DB_CNX=gl.MAX_DB_CNX,
         VAR_DICT=gl.VAR_DICT,
-        TEST_RESTART=gl.TEST_RESTART,
+        TEST_RECOVER=gl.TEST_RECOVER,
         OPEN_OUT_FILE=False,
         CHECK_DUP=False,
         MD=gl.MD,
@@ -52,7 +52,6 @@ def left_join_files(ldir='', rdir='', out='', debug=False):
         gl.DEBUG_JOIN = True
     if ldir or rdir:
         init_globals()
-        com.mkdirs(gl.TMP_PATH, True)
         com.log(f"Loading arrays from '{ldir}' and '{rdir}'...")
         gl.ar_in = com.load_csv(ldir)
         ar_right = com.load_csv(rdir)

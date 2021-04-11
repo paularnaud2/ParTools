@@ -21,7 +21,7 @@ CHECK_DUP = True
 OPEN_OUT_FILE = True
 MSG_BOX_END = True
 DEBUG_JOIN = False
-TEST_RESTART = False
+TEST_RECOVER = False
 
 TMP_FOLDER = 'reqlist/'
 OUT_LEFT_FILE = 'out_l.csv'

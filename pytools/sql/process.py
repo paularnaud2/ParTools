@@ -69,20 +69,20 @@ def process_query(c, query, elt, th_nb):
 
     log.process_query_init(elt, query, th_nb)
     c.execute(query)
-    test_restart(th_nb)
+    test_recover(th_nb)
     log.process_query_finish(elt, th_nb)
     init_out_file(c, elt)
     th_name = com.gen_sl_detail(elt, th_nb, gl.multi_th)
     write_rows(c, elt, th_name, th_nb)
 
 
-def test_restart(th_nb):
-    if not (gl.TEST_RESTART and gl.MD):
+def test_recover(th_nb):
+    if not (gl.TEST_RECOVER and gl.MD):
         return
     sleep = False
     with verrou:
         if gl.c_row > gl.MD['N_STOP'] and not gl.MD['STOP']:
-            s = f"TEST_RESTART: Automatic stop (thread no. {th_nb})\n"
+            s = f"TEST_RECOVER: Automatic stop (thread no. {th_nb})\n"
             com.log(s)
             # A STOP flag is sent through the manager dict to the main process in order
             # to terminate this subprocess and all the threads.

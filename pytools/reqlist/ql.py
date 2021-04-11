@@ -6,7 +6,6 @@ import pytools.common.g as g
 import pytools.sql as sql
 
 from . import gl
-from . import log
 from pytools.tools import dup
 
 
@@ -38,7 +37,18 @@ def gen_query_list():
         query_list.append([grp, n_str])
 
     gl.query_list = query_list
-    log.gen_query_list(elt_list, query_list)
+    log_gen_query_list(elt_list, query_list)
+
+
+def log_gen_query_list(elt_list, group_list):
+    bn1 = com.big_number(len(elt_list))
+    bn2 = com.big_number(len(group_list))
+    s = (
+        f"Query list built: {bn1} elements to be processed distributed"
+        f" in {bn2} groups ({gl.NB_MAX_ELT_IN_STATEMENT} max per group)."
+        f" They will be processed in parallel by {gl.MAX_DB_CNX} connection pools."
+    )
+    com.log(s)
 
 
 def gen_group(elt_list):

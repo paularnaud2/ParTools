@@ -3,24 +3,24 @@ import pytools.common as com
 from . import gl
 
 
-def restart():
+def recover():
 
     file_list = com.get_file_list(gl.TMP_PATH)
     a = len(file_list)
     if a == 0:
         return
 
-    s = "Work in progress detected. Kill? (y/n)"
-    if gl.TEST_RESTART:
+    s = "Work in progress detected. Recover? (y/n)"
+    if gl.TEST_RECOVER:
         com.log(s)
-        com.log_print("n (TEST_RESTART = True)")
-    elif com.log_input(s) == 'y':
+        com.log_print("y (TEST_RECOVER = True)")
+    elif com.log_input(s) == 'n':
         com.mkdirs(gl.TMP_PATH, True)
         return
 
     modify_ql(file_list)
     com.log("Query list modified according previous work in progress. "
-            f"Restarting from query '{gl.QUERY_LIST[0][1]}'")
+            f"Recovering from query '{gl.QUERY_LIST[0][1]}'")
 
 
 def modify_ql(file_list):

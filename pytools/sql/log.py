@@ -51,7 +51,7 @@ def inject():
     s1 = "Injecting data in DB"
     if gl.ref_chunk != 0:
         bn = com.big_number(gl.ref_chunk * gl.NB_MAX_ELT_INSERT)
-        s = s1 + f" (restarting from line {bn})"
+        s = s1 + f" (recovering from line {bn})"
     else:
         s = s1
     s += "..."
@@ -64,7 +64,7 @@ def script(script):
     com.log_print(script)
 
 
-def restart_fail(e, chunk, txt):
-    com.log(f"Error while trying to restart: {str(e)}")
+def recover_fail(e, chunk, txt):
+    com.log(f"Error while trying to recover: {str(e)}")
     com.log_print(f"Content of file {chunk}:")
     com.log_print(txt)

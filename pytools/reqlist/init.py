@@ -20,9 +20,3 @@ def init_globals():
     gl.OUT_LEFT = TMP_DIR + gl.OUT_LEFT_FILE
     gl.OUT_RIGHT = TMP_DIR + gl.OUT_RIGHT_FILE
     gl.OUT_SQL = TMP_DIR + gl.OUT_SQL_FILE
-    gl.TMP_PATH = TMP_DIR + gl.DB + '/'
-
-    gl.c = {}
-    gl.multi_th = False
-    gl.tmp_file = {}
-    gl.ec_query_nb = {}
