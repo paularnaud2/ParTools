@@ -13,7 +13,7 @@ from pytools.test.sql import clean_db
 
 def test_reqlist():
     com.init_log('test_reqlist', True)
-    if not is_test_db_defined('test_reqlist'):
+    if not is_test_db_defined():
         return
 
     com.mkdirs(gl.RL_TMP, True)

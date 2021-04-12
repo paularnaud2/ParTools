@@ -12,6 +12,24 @@ def mail(mail_name):
     host = conf['HOST']
     sender = conf['SENDER']
     From = conf['FROM']
+    user, pwd, ctx, port = get_infos(conf)
+
+    recipients = get.recipients(mail_name)
+    msg = gen_msg(recipients, mail_name, From)
+
+    com.log(f"Sending mail '{mail_name}' to {recipients}...")
+    if ctx:
+        with smtplib.SMTP_SSL(host, port, context=ctx) as server:
+            server.login(user, pwd)
+            server.sendmail(sender, recipients, msg.as_string())
+    else:
+        with smtplib.SMTP(host, port) as server:
+            server.sendmail(sender, recipients, msg.as_string())
+
+    com.log('Mail send')
+
+
+def get_infos(conf):
 
     if 'USER' in conf:
         user = conf['USER']
@@ -25,7 +43,11 @@ def mail(mail_name):
     else:
         port = ''
 
-    recipients = get.recipients(mail_name)
+    return user, pwd, ctx, port
+
+
+def gen_msg(recipients, mail_name, From):
+
     To = ", ".join(recipients)
     subject = get.subject(mail_name)
     body = get.body(mail_name)
@@ -36,13 +58,4 @@ def mail(mail_name):
     msg["To"] = To
     msg.attach(body)
 
-    com.log(f"Sending mail '{mail_name}' to {recipients}...")
-    if ctx:
-        with smtplib.SMTP_SSL(host, port, context=ctx) as server:
-            server.login(user, pwd)
-            server.sendmail(sender, recipients, msg.as_string())
-    else:
-        with smtplib.SMTP(host, port) as server:
-            server.sendmail(sender, recipients, msg.as_string())
-
-    com.log('Mail send')
+    return msg

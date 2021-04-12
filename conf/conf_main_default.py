@@ -1,7 +1,10 @@
 # Main-------------------------------------------------------------------------
 
-# Basically where you want your log files and temporary files to be outputted
-ROOT_PATH = 'IO/'
+# Where you want your Input/Output, log, and temporary files to be output
+IO_PATH = 'IO/'
+
+# Input path for mails to be sent (see pytools/mail/mails/test for example)
+MAIL_PATH = 'pytools/mail/mails/'
 
 # DEBUG = True enables function decorator in common.deco
 # it basically terminates the program if one of the threads
@@ -17,10 +20,6 @@ DEBUG = False
 ORACLE_CLIENT = 'C:/instantclient_19_6/'
 
 # test-------------------------------------------------------------------------
-
-# Default test environment is set to local. You can rename it as you wish,
-# it just has to match with ENV_NAME of conf_oracle.py
-TEST_ENV = 'LOCAL'
 
 # For the tests to be working, the user of TEST_DB set in conf_oracle.py
 # must have writing permissions.

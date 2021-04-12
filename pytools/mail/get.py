@@ -2,6 +2,7 @@ from os.path import exists
 from email.mime.text import MIMEText
 
 import pytools.common as com
+import conf._conf_main as cfg
 
 from . import gl
 
@@ -16,9 +17,9 @@ def conf():
 
 
 def recipients(mail_name):
-    recipients_dir = gl.MAIL_PATH + mail_name + '/recipients.txt'
+    recipients_dir = cfg.MAIL_PATH + mail_name + '/recipients.txt'
     if not exists(recipients_dir):
-        s = f"Recipients file missing ({recipients_dir})"
+        s = f"Recipients file missing ({recipients_dir}). See pytools/mail/mails/test for example"
         com.log(s)
         raise Exception(s)
     recipients = com.load_txt(recipients_dir)
@@ -26,9 +27,9 @@ def recipients(mail_name):
 
 
 def subject(mail_name):
-    subject_dir = gl.MAIL_PATH + mail_name + '/subject.txt'
+    subject_dir = cfg.MAIL_PATH + mail_name + '/subject.txt'
     if not exists(subject_dir):
-        s = f"Subject file missing ({subject_dir})"
+        s = f"Subject file missing ({subject_dir}). See pytools/mail/mails/test for example"
         com.log(s)
         raise Exception(s)
     subject = com.load_txt(subject_dir, list_out=False)
@@ -36,9 +37,9 @@ def subject(mail_name):
 
 
 def body(mail_name):
-    body_dir = gl.MAIL_PATH + mail_name + '/body.html'
+    body_dir = cfg.MAIL_PATH + mail_name + '/body.html'
     if not exists(body_dir):
-        s = f"Html body file missing ({body_dir})"
+        s = f"Html body file missing ({body_dir}). See pytools/mail/mails/test for example"
         com.log(s)
         raise Exception(s)
     html = com.load_txt(body_dir, list_out=False)

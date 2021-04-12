@@ -12,7 +12,7 @@ from pytools.test import is_test_db_defined
 
 def test_sql():
     com.init_log("test_sql", True)
-    if not is_test_db_defined("test_sql"):
+    if not is_test_db_defined():
         return
 
     # com.log("Test connect------------------------------------------")

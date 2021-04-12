@@ -31,10 +31,10 @@ sl_detail = {}
 
 # Path
 paths = {}
-paths['IN'] = cfg.ROOT_PATH + 'IN/'
-paths['OUT'] = cfg.ROOT_PATH + 'OUT/'
-paths['TMP'] = cfg.ROOT_PATH + 'TMP/'
-paths['LOG'] = cfg.ROOT_PATH + 'LOG/'
+paths['IN'] = cfg.IO_PATH + 'IN/'
+paths['OUT'] = cfg.IO_PATH + 'OUT/'
+paths['TMP'] = cfg.IO_PATH + 'TMP/'
+paths['LOG'] = cfg.IO_PATH + 'LOG/'
 
 
 def init_directories():
