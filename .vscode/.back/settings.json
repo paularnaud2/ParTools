@@ -10,7 +10,7 @@
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": [
     "--ignore=W503,W504,E501",
-    "--exclude=__init__.py"
+    "--exclude=__init__.py, test.py"
   ],
   "python.formatting.provider": "yapf",
   "git.enableSmartCommit": true,
