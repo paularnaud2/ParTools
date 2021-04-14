@@ -1,5 +1,6 @@
 import sys
 import warnings
+import os.path as p
 
 from time import time
 from datetime import datetime
@@ -67,8 +68,6 @@ def init_log(parent_module='', force_init=False):
     if g.LOG_FILE_INITIALISED and not force_init:
         return
 
-    g.init_directories()
-
     s = datetime.now().strftime("%Y%m%d_%H%M%S")
     if parent_module:
         s += '_' + parent_module
@@ -78,6 +77,7 @@ def init_log(parent_module='', force_init=False):
 
     g.LOG_FILE_INITIALISED = True
     log_path = g.paths['LOG'] + g.LOG_FILE
+    log_path = p.abspath(log_path)
     s = f"Log file initialised ({log_path})"
     log(s, print_date=True)
     log_print("Python version: " + sys.version)

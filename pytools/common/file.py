@@ -7,7 +7,7 @@ from .log import log
 
 def startfile(in_dir):
     # Same as os.startfile but with absolute path (more robust)
-    os.startfile(os.path.abspath(in_dir))
+    os.startfile(p.abspath(in_dir))
 
 
 def delete_folder(dir):

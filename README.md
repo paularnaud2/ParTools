@@ -15,7 +15,7 @@ You can mainly use them for:
 
 ## Quickstart
 
-Extract zip and run: ``pip install -e .`` at the root.  
+Extract zip and run: `pip install -e .` at the root.
 
-You'll find examples of use and descriptions of the different available packages and functions in the *run* folder.
-If you want to use the cx-Oracle dependant packages (sql and reqlist), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose path you can set in the *conf/_conf_main.py* file.
+You'll find examples of use and descriptions of the different available packages and functions in the _run_ folder.
+If you want to use the cx-Oracle dependant packages (sql and reqlist), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose path you can set in the _conf.py_ file.

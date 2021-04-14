@@ -1,5 +1,15 @@
-CONF_FILE = 'conf/_conf_mail.txt'
+from pytools.common import g
 
-S_MISSING_CONF = f"The email couldn't be sent because the conf file '{CONF_FILE}' was not found."
-S_MISSING_CONF += "\nYou can create a conf file using"
-S_MISSING_CONF += " 'conf_mail_gmail.txt' or 'conf_mail_nologin.txt' as example."
+MAILS_DIR = 'mails/'
+CONF_PATH = MAILS_DIR + 'conf.txt'
+RECIPIENTS = 'recipients.txt'
+SUBJECT = 'subject.txt'
+BODY = 'body.html'
+
+test = g.root_path + 'test/mails/test/'
+conf = g.root_path + 'test/mails/conf'
+
+S_CONF = (f"The email couldn't be sent because the conf file '{CONF_PATH}'"
+          f" was not found.\nSee {conf} for example")
+
+S_MISSING = "{} file missing ({}). See {} for example."

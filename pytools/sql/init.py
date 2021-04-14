@@ -35,5 +35,5 @@ def get_footprint():
 
     fp = gl.DB + gl.ENV + gl.CNX_STR + gl.OUT_FILE
     fp += gl.QUERY_IN + str(gl.QUERY_LIST)
-    fp = com.hash(fp)
+    fp = com.hash512(fp)
     gl.footprint = fp

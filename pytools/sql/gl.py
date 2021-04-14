@@ -1,14 +1,14 @@
 from pytools.common import g
 
-# Mandatory inputs (DB from conf/_conf_oracle.py or CNX_STR)
+# Mandatory inputs (DB from conf.CONF_ORACLE or CNX_STR)
 CNX_STR = ''
 DB = ''
+
+# Optional inputs
+ENV = ''  # See comment in conf.py for details
 OUT_FILE = f"{g.paths['OUT']}sql_out.csv"
 QUERY_IN = 'pytools/sql/queries/query_in.sql'
 QUERY_LIST = []
-
-# Optional inputs
-ENV = ''  # See comment in conf/_conf_oracle.py for details
 OUT_RG_DIR = f"{g.paths['OUT']}SQL_RG/"
 
 # Default const
@@ -59,6 +59,7 @@ S_2 = "Connecting to data base '{}' of environment '{}' ({})..."
 S_3 = "Connecting to data base {} ({})..."
 
 # Exceptions
+s = " Pease check the CONF_ORACLE conf var."
 E_1 = "Error: either gl.CNX_STR or gl.DB have to be defined"
-E_2 = "Error: data base '{}' doesn't seem to be defined. Pease check your conf_oracle.py file."
-E_3 = "Error: data base '{}' of environment '{}' doesn't seem to be defined. Pease check your conf_oracle.py file."
+E_2 = "Error: data base '{}' doesn't seem to be defined." + s
+E_3 = "Error: data base '{}' of environment '{}' doesn't seem to be defined." + s

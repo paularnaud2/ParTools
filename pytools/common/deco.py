@@ -1,6 +1,6 @@
 import os
 import traceback
-import conf._conf_main as cfg
+import pytools.conf as cfg
 
 from . import g
 from .log import log

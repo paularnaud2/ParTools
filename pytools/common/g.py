@@ -1,6 +1,12 @@
 from threading import RLock
-import conf._conf_main as cfg
+from os.path import exists
+
+import pytools.conf as cfg
+from pytools import get_root
 from .file import mkdirs
+from .file import save_list
+from .log import log
+from .log import init_log
 
 # Misc
 CSV_SEPARATOR = ';'
@@ -30,14 +36,29 @@ sl_time_dict = {}
 sl_detail = {}
 
 # Path
+r = cfg.FILES_PATH
 paths = {}
-paths['IN'] = cfg.IO_PATH + 'IN/'
-paths['OUT'] = cfg.IO_PATH + 'OUT/'
-paths['TMP'] = cfg.IO_PATH + 'TMP/'
-paths['LOG'] = cfg.IO_PATH + 'LOG/'
+paths['IN'] = r + 'in/'
+paths['OUT'] = r + 'out/'
+paths['TMP'] = r + 'tmp/'
+paths['LOG'] = r + 'log/'
+
+root_path = get_root()
+conf_path = root_path + 'conf.py'
 
 
 def init_directories():
     for key in paths:
         cur_path = paths[key]
         mkdirs(cur_path)
+
+
+def init_PT():
+    if exists(paths['LOG']):
+        return
+
+    init_directories()
+    save_list(['*'], cfg.FILES_PATH + '.gitignore')
+    init_log('init')
+    log("PyTools package successfully initialised."
+        f" Set up your conf here: {conf_path}")

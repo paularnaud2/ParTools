@@ -3,8 +3,8 @@ from os.path import exists
 from threading import RLock
 
 import pytools.common as com
-import conf._conf_main as cfg
-from conf._conf_oracle import conf
+from pytools.common import g
+import pytools.conf as cfg
 
 from . import gl
 from . import gls
@@ -29,16 +29,16 @@ def get_cnx_str():
     if gl.CNX_STR:
         cnx_str = gl.CNX_STR
         s = gl.S_1.format(cnx_str)
-    elif (gl.DB, gl.ENV) in conf:
-        cnx_str = conf[(gl.DB, gl.ENV)]
+    elif (gl.DB, gl.ENV) in cfg.CONF_ORACLE:
+        cnx_str = cfg.CONF_ORACLE[(gl.DB, gl.ENV)]
         s = gl.S_2.format(gl.DB, gl.ENV, cnx_str)
-    elif gl.DB in conf:
-        cnx_str = conf[gl.DB]
+    elif gl.DB in cfg.CONF_ORACLE:
+        cnx_str = cfg.CONF_ORACLE[gl.DB]
         s = s = gl.S_3.format(gl.DB, cnx_str)
     elif not gl.DB:
         s = gl.E_1
         err = True
-    elif not gl.ENV and gl.DB not in conf:
+    elif not gl.ENV and gl.DB not in cfg.CONF_ORACLE:
         s = gl.E_2.format(gl.DB)
         err = True
     else:
@@ -72,7 +72,7 @@ def init_instant_client():
             gls.client_is_init = True
             if not exists(cfg.ORACLE_CLIENT):
                 s = ("Error: The Oracle instant client path specified in"
-                     f" conf_main.py (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"
+                     f" {g.conf_path} (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"
                      " doesn't exist. Please enter a valid path for the"
                      " Oracle instant client.")
                 com.log(s)

@@ -3,19 +3,22 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 
 import pytools.common as com
-
+from pytools.common import g
 from . import get
 
 
 def mail(mail_name):
+    gl.mail_name = mail_name
+    gl.mail_dir = gl.MAILS_DIR + mail_name + '/'
+
     conf = get.conf()
     host = conf['HOST']
     sender = conf['SENDER']
     From = conf['FROM']
     user, pwd, ctx, port = get_infos(conf)
 
-    recipients = get.recipients(mail_name)
-    msg = gen_msg(recipients, mail_name, From)
+    recipients = get.recipients()
+    msg = gen_msg(recipients, From)
 
     com.log(f"Sending mail '{mail_name}' to {recipients}...")
     if ctx:
@@ -46,11 +49,11 @@ def get_infos(conf):
     return user, pwd, ctx, port
 
 
-def gen_msg(recipients, mail_name, From):
+def gen_msg(recipients, From):
 
     To = ", ".join(recipients)
-    subject = get.subject(mail_name)
-    body = get.body(mail_name)
+    subject = get.subject()
+    body = get.body()
 
     msg = MIMEMultipart()
     msg["Subject"] = subject

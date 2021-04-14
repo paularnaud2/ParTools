@@ -3,11 +3,11 @@ _old/
 ~$*.xlsm
 .vscode/.ropeproject/objectdb
 .coverage
-_conf*
 htmlcov
 mail/mails
 venv/
 *.egg-info/
 .old/
 .pytest_cache/
-IO/
+pytools/test/mail/conf/conf.txt
+mails/

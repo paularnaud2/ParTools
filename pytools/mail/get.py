@@ -2,44 +2,42 @@ from os.path import exists
 from email.mime.text import MIMEText
 
 import pytools.common as com
-import conf._conf_main as cfg
-
 from . import gl
 
 
 def conf():
-    if not exists(gl.CONF_FILE):
+    if not exists(gl.CONF_PATH):
         com.log(gl.S_MISSING_CONF)
         raise Exception(gl.S_MISSING_CONF)
-    conf_list = com.load_txt(gl.CONF_FILE)
+    conf_list = com.load_txt(gl.CONF_PATH)
     conf = com.list_to_dict(conf_list)
     return conf
 
 
-def recipients(mail_name):
-    recipients_dir = cfg.MAIL_PATH + mail_name + '/recipients.txt'
+def recipients():
+    recipients_dir = gl.mail_dir + gl.RECIPIENTS
     if not exists(recipients_dir):
-        s = f"Recipients file missing ({recipients_dir}). See pytools/mail/mails/test for example"
+        s = gl.S_MISSING.format('Recipients', recipients_dir, gl.test)
         com.log(s)
         raise Exception(s)
     recipients = com.load_txt(recipients_dir)
     return recipients
 
 
-def subject(mail_name):
-    subject_dir = cfg.MAIL_PATH + mail_name + '/subject.txt'
+def subject():
+    subject_dir = gl.mail_dir + gl.SUBJECT
     if not exists(subject_dir):
-        s = f"Subject file missing ({subject_dir}). See pytools/mail/mails/test for example"
+        s = gl.S_MISSING.format('Subject', subject_dir, gl.test)
         com.log(s)
         raise Exception(s)
     subject = com.load_txt(subject_dir, list_out=False)
     return subject
 
 
-def body(mail_name):
-    body_dir = cfg.MAIL_PATH + mail_name + '/body.html'
+def body():
+    body_dir = gl.mail_dir + gl.BODY
     if not exists(body_dir):
-        s = f"Html body file missing ({body_dir}). See pytools/mail/mails/test for example"
+        s = gl.S_MISSING.format('Body', body_dir, gl.test)
         com.log(s)
         raise Exception(s)
     html = com.load_txt(body_dir, list_out=False)

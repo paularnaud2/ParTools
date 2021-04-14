@@ -26,7 +26,7 @@ def like(in_str, like_string, match_output=False):
     return m.group(0)
 
 
-def hash(in_str, length=10):
+def hash512(in_str, length=10):
     out = hashlib.sha512(in_str.encode('utf-8')).hexdigest()[:length]
     return out
 
