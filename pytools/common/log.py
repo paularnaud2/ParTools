@@ -60,7 +60,7 @@ def log(str_in, level=0, print_date=False, nb_tab=0, c_out=True):
         s = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     else:
         s = datetime.now().strftime("%H:%M:%S")
-    s = s + " - " + str_in
+    s = s + " - " + str(str_in)
     log_print(s, nb_tab, c_out)
 
 
