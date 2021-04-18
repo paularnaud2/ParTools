@@ -15,31 +15,31 @@ def conf():
 
 
 def recipients():
-    recipients_dir = gl.mail_dir + gl.RECIPIENTS
-    if not exists(recipients_dir):
-        s = gl.S_MISSING.format('Recipients', recipients_dir, gl.test)
+    recipients_path = gl.mail_dir + gl.RECIPIENTS
+    if not exists(recipients_path):
+        s = gl.S_MISSING.format('Recipients', recipients_path, gl.test)
         com.log(s)
         raise Exception(s)
-    recipients = com.load_txt(recipients_dir)
+    recipients = com.load_txt(recipients_path)
     return recipients
 
 
 def subject():
-    subject_dir = gl.mail_dir + gl.SUBJECT
-    if not exists(subject_dir):
-        s = gl.S_MISSING.format('Subject', subject_dir, gl.test)
+    subject_path = gl.mail_dir + gl.SUBJECT
+    if not exists(subject_path):
+        s = gl.S_MISSING.format('Subject', subject_path, gl.test)
         com.log(s)
         raise Exception(s)
-    subject = com.load_txt(subject_dir, list_out=False)
+    subject = com.load_txt(subject_path, list_out=False)
     return subject
 
 
 def body():
-    body_dir = gl.mail_dir + gl.BODY
-    if not exists(body_dir):
-        s = gl.S_MISSING.format('Body', body_dir, gl.test)
+    body_path = gl.mail_dir + gl.BODY
+    if not exists(body_path):
+        s = gl.S_MISSING.format('Body', body_path, gl.test)
         com.log(s)
         raise Exception(s)
-    html = com.load_txt(body_dir, list_out=False)
+    html = com.load_txt(body_path, list_out=False)
     body = MIMEText(html, "html")
     return body

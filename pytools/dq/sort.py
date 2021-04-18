@@ -13,39 +13,39 @@ from .fill_al import fill_array_list
 from .empty_al import empty_array_list
 
 
-def sort_big_file(in_file_dir, out_file_dir, prompt=False, nb=0, main=False):
+def sort_big_file(in_path, out_path, prompt=False, nb=0, main=False):
     # nb variable is used to differentiate input file when main run is dq
 
-    com.log(f"[dq] sort_file: start ({in_file_dir})")
+    com.log(f"[dq] sort_file: start ({in_path})")
     start_time = time()
-    init_stf(in_file_dir, out_file_dir)
-    gen_sorted_temp_files(in_file_dir, out_file_dir)
+    init_stf(in_path, out_path)
+    gen_sorted_temp_files(in_path, out_path)
     com.log_print('|')
     nb_files = gl.c_file
     if nb_files > 1:
         s = f"Generating sorted output file from {nb_files} sorted temporary files..."
         com.log(s)
-        merge_sorted_files(out_file_dir)
-    finish(out_file_dir, prompt, nb, start_time)
+        merge_sorted_files(out_path)
+    finish(out_path, prompt, nb, start_time)
     if not main:
         com.log_print('|')
 
 
-def merge_sorted_files(out_file_dir):
+def merge_sorted_files(out_path):
 
     init_msf()
     while temp_files() or array_list_not_void():
         fill_array_list()
-        empty_array_list(out_file_dir)
+        empty_array_list(out_path)
 
 
-def finish(out_file_dir, prompt, nb, start_time):
+def finish(out_path, prompt, nb, start_time):
 
     n_dup_key = len(gl.dup_key_list)
     n_dup = len(gl.dup_list)
     bn1 = com.big_number(gl.c_tot_out)
     bn2 = com.big_number(n_dup)
-    s = (f"Output file {out_file_dir} successfully generated"
+    s = (f"Output file {out_path} successfully generated"
          f" ({bn1} lines written, {bn2} duplicates removed).")
     com.log(s)
     if n_dup > 0:

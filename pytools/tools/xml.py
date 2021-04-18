@@ -9,14 +9,14 @@ from .finish import finish_xml
 from . import gl
 
 
-def parse_xml(in_dir, out_dir, **kwargs):
+def parse_xml(in_path, out_path, **kwargs):
     com.log("[toolParseXML] parse_xml: start")
     start_time = time()
     com.init_kwargs(gl, kwargs)
     init_globals()
-    gen_img_dict(in_dir)
-    save_img_dict(out_dir)
-    finish_xml(out_dir, start_time)
+    gen_img_dict(in_path)
+    save_img_dict(out_path)
+    finish_xml(out_path, start_time)
 
 
 def init_globals():
@@ -25,11 +25,11 @@ def init_globals():
     gl.N_ROW = 0
 
 
-def gen_img_dict(in_dir):
-    s = f"Generating parse dictionary from file '{in_dir}'..."
+def gen_img_dict(in_path):
+    s = f"Generating parse dictionary from file '{in_path}'..."
     com.log(s)
     gl.parse_dict = {}
-    with open(in_dir, 'r', encoding='utf-8', errors='ignore') as in_file:
+    with open(in_path, 'r', encoding='utf-8', errors='ignore') as in_file:
         gl.N_READ = 0
         line = read_one_line(in_file)
         fill_parse_dict(line)
@@ -42,13 +42,13 @@ def gen_img_dict(in_dir):
     com.log(f"Parse dictionary generated ({gl.N_READ} lines processed)")
 
 
-def save_img_dict(out_dir):
+def save_img_dict(out_path):
     com.log('Saving parse dictionary as csv...')
     header = []
     for elt in gl.parse_dict:
         header.append(elt)
 
-    with open(out_dir, 'w', encoding='utf-8') as out_file:
+    with open(out_path, 'w', encoding='utf-8') as out_file:
         com.write_csv_line(header, out_file)
         com.init_sl_time()
         gl.N_WRITE = 0
@@ -60,7 +60,7 @@ def save_img_dict(out_dir):
             gl.N_WRITE += 1
             com.step_log(gl.N_WRITE, gl.SL_STEP_WRITE, what='lines written')
 
-    com.log(f"csv file saved in {out_dir}")
+    com.log(f"csv file saved in {out_path}")
 
 
 def read_one_line(in_file):

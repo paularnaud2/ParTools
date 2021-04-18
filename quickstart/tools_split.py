@@ -4,8 +4,8 @@ import pytools.common.g as g
 from pytools.tools import split
 
 # Input variables default values
-in_dir = g.paths['IN'] + "in.csv"
-in_dir = "pytools/test/sql/files/in.csv"
-out_dir = g.paths['OUT']
+in_path = g.dirs['IN'] + "in.csv"
+in_path = "pytools/test/sql/files/in.csv"
+out_dir = g.dirs['OUT']
 
-split.split_file(in_dir, out_dir, MAX_LINE=1000)
+split.split_file(in_path, out_dir, MAX_LINE=1000)

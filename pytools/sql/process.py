@@ -116,7 +116,7 @@ def init_out_file(cursor, file_name):
     # Output file is initialised with cursor description
     # plus range name if EXPORT_RANGE parameter is set to True
 
-    s = gl.TMP_PATH + file_name + "{}" + gl.FILE_TYPE
+    s = gl.TMP_DIR + file_name + "{}" + gl.FILE_TYPE
     s_ = s.format('')
     s_EC = s.format(gl.EC)
     with verrou:

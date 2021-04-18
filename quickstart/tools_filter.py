@@ -4,9 +4,9 @@ import pytools.tools.filter as f
 from pytools.tools import gl
 
 # Input variables
-in_dir = g.paths['IN'] + "in.csv"
-in_dir = "pytools/test/sql/files/in.csv"
-out_dir = g.paths['OUT'] + "out_filtered.csv"
+in_path = g.dirs['IN'] + "in.csv"
+in_path = "pytools/test/sql/files/in.csv"
+out_path = g.dirs['OUT'] + "out_filtered.csv"
 col_list = ['PRM', 'AFFAIRE']
 
 
@@ -19,8 +19,4 @@ def filter_function(line_list):
     return cond
 
 
-if __name__ == '__main__':
-    f.filter(in_dir, out_dir, COL_LIST=col_list, FF=filter_function)
-else:
-    f.gl.OPEN_OUT_FILE = False
-    f.filter(in_dir, out_dir, COL_LIST=col_list, FF=filter_function)
+f.filter(in_path, out_path, COL_LIST=col_list, FF=filter_function)

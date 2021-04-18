@@ -5,9 +5,9 @@ from shutil import rmtree
 from .log import log
 
 
-def startfile(in_dir):
+def startfile(in_path):
     # Same as os.startfile but with absolute path (more robust)
-    os.startfile(p.abspath(in_dir))
+    os.startfile(p.abspath(in_path))
 
 
 def delete_folder(dir):
@@ -24,9 +24,9 @@ def mkdirs(dir, delete=False):
     log(f"Folder {dir} created")
 
 
-def merge_files(in_dir, out_dir, remove_header=False):
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
-        with open(out_dir, 'a', encoding='utf-8') as out_file:
+def merge_files(in_path, out_path, remove_header=False):
+    with open(in_path, 'r', encoding='utf-8') as in_file:
+        with open(out_path, 'a', encoding='utf-8') as out_file:
             i = 0
             for line in in_file:
                 i += 1
@@ -36,10 +36,10 @@ def merge_files(in_dir, out_dir, remove_header=False):
                     out_file.write(line)
 
 
-def get_file_list(in_dir):
+def get_file_list(in_path):
     try:
-        dirs = os.listdir(in_dir)
-        file_list = [f for f in dirs if p.isfile(p.join(in_dir, f))]
+        dirs = os.listdir(in_path)
+        file_list = [f for f in dirs if p.isfile(p.join(in_path, f))]
     except FileNotFoundError:
         return []
 
@@ -47,13 +47,13 @@ def get_file_list(in_dir):
     return file_list
 
 
-def load_txt(in_dir, list_out=True):
+def load_txt(in_path, list_out=True):
     if list_out:
         out = []
     else:
         out = ''
 
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         for line in in_file:
             if list_out:
                 out.append(line.strip('\n'))
@@ -63,8 +63,8 @@ def load_txt(in_dir, list_out=True):
     return out
 
 
-def count_lines(in_dir):
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
+def count_lines(in_path):
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         i = 0
         for line in in_file:
             i += 1
@@ -72,13 +72,13 @@ def count_lines(in_dir):
     return i
 
 
-def save_list(list, out_file_dir, att='w'):
-    with open(out_file_dir, 'w', encoding='utf-8') as out_file:
+def save_list(list, out_path, att='w'):
+    with open(out_path, 'w', encoding='utf-8') as out_file:
         for elt in list:
             out_file.write(str(elt).strip("\n") + '\n')
 
 
-def read_file(in_dir):
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
+def read_file(in_path):
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         txt = in_file.read()
     return txt

@@ -23,15 +23,15 @@ def is_up_to_date(cnx):
 
 def iutd_db(d_now, cnx):
     d_bdd = get_bdd_date(cnx)
-    com.save_csv([d_bdd], gl.IUTD_DIR)
-    com.log(f"Check file saved in {gl.IUTD_DIR}")
+    com.save_csv([d_bdd], gl.iutd_path)
+    com.log(f"Check file saved in {gl.iutd_path}")
     compare_dates(d_bdd, d_now)
     gls.iutd = True
 
 
 def iutd_file(d_now):
-    if exists(gl.IUTD_DIR):
-        d_old = com.load_txt(gl.IUTD_DIR)[0]
+    if exists(gl.iutd_path):
+        d_old = com.load_txt(gl.iutd_path)[0]
         if d_now == d_old:
             gls.iutd = True
             com.log("IUTD check OK")
@@ -81,8 +81,8 @@ def get_bdd_date(cnx):
 
 def get_iutd_query():
     if gl.TEST_IUTD:
-        query = com.read_file(f"{gl.QUERY_PATH}IUTD_TEST.sql")
+        query = com.read_file(f"{gl.QUERY_DIR}IUTD_TEST.sql")
     else:
-        query = com.read_file(f"{gl.QUERY_PATH}IUTD_{gl.DB}")
+        query = com.read_file(f"{gl.QUERY_DIR}IUTD_{gl.DB}")
 
     return query

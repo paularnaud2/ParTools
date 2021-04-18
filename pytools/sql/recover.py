@@ -5,7 +5,7 @@ from . import gl
 
 def recover():
 
-    file_list = com.get_file_list(gl.TMP_PATH)
+    file_list = com.get_file_list(gl.TMP_DIR)
     a = len(file_list)
     if a == 0:
         return
@@ -15,7 +15,7 @@ def recover():
         com.log(s)
         com.log_print("y (TEST_RECOVER = True)")
     elif com.log_input(s) == 'n':
-        com.mkdirs(gl.TMP_PATH, True)
+        com.mkdirs(gl.TMP_DIR, True)
         return
 
     modify_ql(file_list)
@@ -34,7 +34,7 @@ def modify_ql(file_list):
         if comp_elt not in file_list:
             list_out.append(elt)
         if comp_elt_ec in file_list:
-            ec_path = gl.TMP_PATH + comp_elt_ec
+            ec_path = gl.TMP_DIR + comp_elt_ec
             os.remove(ec_path)
             com.log(f"EC file {ec_path} deleted")
 

@@ -34,17 +34,17 @@ def finish(start_time):
     com.log(s)
 
     if gl.MERGE_OK:
-        out_dir = gl.OUT_FILE
-        com.log(f"Output file {out_dir} successfully filled out")
+        out_path = gl.OUT_PATH
+        com.log(f"Output file {out_path} successfully filled out")
         a = n < gl.MAX_CHECK_DUP and n > 0
 
         if a and gl.CHECK_DUP and not gl.COUNT:
             s = "Verifying duplicates on the first column of the output file..."
             com.log(s)
             com.log_print('|')
-            find_dup(out_dir, col=1)
+            find_dup(out_path, col=1)
         if gl.OPEN_OUT_FILE:
-            com.startfile(out_dir)
+            com.startfile(out_path)
 
     com.log_print('|')
     (dms, dstr) = com.get_duration_string(start_time, True)

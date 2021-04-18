@@ -32,8 +32,8 @@ cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
 date = datetime.now().strftime("%Y%m%d")
 query_in = 'pytools/test/reqlist/files/query1.sql'
-in_file = f"{g.paths['IN']}rl_in.csv"
-out_file = f"{g.paths['OUT']}export_RL_{db}_{date}.csv"
+in_file = f"{g.dirs['IN']}rl_in.csv"
+out_file = f"{g.dirs['OUT']}export_RL_{db}_{date}.csv"
 
 # Creates input file from test file
 arr = com.load_csv('pytools/test/sql/files/in.csv')
@@ -50,7 +50,7 @@ AND AFFAIRE IN @@IN@@
 run_reqList(
     CNX_STR=cnx_str,
     QUERY_IN=query_in,
-    IN_FILE=in_file,
-    OUT_FILE=out_file,
+    IN_PATH=in_file,
+    OUT_PATH=out_file,
     OPEN_OUT_FILE=True,
 )

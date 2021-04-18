@@ -82,8 +82,8 @@ def temp_files():
     counter = 0
     while counter < gl.c_file:
         counter += 1
-        tmp_file_dir = gl.TMP_DIR + "tmp_" + str(counter) + gl.FILE_TYPE
-        if exists(tmp_file_dir):
+        tmp_path = gl.TMP_DIR + "tmp_" + str(counter) + gl.FILE_TYPE
+        if exists(tmp_path):
             return True
 
     return False
@@ -103,11 +103,11 @@ def read_list(in_file):
     return line_list
 
 
-def check_split(in_dir):
+def check_split(in_path):
 
     if split_needed():
         split_file(
-            in_dir,
+            in_path,
             MAX_LINE=gl.MAX_LINE_SPLIT,
             MAX_FILE_NB=gl.MAX_FILE_NB_SPLIT,
             ADD_HEADER=True,

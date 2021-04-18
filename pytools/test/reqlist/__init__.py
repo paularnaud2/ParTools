@@ -21,8 +21,8 @@ def reqlist(inp, out, query, tr=False, md='', cnx=3, elt=200):
     rl.run_reqList(
         DB=gl.SQL_DB,
         QUERY_IN=query,
-        IN_FILE=inp,
-        OUT_FILE=out,
+        IN_PATH=inp,
+        OUT_PATH=out,
         VAR_DICT={'TABLE_NAME': gl.SQL_T_TEST},
         MAX_DB_CNX=cnx,
         NB_MAX_ELT_IN_STATEMENT=elt,

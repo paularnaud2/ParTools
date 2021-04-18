@@ -27,7 +27,7 @@ db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
 date = datetime.now().strftime("%Y%m%d")
-out_file = f"{g.paths['OUT']}sql_{db}_{date}.csv"
+out_file = f"{g.dirs['OUT']}sql_{db}_{date}.csv"
 
 
 def example_simple():
@@ -35,7 +35,7 @@ def example_simple():
     sql.download(
         CNX_STR=cnx_str,
         QUERY_IN=query_in,
-        OUT_FILE=out_file,
+        OUT_PATH=out_file,
     )
 
 
@@ -52,7 +52,7 @@ def example_ql_raw():
     sql.download(
         CNX_STR=cnx_str,
         QUERY_LIST=query_list_raw,
-        OUT_FILE=out_file,
+        OUT_PATH=out_file,
     )
 
 
@@ -72,7 +72,7 @@ def example_ql_var():
         CNX_STR=cnx_str,
         QUERY_IN=query_in_var,
         QUERY_LIST=query_list_var,
-        OUT_FILE=out_file,
+        OUT_PATH=out_file,
         MERGE_FILES=False,
     )
 
@@ -90,7 +90,7 @@ def example_rg():
     sql.download(
         CNX_STR=cnx_str,
         QUERY_IN=query_in_rg,
-        OUT_FILE=out_file,
+        OUT_PATH=out_file,
     )
 
 

@@ -8,9 +8,9 @@ def init(kwargs):
 
     com.init_kwargs(gl, kwargs)
     init_globals()
-    com.check_header(gl.IN_FILE)
-    com.log(f"Loading input array from '{gl.IN_FILE}'...")
-    gl.ar_in = com.load_csv(gl.IN_FILE)
+    com.check_header(gl.IN_PATH)
+    com.log(f"Loading input array from '{gl.IN_PATH}'...")
+    gl.ar_in = com.load_csv(gl.IN_PATH)
     com.log("Input array loaded")
     com.log_print('|')
 
@@ -18,7 +18,7 @@ def init(kwargs):
 def init_globals():
 
     get_footprint()
-    TMP_DIR = g.paths['TMP'] + gl.TMP_FOLDER + gl.footprint + '/'
+    TMP_DIR = g.dirs['TMP'] + gl.TMP_FOLDER + gl.footprint + '/'
     com.mkdirs(TMP_DIR)
     gl.OUT_LEFT = TMP_DIR + gl.OUT_LEFT_FILE
     gl.OUT_RIGHT = TMP_DIR + gl.OUT_RIGHT_FILE
@@ -28,6 +28,6 @@ def init_globals():
 def get_footprint():
 
     fp = gl.DB + gl.ENV + gl.CNX_STR
-    fp += gl.QUERY_IN + gl.IN_FILE + gl.OUT_FILE
+    fp += gl.QUERY_IN + gl.IN_PATH + gl.OUT_PATH
     fp = com.hash512(fp)
     gl.footprint = fp

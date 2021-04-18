@@ -1,9 +1,9 @@
 from . import g
 
 
-def get_csv_fields_dict(in_dir):
+def get_csv_fields_dict(in_path):
     fields = {}
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         header = in_file.readline()
 
     line_list = csv_to_list(header)
@@ -13,9 +13,9 @@ def get_csv_fields_dict(in_dir):
     return fields
 
 
-def load_csv(in_dir):
+def load_csv(in_path):
     out_list = []
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         for line in in_file:
             line_list = csv_to_list(line)
             out_list.append(line_list)
@@ -27,8 +27,8 @@ def csv_to_list(line_in):
     return line_in.strip('\n').split(g.CSV_SEPARATOR)
 
 
-def save_csv(array_in, out_file_dir, att='w'):
-    with open(out_file_dir, att, encoding='utf-8') as out_file:
+def save_csv(array_in, out_path, att='w'):
+    with open(out_path, att, encoding='utf-8') as out_file:
         for row in array_in:
             write_csv_line(row, out_file)
 

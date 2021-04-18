@@ -11,8 +11,8 @@ QUERY_LIST = []
 
 # Optional inputs----------------------------------------------------
 ENV = ''  # See comment in conf.py for details
-OUT_FILE = f"{g.paths['OUT']}sql_out.csv"
-OUT_RG_DIR = f"{g.paths['OUT']}sql_out/"
+OUT_PATH = f"{g.dirs['OUT']}sql_out.csv"
+OUT_DIR = f"{g.dirs['OUT']}sql_out/"
 
 # Default const------------------------------------------------------
 SL_STEP = 100000
@@ -34,8 +34,8 @@ EC = '_EC'
 RANGE_FIELD = "RANGE"
 
 TMP_FOLDER = 'sql/'
-RANGE_PATH = 'pytools/sql/ranges/'
-QUERY_PATH = 'pytools/sql/queries/'
+RANGE_DIR = 'pytools/sql/ranges/'
+QUERY_DIR = 'pytools/sql/queries/'
 IUTD_FILE = 'last_iutd_check.csv'
 
 # Strings

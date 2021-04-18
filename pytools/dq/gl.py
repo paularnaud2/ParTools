@@ -18,8 +18,8 @@ DIFF_OUT = False
 EQUAL_LABEL = 'E'
 
 FILE_TYPE = '.csv'
-IN_DIR = g.paths['OUT']
-OUT_DIR = g.paths['OUT']
+IN_DIR = g.dirs['OUT']
+OUT_DIR = g.dirs['OUT']
 OUT_FILE_NAME = 'dq_out'
 OUT_DUP_FILE_NAME = 'dq_out_dup'
 OUT_E_FILE = 'out_e'

@@ -75,7 +75,7 @@ def prepare_bdd():
 
 def finish_this(start_time):
     gl.cnx.close()
-    os.remove(gl.TMP_FILE_CHUNK)
+    os.remove(gl.tmp_file_chunk)
     bn = com.big_number(gl.c_main)
     dstr = com.get_duration_string(start_time)
     com.log(f"{bn} lines exported")
@@ -110,9 +110,9 @@ def insert(script):
         gl.c.executemany(script, gl.data)
         gl.c_chunk += 1
         snc = str(gl.c_chunk)
-        com.save_csv([f"{snc}_COMMIT_RUNNING"], gl.TMP_FILE_CHUNK)
+        com.save_csv([f"{snc}_COMMIT_RUNNING"], gl.tmp_file_chunk)
         gl.cnx.commit()
-        com.save_csv([snc], gl.TMP_FILE_CHUNK)
+        com.save_csv([snc], gl.tmp_file_chunk)
         sn = com.big_number(gl.c_main)
         com.log(f"{sn} lines inserted in total")
         gl.c.close()
@@ -125,7 +125,7 @@ def insert(script):
 
 def check_recover():
 
-    chunk = gl.TMP_FILE_CHUNK
+    chunk = gl.tmp_file_chunk
     if os.path.exists(chunk):
         s = "Injection running detected. Recover? (y/n)"
         if gl.TEST_RECOVER:

@@ -31,7 +31,7 @@ def iutd():
     sql.connect()
 
     com.log_print()
-    os.remove(sql.gl.IUTD_DIR)
+    os.remove(sql.gl.iutd_path)
     prepare_iutd(gl.SQL_INSERT_IUTD_KO)
     sql.gl.TEST_IUTD = True
 

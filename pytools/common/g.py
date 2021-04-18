@@ -36,29 +36,29 @@ sl_time_dict = {}
 sl_detail = {}
 
 # Path
-r = cfg.FILES_PATH
-paths = {}
-paths['IN'] = r + 'in/'
-paths['OUT'] = r + 'out/'
-paths['TMP'] = r + 'tmp/'
-paths['LOG'] = r + 'log/'
+r = cfg.FILES_DIR
+dirs = {}
+dirs['IN'] = r + 'in/'
+dirs['OUT'] = r + 'out/'
+dirs['TMP'] = r + 'tmp/'
+dirs['LOG'] = r + 'log/'
 
-root_path = get_root()
-conf_path = root_path + 'conf.py'
+root_dir = get_root()
+conf_path = root_dir + 'conf.py'
 
 
 def init_directories():
-    for key in paths:
-        cur_path = paths[key]
-        mkdirs(cur_path)
+    for key in dirs:
+        cur_dir = dirs[key]
+        mkdirs(cur_dir)
 
 
 def init_PT():
-    if exists(paths['LOG']):
+    if exists(dirs['LOG']):
         return
 
     init_directories()
-    save_list(['*'], cfg.FILES_PATH + '.gitignore')
+    save_list(['*'], cfg.FILES_DIR + '.gitignore')
     init_log('init')
     log("PyTools package successfully initialised."
         f" Set up your conf here: {conf_path}\n")

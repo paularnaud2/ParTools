@@ -4,8 +4,8 @@ from .log import log_print
 from .csv import csv_to_list
 
 
-def get_header(in_dir, csv=False):
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
+def get_header(in_path, csv=False):
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         header = in_file.readline().strip('\n')
 
     if csv:
@@ -14,12 +14,12 @@ def get_header(in_dir, csv=False):
     return header
 
 
-def gen_header(in_dir, last_field='', out_dir=''):
+def gen_header(in_path, last_field='', out_path=''):
 
-    if has_header(in_dir):
-        header = get_header(in_dir)
+    if has_header(in_path):
+        header = get_header(in_path)
     else:
-        first_line = get_header(in_dir, True)
+        first_line = get_header(in_path, True)
         header = g.DEFAULT_FIELD + "_1"
         if len(first_line) > 1:
             counter = 1
@@ -30,8 +30,8 @@ def gen_header(in_dir, last_field='', out_dir=''):
     if last_field:
         header = header + g.CSV_SEPARATOR + last_field
 
-    if out_dir:
-        with open(out_dir, 'w', encoding='utf-8') as out_file:
+    if out_path:
+        with open(out_path, 'w', encoding='utf-8') as out_file:
             out_file.write(header + '\n')
 
     return header
@@ -61,9 +61,9 @@ def has_header(in_var):
     return out
 
 
-def check_header(in_dir):
-    if not has_header(in_dir):
-        s = f"Error: the input file {in_dir} must have a header"
+def check_header(in_path):
+    if not has_header(in_path):
+        s = f"Error: the input file {in_path} must have a header"
         log(s)
         s = "Make sure the first elements of the first two lines are of different lengths"
         log_print(s)

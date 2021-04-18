@@ -6,11 +6,11 @@ from .functions import compare_elt
 from .functions import write_min_elt
 
 
-def empty_array_list(out_file_dir):
+def empty_array_list(out_path):
     s = "Emptying buffer array in output file (and removing dupes)..."
     com.log(s)
     n_col = len(gl.array_list)
-    with open(out_file_dir, 'a', encoding='utf-8') as out_file:
+    with open(out_path, 'a', encoding='utf-8') as out_file:
         com.init_sl_time()
         # cursor variable represents a reading cursor for gl.array_list
         (cursor, max_cursor, void_cursor) = init_cursors()

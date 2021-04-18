@@ -8,8 +8,8 @@ QUERY_IN = ''
 
 # Optional inputs----------------------------------------------------
 ENV = ''  # See comment in conf.CONF_ORACLE for details
-IN_FILE = f"{g.paths['IN']}rl_in.csv"
-OUT_FILE = f"{g.paths['OUT']}rl_out.csv"
+IN_PATH = f"{g.dirs['IN']}rl_in.csv"
+OUT_PATH = f"{g.dirs['OUT']}rl_out.csv"
 
 # Default const------------------------------------------------------
 MAX_DB_CNX = 8

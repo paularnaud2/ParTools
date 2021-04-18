@@ -5,17 +5,17 @@ import pytools.common as com
 from pytools.tools import gl
 
 
-def split_file(in_dir, out_dir='', **kwargs):
+def split_file(in_path, out_dir='', **kwargs):
     com.log("[toolSplit] split_file: start")
     com.init_kwargs(gl, kwargs)
     init_globals()
-    (file_dir, file_name, ext) = split_in_dir(in_dir, out_dir)
-    gl.header = com.get_header(in_dir)
-    with open(in_dir, 'r', encoding='utf-8') as in_file:
+    (file_dir, file_name, ext) = parse_in_path(in_path, out_dir)
+    gl.header = com.get_header(in_path)
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         while True:
             gl.N_OUT += 1
-            out_dir = f'{file_dir}{file_name}_{gl.N_OUT}.{ext}'
-            if not gen_split_out(out_dir, in_file):
+            out_path = f'{file_dir}{file_name}_{gl.N_OUT}.{ext}'
+            if not gen_split_out(out_path, in_file):
                 break
 
     com.log("[toolSplit] split_file: end")
@@ -27,9 +27,9 @@ def init_globals():
     gl.N_OUT = 0
 
 
-def split_in_dir(in_dir, out_dir):
+def parse_in_path(in_path, out_dir):
     exp = r'(.*)/(\w*).(\w*)$'
-    m = re.search(exp, in_dir)
+    m = re.search(exp, in_path)
     (file_dir, file_name, ext) = (m.group(1), m.group(2), m.group(3))
     file_dir += '/'
     if out_dir:

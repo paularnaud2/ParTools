@@ -6,14 +6,14 @@ from .functions import read_list
 from .functions import compare_elt
 
 
-def compare_sorted_files(in_file_dir_1, in_file_dir_2, out_file_dir):
+def compare_sorted_files(in_path_1, in_path_2, out_path):
 
-    with open(out_file_dir, 'a', encoding='utf-8') as out_file:
-        with open(in_file_dir_1, 'r', encoding='utf-8') as in_file_1:
-            with open(in_file_dir_2, 'r', encoding='utf-8') as in_file_2:
+    with open(out_path, 'a', encoding='utf-8') as out_file:
+        with open(in_path_1, 'r', encoding='utf-8') as in_file_1:
+            with open(in_path_2, 'r', encoding='utf-8') as in_file_2:
                 comp(in_file_1, in_file_2, out_file)
 
-    finish(out_file_dir)
+    finish(out_path)
 
 
 def comp(in1, in2, out):
@@ -25,12 +25,12 @@ def comp(in1, in2, out):
         (l1, l2) = compare_sup(l1, l2, in2, out)
 
 
-def finish(out_file_dir):
+def finish(out_path):
 
     nb_out = com.big_number(gl.c_out)
     nb_1 = com.big_number(gl.c_1)
     nb_2 = com.big_number(gl.c_2)
-    s = (f"Output file successfully generated in {out_file_dir}\n"
+    s = (f"Output file successfully generated in {out_path}\n"
          f"\t\t{nb_1} lines read in file 1\n"
          f"\t\t{nb_2} lines read in file 2\n"
          f"\t\t{nb_out} lines written in output file")

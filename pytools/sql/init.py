@@ -12,9 +12,9 @@ def init():
 
 def init_gl():
     get_footprint()
-    gl.TMP_DIR = g.paths['TMP'] + gl.TMP_FOLDER
-    gl.IUTD_DIR = gl.TMP_DIR + gl.IUTD_FILE
-    gl.TMP_FILE_CHUNK = gl.TMP_DIR + 'chunk_' + gl.footprint + '.txt'
+    gl.TMP_DIR = g.dirs['TMP'] + gl.TMP_FOLDER
+    gl.iutd_path = gl.TMP_DIR + gl.IUTD_FILE
+    gl.tmp_file_chunk = gl.TMP_DIR + 'chunk_' + gl.footprint + '.txt'
 
     gl.range_query = False
     gl.COUNT = False
@@ -27,13 +27,13 @@ def init_gl():
 def init_tmp_dir():
 
     tmp = gl.footprint + '/'
-    gl.TMP_PATH = gl.TMP_DIR + tmp
-    com.mkdirs(gl.TMP_PATH)
+    gl.TMP_DIR = gl.TMP_DIR + tmp
+    com.mkdirs(gl.TMP_DIR)
 
 
 def get_footprint():
 
-    fp = gl.DB + gl.ENV + gl.CNX_STR + gl.OUT_FILE
+    fp = gl.DB + gl.ENV + gl.CNX_STR + gl.OUT_PATH
     fp += gl.QUERY_IN + str(gl.QUERY_LIST)
     fp = com.hash512(fp)
     gl.footprint = fp

@@ -15,12 +15,12 @@ def fill_array_list():
         gl.c_col += 1
         n = gl.c_col
         com.log(f"Reading tmp file no. {n}...", 1)
-        tmp_file_dir = f"{gl.TMP_DIR}tmp_{n}{gl.FILE_TYPE}"
+        tmp_file_path = f"{gl.TMP_DIR}tmp_{n}{gl.FILE_TYPE}"
         if n > 1:
             com.log("Deleting previous tmp list...", 1)
             del tmp_file_list
             com.log("Previous tmp list deleted", 1)
-        tmp_file_list = read_tmp_file(tmp_file_dir)
+        tmp_file_list = read_tmp_file(tmp_file_path)
         # if current tmp file doesn't exist, we directly jump to the next one
         if tmp_file_list == "empty":
             com.log(f"Tmp file no. {n} not found", 1)
@@ -28,14 +28,14 @@ def fill_array_list():
         com.log(f"Writing tmp file no. {n} in buffer array...", 1)
         n_written_rows = write_tmp_file_in_array(tmp_file_list)
         com.log(f"Rewriting tmp file no. {n}...", 1)
-        rewrite_tmp_file(tmp_file_list, tmp_file_dir, n_written_rows)
+        rewrite_tmp_file(tmp_file_list, tmp_file_path, n_written_rows)
 
 
-def read_tmp_file(tmp_file_dir):
+def read_tmp_file(tmp_file_path):
     # Reading one tmp file
 
     try:
-        with open(tmp_file_dir, 'r', encoding='utf-8') as tmp_file:
+        with open(tmp_file_path, 'r', encoding='utf-8') as tmp_file:
             tmp_file_list = tmp_file.readlines()
     except FileNotFoundError:
         tmp_file_list = "empty"
@@ -59,14 +59,14 @@ def write_tmp_file_in_array(tmp_file_list):
     return counter
 
 
-def rewrite_tmp_file(tmp_file_list, tmp_file_dir, n_written_rows):
+def rewrite_tmp_file(tmp_file_list, tmp_file_path, n_written_rows):
     # Rewriting tmp file without the lines written in buffer array
 
     if len(tmp_file_list) > 0:
-        with open(tmp_file_dir, 'w', encoding='utf-8') as tmp_file:
+        with open(tmp_file_path, 'w', encoding='utf-8') as tmp_file:
             for line in tmp_file_list[n_written_rows:]:
                 tmp_file.write(line)
     else:
         # If void, tmp file is deleted
-        os.remove(tmp_file_dir)
+        os.remove(tmp_file_path)
         com.log(f"Deleting temporary file no. {gl.c_col}")

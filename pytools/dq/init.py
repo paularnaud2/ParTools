@@ -1,5 +1,4 @@
 import os
-from time import time
 from math import floor
 
 import pytools.common as com
@@ -11,16 +10,14 @@ from .functions import read_list
 
 def init_dq(kwargs):
     com.log("[dq] run_dq: start")
-    start_time = time()
     com.init_kwargs(gl, kwargs)
     init_tmp_dir()
-    dirs = set_dirs()
-    s = (f"run_dq job initialised. Input files {dirs['in1']} and {dirs['in2']}"
-         " are going to be sorted and compared.")
+    set_paths()
+    s = (
+        f"run_dq job initialised. Input files {gl.paths['in1']} and {gl.paths['in2']}"
+        " are going to be sorted and compared.")
     com.log(s)
     com.log_print('|')
-
-    return (start_time, dirs)
 
 
 def init_compare_files(out):
@@ -29,9 +26,9 @@ def init_compare_files(out):
     gl.IN_FILE_NAME_1 = '1'
     gl.IN_FILE_NAME_2 = '2'
     if out:
-        gl.OUT_DIR = out
+        gl.out_path = out
     else:
-        gl.OUT_DIR = g.paths['OUT'] + 'file_match_out.csv'
+        gl.out_path = g.dirs['OUT'] + 'file_match_out.csv'
     gl.TMP_1 = gl.TMP_DIR + 'tmp_1.csv'
     gl.TMP_2 = gl.TMP_DIR + 'tmp_2.csv'
     gl.EQUAL_OUT = False
@@ -39,24 +36,24 @@ def init_compare_files(out):
 
 
 def init_tmp_dir():
-    gl.TMP_DIR = g.paths['TMP'] + gl.TMP_FOLDER
+    gl.TMP_DIR = g.dirs['TMP'] + gl.TMP_FOLDER
     com.mkdirs(gl.TMP_DIR, True)
 
 
-def set_dirs():
+def set_paths():
 
-    dirs = {}
+    paths = {}
 
-    dirs["in1"] = gl.IN_DIR + gl.IN_FILE_NAME_1 + gl.FILE_TYPE
-    dirs["out1"] = gl.TMP_DIR + gl.OUT_FILE_NAME + "_1" + gl.FILE_TYPE
-    dirs["in2"] = gl.IN_DIR + gl.IN_FILE_NAME_2 + gl.FILE_TYPE
-    dirs["out2"] = gl.TMP_DIR + gl.OUT_FILE_NAME + "_2" + gl.FILE_TYPE
-    dirs["out"] = gl.OUT_DIR + gl.OUT_FILE_NAME + gl.FILE_TYPE
+    paths["in1"] = gl.IN_DIR + gl.IN_FILE_NAME_1 + gl.FILE_TYPE
+    paths["out1"] = gl.TMP_DIR + gl.OUT_FILE_NAME + "_1" + gl.FILE_TYPE
+    paths["in2"] = gl.IN_DIR + gl.IN_FILE_NAME_2 + gl.FILE_TYPE
+    paths["out2"] = gl.TMP_DIR + gl.OUT_FILE_NAME + "_2" + gl.FILE_TYPE
+    paths["out"] = gl.OUT_DIR + gl.OUT_FILE_NAME + gl.FILE_TYPE
 
-    return dirs
+    gl.paths = paths
 
 
-def init_stf(in_file_dir, out_file_dir):
+def init_stf(in_path, out_path):
 
     gl.c_file = 0
     gl.c_row_max = 0
@@ -75,7 +72,7 @@ def init_stf(in_file_dir, out_file_dir):
     gl.OUT_DUP_KEY_FILE += "_dup_key" + gl.FILE_TYPE
 
     del_tmp_files()
-    com.gen_header(in_file_dir, out_dir=out_file_dir)
+    com.gen_header(in_path, out_path=out_path)
 
 
 def init_prev_elt(list_in):
@@ -136,8 +133,8 @@ def del_tmp_files():
     while True:
         try:
             counter += 1
-            tmp_file_dir = gl.TMP_DIR + str(counter) + gl.FILE_TYPE
-            os.remove(tmp_file_dir)
+            tmp_path = gl.TMP_DIR + str(counter) + gl.FILE_TYPE
+            os.remove(tmp_path)
         except FileNotFoundError:
             break
 

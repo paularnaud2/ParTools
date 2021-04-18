@@ -9,13 +9,13 @@ import pytools.sql.gl as sql
 # Main
 TEST = 'pytools/test/'
 TEST_OUT = 'test/'
-OUT_DUP_TMP = g.paths['TMP'] + tools.TMP_FOLDER + gt.TMP_OUT
+OUT_DUP_TMP = g.dirs['TMP'] + tools.TMP_FOLDER + gt.TMP_OUT
 
 # test_sql
 TEST_SQL = TEST + 'sql/files/'
 TEST_SQL_OUT = TEST_OUT + 'sql/'
-SQL_OUT = g.paths['TMP'] + TEST_SQL_OUT
-SQL_TMP = g.paths['TMP'] + sql.TMP_FOLDER
+SQL_OUT = g.dirs['TMP'] + TEST_SQL_OUT
+SQL_TMP = g.dirs['TMP'] + sql.TMP_FOLDER
 SQL_DB = cfg.TEST_DB
 SQL_ENV = 'LOCAL'
 SQL_T_TEST = 'TEST'
@@ -50,8 +50,8 @@ SQL_MAX_ELT_INSERT = 200
 # test_reqlist
 TEST_RL = TEST + 'reqlist/files/'
 TEST_RL_OUT = TEST_OUT + 'reqlist/'
-RL_OUT = g.paths['TMP'] + TEST_RL_OUT
-RL_TMP = g.paths['TMP'] + rl.TMP_FOLDER
+RL_OUT = g.dirs['TMP'] + TEST_RL_OUT
+RL_TMP = g.dirs['TMP'] + rl.TMP_FOLDER
 RL_OUT_JOIN = RL_OUT + 'join.csv'
 RL_OUT_DUP_REF = TEST_RL + 'out_dup_ref.csv'
 
@@ -83,7 +83,7 @@ RL_OUT_JOIN_REF_3 = TEST_RL + 'join_ref_3.csv'
 # test_dq
 TEST_DQ = TEST + 'dq/files/'
 TEST_DQ_OUT = TEST_OUT + 'dq/'
-DQ_OUT = g.paths['TMP'] + TEST_DQ_OUT
+DQ_OUT = g.dirs['TMP'] + TEST_DQ_OUT
 
 IN_MH = 'in_missing_header'
 IN_DH = 'in_different_header'
@@ -122,7 +122,7 @@ OUT_SPLIT_3 = '3_3'
 # test_tools
 TEST_TOOL = TEST + 'tools/files/'
 TEST_TOOL_OUT = TEST_OUT + 'tools/'
-TOOLS_OUT = g.paths['TMP'] + TEST_TOOL_OUT
+TOOLS_OUT = g.dirs['TMP'] + TEST_TOOL_OUT
 
 # XML
 XML_IN = TEST_TOOL + 'xml_in.xml'

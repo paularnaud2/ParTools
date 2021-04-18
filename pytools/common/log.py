@@ -15,14 +15,14 @@ def write_log(str_in):
         return
 
     s = str(str_in)
-    with open(g.paths['LOG'] + g.LOG_FILE, 'a', encoding='utf-8') as in_file:
+    with open(g.dirs['LOG'] + g.LOG_FILE, 'a', encoding='utf-8') as in_file:
         in_file.write(s + '\n')
 
 
 def check_log(in_list, log_match=False):
 
     log('check_log...')
-    lp = g.paths['LOG'] + g.LOG_FILE
+    lp = g.dirs['LOG'] + g.LOG_FILE
     txt = file.load_txt(lp, False)
     n_w = 0
     for elt in in_list:
@@ -72,11 +72,11 @@ def init_log(parent_module='', force_init=False):
     if parent_module:
         s += '_' + parent_module
     g.LOG_FILE = s + '.txt'
-    with open(g.paths['LOG'] + g.LOG_FILE, 'w', encoding='utf-8') as in_file:
+    with open(g.dirs['LOG'] + g.LOG_FILE, 'w', encoding='utf-8') as in_file:
         in_file.write('')
 
     g.LOG_FILE_INITIALISED = True
-    log_path = g.paths['LOG'] + g.LOG_FILE
+    log_path = g.dirs['LOG'] + g.LOG_FILE
     log_path = p.abspath(log_path)
     s = f"Log file initialised ({log_path})"
     log(s, print_date=True)

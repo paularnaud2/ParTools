@@ -71,9 +71,9 @@ def init_instant_client():
             com.log("Initialising Oracle client...")
             gls.client_is_init = True
             if not exists(cfg.ORACLE_CLIENT):
-                s = ("Error: The Oracle instant client path specified in"
+                s = ("Error: The Oracle instant client directory specified in"
                      f" {g.conf_path} (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"
-                     " doesn't exist. Please enter a valid path for the"
+                     " doesn't exist. Please enter a valid directory for the"
                      " Oracle instant client.")
                 com.log(s)
                 raise Exception(s)

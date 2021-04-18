@@ -31,14 +31,14 @@ def run_reqList(**kwargs):
 
 def download():
     if gl.SQUEEZE_JOIN:
-        gl.OUT_SQL = gl.OUT_FILE
+        gl.OUT_SQL = gl.OUT_PATH
     sql.download(
         CNX_STR=gl.CNX_STR,
         DB=gl.DB,
         ENV=gl.ENV,
         QUERY_IN=gl.QUERY_IN,
         QUERY_LIST=gl.query_list,
-        OUT_FILE=gl.OUT_SQL,
+        OUT_PATH=gl.OUT_SQL,
         MAX_DB_CNX=gl.MAX_DB_CNX,
         VAR_DICT=gl.VAR_DICT,
         TEST_RECOVER=gl.TEST_RECOVER,
@@ -48,16 +48,16 @@ def download():
     )
 
 
-def left_join_files(ldir='', rdir='', out='', debug=False):
+def left_join_files(lpath='', rpath='', out='', debug=False):
     com.log("[reqlist] left_join_files: start")
     start_time = time()
     if debug:
         gl.DEBUG_JOIN = True
-    if ldir or rdir:
+    if lpath or rpath:
         init_globals()
-        com.log(f"Loading arrays from '{ldir}' and '{rdir}'...")
-        gl.ar_in = com.load_csv(ldir)
-        ar_right = com.load_csv(rdir)
+        com.log(f"Loading arrays from '{lpath}' and '{rpath}'...")
+        gl.ar_in = com.load_csv(lpath)
+        ar_right = com.load_csv(rpath)
         com.log("Arrays loaded")
         com.log_print('|')
     else:
@@ -66,7 +66,7 @@ def left_join_files(ldir='', rdir='', out='', debug=False):
         com.log("Right array loaded")
     left_join_arrays(gl.ar_in, ar_right)
     if not out:
-        out = gl.OUT_FILE
+        out = gl.OUT_PATH
     com.log("Saving output file...")
     com.save_csv(gl.out_array, out)
     s = f"Output file saved in {out}"
@@ -80,7 +80,7 @@ def finish(start_time):
     if gl.CHECK_DUP:
         s = "Checking duplicates on the first column of the output file..."
         com.log(s)
-        find_dup(gl.OUT_FILE, col=1)
+        find_dup(gl.OUT_PATH, col=1)
         com.log_print('|')
 
     (dms, dstr) = com.get_duration_string(start_time, True)
@@ -90,4 +90,4 @@ def finish(start_time):
         st.msg_box(s, "reqlist", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
-        com.startfile(gl.OUT_FILE)
+        com.startfile(gl.OUT_PATH)

@@ -5,13 +5,13 @@ from .init import init_prev_elt
 from .functions import write_min_elt
 
 
-def gen_sorted_temp_files(in_file_dir, out_file_dir):
+def gen_sorted_temp_files(in_path, out_path):
     # Generation of sorted temporary files
 
-    has_header = com.has_header(in_file_dir)
+    has_header = com.has_header(in_path)
     com.log("Generating first list to be sorted...")
     com.init_sl_time()
-    with open(in_file_dir, 'r', encoding='utf-8') as in_file:
+    with open(in_path, 'r', encoding='utf-8') as in_file:
         first_line = in_file.readline()
         if not has_header:
             gl.cur_list.append(com.csv_to_list(first_line))
@@ -22,11 +22,11 @@ def gen_sorted_temp_files(in_file_dir, out_file_dir):
             s = "lines read"
             com.step_log(gl.c_sf_read, gl.SL_STEP, s)
             check_max_row(gl.c_sf_read)
-    gen_last_file(out_file_dir)
+    gen_last_file(out_path)
     del gl.cur_list
 
 
-def gen_last_file(out_file_dir):
+def gen_last_file(out_path):
     # Generation of the last temporary file
 
     gl.c_file += 1
@@ -38,8 +38,8 @@ def gen_last_file(out_file_dir):
         gl.cur_list.sort()
         s = "Current list sorted. Generating output file..."
         com.log(s)
-        gen_out_file(out_file_dir)
-        s = f"Output file saved in {out_file_dir}"
+        gen_out_file(out_path)
+        s = f"Output file saved in {out_path}"
         com.log(s)
     else:
         if len(gl.cur_list) > 0:
@@ -58,10 +58,10 @@ def gen_last_file(out_file_dir):
         com.log(f"{gl.c_file} temporary files created")
 
 
-def gen_out_file(out_file_dir):
+def gen_out_file(out_path):
     # Generating output file in the case of only one temporary list
 
-    with open(out_file_dir, 'a', encoding='utf-8') as out_file:
+    with open(out_path, 'a', encoding='utf-8') as out_file:
         gl.c_tot_out = 1
         com.init_sl_time()
         init_prev_elt(gl.cur_list)
@@ -96,5 +96,5 @@ def gen_temp_file():
     # Generating one temporary file
 
     file_nb = gl.c_file
-    tmp_file_dir = f"{gl.TMP_DIR}tmp_{file_nb}{gl.FILE_TYPE}"
-    com.save_csv(gl.cur_list, tmp_file_dir)
+    tmp_path = f"{gl.TMP_DIR}tmp_{file_nb}{gl.FILE_TYPE}"
+    com.save_csv(gl.cur_list, tmp_path)

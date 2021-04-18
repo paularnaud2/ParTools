@@ -21,12 +21,12 @@ def merge_tmp_files():
     i = 0
     for elt in file_list:
         i += 1
-        cur_dir = gl.TMP_PATH + elt
+        cur_path = gl.TMP_DIR + elt
         if i == 1:
-            com.merge_files(cur_dir, out_file, remove_header=False)
+            com.merge_files(cur_path, out_file, remove_header=False)
         else:
-            com.merge_files(cur_dir, out_file, remove_header=True)
-        os.remove(cur_dir)
+            com.merge_files(cur_path, out_file, remove_header=True)
+        os.remove(cur_path)
 
     n = len(file_list)
     com.log(f"Merging and deleting of the {n} temporary files over")
@@ -34,8 +34,8 @@ def merge_tmp_files():
 
 def init_merge():
     gl.MERGE_OK = True
-    file_list = com.get_file_list(gl.TMP_PATH)
-    out_file = gl.OUT_FILE
+    file_list = com.get_file_list(gl.TMP_DIR)
+    out_file = gl.OUT_PATH
     if check_ec(file_list) or check_mono(file_list, out_file):
         return ('', '', True)
 
@@ -50,18 +50,18 @@ def init_merge():
 def move_tmp_folder():
 
     gl.MERGE_OK = False
-    out_dir = gl.OUT_RG_DIR
+    out_dir = gl.OUT_DIR
 
     com.mkdirs(out_dir, True)
     com.log(f"Output folder {out_dir} created")
 
-    file_list = com.get_file_list(gl.TMP_PATH)
+    file_list = com.get_file_list(gl.TMP_DIR)
     n = len(file_list)
     com.log(f"Moving {n} files to the output folder....")
     for elt in file_list:
-        cur_dir = gl.TMP_PATH + elt
-        target_dir = out_dir + elt
-        move(cur_dir, target_dir)
+        cur_path = gl.TMP_DIR + elt
+        target_path = out_dir + elt
+        move(cur_path, target_path)
     com.log(f"Files moved to {out_dir}")
 
 
@@ -78,7 +78,7 @@ def check_ec(file_list):
 
 def check_mono(file_list, out_file):
     if file_list == ['MONO' + gl.FILE_TYPE]:
-        cur_dir = gl.TMP_PATH + file_list[0]
-        move(cur_dir, out_file)
+        cur_path = gl.TMP_DIR + file_list[0]
+        move(cur_path, out_file)
         return True
     return False

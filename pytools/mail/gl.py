@@ -6,8 +6,8 @@ RECIPIENTS = 'recipients.txt'
 SUBJECT = 'subject.txt'
 BODY = 'body.html'
 
-test = g.root_path + 'test/mails/test/'
-conf = g.root_path + 'test/mails/conf'
+test = g.root_dir + 'test/mails/test/'
+conf = g.root_dir + 'test/mails/conf'
 
 S_CONF = (f"The email couldn't be sent because the conf file '{CONF_PATH}'"
           f" was not found.\nSee {conf} for example")

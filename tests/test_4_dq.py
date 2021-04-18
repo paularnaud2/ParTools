@@ -21,11 +21,11 @@ def test_dq():
     t.dq_t(gl.IN_DK, gl.IN12, gl.OUT1, tpd=True)
 
     # Compare matching files
-    dq.file_match(gl.OUT_DK, gl.OUT_DK_REF, compare=True, out=gl.OUT_FM)
+    dq.file_match(gl.OUT_DK, gl.OUT_DK_REF, compare=True, out_path=gl.OUT_FM)
     dq.file_match(gl.OUT_FM, gl.REF_FM)
 
     # Compare different files
-    dq.file_match(gl.REF1_F, gl.REF2_F, err=False, out=gl.OUT_FM)
+    dq.file_match(gl.REF1_F, gl.REF2_F, err=False, out_path=gl.OUT_FM)
     dq.file_match(gl.OUT_FM, gl.REF_FDM)
 
     t.dq_t(gl.IN11, gl.IN12, gl.OUT1, gl.REF1, 100, gl.REF_DUP1, sl=10)

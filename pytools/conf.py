@@ -1,7 +1,7 @@
-# This path contains input, output, log, and temporary files folders.
+# This directory contains input, output, log, and temporary files folders.
 # If you whish to change it, run import pytools.common after to initialise the
 # new folder.
-FILES_PATH = 'PT/'
+FILES_DIR = 'PT/'
 
 # DEBUG = True enables function decorator in common.deco
 # it basically terminates the program if one of the threads
