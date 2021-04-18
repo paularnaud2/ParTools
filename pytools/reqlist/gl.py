@@ -1,16 +1,17 @@
 from pytools.common import g
 
-# Mandatory inputs (DB from conf.CONF_ORACLE or CNX_STR)
+# Mandatory inputs---------------------------------------------------
+# CNX_STR or DB from conf.CONF_ORACLE
 CNX_STR = ''
 DB = ''
+QUERY_IN = ''
 
-# Optional inputs
+# Optional inputs----------------------------------------------------
 ENV = ''  # See comment in conf.CONF_ORACLE for details
 IN_FILE = f"{g.paths['IN']}rl_in.csv"
 OUT_FILE = f"{g.paths['OUT']}rl_out.csv"
-QUERY_IN = 'reqlist/queries/query_in_rl.sql'
 
-# Default const
+# Default const------------------------------------------------------
 MAX_DB_CNX = 8
 NB_MAX_ELT_IN_STATEMENT = 1000
 IN_FIELD_NB = 1
