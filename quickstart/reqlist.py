@@ -1,3 +1,23 @@
+# reqlist allows you to quickly retrieve data from an Oracle DB given an input
+# perimeter. The SQL output result can be joint to the input csv file (which can
+# contain more than one column). The database in queried in a multithreaded way.
+#
+# In this example of use, the input file is first created from the 'in.csv' file
+# (used to populate the TEST table) an contains two columns.
+# The result contains 3 colums: 2 from the input file and the third (PRM) from
+# the SQL result.
+#
+# Notes:
+# The SQL result must contain the first column in order to operate the joint.
+# In other words, the first field of both input and SQL has to be an ID.
+#
+# QUERY_IN accepts either a string or a file path.
+#
+# Before running this example, you have to populate the TEST table
+# by running quickstart/sql_upload.py
+#
+# For more details see the README.md file.
+
 from datetime import datetime
 
 import pytools.common as com
@@ -11,40 +31,26 @@ db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
 date = datetime.now().strftime("%Y%m%d")
-query_in = 'reqlist/queries/e_RL.sql'
 query_in = 'pytools/test/reqlist/files/query1.sql'
 in_file = f"{g.paths['IN']}rl_in.csv"
 out_file = f"{g.paths['OUT']}export_RL_{db}_{date}.csv"
 
 # Creates input file from test file
 arr = com.load_csv('pytools/test/sql/files/in.csv')
-arr = [elt[0] for elt in arr]
+arr = [elt[0:2] for elt in arr]
 com.save_csv(arr, in_file)
 
 query_in = """
-SELECT AFFAIRE, DEM_ID
+SELECT AFFAIRE, PRM
 FROM TEST
 WHERE 1=1
 AND AFFAIRE IN @@IN@@
 """
 
-if __name__ == '__main__':
-    run_reqList(
-        CNX_STR=cnx_str,
-        # DB=db,
-        QUERY_IN=query_in,
-        IN_FILE=in_file,
-        OUT_FILE=out_file,
-        VAR_DICT={'TABLE_NAME': 'TEST'},
-        SQUEEZE_JOIN=False,
-        SQUEEZE_SQL=False,
-    )
-else:
-    run_reqList(
-        CNX_STR=cnx_str,
-        QUERY_IN=query_in,
-        IN_FILE=in_file,
-        OUT_FILE=out_file,
-        VAR_DICT={'TABLE_NAME': 'TEST'},
-        OPEN_OUT_FILE=False,
-    )
+run_reqList(
+    CNX_STR=cnx_str,
+    QUERY_IN=query_in,
+    IN_FILE=in_file,
+    OUT_FILE=out_file,
+    OPEN_OUT_FILE=True,
+)

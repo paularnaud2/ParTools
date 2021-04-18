@@ -1,4 +1,4 @@
-# This script aims to solve problems with local TNS listener
+# This script aims to fix ORA-12514 (problem with local TNS listener)
 import pytools.common.sTools as st
 import pytools.conf as cfg
 

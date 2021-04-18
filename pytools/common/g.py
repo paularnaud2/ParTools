@@ -61,4 +61,4 @@ def init_PT():
     save_list(['*'], cfg.FILES_PATH + '.gitignore')
     init_log('init')
     log("PyTools package successfully initialised."
-        f" Set up your conf here: {conf_path}")
+        f" Set up your conf here: {conf_path}\n")

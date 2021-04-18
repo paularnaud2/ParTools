@@ -9,8 +9,8 @@ import pytools.common as com
 import pytools.common.g as g
 
 from . import gl
-from . import mg
 from . import log
+from . import merge
 from .connect import gen_cnx_dict
 from .functions import write_rows
 
@@ -24,7 +24,7 @@ def process_query_list():
     init_th_dict()
     gl.sem = Semaphore(gl.MAX_DB_CNX)
     lauch_threads()
-    mg.finish()
+    merge.finish()
 
 
 def lauch_threads():

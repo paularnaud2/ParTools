@@ -7,7 +7,7 @@ from .groupby import group_by
 
 
 def finish():
-    if gl.MERGE_FILES or not gl.range_query:
+    if gl.MERGE_FILES or len(gl.QUERY_LIST) == 1:
         merge_tmp_files()
         group_by()
     else:

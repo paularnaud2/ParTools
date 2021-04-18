@@ -85,6 +85,7 @@ def finish_this(start_time):
 def init(kwargs):
     com.init_kwargs(gl, kwargs)
     init_gl()
+    com.mkdirs(gl.TMP_DIR)
 
     gl.ref_chunk = 0
     gl.c_main = 0
