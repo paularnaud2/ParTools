@@ -1,6 +1,3 @@
-# Main-------------------------------------------------------------------------
-CI = True
-
 # This path contains input, output, log, and temporary files folders.
 # If you whish to change it, run import pytools.common after to initialise the
 # new folder.
