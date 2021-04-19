@@ -11,6 +11,7 @@ from .log import log
 from .log import step_log
 from .log import init_log
 from .log import log_print
+from .log import log_dict
 from .log import log_array
 from .log import log_input
 from .log import check_log
