@@ -4,6 +4,7 @@ from pytools.common import g
 # CNX_STR or DB from conf.CONF_ORACLE
 CNX_STR = ''
 DB = ''
+
 QUERY_IN = ''
 
 # Optional inputs----------------------------------------------------

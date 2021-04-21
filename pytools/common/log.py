@@ -152,7 +152,7 @@ def log_array(array, nb_tab=0):
 
 def log_dict(dict):
     for key in dict:
-        log_print(f'{key} : {dict[key]}')
+        log_print(f'{key}: {dict[key]}')
 
 
 def log_example(list_in, what="duplicates"):

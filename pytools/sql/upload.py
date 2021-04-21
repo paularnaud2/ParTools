@@ -67,10 +67,10 @@ def send_chunk_duration(start):
 
 
 def prepare_bdd():
-    if gl.EXECUTE_PARAMS:
+    if gl.EXECUTE_KWARGS:
         com.log("Preparing DB before data injection...")
         com.log_print("|")
-        execute(**gl.EXECUTE_PARAMS)
+        execute(**gl.EXECUTE_KWARGS)
 
 
 def finish_this(start_time):

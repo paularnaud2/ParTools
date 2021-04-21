@@ -1,15 +1,17 @@
 import ssl
 import smtplib
+from shutil import copytree
 from email.mime.multipart import MIMEMultipart
 
 import pytools.common as com
 from pytools.common import g
+import pytools.conf as cfg
 from . import get
 
 
 def mail(mail_name):
     gl.mail_name = mail_name
-    gl.mail_dir = gl.MAILS_DIR + mail_name + '/'
+    gl.mail_dir = cfg.MAILS_DIR + mail_name + '/'
 
     conf = get.conf()
     host = conf['HOST']
@@ -30,6 +32,14 @@ def mail(mail_name):
             server.sendmail(sender, recipients, msg.as_string())
 
     com.log('Mail send')
+
+
+def init_mail():
+
+    com.delete_folder(cfg.MAILS_DIR)
+    copytree('pytools/test/mails', cfg.MAILS_DIR)
+    com.save_list(['*'], cfg.MAILS_DIR + '.gitignore')
+    com.log(f"Mail folder '{cfg.MAILS_DIR}' successfully initialised")
 
 
 def get_infos(conf):

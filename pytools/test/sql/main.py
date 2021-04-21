@@ -30,7 +30,7 @@ def upload(inp, tr=False, md=""):
 
     sql.upload(
         DB=gl.SQL_DB,
-        EXECUTE_PARAMS=execute_kwargs,
+        EXECUTE_KWARGS=execute_kwargs,
         SCRIPT_IN=gl.SQL_INSERT_TABLE,
         VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
         UPLOAD_IN=inp,

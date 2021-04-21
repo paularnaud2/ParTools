@@ -1,17 +1,19 @@
-# sql.download allows you to simply retreive data from an Oracle DB
-# in a multithreaded way.
+# sql.download allows you to simply and quickly retreive data from an Oracle DB
 #
-# In this file you'll find four example of use:
+# In this file, you'll find four examples of use:
 # 1) example_simple: a simple SELECT query (no multithread in this case) is processed.
 # 2) example_ql_raw: a raw query list is processed. The 3 results are merged
 # (default behavior, MERGE_FILES=True) and output in a single csv file.
 # 3) example_ql_var: a variabilised query list is processed. The 3 results are
-# output in 3 differnt csv files (MERGE_FILES=False).
-# 4) example_rg: a 'range query' is processed. It is a variablilised query which
-# is going to be executed in parralel for each range of ID contained in the file
-# 'pytools/sql/ranges/RG_PRM_2.csv'
+# output in 3 different csv files (MERGE_FILES=False).
+# 4) example_rg: a 'range query' is processed. A range query is a variablilised
+# query which executed in parralel for each range of ID contained in the file
+# whose name appears in the variable (see example)
 #
-# Note that QUERY_IN accepts either a string or a file path
+# Notes:
+# - SCRIPT_IN accepts either a string or a file path
+# - You can input either CNX_STR or DB, as long as the DB you pass is defined
+# in the conf file (pytools/conf.py)
 #
 # For more details, see the README.md file.
 
@@ -40,7 +42,9 @@ def example_simple():
 
 
 def example_ql_raw():
-    # Format of elements of a raw query list : [query, name of query]
+    # Expected format for the elements of a raw query list :
+    # [query, name of query]
+    #
     # Note that in the case of a raw query list, no QUERY_IN should be input
 
     query_list_raw = [
@@ -57,7 +61,9 @@ def example_ql_raw():
 
 
 def example_ql_var():
-    # Format of elements of a var query list : [replacing element, name of query]
+    # Expected format for the elements of a var query list :
+    # [replacing element, name of query]
+    #
     # Note that in the case of a var query list, a QUERY_IN var should be input;
     # containing a variabilised query used for the replacing elements
 
@@ -81,6 +87,7 @@ def example_rg():
     # A range query should contain a variable element formatted as follows:
     # @@RG_<range_file>@@. The range file is a csv file located in
     # 'pytools/sql/ranges'
+
     query_in_rg = """
     SELECT * FROM TEST
     WHERE 1=1

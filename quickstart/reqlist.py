@@ -8,12 +8,12 @@
 # the SQL result.
 #
 # Notes:
-# The SQL result must contain the first column in order to operate the joint.
+# - The SQL result must contain the first column in order to operate the joint.
 # In other words, the first field of both input and SQL has to be an ID.
 #
-# QUERY_IN accepts either a string or a file path.
+# - QUERY_IN accepts either a string or a file path.
 #
-# Before running this example, you have to populate the TEST table
+# - Before running this example, you have to populate the TEST table
 # by running quickstart/sql_upload.py
 #
 # For more details see the README.md file.

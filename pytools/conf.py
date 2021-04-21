@@ -3,6 +3,10 @@
 # new folder.
 FILES_DIR = 'PT/'
 
+# This directory has to contain a conf.txt file and the mail folders corresponding
+# to the mail_name passed in the mail function.
+MAILS_DIR = 'mails/'
+
 # DEBUG = True enables function decorator in common.deco
 # it basically terminates the program if one of the threads
 # (or the main thread) throws an exception and prints the exception (full trace)

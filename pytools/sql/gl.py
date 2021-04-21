@@ -54,7 +54,7 @@ IUTD_LIST = []
 
 # Settable globales
 VAR_DICT = {}
-EXECUTE_PARAMS = {}
+EXECUTE_KWARGS = {}
 
 # Process manager
 MD = None
@@ -62,7 +62,7 @@ MD = None
 # Execute
 SCRIPT_IN = ''
 NB_MAX_ELT_INSERT = 100000
-PROC = False
+PROC = True
 
 # Upload
 UPLOAD_IN = ''

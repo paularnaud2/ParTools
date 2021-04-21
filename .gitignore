@@ -4,10 +4,7 @@ _old/
 .vscode/.ropeproject/objectdb
 .coverage
 htmlcov
-mail/mails
 venv/
 *.egg-info/
 .old/
 .pytest_cache/
-pytools/test/mail/conf/conf.txt
-mails/

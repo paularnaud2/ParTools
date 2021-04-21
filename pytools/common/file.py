@@ -11,8 +11,9 @@ def startfile(in_path):
 
 
 def delete_folder(dir):
-    rmtree(dir)
-    log(f"Folder {dir} deleted")
+    if p.exists(dir):
+        rmtree(dir)
+        log(f"Folder {dir} deleted")
 
 
 def mkdirs(dir, delete=False):
