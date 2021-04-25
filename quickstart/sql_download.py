@@ -1,11 +1,15 @@
 # sql.download allows you to simply and quickly retreive data from an Oracle DB
 #
 # In this file, you'll find four examples of use:
-# 1) example_simple: a simple SELECT query (no multithread in this case) is processed.
+# 1) example_simple: a simple SELECT query (no multithread possible in this
+# case) is processed.
+#
 # 2) example_ql_raw: a raw query list is processed. The 3 results are merged
 # (default behavior, MERGE_FILES=True) and output in a single csv file.
+#
 # 3) example_ql_var: a variabilised query list is processed. The 3 results are
 # output in 3 different csv files (MERGE_FILES=False).
+#
 # 4) example_rg: a 'range query' is processed. A range query is a variablilised
 # query which executed in parralel for each range of ID contained in the file
 # whose name appears in the variable (see example)

@@ -1,3 +1,6 @@
+# The dq package allows you to compare two big csv files (> 100 Mo).
+# A details result of the comparison is ouput.
+
 import pytools.dq as dq
 from pytools.common import init_log
 from pytools.test import gl

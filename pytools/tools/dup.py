@@ -31,21 +31,6 @@ def del_dup(in_path, out_path, open_out=False):
     com.log("[toolDup] del_dup: end")
 
 
-def shuffle_csv(in_path, out_path, open_out=False):
-    com.log("[toolShuf] shuffle_csv: start")
-    cur_list = com.load_csv(in_path)
-    if com.has_header(cur_list):
-        header = cur_list[0]
-        cur_list = cur_list[1:]
-    shuffle(cur_list)
-    cur_list = [header] + cur_list
-    com.save_csv(cur_list, out_path)
-    com.log(f"Shuffled csv file saved in {out_path}")
-    if open_out:
-        com.startfile(out_path)
-    com.log("[toolShuf] shuffle_csv: end")
-
-
 def find_dup_list(in_list):
     if not in_list:
         return []
@@ -85,3 +70,18 @@ def del_dup_list(in_list):
             old_elt = elt
 
     return out_list
+
+
+def shuffle_csv(in_path, out_path, open_out=False):
+    com.log("[toolShuf] shuffle_csv: start")
+    cur_list = com.load_csv(in_path)
+    if com.has_header(cur_list):
+        header = cur_list[0]
+        cur_list = cur_list[1:]
+    shuffle(cur_list)
+    cur_list = [header] + cur_list
+    com.save_csv(cur_list, out_path)
+    com.log(f"Shuffled csv file saved in {out_path}")
+    if open_out:
+        com.startfile(out_path)
+    com.log("[toolShuf] shuffle_csv: end")

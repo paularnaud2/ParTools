@@ -4,9 +4,10 @@
 #
 # The initialised folder contains two conf files. You have to rename one of them
 # (depending on your case) to 'conf.txt'. The folder should also contain the mail
-# folders corresponding to the mail_name passed in the mail function. As you'll notice,
-# it initialy contains a 'test' folder, allowing you to quickly test the function and
-# to provide you with an example of what a 'mail_name' folder is expected to contain.
+# folders corresponding to the mail_name passed in the mail function. As you'll
+# notice, it initialy contains a 'test' folder, allowing you to quickly test the
+# function and to provide you with an example of what a 'mail_name' folder is
+# expected to contain.
 
 from pytools.mail import mail
 from pytools.mail import init_mail

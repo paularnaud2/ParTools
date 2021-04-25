@@ -38,7 +38,7 @@ TO = [
     "[toolBF] search_big_file: end (* ms)",
     "[dq] sort_file: start (*)",
     "Generating first list to be sorted...",
-    "Output file * successfully generated (2 897 lines written, 4 duplicates removed).",
+    "Output file * successfully generated (2 897 lines written, 4 pure duplicates removed).",
     "4 key duplicates found. List written in *",
     "[dq] sort_file: end (* ms)",
 ]
@@ -62,7 +62,7 @@ DQ = [
     "Filling buffer array - Iteration no. *",
     "Emptying buffer array in output file (and removing dupes)...",
     "Deleting temporary file no. 2",
-    "Output file * successfully generated (25 lines written, 4 duplicates removed).",
+    "Output file * successfully generated (25 lines written, 4 pure duplicates removed).",
     "Examples of duplicates (limited to *):",
     "Input file has more than * lines. It will be splitted in * files (max file nb set to *). Continue? (y/n)",
     "y (TEST_PROMPT_SPLIT = True)",

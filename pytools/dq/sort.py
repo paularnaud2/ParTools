@@ -46,7 +46,7 @@ def finish(out_path, prompt, nb, start_time):
     bn1 = com.big_number(gl.c_tot_out)
     bn2 = com.big_number(n_dup)
     s = (f"Output file {out_path} successfully generated"
-         f" ({bn1} lines written, {bn2} duplicates removed).")
+         f" ({bn1} lines written, {bn2} pure duplicates removed).")
     com.log(s)
     if n_dup > 0:
         if nb != 0:
@@ -54,8 +54,8 @@ def finish(out_path, prompt, nb, start_time):
         else:
             out_dup = gl.OUT_DUP_FILE + gl.FILE_TYPE
         com.save_csv(gl.dup_list, out_dup)
-        com.log(f"Duplicates list written in {out_dup}")
-        com.log_example(gl.dup_list)
+        com.log(f"Pure duplicates list written in {out_dup}")
+        com.log_example(gl.dup_list, "pure duplicates")
     if n_dup_key > 0:
         if prompt:
             prompt_dup_key(n_dup_key)
