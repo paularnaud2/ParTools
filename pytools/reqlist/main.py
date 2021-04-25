@@ -19,18 +19,18 @@ def run_reqList(**kwargs):
     reload(gl)  # reinit globals
     init(kwargs)
     start_time = time()
-    if not gl.SQUEEZE_SQL:
+    if not gl.SKIP_SQL:
         gen_query_list()
         download()
 
-    if not gl.SQUEEZE_JOIN:
+    if not gl.SKIP_JOIN:
         left_join_files()
 
     finish(start_time)
 
 
 def download():
-    if gl.SQUEEZE_JOIN:
+    if gl.SKIP_JOIN:
         gl.OUT_SQL = gl.OUT_PATH
     sql.download(
         CNX_STR=gl.CNX_STR,

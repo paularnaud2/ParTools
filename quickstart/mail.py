@@ -1,6 +1,6 @@
-# In order for the mail function to work,  you have to initialise a mail folder
-# by running the 'init_mail' function. This will create a folder in the MAIL_DIR
-# defined in 'pytool/conf.py' ('mails/' by default).
+# In order for the mail function to be worinkg, you have to initialise a mail
+# folder by running the 'init_mail' function. This will create a folder in the
+# MAIL_DIR defined in 'pytool/conf.py' ('mails/' by default).
 #
 # The initialised folder contains two conf files. You have to rename one of them
 # (depending on your case) to 'conf.txt'. The folder should also contain the mail

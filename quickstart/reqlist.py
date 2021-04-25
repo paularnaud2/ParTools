@@ -17,7 +17,7 @@
 # - Before running this example, you have to populate the TEST table
 # by running quickstart/sql_upload.py
 #
-# For more details see the README.md file.
+# For more details, see the README.md file.
 
 from datetime import datetime
 

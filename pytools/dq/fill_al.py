@@ -48,7 +48,7 @@ def read_tmp_file(tmp_file_path):
 
 def write_tmp_file_in_array(tmp_file_list):
     # Writing part of a tmp file in buffer array so that
-    # it's length reaches at most counters["row_max"]
+    # it's length reaches at most c_row_max
 
     cur_rm = min(len(tmp_file_list), gl.c_row_max)
     counter = 0

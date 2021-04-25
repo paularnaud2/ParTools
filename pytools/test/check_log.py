@@ -64,7 +64,7 @@ DQ = [
     "Deleting temporary file no. 2",
     "Output file * successfully generated (25 lines written, 4 pure duplicates removed).",
     "Examples of duplicates (limited to *):",
-    "Input file has more than * lines. It will be splitted in * files (max file nb set to *). Continue? (y/n)",
+    "Input file has more than * lines. It will be split in * files (max file nb set to *). Continue? (y/n)",
     "y (TEST_PROMPT_SPLIT = True)",
     "Splitted file no. 1 (*) successfully generated",
     "[dq] run_dq: start",

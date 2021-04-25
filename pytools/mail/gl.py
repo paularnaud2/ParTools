@@ -12,6 +12,7 @@ conf = g.root_dir + 'test/mails/conf'
 S_MISSING_CONF = (
     f"The email couldn't be sent because the conf file '{CONF_PATH}' was not found."
     "\nBefore running the mail function, you have to run the init_mail function"
-    " and to set a conf file from one of the two examples (see quickstart).")
+    " and to set a conf file from one of the two examples (see quickstart/mail)."
+)
 
 S_MISSING = "{} file missing ({}). See {} for example."

@@ -11,7 +11,7 @@
 # - You can input either CNX_STR or DB, as long as the DB you pass is defined
 # in the conf file (pytools/conf.py)
 #
-# For more details see the README.md file.
+# For more details, see the README.md file.
 
 import pytools.sql as sql
 from pytools.common import init_log

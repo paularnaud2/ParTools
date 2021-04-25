@@ -1,11 +1,11 @@
 from pytools.common import g
 
 # Mandatory inputs---------------------------------------------------
-# CNX_STR or DB from conf.CONF_ORACLE
-CNX_STR = ''
-DB = ''
+# Either CNX_STR or DB have to be input. If both are filled, CNX_STR is taken
+CNX_STR = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
+DB = ''  # DB name from pytools.conf.CONF_ORACLE
 
-QUERY_IN = ''
+QUERY_IN = ''  # Must be a variabilised query containing '@@IN@@' (see quickstart/reqlist)
 
 # Optional inputs----------------------------------------------------
 ENV = ''  # See comment in conf.CONF_ORACLE for details
@@ -13,15 +13,15 @@ IN_PATH = f"{g.dirs['IN']}rl_in.csv"
 OUT_PATH = f"{g.dirs['OUT']}rl_out.csv"
 
 # Default const------------------------------------------------------
-MAX_DB_CNX = 8
-NB_MAX_ELT_IN_STATEMENT = 1000
-IN_FIELD_NB = 1
+MAX_DB_CNX = 8  # Maximum number of connections allowed to work in parralel
+NB_MAX_ELT_IN_STATEMENT = 1000  # Maximum number of elements in the 'IN' statement per queries
+IN_FIELD_NB = 1  # Column number of the input file on which the queries and joint are performed
 
-SQUEEZE_JOIN = False
-SQUEEZE_SQL = False
+SKIP_JOIN = False  # If True, no joint is performed and the SQL result is directly output
+SKIP_SQL = False  # If True, no SQL query is performed and the joint is directly performed with the available SQL tmp file (only needed for test purpose)
 CHECK_DUP = True
 OPEN_OUT_FILE = True
-MSG_BOX_END = True
+MSG_BOX_END = True  # If True, a message box will pop up at the end of the process, if the processing time is greater than that defined in g.MIN_DUR_MSG_BOX_TRIGGER
 DEBUG_JOIN = False
 TEST_RECOVER = False
 

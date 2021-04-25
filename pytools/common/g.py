@@ -12,10 +12,9 @@ from .log import init_log
 CSV_SEPARATOR = ';'
 VAR_DEL = '@@'
 DEFAULT_FIELD = "FIELD"
-LIKE_MATCH_OUT = "like_match_out.csv"
 
 MAX_EXAMPLE_PRINT = 5
-MIN_DUR_NOTIF_TRIGGER = 30
+MIN_DUR_MSG_BOX_TRIGGER = 30
 MAX_LOG_VAR_CHAR = 100
 
 verrou = RLock()
@@ -29,8 +28,8 @@ E_VA = "Void array"
 # Log
 LOG_LEVEL = 0
 LOG_FILE_INITIALISED = False
-LOG_FILE = None
 LOG_OUTPUT = True
+LOG_FILE = ''
 
 sl_time_dict = {}
 sl_detail = {}

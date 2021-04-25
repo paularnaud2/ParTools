@@ -1,6 +1,7 @@
 # sql.download allows you to simply and quickly retreive data from an Oracle DB
+# In this file, you'll find four examples of use. For cases 2, 3, 4, the database
+# is queried in parallel by multiple threads.
 #
-# In this file, you'll find four examples of use:
 # 1) example_simple: a simple SELECT query (no multithread possible in this
 # case) is processed.
 #

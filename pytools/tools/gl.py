@@ -19,17 +19,17 @@ MULTI_TAG_LIST = [
     'telephone2Num',
     'adresseEmail',
 ]
-SL_STEP_READ = 1000 * 10**3
-SL_STEP_WRITE = 100 * 10**3
+SL_STEP_READ = 1000 * 10**3  # step_log setting (see README.md)
+SL_STEP_WRITE = 100 * 10**3  # step_log setting (see README.md)
 
 # BF-----------------------------------------------------------------
 # Optional input defaults
-LINE_PER_LINE = True
-TEST = False
 N_READ = 10
 PRINT_SIZE = 10
-MAX_LIST_SIZE = 5 * 10**6
-BUFFER_SIZE = 100 * 10**3
+MAX_LIST_SIZE = 5 * 10**6  # Warning: a too high value may cause a Memory error
+BUFFER_SIZE = 100 * 10**3  # Warning: a too high value may cause a Memory error
+LINE_PER_LINE = True
+TEST = False
 
 # Filter-------------------------------------------------------------
 # Const
@@ -39,13 +39,13 @@ s = ("{bn_1} lines read in {dstr}."
 
 # Optional input defaults
 EXTRACT_COL = True
-SL_STEP = 500 * 10**3
+SL_STEP = 500 * 10**3  # step_log setting (see README.md)
 
 # Globals
 COL_LIST = ''
 FF = ''
 
 # Split--------------------------------------------------------------
-MAX_LINE = 10**6  # Maximum number of lines for a splitted file
-MAX_FILE_NB = 10  # Maximum number of splitted files
-ADD_HEADER = True  # Adds the header of the input file to each splitted file
+MAX_LINE = 10**6  # Maximum number of lines for a split file
+MAX_FILE_NB = 10  # Maximum number of split files
+ADD_HEADER = True  # Adds the header of the input file to each split file

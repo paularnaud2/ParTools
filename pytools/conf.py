@@ -40,7 +40,7 @@ CONF_ORACLE = {
 # must have writing permissions.
 # Note also that as with TEST_ENV, the name of the TEST_DB has to be
 # set in CONF_ORACLE so that the duplet (TEST_ENV, TEST_DB) has a defined
-# connexion string
+# connection string
 # Set TEST_DB to '' if you want SQL tests (test_sql and test_reqlist)
 # to be skipped (though a warning will be thrown is this case)
 TEST_DB = 'XE'

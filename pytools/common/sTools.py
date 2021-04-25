@@ -11,7 +11,7 @@ def msg_box(msg, package='common', jdur=0):
 
     if jdur != 0:
         jdur = jdur / 1000
-        if jdur < g.MIN_DUR_NOTIF_TRIGGER:
+        if jdur < g.MIN_DUR_MSG_BOX_TRIGGER:
             return
 
     title = "Python - " + package

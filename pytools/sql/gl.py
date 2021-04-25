@@ -1,9 +1,9 @@
 from pytools.common import g
 
 # Mandatory inputs---------------------------------------------------
-# CNX_STR or DB from conf.CONF_ORACLE
-CNX_STR = ''
-DB = ''
+# Either CNX_STR or DB have to be input. If both are filled, CNX_STR is taken
+CNX_STR = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
+DB = ''  # DB name from pytools.conf.CONF_ORACLE
 
 # QUERY_IN or QUERY_LIST, or both if QUERY_IN is variabilised
 QUERY_IN = ''
@@ -12,18 +12,20 @@ QUERY_LIST = []
 # Optional inputs----------------------------------------------------
 ENV = ''  # See comment in conf.py for details
 OUT_PATH = f"{g.dirs['OUT']}sql_out.csv"
-OUT_DIR = f"{g.dirs['OUT']}sql_out/"
+OUT_DIR = f"{g.dirs['OUT']}sql_out/"  # Used when MERGE_FILES = False
+
+MAX_DB_CNX = 8  # Maximum number of connections allowed to work in parralel
+
+OPEN_OUT_FILE = True
+MERGE_FILES = True  # See quickstart/sql
+EXPORT_RANGE = False  # See quickstart/sql
+CHECK_DUP = True
+MSG_BOX_END = True  # If True, a message box will pop up at the end of the process, if the processing time is greater than that defined in g.MIN_DUR_MSG_BOX_TRIGGER
 
 # Default const------------------------------------------------------
-SL_STEP = 100000
-MAX_DB_CNX = 10
-MAX_CHECK_DUP = 1 * 10**6
+SL_STEP = 100 * 10**3  # step_log setting (see README.md)
+MAX_CHECK_DUP = 1 * 10**6  # If the output number of line exceeds this value, no duplicate check will be performed (avoids potential memory error)
 
-MERGE_FILES = True
-EXPORT_RANGE = False
-CHECK_DUP = True
-OPEN_OUT_FILE = True
-MSG_BOX_END = True
 TEST_RECOVER = False
 TEST_IUTD = False
 
@@ -31,7 +33,6 @@ RANGE_NAME = "RANGE"
 VAR_IN = "IN"
 FILE_TYPE = '.csv'
 EC = '_EC'
-RANGE_FIELD = "RANGE"
 
 TMP_FOLDER = 'sql/'
 RANGE_DIR = 'pytools/sql/ranges/'

@@ -124,7 +124,7 @@ def split_needed():
     n_out_files = ceil(n_line_2 / gl.MAX_LINE_SPLIT)
     bn = com.big_number(gl.MAX_LINE_SPLIT)
     s = (f"Input file has more than {bn} lines."
-         f" It will be splitted in {n_out_files} files "
+         f" It will be split in {n_out_files} files "
          f"(max file nb set to {gl.MAX_FILE_NB_SPLIT}). Continue? (y/n)")
     if gl.TEST_PROMPT_SPLIT:
         com.log(s)
