@@ -49,7 +49,7 @@ AND AFFAIRE IN @@IN@@
 """
 
 run_reqList(
-    CNX_STR=cnx_str,
+    CNX_INFO=cnx_str,
     QUERY_IN=query_in,
     IN_PATH=in_file,
     OUT_PATH=out_file,

@@ -1,8 +1,7 @@
 from os.path import realpath
+from os.path import exists
 
-
-def get_root():
-    root = realpath(__file__)
-    root = str(root).replace("\\", "/")
-    root = root.replace("__init__.py", "")
-    return root
+if exists('conf_perso.py'):
+    import conf_perso as cfg
+else:
+    import conf as cfg

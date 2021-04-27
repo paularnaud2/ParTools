@@ -1,7 +1,7 @@
+from pytools import cfg
 from pytools.common import g
 
 import pytools.tools.gl as gt
-import pytools.conf as cfg
 import pytools.tools.gl as tools
 import pytools.reqlist.gl as rl
 import pytools.sql.gl as sql

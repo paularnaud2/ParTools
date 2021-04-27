@@ -2,7 +2,7 @@
 # Here you can try to connect either by using a connection string, a DNS or a TNS_NAME
 
 import cx_Oracle as cx
-import pytools.conf as cfg
+from pytools import cfg
 
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 dsn = """

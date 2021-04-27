@@ -1,8 +1,8 @@
 from pytools.common import g
 
 # Mandatory inputs---------------------------------------------------
-# Either CNX_STR or DB have to be input. If both are filled, CNX_STR is taken
-CNX_STR = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
+# Either CNX_INFO or DB have to be input. If both are filled, CNX_INFO is taken
+CNX_INFO = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
 DB = ''  # DB name from pytools.conf.CONF_ORACLE
 
 # QUERY_IN or QUERY_LIST, or both if QUERY_IN is variabilised
@@ -46,7 +46,7 @@ S_3 = "Connecting to data base {} ({})..."
 
 # Exceptions
 s = " Pease check the CONF_ORACLE conf var."
-E_1 = "Error: either gl.CNX_STR or gl.DB have to be defined"
+E_1 = "Error: either gl.CNX_INFO or gl.DB have to be defined"
 E_2 = "Error: data base '{}' doesn't seem to be defined." + s
 E_3 = "Error: data base '{}' of environment '{}' doesn't seem to be defined." + s
 

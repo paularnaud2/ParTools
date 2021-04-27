@@ -92,7 +92,7 @@ SQ = [
     "y (TEST_IUTD = True)",
     "The date found in the check file doesn't match the current date",
     "Error: the input file * must have a header",
-    "Error: either gl.CNX_STR or gl.DB have to be defined",
+    "Error: either gl.CNX_INFO or gl.DB have to be defined",
     "Error: data base * doesn't seem to be defined. Pease check the CONF_ORACLE conf var.",
     "Error: data base * of environment * doesn't seem to be defined. Pease check the CONF_ORACLE conf var.",
     "Make sure the first elements of the first two lines are of different lengths",

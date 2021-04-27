@@ -1,13 +1,11 @@
-from pytools.common import g
-import pytools.conf as cfg
+from pytools import cfg
 
 CONF_PATH = cfg.MAILS_DIR + 'conf.txt'
 RECIPIENTS = 'recipients.txt'
 SUBJECT = 'subject.txt'
 BODY = 'body.html'
 
-test = g.root_dir + 'test/mails/test/'
-conf = g.root_dir + 'test/mails/conf'
+test = 'pytotest/mails/test/'
 
 S_MISSING_CONF = (
     f"The email couldn't be sent because the conf file '{CONF_PATH}' was not found."
@@ -15,4 +13,4 @@ S_MISSING_CONF = (
     " and to set a conf file from one of the two examples (see quickstart/mail)."
 )
 
-S_MISSING = "{} file missing ({}). See {} for example."
+S_MISSING = "{} file missing ({}). See quickstart/mail for guidance."

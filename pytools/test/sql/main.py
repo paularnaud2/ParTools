@@ -6,7 +6,7 @@ from pytools.test import ttry
 
 
 def connect():
-    (sql.gl.CNX_STR, sql.gl.DB, sql.gl.ENV) = ('', '', '')
+    (sql.gl.CNX_INFO, sql.gl.DB, sql.gl.ENV) = ('', '', '')
     ttry(sql.connect, sql.gl.E_1)
     sql.gl.DB = 'TEST_DB'
     ttry(sql.connect, sql.gl.E_2.format('TEST_DB'))

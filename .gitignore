@@ -8,3 +8,4 @@ venv/
 *.egg-info/
 .old/
 .pytest_cache/
+conf_perso.py

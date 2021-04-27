@@ -2,9 +2,9 @@ import cx_Oracle as cx
 from os.path import exists
 from threading import RLock
 
+from pytools import cfg
 import pytools.common as com
 from pytools.common import g
-import pytools.conf as cfg
 
 from . import gl
 from . import gls
@@ -16,25 +16,33 @@ verrou = RLock()
 def connect():
 
     init_instant_client()
-    cnx_str = get_cnx_str()
-    cnx = cx.connect(cnx_str)
+    cnx_info = get_cnx_info()
+    cnx = connect_with(cnx_info)
     com.log("Connected")
     is_up_to_date(cnx)
 
     return cnx
 
 
-def get_cnx_str():
+def connect_with(cnx_info):
+
+    if isinstance(cnx_info, str):
+        return cx.connect(cnx_info)
+    else:
+        return cx.connect(*cnx_info)
+
+
+def get_cnx_info():
     err = False
-    if gl.CNX_STR:
-        cnx_str = gl.CNX_STR
-        s = gl.S_1.format(cnx_str)
+    if gl.CNX_INFO:
+        cnx_info = gl.CNX_INFO
+        s = gl.S_1.format(cnx_info)
     elif (gl.DB, gl.ENV) in cfg.CONF_ORACLE:
-        cnx_str = cfg.CONF_ORACLE[(gl.DB, gl.ENV)]
-        s = gl.S_2.format(gl.DB, gl.ENV, cnx_str)
+        cnx_info = cfg.CONF_ORACLE[(gl.DB, gl.ENV)]
+        s = gl.S_2.format(gl.DB, gl.ENV, cnx_info)
     elif gl.DB in cfg.CONF_ORACLE:
-        cnx_str = cfg.CONF_ORACLE[gl.DB]
-        s = s = gl.S_3.format(gl.DB, cnx_str)
+        cnx_info = cfg.CONF_ORACLE[gl.DB]
+        s = gl.S_3.format(gl.DB, cnx_info)
     elif not gl.DB:
         s = gl.E_1
         err = True
@@ -48,18 +56,18 @@ def get_cnx_str():
     com.log(s)
     if err:
         raise Exception(s)
-    return cnx_str
+    return cnx_info
 
 
 def gen_cnx_dict(nb):
 
     init_instant_client()
-    cnx_str = get_cnx_str()
+    cnx_info = get_cnx_info()
     gl.cnx_dict = dict()
     i = 1
     while i <= nb:
         com.log(f'Creating connection no. {i}...')
-        gl.cnx_dict[i] = cx.connect(cnx_str)
+        gl.cnx_dict[i] = connect_with(cnx_info)
         is_up_to_date(gl.cnx_dict[i])
         com.log(f'Connection no. {i} created')
         i += 1

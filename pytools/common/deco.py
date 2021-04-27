@@ -1,7 +1,7 @@
 import os
 import traceback
-import pytools.conf as cfg
 
+from pytools import cfg
 from . import g
 from .log import log
 from .log import log_input

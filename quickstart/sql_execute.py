@@ -8,8 +8,8 @@
 #
 # Notes:
 # - SCRIPT_IN accepts either a string or a file path
-# - You can input either CNX_STR or DB, as long as the DB you pass is defined
-# in the conf file (pytools/conf.py)
+# - You can input either CNX_INFO or DB, as long as the DB you pass is defined
+# in the conf file (conf.py)
 #
 # For more details, see the README.md file.
 
@@ -34,7 +34,7 @@ INSERT INTO TEST VALUES (2, 2, 2);
 """
 
 sql.execute(
-    CNX_STR=cnx_str,
+    CNX_INFO=cnx_str,
     SCRIPT_IN=script_in,
     PROC=False,
 )

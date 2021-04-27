@@ -16,9 +16,9 @@
 # whose name appears in the variable (see example)
 #
 # Notes:
-# - SCRIPT_IN accepts either a string or a file path
-# - You can input either CNX_STR or DB, as long as the DB you pass is defined
-# in the conf file (pytools/conf.py)
+# - QUERY_IN accepts either a string or a file path
+# - You can input either CNX_INFO or DB, as long as the DB you pass in is defined
+# in the conf file (conf.py)
 #
 # For more details, see the README.md file.
 
@@ -33,6 +33,10 @@ init_log('sql_download')
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
+# Here 'LOCAL_XE' is a TNS_NAME that has to be defined in the tnsnames.ora file.
+# You can also directly put a DSN instead
+cnx_tns = ['USERNAME', 'PWD', 'LOCAL_XE']
+
 date = datetime.now().strftime("%Y%m%d")
 out_file = f"{g.dirs['OUT']}sql_{db}_{date}.csv"
 
@@ -40,7 +44,9 @@ out_file = f"{g.dirs['OUT']}sql_{db}_{date}.csv"
 def example_simple():
     query_in = "SELECT 'HELLO WORLD' as TEST FROM DUAL"
     sql.download(
-        CNX_STR=cnx_str,
+        CNX_INFO=cnx_str,
+        # CNX_INFO=cnx_tns,
+        # DB = db
         QUERY_IN=query_in,
         OUT_PATH=out_file,
     )
@@ -59,7 +65,7 @@ def example_ql_raw():
     ]
 
     sql.download(
-        CNX_STR=cnx_str,
+        CNX_INFO=cnx_str,
         QUERY_LIST=query_list_raw,
         OUT_PATH=out_file,
     )
@@ -80,7 +86,7 @@ def example_ql_var():
     ]
 
     sql.download(
-        CNX_STR=cnx_str,
+        CNX_INFO=cnx_str,
         QUERY_IN=query_in_var,
         QUERY_LIST=query_list_var,
         OUT_PATH=out_file,
@@ -100,7 +106,7 @@ def example_rg():
     """
 
     sql.download(
-        CNX_STR=cnx_str,
+        CNX_INFO=cnx_str,
         QUERY_IN=query_in_rg,
         OUT_PATH=out_file,
     )

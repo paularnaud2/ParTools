@@ -18,7 +18,7 @@ You can mainly use them for:
 Dowload code, extract zip and run `pip install -e .` at the root.
 
 You'll find examples of use and descriptions of the different available packages and functions in the _quickstart_ folder.
-If you want to use the cx*Oracle dependant packages (sql and reqlist), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the \_pytools/conf.py* file.
+If you want to use the cx*Oracle dependant packages (sql and reqlist), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the conf.py* file.
 
 ## Good to know
 

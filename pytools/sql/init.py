@@ -33,7 +33,7 @@ def init_tmp_dir():
 
 def get_footprint():
 
-    fp = gl.DB + gl.ENV + gl.CNX_STR + gl.OUT_PATH
+    fp = gl.DB + gl.ENV + str(gl.CNX_INFO) + gl.OUT_PATH
     fp += gl.QUERY_IN + str(gl.QUERY_LIST)
     fp = com.hash512(fp)
     gl.footprint = fp

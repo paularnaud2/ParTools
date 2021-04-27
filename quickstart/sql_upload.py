@@ -11,8 +11,8 @@
 #
 # Notes:
 # - SCRIPT_IN accepts either a string or a file path
-# - You can input either CNX_STR or DB, as long as the DB you pass is defined
-# in the conf file (pytools/conf.py)
+# - You can input either CNX_INFO or DB, as long as the DB you pass is defined
+# in the conf file (conf.py)
 #
 # For more details, see the README.md file.
 

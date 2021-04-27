@@ -27,7 +27,7 @@ def init_globals():
 
 def get_footprint():
 
-    fp = gl.DB + gl.ENV + gl.CNX_STR
+    fp = gl.DB + gl.ENV + str(gl.CNX_INFO)
     fp += gl.QUERY_IN + gl.IN_PATH + gl.OUT_PATH
     fp = com.hash512(fp)
     gl.footprint = fp

@@ -3,9 +3,10 @@ import smtplib
 from shutil import copytree
 from email.mime.multipart import MIMEMultipart
 
+from pytools import cfg
 import pytools.common as com
 from pytools.common import g
-import pytools.conf as cfg
+
 from . import get
 
 

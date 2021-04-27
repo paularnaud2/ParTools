@@ -1,8 +1,8 @@
 from pytools.common import g
 
 # Mandatory inputs---------------------------------------------------
-# Either CNX_STR or DB have to be input. If both are filled, CNX_STR is taken
-CNX_STR = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
+# Either CNX_INFO or DB have to be input. If both are filled, CNX_INFO is taken
+CNX_INFO = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
 DB = ''  # DB name from pytools.conf.CONF_ORACLE
 
 QUERY_IN = ''  # Must be a variabilised query containing '@@IN@@' (see quickstart/reqlist)

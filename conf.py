@@ -29,7 +29,8 @@ CONF_ORACLE = {
     # Note that ENV_NAME can be defined to differentiate between two DB of same
     # name but of different environment.
 
-    'XE': 'USERNAME/PWD@localhost:1521/XE',
+    # 'XE': 'USERNAME/PWD@localhost:1521/XE',
+    'XE': ['USERNAME', 'PWD', 'LOCAL_XE'],
     ('XE', 'LOCAL'): 'USERNAME/PWD@localhost:1521/XE',
 }
 # yapf: enable

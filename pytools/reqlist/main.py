@@ -33,7 +33,7 @@ def download():
     if gl.SKIP_JOIN:
         gl.OUT_SQL = gl.OUT_PATH
     sql.download(
-        CNX_STR=gl.CNX_STR,
+        CNX_INFO=gl.CNX_INFO,
         DB=gl.DB,
         ENV=gl.ENV,
         QUERY_IN=gl.QUERY_IN,
