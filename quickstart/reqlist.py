@@ -26,7 +26,7 @@ from pytools.common import g
 from pytools.common import init_log
 from pytools.reqlist import run_reqList
 
-init_log('run_reqlist')
+init_log('reqlist')
 
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'

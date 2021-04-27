@@ -28,7 +28,7 @@ import pytools.sql as sql
 from pytools.common import g
 from pytools.common import init_log
 
-init_log('run_sql.download')
+init_log('sql_download')
 
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'

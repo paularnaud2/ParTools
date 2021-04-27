@@ -19,7 +19,7 @@
 import pytools.sql as sql
 from pytools.common import init_log
 
-init_log('run_sql.upload')
+init_log('sql_upload')
 
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'

@@ -77,9 +77,3 @@ def save_list(list, out_path, att='w'):
     with open(out_path, 'w', encoding='utf-8') as out_file:
         for elt in list:
             out_file.write(str(elt).strip("\n") + '\n')
-
-
-def read_file(in_path):
-    with open(in_path, 'r', encoding='utf-8') as in_file:
-        txt = in_file.read()
-    return txt

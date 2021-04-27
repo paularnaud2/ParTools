@@ -62,7 +62,7 @@ def gen_group(elt_list):
 
 def set_query_var(query_in):
     if com.like(query_in, "*.sql"):
-        query = com.read_file(query_in)
+        query = com.load_txt(query_in, False)
     else:
         query = query_in
     query = query.strip('\r\n;')

@@ -18,7 +18,7 @@ DEBUG = False
 
 # Path of your Oracle instant client
 # (the nb of bit has to match your python version)
-ORACLE_CLIENT = 'C:/instantclient_19_6/'
+ORACLE_CLIENT = 'C:/instantclient/'
 
 # yapf: disable
 CONF_ORACLE = {

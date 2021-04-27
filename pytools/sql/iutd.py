@@ -81,8 +81,8 @@ def get_bdd_date(cnx):
 
 def get_iutd_query():
     if gl.TEST_IUTD:
-        query = com.read_file(f"{gl.QUERY_DIR}IUTD_TEST.sql")
+        query = com.load_txt(f"{gl.QUERY_DIR}IUTD_TEST.sql", False)
     else:
-        query = com.read_file(f"{gl.QUERY_DIR}IUTD_{gl.DB}")
+        query = com.load_txt(f"{gl.QUERY_DIR}IUTD_{gl.DB}", False)
 
     return query

@@ -16,7 +16,7 @@
 import pytools.sql as sql
 from pytools.common import init_log
 
-init_log('run_sql.execute')
+init_log('sql_execute')
 
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'

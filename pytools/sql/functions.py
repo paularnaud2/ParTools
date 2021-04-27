@@ -27,7 +27,7 @@ def get_query_list():
 
 def get_query(query_in):
     if com.like(query_in, "*.sql"):
-        query_out = com.read_file(query_in)
+        query_out = com.load_txt(query_in, False)
     else:
         query_out = query_in
     query_out = query_out.strip('\r\n;')
@@ -38,7 +38,7 @@ def get_query(query_in):
 
 def get_final_script(script_in):
     if com.like(script_in, "*.sql"):
-        script = com.read_file(script_in)
+        script = com.load_txt(script_in, False)
     else:
         script = script_in
     script = com.replace_from_dict(script, gl.VAR_DICT)
