@@ -43,12 +43,12 @@ The `step_log` function
 
 ### The conf.py file
 
+- conf_perso.py
+
 ### The common package
 
 ### The global variable file gl.py
 
 ### Main package functions input
 
-### The step_log function
-
-### Recovery functionnality
+### Recover functionnality

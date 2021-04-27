@@ -27,10 +27,10 @@ cx.init_oracle_client(cfg.ORACLE_CLIENT)
 # cnx = cx.connect(cnx_str)
 
 # 2) connect via DSN
-cnx = cx.connect("USERNAME", "PWD", dsn)
+# cnx = cx.connect("USERNAME", "PWD", dsn)
 
 # 3) connection via TNS_NAME
-# cnx = cx.connect("USERNAME", "PWD", "LOCAL_XE")
+cnx = cx.connect("USERNAME", "PWD", "XE_TNS")
 
 c = cnx.cursor()
 c.execute(query)

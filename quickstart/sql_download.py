@@ -19,6 +19,10 @@
 # - QUERY_IN accepts either a string or a file path
 # - You can input either CNX_INFO or DB, as long as the DB you pass in is defined
 # in the conf file (conf.py)
+# - As you'll see below, CNX_INFO can either be a connection string:
+# 'USER/PWD@HOST:PORT/SERVICE_NAME'
+#  or a list:
+# ['USERNAME', 'PWD', 'TNS_NAME'] or ['USERNAME', 'PWD', 'DSN']
 #
 # For more details, see the README.md file.
 
@@ -33,9 +37,9 @@ init_log('sql_download')
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
-# Here 'LOCAL_XE' is a TNS_NAME that has to be defined in the tnsnames.ora file.
+# Here 'XE_TNS' is a TNS_NAME that has to be defined in the tnsnames.ora file.
 # You can also directly put a DSN instead
-cnx_tns = ['USERNAME', 'PWD', 'LOCAL_XE']
+cnx_tns = ['USERNAME', 'PWD', 'XE_TNS']
 
 date = datetime.now().strftime("%Y%m%d")
 out_file = f"{g.dirs['OUT']}sql_{db}_{date}.csv"
@@ -46,7 +50,7 @@ def example_simple():
     sql.download(
         CNX_INFO=cnx_str,
         # CNX_INFO=cnx_tns,
-        # DB = db
+        # DB=db,
         QUERY_IN=query_in,
         OUT_PATH=out_file,
     )

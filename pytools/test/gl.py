@@ -1,4 +1,3 @@
-from pytools import cfg
 from pytools.common import g
 
 import pytools.tools.gl as gt
@@ -16,7 +15,7 @@ TEST_SQL = TEST + 'sql/files/'
 TEST_SQL_OUT = TEST_OUT + 'sql/'
 SQL_OUT = g.dirs['TMP'] + TEST_SQL_OUT
 SQL_TMP = g.dirs['TMP'] + sql.TMP_FOLDER
-SQL_DB = cfg.TEST_DB
+SQL_DB = 'XE'
 SQL_ENV = 'LOCAL'
 SQL_T_TEST = 'TEST'
 SQL_T_IUTD = 'TEST_IUTD'

@@ -22,26 +22,19 @@ ORACLE_CLIENT = 'C:/instantclient/'
 
 # yapf: disable
 CONF_ORACLE = {
-    # Expected format:
-    # 'DB_NAME': 'USER/PWD@HOST:PORT/SERVICE_NAME',
-    # Or
-    # ('DB_NAME', 'ENV_NAME'): 'USER/PWD@HOST:PORT/SERVICE_NAME',
+    # A conf line should match with one of the two following expected formats:
+    # 'DB_NAME': CNX_INFO,
+    # ('DB_NAME', 'ENV_NAME'): CNX_INFO,
+    # Where CNX_INFO can either be a connection string:
+    # 'USER/PWD@HOST:PORT/SERVICE_NAME'
+    #  or a list:
+    # ['USERNAME', 'PWD', 'TNS_NAME'] or ['USERNAME', 'PWD', 'DSN']
+    #
     # Note that ENV_NAME can be defined to differentiate between two DB of same
     # name but of different environment.
 
     # 'XE': 'USERNAME/PWD@localhost:1521/XE',
-    'XE': ['USERNAME', 'PWD', 'LOCAL_XE'],
+    'XE': ['USERNAME', 'PWD', 'XE_TNS'],
     ('XE', 'LOCAL'): 'USERNAME/PWD@localhost:1521/XE',
 }
 # yapf: enable
-
-# test-------------------------------------------------------------------------
-
-# For the tests to be working, the user of TEST_DB set in CONF_ORACLE
-# must have writing permissions.
-# Note also that as with TEST_ENV, the name of the TEST_DB has to be
-# set in CONF_ORACLE so that the duplet (TEST_ENV, TEST_DB) has a defined
-# connection string
-# Set TEST_DB to '' if you want SQL tests (test_sql and test_reqlist)
-# to be skipped (though a warning will be thrown is this case)
-TEST_DB = 'XE'

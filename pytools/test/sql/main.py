@@ -8,12 +8,16 @@ from pytools.test import ttry
 def connect():
     (sql.gl.CNX_INFO, sql.gl.DB, sql.gl.ENV) = ('', '', '')
     ttry(sql.connect, sql.gl.E_1)
+
     sql.gl.DB = 'TEST_DB'
     ttry(sql.connect, sql.gl.E_2.format('TEST_DB'))
+
     (sql.gl.DB, sql.gl.ENV) = ('TEST_DB', 'TEST_ENV')
     ttry(sql.connect, sql.gl.E_3.format('TEST_DB', 'TEST_ENV'))
+
     (sql.gl.DB, sql.gl.ENV) = (gl.SQL_DB, '')
     sql.connect()
+
     (sql.gl.DB, sql.gl.ENV) = (gl.SQL_DB, gl.SQL_ENV)
     sql.connect()
 
