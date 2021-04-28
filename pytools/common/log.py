@@ -17,6 +17,7 @@ def write_log(str_in):
     s = str(str_in)
     with open(g.dirs['LOG'] + g.LOG_FILE, 'a', encoding='utf-8') as in_file:
         in_file.write(s + '\n')
+    g.logs.append(s)
 
 
 def check_log(in_list, log_match=False):
@@ -74,6 +75,7 @@ def init_log(parent_module='', force_init=False):
     g.LOG_FILE = s + '.txt'
     with open(g.dirs['LOG'] + g.LOG_FILE, 'w', encoding='utf-8') as in_file:
         in_file.write('')
+    g.logs = []
 
     g.LOG_FILE_INITIALISED = True
     log_path = g.dirs['LOG'] + g.LOG_FILE

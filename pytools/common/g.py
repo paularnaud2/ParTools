@@ -29,6 +29,7 @@ LOG_LEVEL = 0
 LOG_FILE_INITIALISED = False
 LOG_OUTPUT = True
 LOG_FILE = ''
+logs = []
 
 sl_time_dict = {}
 sl_detail = {}
