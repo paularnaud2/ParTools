@@ -4,7 +4,6 @@ from threading import RLock
 
 from pytools import cfg
 import pytools.common as com
-from pytools.common import g
 
 from . import gl
 from . import gls
@@ -80,7 +79,7 @@ def init_instant_client():
             gls.client_is_init = True
             if not exists(cfg.ORACLE_CLIENT):
                 s = ("Error: The Oracle instant client directory specified in"
-                     f" {g.conf_path} (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"
+                     f" {cfg.__file__} (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"
                      " doesn't exist. Please enter a valid directory for the"
                      " Oracle instant client.")
                 com.log(s)
