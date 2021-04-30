@@ -1,3 +1,4 @@
+import sys
 from os.path import exists
 from os.path import basename
 from email.mime.text import MIMEText
@@ -8,13 +9,19 @@ import pytools.common as com
 from . import gl
 
 
-def recipients():
+def recipients(check_internal):
     recipients_path = gl.mail_dir + gl.RECIPIENTS
     if not exists(recipients_path):
         s = gl.S_MISSING.format('Recipients', recipients_path)
         com.log(s)
         raise Exception(s)
+
     recipients = com.load_txt(recipients_path)
+    for elt in recipients:
+        if gl.INTERNAL_STR not in elt:
+            s = f'Warning: "{elt}" is not an internal email address. Send anyways? (y/n)'
+            if not com.log_input(s) == 'y':
+                sys.exit()
     return recipients
 
 
