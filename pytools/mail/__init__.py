@@ -40,7 +40,7 @@ def no_auth(mail_name,
             TXTbody='',
             HTMLbody=''):
 
-    init(mail_name)
+    init(mail_name, True)
     init_cfi()
     msg = get.msg(subject, TXTbody, HTMLbody, attachments, var_dict)
 
@@ -56,24 +56,28 @@ def outlook(mail_name,
             TXTbody='',
             HTMLbody=''):
 
-    init(mail_name)
+    init(mail_name, True)
 
     outlook = win32.Dispatch('outlook.application')
     mail = outlook.CreateItem(0)
     mail.To = '; '.join(gl.recipients)
     mail.Subject = subject
-    mail.Body = TXTbody
-    mail.HTMLBody = HTMLbody
+    if TXTbody:
+        mail.Body = TXTbody
+    if HTMLbody:
+        mail.HTMLBody = HTMLbody
+    else:
+        mail.HTMLBody = get.HTML(var_dict)
     for attachment in attachments:
         mail.Attachments.Add(attachment)
     mail.Send()
     com.log('Mail sent')
 
 
-def init(mail_name):
+def init(mail_name, check_internal=False):
 
     gl.mail_dir = cfg.MAILS_DIR + mail_name + '/'
-    gl.recipients = get.recipients()
+    gl.recipients = get.recipients(check_internal)
     com.log(f"Sending mail '{mail_name}' to {gl.recipients}...")
 
 
