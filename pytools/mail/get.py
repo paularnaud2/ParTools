@@ -1,17 +1,11 @@
 from os.path import exists
+from os.path import basename
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 
 import pytools.common as com
 from . import gl
-
-
-def conf():
-    if not exists(gl.CONF_PATH):
-        com.log(gl.S_MISSING_CONF)
-        raise Exception(gl.S_MISSING_CONF)
-    conf_list = com.load_txt(gl.CONF_PATH)
-    conf = com.list_to_dict(conf_list)
-    return conf
 
 
 def recipients():
@@ -24,22 +18,40 @@ def recipients():
     return recipients
 
 
-def subject():
-    subject_path = gl.mail_dir + gl.SUBJECT
-    if not exists(subject_path):
-        s = gl.S_MISSING.format('Subject', subject_path)
+def HTML(var_dict):
+
+    template_path = gl.mail_dir + 'template.html'
+    if not exists(template_path):
+        s = gl.S_MISSING.format('Template', template_path)
         com.log(s)
         raise Exception(s)
-    subject = com.load_txt(subject_path, list_out=False)
-    return subject
+    template = com.load_txt(template_path, list_out=False)
+    html = com.replace_from_dict(template, var_dict)
+    return html
 
 
-def body():
-    body_path = gl.mail_dir + gl.BODY
-    if not exists(body_path):
-        s = gl.S_MISSING.format('Body', body_path)
-        com.log(s)
-        raise Exception(s)
-    html = com.load_txt(body_path, list_out=False)
-    body = MIMEText(html, "html")
-    return body
+def msg(subject, TXTbody, HTMLbody, attachments, var_dict):
+
+    if not HTMLbody:
+        HTMLbody = HTML(var_dict)
+
+    msg = MIMEMultipart()
+    msg["Subject"] = subject
+    msg["From"] = gl.From
+    msg["To"] = '; '.join(gl.recipients)
+
+    if TXTbody:
+        partTXT = MIMEText(TXTbody, 'plain')
+        msg.attach(partTXT)
+    if HTMLbody:
+        partHTML = MIMEText(HTMLbody, 'html')
+        msg.attach(partHTML)
+
+    for path in attachments:
+        name = basename(path)
+        with open(path, "rb") as f:
+            part = MIMEApplication(f.read(), Name=name)
+        part['Content-Disposition'] = f'attachment; filename="{name}"'
+        msg.attach(part)
+
+    return msg

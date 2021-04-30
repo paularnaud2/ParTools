@@ -4,13 +4,13 @@ import pytools.test.check_log as cl
 
 
 def msg_box():
-    com.log("Testing common.msg_box-----------------------------------")
+    com.log("Test msg_box--------------------------------------------")
     st.msg_box('Message box test', 'Test')
     com.log_print()
 
 
 def get_duration():
-    com.log("Testing common.string.get_duration--------------------------")
+    com.log("Test string.get_duration--------------------------------")
     dstr = com.get_duration_string(0, end_time=0.35)
     com.log(dstr)
     assert dstr == "350 ms"

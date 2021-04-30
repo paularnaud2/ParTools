@@ -1,38 +1,90 @@
 import ssl
 import smtplib
+import win32com.client as win32
 from shutil import copytree
-from email.mime.multipart import MIMEMultipart
 
 from pytools import cfg
 import pytools.common as com
-from pytools.common import g
 
+from . import gl
 from . import get
 
 
-def mail(mail_name):
-    gl.mail_name = mail_name
+def gmail(mail_name,
+          subject,
+          var_dict=[],
+          attachments=[],
+          TXTbody='',
+          HTMLbody=''):
+
+    init(mail_name)
+    init_cfi()
+    msg = get.msg(subject, TXTbody, HTMLbody, attachments, var_dict)
+
+    host = gl.GMAIL_HOST
+    port = gl.GMAIL_PORT
+    user = gl.cfi['USER_GMAIL']
+    pwd = gl.cfi['PWD_GMAIL']
+
+    ctx = ssl.create_default_context()
+    with smtplib.SMTP_SSL(host, port, context=ctx) as server:
+        server.login(user, pwd)
+        server.sendmail(gl.sender, gl.recipients, msg.as_string())
+    com.log('Mail sent')
+
+
+def no_auth(mail_name,
+            subject,
+            var_dict=[],
+            attachments=[],
+            TXTbody='',
+            HTMLbody=''):
+
+    init(mail_name)
+    init_cfi()
+    msg = get.msg(subject, TXTbody, HTMLbody, attachments, var_dict)
+
+    with smtplib.SMTP(gl.NO_AUTH_HOST) as server:
+        server.sendmail(gl.sender, gl.recipients, msg.as_string())
+    com.log('Mail sent')
+
+
+def outlook(mail_name,
+            subject,
+            var_dict=[],
+            attachments=[],
+            TXTbody='',
+            HTMLbody=''):
+
+    init(mail_name)
+
+    outlook = win32.Dispatch('outlook.application')
+    mail = outlook.CreateItem(0)
+    mail.To = '; '.join(gl.recipients)
+    mail.Subject = subject
+    mail.Body = TXTbody
+    mail.HTMLBody = HTMLbody
+    for attachment in attachments:
+        mail.Attachments.Add(attachment)
+    mail.Send()
+    com.log('Mail sent')
+
+
+def init(mail_name):
+
     gl.mail_dir = cfg.MAILS_DIR + mail_name + '/'
+    gl.recipients = get.recipients()
+    com.log(f"Sending mail '{mail_name}' to {gl.recipients}...")
 
-    conf = get.conf()
-    host = conf['HOST']
-    sender = conf['SENDER']
-    From = conf['FROM']
-    user, pwd, ctx, port = get_infos(conf)
 
-    recipients = get.recipients()
-    msg = gen_msg(recipients, From)
+def init_cfi():
 
-    com.log(f"Sending mail '{mail_name}' to {recipients}...")
-    if ctx:
-        with smtplib.SMTP_SSL(host, port, context=ctx) as server:
-            server.login(user, pwd)
-            server.sendmail(sender, recipients, msg.as_string())
-    else:
-        with smtplib.SMTP(host, port) as server:
-            server.sendmail(sender, recipients, msg.as_string())
-
-    com.log('Mail send')
+    gl.cfi = com.g.get_confidential(False)
+    if not gl.cfi:
+        com.log(gl.S_MISSING_CFI)
+        raise Exception(com.g.E_CFI)
+    gl.sender = gl.cfi['MAIL_FROM']
+    gl.From = gl.cfi['MAIL_FROM']
 
 
 def init_mail():
@@ -41,35 +93,3 @@ def init_mail():
     copytree('pytools/test/mails', cfg.MAILS_DIR)
     com.save_list(['*'], cfg.MAILS_DIR + '.gitignore')
     com.log(f"Mail folder '{cfg.MAILS_DIR}' successfully initialised")
-
-
-def get_infos(conf):
-
-    if 'USER' in conf:
-        user = conf['USER']
-        pwd = conf['PWD']
-        ctx = ssl.create_default_context()
-    else:
-        ctx = ''
-
-    if 'PORT' in conf:
-        port = conf['PORT']
-    else:
-        port = ''
-
-    return user, pwd, ctx, port
-
-
-def gen_msg(recipients, From):
-
-    To = ", ".join(recipients)
-    subject = get.subject()
-    body = get.body()
-
-    msg = MIMEMultipart()
-    msg["Subject"] = subject
-    msg["From"] = From
-    msg["To"] = To
-    msg.attach(body)
-
-    return msg

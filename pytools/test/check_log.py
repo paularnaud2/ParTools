@@ -1,8 +1,8 @@
 CO = [
     "Log file initialised",
     "Python version:",
-    "Testing common.msg_box",
-    "Testing common.string.get_duration",
+    "Test msg_box",
+    "Test string.get_duration",
 ]
 
 TO = [

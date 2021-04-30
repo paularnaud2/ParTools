@@ -9,3 +9,4 @@ venv/
 .old/
 .pytest_cache/
 conf_perso.py
+/confidential.txt

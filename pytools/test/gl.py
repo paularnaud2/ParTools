@@ -1,3 +1,4 @@
+from datetime import date
 from pytools.common import g
 
 import pytools.tools.gl as gt
@@ -5,12 +6,12 @@ import pytools.tools.gl as tools
 import pytools.reqlist.gl as rl
 import pytools.sql.gl as sql
 
-# Main
+# Main---------------------------------------------------------------
 TEST = 'pytools/test/'
 TEST_OUT = 'test/'
 OUT_DUP_TMP = g.dirs['TMP'] + tools.TMP_FOLDER + gt.TMP_OUT
 
-# test_sql
+# test_sql-----------------------------------------------------------
 TEST_SQL = TEST + 'sql/files/'
 TEST_SQL_OUT = TEST_OUT + 'sql/'
 SQL_OUT = g.dirs['TMP'] + TEST_SQL_OUT
@@ -46,7 +47,7 @@ SQL_RG_REF = TEST_SQL + '01_ref.csv'
 SQL_RG_COMP = SQL_DL_OUT_RG_FOLDER + '01.csv'
 SQL_MAX_ELT_INSERT = 200
 
-# test_reqlist
+# test_reqlist-------------------------------------------------------
 TEST_RL = TEST + 'reqlist/files/'
 TEST_RL_OUT = TEST_OUT + 'reqlist/'
 RL_OUT = g.dirs['TMP'] + TEST_RL_OUT
@@ -79,7 +80,7 @@ RL_LEFT_3 = TEST_RL + 'left_3.csv'
 RL_RIGHT_3 = TEST_RL + 'right_3.csv'
 RL_OUT_JOIN_REF_3 = TEST_RL + 'join_ref_3.csv'
 
-# test_dq
+# test_dq------------------------------------------------------------
 TEST_DQ = TEST + 'dq/files/'
 TEST_DQ_OUT = TEST_OUT + 'dq/'
 DQ_OUT = g.dirs['TMP'] + TEST_DQ_OUT
@@ -118,7 +119,7 @@ REF_DUP3 = 'out_ref_dup_31.csv'
 OUT3 = '3'
 OUT_SPLIT_3 = '3_3'
 
-# test_tools
+# test_tools---------------------------------------------------------
 TEST_TOOL = TEST + 'tools/files/'
 TEST_TOOL_OUT = TEST_OUT + 'tools/'
 TOOLS_OUT = g.dirs['TMP'] + TEST_TOOL_OUT
@@ -154,3 +155,11 @@ LOOK_FOR = '22173227102607'
 SEARCH_BF_OUT = TOOLS_OUT + 'search_bf_out.csv'
 SEARCH_BF_OUT_REF = TEST_TOOL + 'search_bf_out_ref.csv'
 SORT_BF_OUT = TOOLS_OUT + 'sort_bf_out.csv'
+
+# test_mail----------------------------------------------------------
+MAIL_NAME = 'test'
+MAIL_SUBJECT = '[Test] Python mail'
+MAIL_VD = {'DATE': str(date.today()), 'NAME': 'dear tester'}
+MAIL_A = ['README.md', 'LICENSE']
+E_NO_AUT = '[Errno 11001] getaddrinfo failed'
+E_OUTLOOK = 'Chaîne de classe incorrecte'

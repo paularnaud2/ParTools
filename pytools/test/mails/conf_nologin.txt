@@ -1,3 +1,0 @@
-HOST=mailhost.****.com
-SENDER=Fisrtname Lastname <username@host.com>
-FROM=Firstname Lastname <username@host.com>

@@ -1,16 +1,11 @@
-from pytools import cfg
-
-CONF_PATH = cfg.MAILS_DIR + 'conf.txt'
 RECIPIENTS = 'recipients.txt'
-SUBJECT = 'subject.txt'
-BODY = 'body.html'
+GMAIL_HOST = 'smtp.gmail.com'
+GMAIL_PORT = '465'
+NO_AUTH_HOST = 'host.no_auth.com'
 
-test = 'pytotest/mails/test/'
-
-S_MISSING_CONF = (
-    f"The email couldn't be sent because the conf file '{CONF_PATH}' was not found."
-    "\nBefore running the mail function, you have to run the init_mail function"
-    " and to set a conf file from one of the two examples (see quickstart/mail)."
-)
+S_MISSING_CFI = """The email couldn't be sent because the confidential file was not found.
+Before running the gmail or no_auth functions, you have to run the init_mail function and set a confidential.txt file.
+This file must be saved at the root path using the example provided in the initialised folder."
+See quickstart/mail for further guidance."""
 
 S_MISSING = "{} file missing ({}). See quickstart/mail for guidance."

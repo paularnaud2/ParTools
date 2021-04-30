@@ -15,10 +15,10 @@ def test_sql():
     if not is_test_db_defined():
         return
 
-    # com.log("Test connect------------------------------------------")
+    com.log("Test connect------------------------------------------")
     t.connect()
 
-    # com.log("Test iutd---------------------------------------------")
+    com.log("Test iutd---------------------------------------------")
     t.reset()
     t.iutd()
 

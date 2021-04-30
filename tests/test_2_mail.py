@@ -1,20 +1,23 @@
-import warnings
-from os.path import exists
-
 import pytools.common as com
-from pytools.mail import gl
-from pytools.mail import mail
+from pytools import mail
+from pytools.test import gl
+from pytools.test import ttry
 
 
 def test_mail():
     com.init_log('test_mail', True)
-    com.log("Testing mail.mail-----------------------------------------")
-    if exists(gl.CONF_PATH):
-        mail('test')
-    else:
-        com.log(gl.S_CONF)
-        warnings.warn(gl.S_CONF)
+
+    args = [gl.MAIL_NAME, gl.MAIL_SUBJECT, gl.MAIL_VD, gl.MAIL_A]
+
+    com.log("Test gmail----------------------------------------------")
+    mail.gmail(*args)
     com.log_print()
+
+    com.log("Test no_auth--------------------------------------------")
+    ttry(mail.no_auth, gl.E_NO_AUT, *args)
+
+    com.log("Test outlook--------------------------------------------")
+    ttry(mail.outlook, gl.E_OUTLOOK, *args)
 
 
 if __name__ == '__main__':

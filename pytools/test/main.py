@@ -10,6 +10,7 @@ def ttry(f, e_ref, *args, **kwargs):
         f(*args, **kwargs)
     except Exception as e:
         assert com.like(str(e), e_ref)
+        com.log(str(e))
         exception_occured = True
 
     assert exception_occured

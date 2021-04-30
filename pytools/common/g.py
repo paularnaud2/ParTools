@@ -3,9 +3,11 @@ from os.path import exists
 
 from pytools import cfg
 from .file import mkdirs
+from .file import load_txt
 from .file import save_list
 from .log import log
 from .log import init_log
+from .tools import list_to_dict
 
 # Misc
 CSV_SEPARATOR = ';'
@@ -23,6 +25,7 @@ E_MH = "Missing header (first elements of line 1 and 2 must be of different leng
 E_MV = "Missing variable"
 E_DH = "Different headers"
 E_VA = "Void array"
+E_CFI = f"Confidential file '{cfg.CFI_PATH}' not found"
 
 # Log
 LOG_LEVEL = 0
@@ -58,3 +61,16 @@ def init_PT():
     init_log('init')
     log("PyTools package successfully initialised."
         f" Set up your conf here: {cfg.__file__}\n")
+
+
+def get_confidential(raise_e=True):
+
+    if not exists(cfg.CFI_PATH):
+        log(E_CFI)
+        if raise_e:
+            raise Exception(E_CFI)
+        else:
+            return False
+    cfi_list = load_txt(cfg.CFI_PATH)
+    cfi = list_to_dict(cfi_list)
+    return cfi

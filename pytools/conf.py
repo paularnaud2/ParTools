@@ -3,6 +3,9 @@
 # new folder.
 FILES_DIR = 'PT/'
 
+# Path to confidential data (used by mail package)
+CFI_PATH = 'confidential.txt'
+
 # This directory has to contain a conf.txt file and the mail folders corresponding
 # to the mail_name passed in the mail function.
 MAILS_DIR = 'mails/'

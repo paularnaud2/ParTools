@@ -1,0 +1,3 @@
+MAIL_FROM=Fisrtname Lastname <username@gmail.com>
+USER_GMAIL=username@gmail.com
+PWD_GMAIL=********
