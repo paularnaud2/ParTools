@@ -17,10 +17,16 @@ def recipients(check_internal):
         raise Exception(s)
 
     recipients = com.load_txt(recipients_path)
+    if not check_internal:
+        return recipients
+
     for elt in recipients:
         if gl.INTERNAL_STR not in elt:
             s = f'Warning: "{elt}" is not an internal email address. Send anyways? (y/n)'
-            if not com.log_input(s) == 'y':
+            if gl.TEST:
+                com.log(s)
+                com.log_print('y (TEST = True)')
+            elif not com.log_input(s) == 'y':
                 sys.exit()
     return recipients
 

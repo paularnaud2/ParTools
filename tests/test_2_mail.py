@@ -6,7 +6,7 @@ from pytools.test import ttry
 
 def test_mail():
     com.init_log('test_mail', True)
-
+    mail.gl.TEST = True
     args = [gl.MAIL_NAME, gl.MAIL_SUBJECT, gl.MAIL_VD, gl.MAIL_A]
 
     com.log("Test gmail----------------------------------------------")

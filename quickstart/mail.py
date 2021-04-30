@@ -30,6 +30,6 @@ var_dict = {
     'NAME': 'dear tester',
 }
 
-# mail.gmail('test', '[Test] Python mail', var_dict=var_dict)
+mail.gmail('test', '[Test] Python mail', var_dict=var_dict)
 # mail.no_auth('test', '[Test] Python mail', var_dict=var_dict)
-mail.outlook('test', '[Test] Python mail', var_dict=var_dict)
+# mail.outlook('test', '[Test] Python mail', var_dict=var_dict)
