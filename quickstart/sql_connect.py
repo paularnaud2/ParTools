@@ -1,5 +1,5 @@
-# Use this script to troubleshoot you connection problems to Oracle DB
-# Here you can try to connect either by using a connection string, a DNS or a TNS_NAME
+# Use this script to troubleshoot you connection problems to Oracle DB.
+# Here you can try to connect either by using a connection string, a DNS or a TNS_NAME.
 
 import cx_Oracle as cx
 from pytools import cfg
@@ -21,7 +21,10 @@ dsn = """
 """
 query = "SELECT 'HELLO WORLD' as TEST FROM DUAL"
 
+print("Initialising Oracle instant client...")
 cx.init_oracle_client(cfg.ORACLE_CLIENT)
+print("Initialising Oracle instant client initialised")
+print("Connecting...")
 
 # 1) connect via connection string
 # cnx = cx.connect(cnx_str)
@@ -32,6 +35,9 @@ cx.init_oracle_client(cfg.ORACLE_CLIENT)
 # 3) connection via TNS_NAME
 cnx = cx.connect("USERNAME", "PWD", "XE_TNS")
 
+print("Connected")
+print(f'Executing "{query}"')
 c = cnx.cursor()
 c.execute(query)
+print("Query executed. Output:")
 print(c.fetchone()[0])

@@ -4,7 +4,7 @@
 # In order for the run_dq function to work correctly, the input files must both
 # have a pivot column (ie. containing keys/IDs) and be free of 'key dupplicates'
 # meaning having different lines with same ID. The index of the pivot column
-# can be set in the gl file (default value: 1 -> first column).
+# is an input parameter (gl.PIVOT_IDX = 0)
 #
 # In this script, two files used for testing purpose are compared.
 # Result interpretation:

@@ -4,7 +4,7 @@ import pytools.common.g as g
 from pytools.tools import xml
 
 # Input variables
-in_path = g.dirs['IN'] + "in.xml"
+# in_path = g.dirs['IN'] + "in.xml"
 in_path = "pytools/test/tools/files/xml_in.xml"
 out_path = g.dirs['OUT'] + "out.csv"
 

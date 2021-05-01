@@ -12,7 +12,7 @@ MAX_ROW_LIST = 12 * 10**6  # Max list size. Warning: a too high value may cause 
 MAX_LINE_SPLIT = 900 * 10**3  # If the number of line of the output file exceeds this value, the file is split
 MAX_FILE_NB_SPLIT = 10  # Maximum number of split files
 SL_STEP = 5 * 10**6  # step_log setting (see README.md)
-COMPARE_FIELD_NB = 1  # Index of the pivot column (1 -> first column)
+PIVOT_IDX = 0  # Index of the pivot column (ie. containing keys/IDs used as reference for comparison)
 
 EQUAL_OUT = False  # If True, equal lines are written in the output file
 DIFF_OUT = False  # If True, different lines are written in the output file (applies only when EQUAL_OUT = True)

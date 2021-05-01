@@ -1,4 +1,4 @@
-# sql.upload allows you to simply upload data to an Oracle DB
+# sql.upload allows you to simply upload data to an Oracle DB.
 
 # In this example of use, the file 'in.csv' is uploaded into the 'XE' DB.
 # You can input kwargs for execute function to be run before the upload
@@ -12,7 +12,7 @@
 # Notes:
 # - SCRIPT_IN accepts either a string or a file path
 # - You can input either CNX_INFO or DB, as long as the DB you pass is defined
-# in the conf file (conf.py)
+# in the conf file (pytools/conf.py)
 #
 # For more details, see the README.md file.
 
@@ -31,6 +31,8 @@ execute_kwargs = {
 }
 
 sql.upload(
+    # CNX_INFO=cnx_str,
+    # CNX_INFO=cnx_tns,
     DB=db,
     UPLOAD_IN='pytools/test/sql/files/in.csv',
     SCRIPT_IN=script_in,

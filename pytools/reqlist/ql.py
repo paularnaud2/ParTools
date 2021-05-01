@@ -83,15 +83,15 @@ def prepare_elt_list(array_in):
     com.check_header(array_in)
     check_field_nb()
 
-    elt_list = [elt[gl.IN_FIELD_NB - 1] for elt in array_in[1:]]
+    elt_list = [elt[gl.PIVOT_IDX] for elt in array_in[1:]]
     elt_list = dup.del_dup_list(elt_list)
 
     return elt_list
 
 
 def check_field_nb():
-    if gl.IN_FIELD_NB != 1:
-        s = (f"Warning: queries will take field no. {gl.IN_FIELD_NB}"
-             " of input file in the IN statement. Continue? (y/n)")
+    if gl.PIVOT_IDX != 0:
+        s = (f"Warning: pivot index is set to {gl.PIVOT_IDX}."
+             " Continue? (y/n)")
         if com.log_input(s) == 'n':
             sys.exit()

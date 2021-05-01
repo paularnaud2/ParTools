@@ -6,7 +6,7 @@ import pytools.common.g as g
 from pytools.tools import split
 
 # Input variables default values
-in_path = g.dirs['IN'] + "in.csv"
+# in_path = g.dirs['IN'] + "in.csv"
 in_path = "pytools/test/sql/files/in.csv"
 out_dir = g.dirs['OUT']
 

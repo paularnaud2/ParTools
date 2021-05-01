@@ -4,6 +4,7 @@ import pytools.common.g as g
 import pytools.tools.bf as bf
 
 # Input variables
+# in_path = g.dirs['IN'] + "in.csv"
 in_path = "pytools/test/sql/files/in.csv"
 out_path = g.dirs['OUT'] + "out.csv"
 look_for = "22173227102607"

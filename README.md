@@ -24,12 +24,12 @@ If you want to use the cx*Oracle dependant packages (sql and reqlist), you'll ne
 
 ### The common package
 
-The pytools package includes a _common_ package which provides generic functions used by other the packages. As you may find usefull to use some of them for your own code, I recommend you to check out the list of those functions in pytools/common/\_\_init\_\_.py. Here are a few examples:
+The pytools package includes a _common_ sub package which provides generic functions used by other sub packages. As you may find usefull to use some of them for your own code, I recommend you to check out the list of those functions in _pytools/common/\_\_init\_\_.py_. Here are a few examples:
 
 - `save_list`: saves a list into a text file
 - `load_txt`: loads a text file into a string or a list
 - `get_file_list`: returns the list of the files in a folder
-- `like`: behaves as the LIKE of SQL (you can match strings with joker character '\*')
+- `like`: behaves as the LIKE of Oracle SQL (you can match strings with wildcard character '\*')
 - `big_number`: converts a potentially big number into a lisible string. For example 10000000 becomes '10 000 000'
 - `get_duration_string`: outputs a string representing the time elapsed since the input start_time. For example '3 minutes and 20 seconds'.
 
@@ -43,12 +43,12 @@ The `step_log` function
 
 ### The conf.py file
 
-- conf_perso.py
-
-### The common package
+- PTconf.py and PTconf_perso.py
 
 ### The global variable file gl.py
 
 ### Main package functions input
 
 ### Recover functionnality
+
+### Install Oracle XE for tests

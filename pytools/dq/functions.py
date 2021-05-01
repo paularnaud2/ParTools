@@ -37,17 +37,17 @@ def compare_elt(elt1, elt2):
         return ">"
     if elt2 == ['']:
         return "<"
-    if elt1[gl.COMPARE_FIELD_NB - 1] < elt2[gl.COMPARE_FIELD_NB - 1]:
+    if elt1[gl.PIVOT_IDX] < elt2[gl.PIVOT_IDX]:
         return "<"
-    if elt1[gl.COMPARE_FIELD_NB - 1] == elt2[gl.COMPARE_FIELD_NB - 1]:
+    if elt1[gl.PIVOT_IDX] == elt2[gl.PIVOT_IDX]:
         return "="
-    if elt1[gl.COMPARE_FIELD_NB - 1] > elt2[gl.COMPARE_FIELD_NB - 1]:
+    if elt1[gl.PIVOT_IDX] > elt2[gl.PIVOT_IDX]:
         return ">"
 
 
 def write_min_elt(min_elt, out_file):
-    cur_key = min_elt[gl.COMPARE_FIELD_NB - 1]
-    prev_key = gl.prev_elt[gl.COMPARE_FIELD_NB - 1]
+    cur_key = min_elt[gl.PIVOT_IDX]
+    prev_key = gl.prev_elt[gl.PIVOT_IDX]
 
     if cur_key != prev_key:
         gl.DUP_KEY = False

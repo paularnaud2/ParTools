@@ -15,7 +15,7 @@ OUT_PATH = f"{g.dirs['OUT']}rl_out.csv"
 # Default const------------------------------------------------------
 MAX_DB_CNX = 8  # Maximum number of connections allowed to work in parralel
 NB_MAX_ELT_IN_STATEMENT = 1000  # Maximum number of elements in the 'IN' statement per queries
-IN_FIELD_NB = 1  # Column number of the input file on which the queries and joint are performed
+PIVOT_IDX = 0  # Index of the pivot column (column on which the queries and joint are performed)
 
 SKIP_JOIN = False  # If True, no joint is performed and the SQL result is directly output
 SKIP_SQL = False  # If True, no SQL query is performed and the joint is directly performed with the available SQL tmp file (only needed for test purpose)

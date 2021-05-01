@@ -9,13 +9,18 @@
 # the SQL result.
 #
 # Notes:
-# - The SQL result must contain the first column in order to operate the joint.
-# In other words, the first field of both input and SQL has to be an ID.
-#
+# - If SKIP_JOIN is False, the SQL result must contain the pivot column (column
+# used for the queries and for the joint) so that the script can operate the joint.
+# - The index of the pivot column is an input parameter (gl.PIVOT_IDX = 0)
+# - In other words, with the default value (PIVOT_IDX), the first field of both
+# input and SQL output have to contain IDs/keys (as in the example below).
 # - QUERY_IN accepts either a string or a file path.
+# - QUERY_IN must be (or point to) a variabilised query, ie. containing '@@IN@@'
+# after a IN statement, which will be replaced by the elements of the pivot column
+# while building the final queries being run in parallel.
 #
-# - Before running this example, you have to populate the TEST table
-# by running quickstart/sql_upload.py
+# - Before running this example, you have to populate the TEST table by running
+# quickstart/sql_upload.py
 #
 # For more details, see the README.md file.
 
@@ -41,6 +46,7 @@ arr = com.load_csv('pytools/test/sql/files/in.csv')
 arr = [elt[0:2] for elt in arr]
 com.save_csv(arr, in_file)
 
+# The input query has to be variabilised
 query_in = """
 SELECT AFFAIRE, PRM
 FROM TEST
