@@ -1,9 +1,9 @@
 import pytools.common as com
 import pytools.dq as dq
 import pytools.tools.bf as bf
-import pytools.test.check_log as cl
 import pytools.tools.dup as dup
 import pytools.test.tools as t
+import pytools.test.check_log as cl
 
 from pytools.test import gl
 
@@ -13,40 +13,40 @@ def test_tools():
     com.mkdirs(gl.TOOLS_OUT, True)
     com.log_print()
 
-    # Test tools.xml
+    com.log("Test tools.xml------------------------------------------")
     t.parse_xml()
     dq.file_match(gl.XML_OUT, gl.XML_OUT_REF)
 
-    # Test toolSplit
+    com.log("Test toolSplit------------------------------------------")
     t.split()
 
-    # Test toolDup - dup.find_dup simple
+    com.log("Test toolDup - dup.find_dup simple----------------------")
     dup.find_dup(gl.DUP_IN, gl.DUP_OUT)
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
-    # Test toolDup - dup.find_dup col
+    com.log("Test toolDup - dup.find_dup col-------------------------")
     dup.find_dup(gl.DUP_COL_IN, col=1)
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
-    # Test toolDup - dup.del_dup + shuffle
+    com.log("Test toolDup - dup.del_dup + shuffle--------------------")
     dup.shuffle_csv(gl.DUP_IN, gl.SHUF_OUT)
     com.log_print()
     dup.del_dup(gl.SHUF_OUT, gl.DUP_OUT)
     com.log_print()
     dq.file_match(gl.DUP_OUT, gl.DEL_DUP_OUT_REF)
 
-    # Test toolDup - dup.find_dup_list
+    com.log("Test toolDup - dup.find_dup_list------------------------")
     list_in = com.load_csv(gl.DUP_IN)
     dup_list = dup.find_dup_list(list_in)
     com.save_csv(dup_list, gl.DUP_OUT)
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
-    # Test toolFilter
+    com.log("Test toolFilter-----------------------------------------")
     t.filter()
 
-    # Test BF
+    com.log("Test BF-------------------------------------------------")
     t.read_big_file()
     t.search_big_file()
     bf.sort_big_file(gl.SQL_IN, gl.SORT_BF_OUT)
