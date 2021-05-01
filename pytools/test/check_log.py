@@ -5,6 +5,21 @@ CO = [
     "Test string.get_duration",
 ]
 
+MAIL = [
+    "Log file initialised",
+    "Python version:",
+    "Test gmail",
+    "Test no_auth",
+    "Test outlook",
+    "Getting recipients from",
+    "Sending mail 'test' to",
+    "Mail sent",
+    "Checking if all recipients are internal",
+    "is not an internal email address",
+    "getaddrinfo failed",
+    "2147221005",
+]
+
 TO = [
     "Log file initialised",
     "Python version:",

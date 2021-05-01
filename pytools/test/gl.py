@@ -162,4 +162,4 @@ MAIL_SUBJECT = '[Test] Python mail'
 MAIL_VD = {'DATE': str(date.today()), 'NAME': 'dear tester'}
 MAIL_A = ['README.md', 'LICENSE']
 E_NO_AUT = '[Errno 11001] getaddrinfo failed'
-E_OUTLOOK = 'Chaîne de classe incorrecte'
+E_OUTLOOK = '2147221005'

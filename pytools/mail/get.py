@@ -11,6 +11,7 @@ from . import gl
 
 def recipients(check_internal):
     recipients_path = gl.mail_dir + gl.RECIPIENTS
+    com.log(f"Getting recipients from {recipients_path}")
     if not exists(recipients_path):
         s = gl.S_MISSING.format('Recipients', recipients_path)
         com.log(s)
@@ -20,8 +21,10 @@ def recipients(check_internal):
     if not check_internal:
         return recipients
 
+    i = gl.INTERNAL_STR
+    com.log(f"Checking if all recipients are internal (ie. contain '{i}')")
     for elt in recipients:
-        if gl.INTERNAL_STR not in elt:
+        if i not in elt:
             s = f'Warning: "{elt}" is not an internal email address. Send anyways? (y/n)'
             if gl.TEST:
                 com.log(s)

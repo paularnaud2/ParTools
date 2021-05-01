@@ -2,6 +2,7 @@ import pytools.common as com
 from pytools import mail
 from pytools.test import gl
 from pytools.test import ttry
+import pytools.test.check_log as cl
 
 
 def test_mail():
@@ -18,6 +19,8 @@ def test_mail():
 
     com.log("Test outlook--------------------------------------------")
     ttry(mail.outlook, gl.E_OUTLOOK, *args)
+
+    com.check_log(cl.MAIL)
 
 
 if __name__ == '__main__':
