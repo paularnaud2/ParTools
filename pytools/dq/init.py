@@ -2,8 +2,6 @@ import os
 from math import floor
 
 import pytools.common as com
-import pytools.common.g as g
-
 from . import gl
 from .functions import read_list
 
@@ -28,7 +26,7 @@ def init_compare_files(out):
     if out:
         gl.out_path = out
     else:
-        gl.out_path = g.dirs['OUT'] + 'file_match_out.csv'
+        gl.out_path = com.g.dirs['OUT'] + 'file_match_out.csv'
     gl.TMP_1 = gl.TMP_DIR + 'tmp_1.csv'
     gl.TMP_2 = gl.TMP_DIR + 'tmp_2.csv'
     gl.EQUAL_OUT = False
@@ -36,7 +34,7 @@ def init_compare_files(out):
 
 
 def init_tmp_dir():
-    gl.TMP_DIR = g.dirs['TMP'] + gl.TMP_FOLDER
+    gl.TMP_DIR = com.g.dirs['TMP'] + gl.TMP_FOLDER
     com.mkdirs(gl.TMP_DIR, True)
 
 

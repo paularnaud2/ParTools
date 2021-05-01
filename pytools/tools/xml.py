@@ -3,8 +3,6 @@ import sys
 from time import time
 
 import pytools.common as com
-import pytools.common.g as g
-
 from .finish import finish_xml
 from . import gl
 
@@ -107,7 +105,7 @@ def get_xml(in_str):
 
     tag = m1.group(1)
     elt = m1.group(2)
-    elt = elt.replace(g.CSV_SEPARATOR, '')
+    elt = elt.replace(com.g.CSV_SEPARATOR, '')
 
     return (tag, elt)
 

@@ -1,18 +1,6 @@
-import time
-from multiprocessing import Process
-from multiprocessing import Manager
-
-import pytools.common as com
-import pytools.common.g as g
 import pytools.dq as dq
 import pytools.reqlist as rl
-import pytools.test.check_log as cl
-
 from pytools.test import gl
-from pytools.test import ttry
-from pytools.test import is_test_db_defined
-from pytools.test.sql import upload
-from pytools.test.sql import clean_db
 from pytools.test.sql import interrupt
 
 

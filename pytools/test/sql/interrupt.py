@@ -5,8 +5,6 @@ from multiprocessing import Process
 from multiprocessing import Manager
 
 import pytools.common as com
-import pytools.common.g as g
-
 from pytools.test import gl
 from .main import upload
 from .main import download
@@ -28,7 +26,7 @@ def upload_interrupted():
     manager = Manager()
     md = manager.dict()
     md["T"] = False
-    md["LOG_FILE"] = g.LOG_FILE
+    md["LOG_FILE"] = com.g.LOG_FILE
     com.log("[sql] upload: start", c_out=False)
     p = Process(target=upload, args=(gl.SQL_IN, True, md))
     p.start()
@@ -54,7 +52,7 @@ def interrupt(function, kwargs, init_msg):
     md = manager.dict()
     md["STOP"] = False
     md["N_STOP"] = math.floor(0.7 * 2900)
-    md["LOG_FILE"] = g.LOG_FILE
+    md["LOG_FILE"] = com.g.LOG_FILE
     com.log(init_msg, c_out=False)
     kwargs['md'] = md
 

@@ -1,5 +1,4 @@
 import pytools.common as com
-import pytools.common.g as g
 import pytools.dq as dq
 import pytools.test.reqlist as t
 import pytools.test.check_log as cl
@@ -34,14 +33,14 @@ def test_reqlist():
 
     com.log('Test reqlist------------------------------------------')
     # Test no sql output
-    ttry(t.reqlist, g.E_VA, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_NO)
+    ttry(t.reqlist, com.g.E_VA, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_NO)
 
     # Test no var
-    ttry(t.reqlist, g.E_MV, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_MV)
+    ttry(t.reqlist, com.g.E_MV, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_MV)
 
     # Test missing header
     com.save_csv(arr[1:], gl.RL_IN_MH)
-    ttry(t.reqlist, g.E_MH, gl.RL_IN_MH, gl.RL_OUT_1, gl.RL_QUERY_1)
+    ttry(t.reqlist, com.g.E_MH, gl.RL_IN_MH, gl.RL_OUT_1, gl.RL_QUERY_1)
 
     # Test nominal conditions
     t.reqlist(gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_1, cnx=1)

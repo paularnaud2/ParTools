@@ -6,8 +6,6 @@ from threading import RLock
 from threading import Semaphore
 
 import pytools.common as com
-import pytools.common.g as g
-
 from . import gl
 from . import log
 from . import merge
@@ -53,7 +51,7 @@ def process_ql_elt(elt):
         cnx = gl.cnx_dict[cur_th]
 
         if gl.ql_replace:
-            var = g.VAR_DEL + gl.VAR_IN + g.VAR_DEL
+            var = com.g.VAR_DEL + gl.VAR_IN + com.g.VAR_DEL
             query = gl.query.replace(var, elt[0])
         else:
             query = elt[0]
@@ -127,5 +125,5 @@ def init_out_file(cursor, file_name):
         fields = [elt[0] for elt in cursor.description]
         if gl.range_query and gl.EXPORT_RANGE:
             fields.append(gl.RANGE_NAME)
-        s = g.CSV_SEPARATOR.join(fields)
+        s = com.g.CSV_SEPARATOR.join(fields)
         out_file.write(s + '\n')

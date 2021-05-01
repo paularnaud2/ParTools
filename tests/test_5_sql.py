@@ -1,5 +1,4 @@
 import pytools.common as com
-import pytools.common.g as g
 import pytools.dq as dq
 
 import pytools.test.sql as t
@@ -24,7 +23,7 @@ def test_sql():
 
     com.log("Test upload-------------------------------------------")
     # Test missing header in input file
-    ttry(t.upload, g.E_MH, gl.SQL_IN_MH)
+    ttry(t.upload, com.g.E_MH, gl.SQL_IN_MH)
     # Test upload with interruption
     t.upload_interrupted()
     t.upload(gl.SQL_IN, tr=True)

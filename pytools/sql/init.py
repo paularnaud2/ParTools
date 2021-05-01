@@ -1,6 +1,4 @@
 import pytools.common as com
-import pytools.common.g as g
-
 from . import gl
 
 
@@ -12,7 +10,7 @@ def init():
 
 def init_gl():
     get_footprint()
-    gl.TMP_DIR = g.dirs['TMP'] + gl.TMP_FOLDER
+    gl.TMP_DIR = com.g.dirs['TMP'] + gl.TMP_FOLDER
     gl.iutd_path = gl.TMP_DIR + gl.IUTD_FILE
     gl.tmp_file_chunk = gl.TMP_DIR + 'chunk_' + gl.footprint + '.txt'
 

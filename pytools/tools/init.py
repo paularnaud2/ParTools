@@ -1,12 +1,10 @@
 import pytools.common as com
-import pytools.common.g as g
-
 from . import gl
 
 
 def init_find_dup(in_path, out_path, col):
     if not out_path:
-        tmp_dir = g.dirs['TMP'] + gl.TMP_FOLDER
+        tmp_dir = com.g.dirs['TMP'] + gl.TMP_FOLDER
         com.mkdirs(tmp_dir)
         out_path = tmp_dir + gl.TMP_OUT
     s = "Searching duplicates in "

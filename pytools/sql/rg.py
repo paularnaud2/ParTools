@@ -1,8 +1,5 @@
 import re
-
 import pytools.common as com
-import pytools.common.g as g
-
 from . import gl
 
 
@@ -23,9 +20,9 @@ def range_query():
 
 def get_rg_file_name(in_str):
 
-    exp = '(.*)' + g.VAR_DEL + '(RG_.*)' + g.VAR_DEL
+    exp = '(.*)' + com.g.VAR_DEL + '(RG_.*)' + com.g.VAR_DEL
     m = re.search(exp, in_str)
-    exp_comment = '(.*-{2,}.*)' + g.VAR_DEL + '(RG_.*)' + g.VAR_DEL
+    exp_comment = '(.*-{2,}.*)' + com.g.VAR_DEL + '(RG_.*)' + com.g.VAR_DEL
     m_comment = re.search(exp_comment, in_str)
     if m and not m_comment:
         rg_file_name = m.group(2)

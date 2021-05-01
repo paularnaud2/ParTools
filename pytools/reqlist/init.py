@@ -1,6 +1,4 @@
-import pytools.common.g as g
 import pytools.common as com
-
 from . import gl
 
 
@@ -18,7 +16,7 @@ def init(kwargs):
 def init_globals():
 
     get_footprint()
-    TMP_DIR = g.dirs['TMP'] + gl.TMP_FOLDER + gl.footprint + '/'
+    TMP_DIR = com.g.dirs['TMP'] + gl.TMP_FOLDER + gl.footprint + '/'
     com.mkdirs(TMP_DIR)
     gl.OUT_LEFT = TMP_DIR + gl.OUT_LEFT_FILE
     gl.OUT_RIGHT = TMP_DIR + gl.OUT_RIGHT_FILE

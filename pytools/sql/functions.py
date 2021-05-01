@@ -2,8 +2,6 @@ from os import rename
 from threading import RLock
 
 import pytools.common as com
-import pytools.common.g as g
-
 from . import gl
 from . import rg
 from . import log
@@ -71,11 +69,11 @@ def write_row(row, out_file, q_name='MONO'):
             s = ''
         else:
             s = com.csv_clean(s)
-        line_out += g.CSV_SEPARATOR + s
-    if line_out.strip(g.CSV_SEPARATOR) == '':
+        line_out += com.g.CSV_SEPARATOR + s
+    if line_out.strip(com.g.CSV_SEPARATOR) == '':
         return 0
     if gl.EXPORT_RANGE and q_name != 'MONO':
-        line_out += g.CSV_SEPARATOR + q_name
+        line_out += com.g.CSV_SEPARATOR + q_name
     line_out += '\n'
     out_file.write(line_out)
     return 1

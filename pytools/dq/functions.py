@@ -3,7 +3,6 @@ from math import ceil
 from os.path import exists
 
 import pytools.common as com
-import pytools.common.g as g
 from pytools.tools.split import split_file
 
 from . import gl
@@ -14,7 +13,7 @@ def check_header(inp):
         s = (f"Error: missing header in file '{inp}'."
              " Input files must have a header.")
         com.log(s)
-        raise Exception(g.E_MH)
+        raise Exception(com.g.E_MH)
 
 
 def compare_headers(in1, in2):
@@ -26,7 +25,7 @@ def compare_headers(in1, in2):
         s = (f"Error: files {in1} and {in2} don't have the same header."
              " Input files must have the same header.")
         com.log(s)
-        raise Exception(g.E_DH)
+        raise Exception(com.g.E_DH)
 
     return True
 
@@ -99,7 +98,7 @@ def array_list_not_void():
 
 def read_list(in_file):
     line = in_file.readline()
-    line_list = line.strip("\n").split(g.CSV_SEPARATOR)
+    line_list = line.strip("\n").split(com.g.CSV_SEPARATOR)
     return line_list
 
 
