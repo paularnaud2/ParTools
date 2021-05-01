@@ -1,7 +1,8 @@
-from os.path import realpath
 from os.path import exists
 
-if exists('pytools/conf_perso.py'):
-    import pytools.conf_perso as cfg
+if exists('PTconf_perso.py'):
+    import PTconf_perso as cfg
+elif exists('PTconf.py'):
+    import PTconf as cfg
 else:
     import pytools.conf as cfg
