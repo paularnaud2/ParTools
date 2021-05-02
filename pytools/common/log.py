@@ -84,17 +84,13 @@ def init_log(parent_module='', force_init=False):
 
 
 def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
-    # For a simple use, initialise with init_sl_time()
-    # For multi_thread use, initialise with gen_sl_detail(rg_name)
+    """For simple use, initialise with init_sl_time()  
+    For multi thread use, initialise with gen_sl_detail(q_name)"""
 
     if counter % step != 0:
         return False
 
-    try:
-        detail = g.sl_detail[th_name]
-    except KeyError:
-        detail = ''
-
+    detail = g.sl_detail[th_name] if th_name in g.sl_detail else ''
     st = g.sl_time_dict[th_name]
     dstr = string.get_duration_string(st)
     bn_1 = string.big_number(step)
@@ -112,21 +108,12 @@ def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
     return True
 
 
-def log_input(str_in):
-    command = input(str_in)
-    write_log(str_in + command)
-
-    return command
-
-
 def init_sl_time(th_name='DEFAULT'):
     with g.verrou:
         g.sl_time_dict[th_name] = time()
 
 
 def gen_sl_detail(q_name='', th_nb=1, multi_th=False):
-
-    th_name = str(q_name) + '_' + str(th_nb)
 
     if q_name not in ['', 'MONO'] and multi_th is True:
         detail = f" for query '{q_name}' (connection no. {th_nb})"
@@ -137,11 +124,19 @@ def gen_sl_detail(q_name='', th_nb=1, multi_th=False):
     else:
         detail = ''
 
+    th_name = f'{q_name}_{th_nb}'
     with g.verrou:
         g.sl_detail[th_name] = detail
 
     init_sl_time(th_name)
     return th_name
+
+
+def log_input(str_in):
+    command = input(str_in)
+    write_log(str_in + command)
+
+    return command
 
 
 def log_array(array, nb_tab=0):
