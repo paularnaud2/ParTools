@@ -53,15 +53,12 @@ def log_print(str_in='', nb_tab=0, c_out=True):
         write_log(str_in)
 
 
-def log(str_in, level=0, print_date=False, nb_tab=0, c_out=True):
+def log(str_in, level=0, format='%H:%M:%S -', nb_tab=0, c_out=True):
     if g.LOG_LEVEL < level:
         return
 
-    if print_date:
-        s = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    else:
-        s = datetime.now().strftime("%H:%M:%S")
-    s = s + " - " + str(str_in)
+    fdate = datetime.now().strftime(format)
+    s = f"{fdate} {str_in}"
     log_print(s, nb_tab, c_out)
 
 
@@ -69,7 +66,7 @@ def init_log(parent_module='', force_init=False):
     if g.LOG_FILE_INITIALISED and not force_init:
         return
 
-    s = datetime.now().strftime("%Y%m%d_%H%M%S")
+    s = datetime.now().strftime('%Y%m%d_%H%M%S')
     if parent_module:
         s += '_' + parent_module
     g.LOG_FILE = s + '.txt'
@@ -81,7 +78,7 @@ def init_log(parent_module='', force_init=False):
     log_path = g.dirs['LOG'] + g.LOG_FILE
     log_path = p.abspath(log_path)
     s = f"Log file initialised ({log_path})"
-    log(s, print_date=True)
+    log(s, format='%Y-%m-%d %H:%M:%S -')
     log_print("Python version: " + sys.version)
     log_print()
 

@@ -42,8 +42,8 @@ EXTRACT_COL = True
 SL_STEP = 500 * 10**3  # step_log setting (see README.md)
 
 # Globals
-COL_LIST = ''
-FF = ''
+COL_LIST = []
+FF = None
 
 # Split--------------------------------------------------------------
 MAX_LINE = 10**6  # Maximum number of lines for a split file

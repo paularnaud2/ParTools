@@ -18,13 +18,13 @@ You can mainly use them for:
 Dowload code, extract zip and run `pip install -e .` at the root.
 
 You'll find examples of use and descriptions of the different available packages and functions in the _quickstart_ folder.
-If you want to use the cx*Oracle dependant packages (sql and reqlist), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the conf.py* file.
+If you want to use the cx_Oracle dependant packages (sql and reqlist), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the _conf.py_ file.
 
 ## Good to know
 
 ### The common package
 
-The pytools package includes a _common_ sub package which provides generic functions used by other sub packages. As you may find usefull to use some of them for your own code, I recommend you to check out the list of those functions in _pytools/common/\_\_init\_\_.py_. Here are a few examples:
+The pytools package includes a _common_ sub package which provides generic functions used by other sub packages. As you may want to use some of them for your own code, I recommend you to check out the list of those functions in _pytools/common/\_\_init\_\_.py_. Here are a few examples:
 
 - `save_list`: saves a list into a text file
 - `load_txt`: loads a text file into a string or a list
