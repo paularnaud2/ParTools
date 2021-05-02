@@ -19,7 +19,7 @@ DEBUG = False
 
 # sql--------------------------------------------------------------------------
 
-# Path of your Oracle instant client
+# Path to the Oracle instant client
 # (the nb of bit has to match your python version)
 ORACLE_CLIENT = 'C:/instantclient/'
 

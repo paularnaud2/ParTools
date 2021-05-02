@@ -1,6 +1,6 @@
 import pytools.common as com
 import pytools.dq as dq
-import pytools.test.reqlist as t
+import pytools.test.rl as t
 import pytools.test.check_log as cl
 
 from pytools.test import gl
@@ -10,8 +10,8 @@ from pytools.test.sql import upload
 from pytools.test.sql import clean_db
 
 
-def test_reqlist():
-    com.init_log('test_reqlist', True)
+def test_rl():
+    com.init_log('test_rl', True)
     if not is_test_db_defined():
         return
 
@@ -31,26 +31,26 @@ def test_reqlist():
     arr = [elt[0] for elt in arr]
     com.save_csv(arr, gl.RL_IN_1)
 
-    com.log('Test reqlist - no sql output----------------------------')
+    com.log('Test rl - no sql output----------------------------')
     ttry(t.reqlist, com.g.E_VA, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_NO)
 
-    com.log('Test reqlist - no var in query--------------------------')
+    com.log('Test rl - no var in query--------------------------')
     ttry(t.reqlist, com.g.E_MV, gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_MV)
 
-    com.log('Test reqlist - missing header---------------------------')
+    com.log('Test rl - missing header---------------------------')
     com.save_csv(arr[1:], gl.RL_IN_MH)
     ttry(t.reqlist, com.g.E_MH, gl.RL_IN_MH, gl.RL_OUT_1, gl.RL_QUERY_1)
 
-    com.log('Test reqlist - standard---------------------------------')
+    com.log('Test rl - standard---------------------------------')
     t.reqlist(gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_1, cnx=1)
     t.reqlist(gl.RL_OUT_1, gl.RL_OUT_2, gl.RL_QUERY_2)
     t.dq.file_match(gl.SQL_IN, gl.RL_OUT_2, del_dup=True)
     t.dq.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
 
-    com.log('Test reqlist - interuption and recovery-----------------')
+    com.log('Test rl - interuption and recovery-----------------')
     com.mkdirs(gl.RL_TMP, True)
     com.log_print()
-    t.rl_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, cnx=6)
+    t.reqlist_interrupted(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, cnx=6)
     t.reqlist(gl.RL_OUT_1, gl.RL_OUT_3, gl.RL_QUERY_2, True, cnx=6)
     dq.file_match(gl.RL_OUT_2, gl.RL_OUT_3)
 
@@ -60,4 +60,4 @@ def test_reqlist():
 
 
 if __name__ == '__main__':
-    test_reqlist()
+    test_rl()

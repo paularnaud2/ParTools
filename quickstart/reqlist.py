@@ -29,15 +29,15 @@ from datetime import datetime
 import pytools.common as com
 from pytools.common import g
 from pytools.common import init_log
-from pytools.reqlist import run_reqList
+from pytools.rl import reqlist
 
-init_log('reqlist')
+init_log('rl')
 
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
 date = datetime.now().strftime("%Y%m%d")
-query_in = 'pytools/test/reqlist/files/query1.sql'
+query_in = 'pytools/test/rl/files/query1.sql'
 in_file = f"{g.dirs['IN']}rl_in.csv"
 out_file = f"{g.dirs['OUT']}export_RL_{db}_{date}.csv"
 
@@ -54,7 +54,7 @@ WHERE 1=1
 AND AFFAIRE IN @@IN@@
 """
 
-run_reqList(
+reqlist(
     CNX_INFO=cnx_str,
     QUERY_IN=query_in,
     IN_PATH=in_file,

@@ -5,7 +5,7 @@ from pytools.common import g
 CNX_INFO = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
 DB = ''  # DB name from pytools.conf.CONF_ORACLE
 
-QUERY_IN = ''  # Must be a variabilised query containing '@@IN@@' (see quickstart/reqlist)
+QUERY_IN = ''  # Must be a variabilised query containing '@@IN@@' (see quickstart/rl)
 
 # Optional inputs----------------------------------------------------
 ENV = ''  # See comment in conf.CONF_ORACLE for details
@@ -25,7 +25,7 @@ MSG_BOX_END = True  # If True, a message box will pop up at the end of the proce
 DEBUG_JOIN = False
 TEST_RECOVER = False
 
-TMP_FOLDER = 'reqlist/'
+TMP_FOLDER = 'rl/'
 OUT_LEFT_FILE = 'out_l.csv'
 OUT_RIGHT_FILE = 'out_r.csv'
 OUT_SQL_FILE = 'out_sql.csv'

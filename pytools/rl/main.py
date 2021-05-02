@@ -14,8 +14,8 @@ from .join import left_join_arrays
 
 
 @com.log_exeptions
-def run_reqList(**kwargs):
-    com.log("[reqlist] run_reqList: start")
+def reqlist(**kwargs):
+    com.log("[rl] reqlist: start")
     reload(gl)  # reinit globals
     init(kwargs)
     start_time = time()
@@ -49,7 +49,7 @@ def download():
 
 
 def left_join_files(lpath='', rpath='', out='', debug=False):
-    com.log("[reqlist] left_join_files: start")
+    com.log("[rl] left_join_files: start")
     start_time = time()
     if debug:
         gl.DEBUG_JOIN = True
@@ -72,7 +72,7 @@ def left_join_files(lpath='', rpath='', out='', debug=False):
     s = f"Output file saved in {out}"
     com.log(s)
     dstr = com.get_duration_string(start_time)
-    com.log(f"[reqlist] left_join_files: end ({dstr})")
+    com.log(f"[rl] left_join_files: end ({dstr})")
     com.log_print('|')
 
 
@@ -84,10 +84,10 @@ def finish(start_time):
         com.log_print('|')
 
     (dms, dstr) = com.get_duration_string(start_time, True)
-    s = f"run_reqList: end ({dstr})"
-    com.log("[reqlist] " + s)
+    s = f"reqlist: end ({dstr})"
+    com.log("[rl] " + s)
     if gl.MSG_BOX_END:
-        st.msg_box(s, "reqlist", dms)
+        st.msg_box(s, "rl", dms)
     com.log_print()
     if gl.OPEN_OUT_FILE:
         com.startfile(gl.OUT_PATH)

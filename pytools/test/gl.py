@@ -3,7 +3,7 @@ from pytools.common import g
 
 import pytools.tools.gl as gt
 import pytools.tools.gl as tools
-import pytools.reqlist.gl as rl
+import pytools.rl.gl as rl
 import pytools.sql.gl as sql
 
 # Main---------------------------------------------------------------
@@ -47,9 +47,9 @@ SQL_RG_REF = TEST_SQL + '01_ref.csv'
 SQL_RG_COMP = SQL_DL_OUT_RG_FOLDER + '01.csv'
 SQL_MAX_ELT_INSERT = 200
 
-# test_reqlist-------------------------------------------------------
-TEST_RL = TEST + 'reqlist/files/'
-TEST_RL_OUT = TEST_OUT + 'reqlist/'
+# test_rl-------------------------------------------------------
+TEST_RL = TEST + 'rl/files/'
+TEST_RL_OUT = TEST_OUT + 'rl/'
 RL_OUT = g.dirs['TMP'] + TEST_RL_OUT
 RL_TMP = g.dirs['TMP'] + rl.TMP_FOLDER
 RL_OUT_JOIN = RL_OUT + 'join.csv'
