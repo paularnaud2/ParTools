@@ -1,20 +1,22 @@
-# sql.upload allows you to simply upload data to an Oracle DB.
+"""
+sql.upload allows you to simply upload data to an Oracle DB.
 
-# In this example of use, the file 'in.csv' is uploaded into the 'XE' DB.
-# You can input kwargs for execute function to be run before the upload
-# (EXECUTE_KWARGS). Here, a create table script is passed ensuring that
-# the 'TEST' table exists before the upload and that the end result remains
-# the same after each execution.
-# The input 'VAR_DICT' allows you to pass a dictionary containing variable
-# names and values to be replaced in the input script.
-# Here, '@@TABLE_NAME@@' will be replaced by 'TEST'
-#
-# Notes:
-# - SCRIPT_IN accepts either a string or a file path
-# - You can input either CNX_INFO or DB, as long as the DB you pass is defined
-# in the conf file (pytools/conf.py)
-#
-# For more details, see the README.md file.
+In this example of use, the file 'in.csv' is uploaded into the 'XE' DB. You can
+input kwargs for the execute function to be run before the upload (EXECUTE_KWARGS).
+Here, a create table script is passed ensuring that the 'TEST' table exists
+before the upload and that the end result remains the same after each execution.
+
+The input 'VAR_DICT' allows you to pass a dictionary containing variable names
+and values to be replaced in the input script. Here, '@@TABLE_NAME@@' will be
+replaced by 'TEST'.
+
+Notes:
+- SCRIPT_IN accepts either a string or a file path
+- You can input either CNX_INFO or DB, as long as the DB you pass is defined
+in the conf file (pytools/conf.py)
+
+For more details, see the README.md file.
+"""
 
 import pytools.sql as sql
 from pytools.common import init_log

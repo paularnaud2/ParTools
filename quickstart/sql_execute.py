@@ -1,17 +1,19 @@
-# sql.execute allows you to simply execute a SQL script or a PL/SQL procedure
-# on an Oracle DB.
-#
-# In this example of use, a create table script is first executed followed by
-# insert commands. If your script contains a single command or is a PL/SQL
-# procedure (first example), you have to put PROC=True or nothing (default value);
-# if it contains several commands (second example), you have to set PROC=False.
-#
-# Notes:
-# - SCRIPT_IN accepts either a string or a file path
-# - You can input either CNX_INFO or DB, as long as the DB you pass is defined
-# in the conf file (pytool/conf.py)
-#
-# For more details, see the README.md file.
+"""
+sql.execute allows you to simply execute a SQL script or a PL/SQL procedure
+on an Oracle DB.
+
+In this example of use, a create table script is first executed followed by
+insert commands. If your script contains a single command or is a PL/SQL
+procedure (first example), you have to put PROC=True or nothing (default value);
+if it contains several commands (second example), you have to set PROC=False.
+
+Notes:
+- SCRIPT_IN accepts either a string or a file path
+- You can input either CNX_INFO or DB, as long as the DB you pass is defined
+in the conf file (pytool/conf.py)
+
+For more details, see the README.md file.
+"""
 
 import pytools.sql as sql
 from pytools.common import init_log

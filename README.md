@@ -4,15 +4,15 @@
 This package contains a bunch of Python tools I have developed and used as a Support / Test Engineer.  
 You can mainly use them for:
 
-- Performing multi threaded SQL queries on an Oracle DB (sql)
-- Performing multi threaded SQL queries on a given perimeter on an Oracle DB (rl)
-- Comparing and sorting potentially big files (dq)
-- Reading and searching potentially big files (toolBF)
-- Parsing potentially big XML files (toolParseXML)
-- Searching and removing duplicates (toolDup)
-- Filtering potentially big file with flexible conditions (toolFilter)
-- Splitting potentially big files (toolSplit)
-- Sending mails (mail)
+- Performing multi threaded SQL queries on an Oracle DB (__sql__)
+- Performing multi threaded SQL queries on a given perimeter on an Oracle DB (__rl__)
+- Comparing and sorting potentially big files (__dq__)
+- Reading and searching potentially big files (__toolB__)
+- Parsing potentially big XML files (__toolParseXML__)
+- Searching and removing duplicates (__toolDup__)
+- Filtering potentially big file with flexible conditions (__toolFilter__)
+- Splitting potentially big files (__toolSplit__)
+- Sending mails (__mail__)
 
 ## Quickstart
 
@@ -21,15 +21,15 @@ Download code, __extract zip and run `pip install -e .` at the root.__
 You'll find examples of use and descriptions of the different available packages and functions in the __quickstart folder__.
 If you want to use the __cx_Oracle__ dependant packages (__sql__ and __rl__), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the __conf.py__ file.
 
-## The __conf.py__ file
+## The conf.py file
 
 The __pytools/conf.py__ file contains the __main user settings__ for the __pytools__ package such as the path to the Oracle instant client (``ORACLE_CLIENT``). If needed, you can create a __PTconf.py__ file at the root that will be used instead of the native __pytools/conf.py__ file. Similarly, you can also create a __PTconf_perso.py__ file at the root that will take over the two previous files described. This can be useful if you __work on a shared repository__ but still want/need to have your own configurations.
 
-## The global variable files __gl.py__ and main functions inputs
+## The global variable files gl.py and main functions inputs
 
 Each package has a __gl.py__ file which sets its __global variables and constants__. Each of these variables can be passed to the main package function (eg. sql.download) and if so, overwrites the value defined in the __gl.py__ file. In that respect, __constants defined in the gl.py file can be seen as input default input values__.
 
-## The __common__ package
+## The common package
 
 The __pytools__ package includes a __common__ package which provides generic functions used by the other packages. As you may want to use some of them for your own code, I recommend you to check out the list of those functions in __pytools/common/\_\_init\_\_.py__. Here are a few examples:
 
@@ -40,7 +40,7 @@ The __pytools__ package includes a __common__ package which provides generic fun
 - `big_number`: converts a potentially big number into a lisible string. For example 10000000 becomes '10 000 000'
 - `get_duration_string`: outputs a string representing the time elapsed since the input ``start_time``. For example '3 minutes and 20 seconds'.
 
-### Logging with the __common__ package
+### Logging with the common package
 
 If you want the `log` function to actually fill a log file, you have to use `init_log()` before using it, otherwise it will just print out the log info in the console.  
 You can specify a ``format`` for the log timestamp which by default is ``'%H:%M:%S -'``. Here is what a default log line looks like:

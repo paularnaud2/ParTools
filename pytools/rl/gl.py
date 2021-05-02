@@ -5,7 +5,7 @@ from pytools.common import g
 CNX_INFO = ''  # Connection string: 'USER/PWD@HOST:PORT/SERVICE_NAME'
 DB = ''  # DB name from pytools.conf.CONF_ORACLE
 
-QUERY_IN = ''  # Must be a variabilised query containing '@@IN@@' (see quickstart/rl)
+QUERY_IN = ''  # Must be a variabilized query containing '@@IN@@' (see quickstart/rl)
 
 # Optional inputs----------------------------------------------------
 ENV = ''  # See comment in conf.CONF_ORACLE for details

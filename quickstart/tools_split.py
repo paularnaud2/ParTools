@@ -1,6 +1,8 @@
-# This script allows you to split a file into multiple files (e.g. if it is too
-# big to be opened with an app such as Excel). see in pytools/tools/gl for other
-# parameters
+"""
+This script allows you to split a file into multiple files (e.g. if it is too
+big to be opened with an app such as Excel). see in pytools/tools/gl for other
+parameters.
+"""
 
 import pytools.common.g as g
 from pytools.tools import split

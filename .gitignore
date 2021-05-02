@@ -11,3 +11,4 @@ venv/
 conf_perso.py
 /confidential.txt
 PTconf_perso.py
+format.py
