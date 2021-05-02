@@ -1,10 +1,10 @@
 # PyTools
 
-This package contains a bunch of Python tools I have developped and used as a Support / Test Engenieer.
+This package contains a bunch of Python tools I have developed and used as a Support / Test Engineer.
 You can mainly use them for:
 
-- Performing multithread SQL queries on an Oracle DB (sql)
-- Performing multithread SQL queries on a given perimeter on an Oracle DB (rl)
+- Performing multi threaded SQL queries on an Oracle DB (sql)
+- Performing multi threaded SQL queries on a given perimeter on an Oracle DB (rl)
 - Comparing and sorting potentially big files (dq)
 - Reading and searching potentially big files (toolBF)
 - Parsing potentially big XML files (toolParseXML)
@@ -15,14 +15,14 @@ You can mainly use them for:
 
 ## Quickstart
 
-Dowload code, extract zip and run `pip install -e .` at the root.
+Download code, extract zip and run `pip install -e .` at the root.
 
 You'll find examples of use and descriptions of the different available packages and functions in the _quickstart_ folder.
 If you want to use the cx_Oracle dependant packages (sql and rl), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the _conf.py_ file.
 
 ## The common package
 
-The pytools package includes a _common_ sub package which provides generic functions used by other sub packages. As you may want to use some of them for your own code, I recommend you to check out the list of those functions in _pytools/common/\_\_init\_\_.py_. Here are a few examples:
+The pytools package includes a _common_ sub package which provides generic functions used by the other sub packages. As you may want to use some of them for your own code, I recommend you to check out the list of those functions in _pytools/common/\_\_init\_\_.py_. Here are a few examples:
 
 - `save_list`: saves a list into a text file
 - `load_txt`: loads a text file into a string or a list
@@ -35,9 +35,9 @@ The pytools package includes a _common_ sub package which provides generic funct
 
 If you want the `log` function to actually fill a log file, you have to use `init_log()` before using it, otherwise it will just print out the log info in the console.
 
-You can specify a format for the log time stamp which by default is ``format='%H:%M:%S -'``
+You can specify a format for the log timestamp which by default is ``format='%H:%M:%S -'``
 
-The `step_log` function allows you to log some information only if the input ``counter`` is a multiple of the input ``step`` (thus, it is most likely used in for or while loops). `step_log` can be usefull to track the progress of long processes such as reading or writing milions of lines in a file. The ``what`` input expects a description of what is being counted. It's default value is  ``what='lines written'``. In order to correctly measure the time displayed in each log line, the ``step_log`` function has to be initialised using the ``init_sl_time`` function. So for example if you input ``step=500`` and don't input any ``what`` value, you should get something like this:
+The `step_log` function allows you to log some information only if the input ``counter`` is a multiple of the input ``step`` (thus, it is most likely used in for or while loops). `step_log` can be useful to track the progress of long processes such as reading or writing millions of lines in a file. The ``what`` input expects a description of what is being counted. It's default value is  ``what='lines written'``. In order to correctly measure the time displayed in each log line, the ``step_log`` function has to be initialised using the ``init_sl_time`` function. So for example if you input ``step=500`` and don't input any ``what`` value, you should get something like this:
 
     19:45:04 - 500 lines written in 3 ms. 500 lines written in total.
     19:45:04 - 500 lines written in 3 ms. 1 000 lines written in total.
@@ -49,14 +49,21 @@ When it is first used, the _common_ package gets initialised by creating a 'PT f
 
 ### The conf.py file
 
-The pytools/conf.py file contains the main user settings for the PyTools package such as the path to the Oracle instant client (``ORACLE_CLIENT``). If needed, you can create a PTconf.py file at the root that will be used instead of the native pytools/conf.py file. Similarly you can also created a PTconf_perso.py file at the root that will take over the two previous files decribed. this can be usefull is you work on a shared repository but still want to have your own configurations.
+The pytools/conf.py file contains the main user settings for the PyTools package such as the path to the Oracle instant client (``ORACLE_CLIENT``). If needed, you can create a PTconf.py file at the root that will be used instead of the native pytools/conf.py file. Similarly you can also create a PTconf_perso.py file at the root that will take over the two previous files described. This can be useful if you work on a shared repository but still want to have your own configurations.
 
 ### The global variable files gl.py and main functions inputs
 
 Each sub package has a gl.py file which sets its global variables and constants. Each gl variables can be passed to the main sub package function (eg. sql.download) and if so, overwrites the value defined in the gl.py file. In that respect, constants defined in the gl.py file can be seen as input default values.
 
-### Recover functionnality
+### Recover functionality
 
-rl.rl, 
+``sql.download``, ``rl.reqlist`` and ``sql.execute`` have a __recovery fonction__. This means that if the process is unexpectedly stopped (eg. because of network issues) before the end, then when relaunched, the script automatically restarts (approximately) from where it stopped. The reliability of these recovery mecanismes is ensured by automated tests using the ``multiprocessing`` library to simulate the unexpected process interruption.
 
-### Install Oracle XE for tests
+### Running the automated tests
+
+If you want to ensure that all Pytools fonctionnalites work correctly on your environment (or if you want a bigger overview of functionalities than that provided in the quickstart scripts), you can run ``pytest`` at the root.
+
+If you want the cx_Oracle dependent tests (sql and rl) to be working, you'll need access to an Oracle database with write permission. If you don't have any, you can install an [Oracle XE](https://www.oracle.com/database/technologies/appdev/xe.html) local database.
+
+If you want to bypass the tests using cx_Oracle, you can simply set to ``''`` the ``SQL_DB`` variable defined in pytools/test/gl.py.
+

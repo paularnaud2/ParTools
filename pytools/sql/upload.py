@@ -63,6 +63,8 @@ def send_chunk_duration(start):
     if not gl.MD["T"]:
         (dms, dstr) = com.get_duration_string(start, True)
         com.log(f"Sending duration to the main process ({dstr})...")
+        if dms == 0:
+            dms = 1
         gl.MD["T"] = dms
 
 

@@ -40,15 +40,15 @@ QUERY_DIR = 'pytools/sql/queries/'
 IUTD_FILE = 'last_iutd_check.csv'
 
 # Strings
-S_1 = "Connecting to data base ({})..."
-S_2 = "Connecting to data base '{}' of environment '{}' ({})..."
-S_3 = "Connecting to data base {} ({})..."
+S_1 = "Connecting to database ({})..."
+S_2 = "Connecting to database '{}' of environment '{}' ({})..."
+S_3 = "Connecting to database {} ({})..."
 
 # Exceptions
 s = " Pease check the CONF_ORACLE conf var."
 E_1 = "Error: either gl.CNX_INFO or gl.DB have to be defined"
-E_2 = "Error: data base '{}' doesn't seem to be defined." + s
-E_3 = "Error: data base '{}' of environment '{}' doesn't seem to be defined." + s
+E_2 = "Error: database '{}' doesn't seem to be defined." + s
+E_3 = "Error: database '{}' of environment '{}' doesn't seem to be defined." + s
 
 # Data bases in this list will be checked by the is_up_to_date function
 IUTD_LIST = []

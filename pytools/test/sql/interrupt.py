@@ -19,7 +19,7 @@ def upload_interrupted():
     subprocess, the main process sleeps for this duration before killing
     the subprocess. This is belieived to introduce some kind of
     randomness to the moment where the subprocess is killed (we also
-    wanna test interruption while the the file gl.tmp_file_chunk  is
+    want to test interruption while the the file gl.tmp_file_chunk  is
     being written)
     """
 

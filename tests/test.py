@@ -1,1 +1,3 @@
-from pytools.mail import mail_gmail
+a = 0
+if a:
+    print('OK')
