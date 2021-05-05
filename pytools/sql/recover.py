@@ -5,7 +5,7 @@ from . import gl
 
 def recover():
 
-    file_list = com.get_file_list(gl.TMP_DIR)
+    file_list = com.list_files(gl.TMP_DIR, False)
     a = len(file_list)
     if a == 0:
         return

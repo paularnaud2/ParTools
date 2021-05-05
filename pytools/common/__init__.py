@@ -35,7 +35,7 @@ from .file import startfile
 from .file import merge_files
 from .file import count_lines
 from .file import delete_folder
-from .file import get_file_list
+from .file import list_files
 
 from .header import get_header
 from .header import gen_header

@@ -19,6 +19,8 @@ def like(in_str, like_string, match_output=False):
 
     like_string = re.escape(like_string)
     like_string = like_string.replace(r'\*', '(.*)')
+    if '\n' not in in_str:
+        like_string = '^' + like_string + '$'
     m = re.search(like_string, in_str)
     if not m:
         return False

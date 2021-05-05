@@ -35,7 +35,7 @@ The __pytools__ package includes a __common__ package which provides generic fun
 
 - `save_list`: saves a list into a text file
 - `load_txt`: loads a text file into a string or a list
-- `get_file_list`: returns the list of the files in a folder
+- `list_files`: returns the list of the files in a folder
 - `like`: behaves as the LIKE of Oracle SQL (you can match strings with wildcard character '\*')
 - `big_number`: converts a potentially big number into a lisible string. For example 10000000 becomes '10 000 000'
 - `get_duration_string`: outputs a string representing the time elapsed since the input ``start_time``. For example '3 minutes and 20 seconds'.

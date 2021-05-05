@@ -1,3 +1,2 @@
-a = 0
-if a:
-    print('OK')
+s = 'test/'
+print(s[-1])
