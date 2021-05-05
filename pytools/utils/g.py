@@ -29,11 +29,9 @@ E_CFI = f"Confidential file '{cfg.CFI_PATH}' not found"
 
 # Log
 LOG_LEVEL = 0
-LOG_FILE_INITIALISED = False
-LOG_OUTPUT = True
-LOG_FILE = ''
+log_file_initialised = False
+log_path = ''
 logs = []
-
 sl_time_dict = {}
 sl_detail = {}
 

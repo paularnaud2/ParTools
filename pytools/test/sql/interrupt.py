@@ -26,7 +26,7 @@ def upload_interrupted():
     manager = Manager()
     md = manager.dict()
     md["T"] = False
-    md["LOG_FILE"] = u.g.LOG_FILE
+    md["LOG_PATH"] = u.g.log_path
     u.log("[sql] upload: start", c_out=False)
     p = Process(target=upload, args=(gl.SQL_IN, True, md))
     p.start()
@@ -52,7 +52,7 @@ def interrupt(function, kwargs, init_msg):
     md = manager.dict()
     md["STOP"] = False
     md["N_STOP"] = math.floor(0.7 * 2900)
-    md["LOG_FILE"] = u.g.LOG_FILE
+    md["LOG_PATH"] = u.g.log_path
     u.log(init_msg, c_out=False)
     kwargs['md'] = md
 

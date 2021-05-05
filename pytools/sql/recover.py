@@ -20,7 +20,7 @@ def recover():
 
     modify_ql(file_list)
     u.log("Query list modified according previous work in progress. "
-          f"Recovering from query '{gl.QUERY_LIST[0][1]}'")
+          f"Recovering from query '{gl.QUERY_LIST[0][1]}'.")
 
 
 def modify_ql(file_list):

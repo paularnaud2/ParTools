@@ -34,6 +34,6 @@ def get_rg_file_name(in_str):
 def gen_query_list(rg_file_name):
 
     rg_path = gl.RANGE_DIR + rg_file_name + gl.FILE_TYPE
-    gl.rg_list = u.load_txt(rg_path)
-    gl.QUERY_LIST = [[elt, elt] for elt in gl.rg_list]
+    rg_list = u.load_txt(rg_path)
+    gl.QUERY_LIST = [[elt, elt] for elt in rg_list]
     u.log(f"Range query detected. Base query:\n{gl.query}\n;")

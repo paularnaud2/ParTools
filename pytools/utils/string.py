@@ -93,5 +93,5 @@ def big_number(str_in):
 
 def replace_from_dict(str_in, dict_in):
     for key in dict_in:
-        str_in = str_in.replace(g.VAR_DEL + key + g.VAR_DEL, dict_in[key])
+        str_in = str_in.replace(g.VAR_DEL + key + g.VAR_DEL, str(dict_in[key]))
     return str_in

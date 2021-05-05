@@ -27,7 +27,8 @@ def process_query_list():
 
 def lauch_threads():
     if gl.range_query:
-        u.log(f"Ranges to be queried: {gl.rg_list}")
+        rg_list = [elt[1] for elt in gl.QUERY_LIST]
+        u.log(f"Ranges to be queried: {rg_list}")
     thread_list = []
     n_cnx = min(gl.MAX_DB_CNX, len(gl.QUERY_LIST))
     gen_cnx_dict(n_cnx)

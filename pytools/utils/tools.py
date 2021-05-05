@@ -13,9 +13,9 @@ def list_to_dict(list_in, separator='='):
 def init_kwargs(mod, kwargs):
     if 'MD' in kwargs:
         if kwargs['MD'] is not None:
-            if 'LOG_FILE' in kwargs['MD']:
-                g.LOG_FILE_INITIALISED = True
-                g.LOG_FILE = kwargs['MD']['LOG_FILE']
+            if 'LOG_PATH' in kwargs['MD']:
+                g.log_file_initialised = True
+                g.log_path = kwargs['MD']['LOG_PATH']
 
     if len(kwargs) > 0:
         kwargs_log = {

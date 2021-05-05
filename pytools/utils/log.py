@@ -11,26 +11,25 @@ from . import string
 
 
 def write_log(str_in):
-    if not g.LOG_OUTPUT or not g.LOG_FILE_INITIALISED:
-        return
 
     s = str(str_in)
-    with open(g.dirs['LOG'] + g.LOG_FILE, 'a', encoding='utf-8') as in_file:
-        in_file.write(s + '\n')
     g.logs.append(s)
+    if not g.log_file_initialised:
+        return
+    with open(g.log_path, 'a', encoding='utf-8') as in_file:
+        in_file.write(s + '\n')
 
 
 def check_log(in_list, log_match=False):
 
     log('check_log...')
-    lp = g.dirs['LOG'] + g.LOG_FILE
-    txt = file.load_txt(lp, False)
+    txt = file.load_txt(g.log_path, False)
     n_w = 0
     for elt in in_list:
         m = string.like(txt, elt)
         if not m:
             n_w += 1
-            s = f"Expression '{elt}' couldn't be found in log file {lp}"
+            s = f"Expression '{elt}' couldn't be found in log file {g.log_path}"
             log(s, c_out=False)
             warnings.warn(s)
         elif str(m) != 'True' and log_match:
@@ -63,21 +62,18 @@ def log(str_in, level=0, format='%H:%M:%S -', nb_tab=0, c_out=True):
 
 
 def init_log(parent_module='', force_init=False):
-    if g.LOG_FILE_INITIALISED and not force_init:
+    if g.log_file_initialised and not force_init:
         return
 
     s = datetime.now().strftime('%Y%m%d_%H%M%S')
     if parent_module:
         s += '_' + parent_module
-    g.LOG_FILE = s + '.txt'
-    with open(g.dirs['LOG'] + g.LOG_FILE, 'w', encoding='utf-8') as in_file:
+    g.log_path = p.abspath(g.dirs['LOG'] + s + '.txt')
+    with open(g.log_path, 'w', encoding='utf-8') as in_file:
         in_file.write('')
     g.logs = []
-
-    g.LOG_FILE_INITIALISED = True
-    log_path = g.dirs['LOG'] + g.LOG_FILE
-    log_path = p.abspath(log_path)
-    s = f"Log file initialised ({log_path})"
+    g.log_file_initialised = True
+    s = f"Log file initialised ({g.log_path})"
     log(s, format='%Y-%m-%d %H:%M:%S -')
     log_print("Python version: " + sys.version)
     log_print()
