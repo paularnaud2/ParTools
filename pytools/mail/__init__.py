@@ -4,7 +4,7 @@ import win32com.client as win32
 from shutil import copytree
 
 from pytools import cfg
-import pytools.common as com
+import pytools.utils as u
 
 from . import gl
 from . import get
@@ -30,7 +30,7 @@ def gmail(mail_name,
     with smtplib.SMTP_SSL(host, port, context=ctx) as server:
         server.login(user, pwd)
         server.sendmail(gl.sender, gl.recipients, msg.as_string())
-    com.log('Mail sent')
+    u.log('Mail sent')
 
 
 def no_auth(mail_name,
@@ -46,7 +46,7 @@ def no_auth(mail_name,
 
     with smtplib.SMTP(gl.NO_AUTH_HOST) as server:
         server.sendmail(gl.sender, gl.recipients, msg.as_string())
-    com.log('Mail sent')
+    u.log('Mail sent')
 
 
 def outlook(mail_name,
@@ -71,29 +71,29 @@ def outlook(mail_name,
     for attachment in attachments:
         mail.Attachments.Add(attachment)
     mail.Send()
-    com.log('Mail sent')
+    u.log('Mail sent')
 
 
 def init(mail_name, check_internal=False):
 
     gl.mail_dir = cfg.MAILS_DIR + mail_name + '/'
     gl.recipients = get.recipients(check_internal)
-    com.log(f"Sending mail '{mail_name}' to {gl.recipients}...")
+    u.log(f"Sending mail '{mail_name}' to {gl.recipients}...")
 
 
 def init_cfi():
 
-    gl.cfi = com.g.get_confidential(False)
+    gl.cfi = u.g.get_confidential(False)
     if not gl.cfi:
-        com.log(gl.S_MISSING_CFI)
-        raise Exception(com.g.E_CFI)
+        u.log(gl.S_MISSING_CFI)
+        raise Exception(u.g.E_CFI)
     gl.sender = gl.cfi['MAIL_FROM']
     gl.From = gl.cfi['MAIL_FROM']
 
 
 def init_mail():
 
-    com.delete_folder(cfg.MAILS_DIR)
+    u.delete_folder(cfg.MAILS_DIR)
     copytree('pytools/test/mails', cfg.MAILS_DIR)
-    com.save_list(['*'], cfg.MAILS_DIR + '.gitignore')
-    com.log(f"Mail folder '{cfg.MAILS_DIR}' successfully initialised")
+    u.save_list(['*'], cfg.MAILS_DIR + '.gitignore')
+    u.log(f"Mail folder '{cfg.MAILS_DIR}' successfully initialised")

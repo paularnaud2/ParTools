@@ -1,4 +1,4 @@
-from pytools.common import g
+from pytools.utils import g
 
 # Mandatory inputs---------------------------------------------------
 IN_FILE_NAME_1 = ''

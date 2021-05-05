@@ -1,4 +1,4 @@
-import pytools.common as com
+import pytools.utils as u
 import pytools.sql as sql
 
 from pytools.test import gl
@@ -65,17 +65,17 @@ def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
 
 
 def reset():
-    com.log("Resetting folders...")
-    com.mkdirs(gl.SQL_TMP, True)
-    com.mkdirs(gl.SQL_OUT, True)
-    com.log("Reset over\n")
+    u.log("Resetting folders...")
+    u.mkdirs(gl.SQL_TMP, True)
+    u.mkdirs(gl.SQL_OUT, True)
+    u.log("Reset over\n")
 
 
 def clean_db(list_in):
-    com.log("Cleaning DB...")
+    u.log("Cleaning DB...")
     for t in list_in:
         drop_table(t)
-    com.log("DB cleaned\n")
+    u.log("DB cleaned\n")
 
 
 def drop_table(table_name):

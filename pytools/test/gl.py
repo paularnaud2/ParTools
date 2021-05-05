@@ -1,5 +1,5 @@
 from datetime import date
-from pytools.common import g
+from pytools.utils import g
 
 import pytools.tools.gl as gt
 import pytools.tools.gl as tools

@@ -2,7 +2,7 @@ import os
 from time import time
 from importlib import reload
 
-import pytools.common as com
+import pytools.utils as u
 
 from . import gl
 from . import log
@@ -12,9 +12,9 @@ from .functions import get_final_script
 from .execute import execute
 
 
-@com.log_exeptions
+@u.log_exeptions
 def upload(**kwargs):
-    com.log("[sql] upload: start")
+    u.log("[sql] upload: start")
     reload(gl)  # reinit globals
     start_time = time()
     init(kwargs)
@@ -22,13 +22,13 @@ def upload(**kwargs):
         prepare_bdd()
         init(kwargs)
     script = get_script()
-    com.check_header(gl.UPLOAD_IN)
+    u.check_header(gl.UPLOAD_IN)
     with open(gl.UPLOAD_IN, "r", encoding="utf-8") as in_file:
-        com.log(f"Input file {gl.UPLOAD_IN} opened")
+        u.log(f"Input file {gl.UPLOAD_IN} opened")
         # First line is dismissed (header)
         in_file.readline()
         for line in in_file:
-            line_list = com.csv_to_list(line)
+            line_list = u.csv_to_list(line)
             if len(line_list) == 1:
                 line_list = line_list[0]
             gl.data.append(line_list)
@@ -42,7 +42,7 @@ def upload(**kwargs):
         insert(script)
 
     finish_this(start_time)
-    com.log_print()
+    u.log_print()
 
 
 def send_chunk_duration(start):
@@ -61,8 +61,8 @@ def send_chunk_duration(start):
         return
 
     if not gl.MD["T"]:
-        (dms, dstr) = com.get_duration_string(start, True)
-        com.log(f"Sending duration to the main process ({dstr})...")
+        (dms, dstr) = u.get_duration_string(start, True)
+        u.log(f"Sending duration to the main process ({dstr})...")
         if dms == 0:
             dms = 1
         gl.MD["T"] = dms
@@ -70,24 +70,24 @@ def send_chunk_duration(start):
 
 def prepare_bdd():
     if gl.EXECUTE_KWARGS:
-        com.log("Preparing DB before data injection...")
-        com.log_print("|")
+        u.log("Preparing DB before data injection...")
+        u.log_print("|")
         execute(**gl.EXECUTE_KWARGS)
 
 
 def finish_this(start_time):
     gl.cnx.close()
     os.remove(gl.tmp_file_chunk)
-    bn = com.big_number(gl.c_main)
-    dstr = com.get_duration_string(start_time)
-    com.log(f"{bn} lines exported")
-    com.log(f"[sql] upload: end ({dstr})")
+    bn = u.big_number(gl.c_main)
+    dstr = u.get_duration_string(start_time)
+    u.log(f"{bn} lines exported")
+    u.log(f"[sql] upload: end ({dstr})")
 
 
 def init(kwargs):
-    com.init_kwargs(gl, kwargs)
+    u.init_kwargs(gl, kwargs)
     init_gl()
-    com.mkdirs(gl.TMP_DIR)
+    u.mkdirs(gl.TMP_DIR)
 
     gl.ref_chunk = 0
     gl.c_main = 0
@@ -112,11 +112,11 @@ def insert(script):
         gl.c.executemany(script, gl.data)
         gl.c_chunk += 1
         snc = str(gl.c_chunk)
-        com.save_csv([f"{snc}_COMMIT_RUNNING"], gl.tmp_file_chunk)
+        u.save_csv([f"{snc}_COMMIT_RUNNING"], gl.tmp_file_chunk)
         gl.cnx.commit()
-        com.save_csv([snc], gl.tmp_file_chunk)
-        sn = com.big_number(gl.c_main)
-        com.log(f"{sn} lines inserted in total")
+        u.save_csv([snc], gl.tmp_file_chunk)
+        sn = u.big_number(gl.c_main)
+        u.log(f"{sn} lines inserted in total")
         gl.c.close()
         gl.c = gl.cnx.cursor()
     else:
@@ -131,13 +131,13 @@ def check_recover():
     if os.path.exists(chunk):
         s = "Injection running detected. Recover? (y/n)"
         if gl.TEST_RECOVER:
-            com.log(s)
-            com.log_print("y (TEST_RECOVER = True)")
-        elif com.log_input(s) == "n":
+            u.log(s)
+            u.log_print("y (TEST_RECOVER = True)")
+        elif u.log_input(s) == "n":
             os.remove(chunk)
             return False
 
-        txt = com.load_txt(chunk)
+        txt = u.load_txt(chunk)
         try:
             gl.ref_chunk = int(txt[0])
             return True

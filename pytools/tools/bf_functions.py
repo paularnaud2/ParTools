@@ -1,4 +1,4 @@
-import pytools.common as com
+import pytools.utils as u
 
 from . import gl
 
@@ -18,12 +18,12 @@ def check_counter(in_file):
 
     if gl.c_read % gl.N_READ == 0:
         if gl.TEST:
-            com.log_print(gl.s_prompt)
-            com.log_print('e (TEST = True)')
+            u.log_print(gl.s_prompt)
+            u.log_print('e (TEST = True)')
             command = 'e'
         else:
-            command = com.log_input(gl.s_prompt)
-        com.log_print()
+            command = u.log_input(gl.s_prompt)
+        u.log_print()
         if command == '':
             return True
         if command == 'q':
@@ -47,13 +47,13 @@ def goto_eof(in_file):
         if len(cur_list) > gl.N_READ + 1:
             del cur_list[0]
 
-    com.log_array(cur_list)
-    bn = com.big_number(gl.c_main - 1)
+    u.log_array(cur_list)
+    bn = u.big_number(gl.c_main - 1)
     if gl.LINE_PER_LINE:
         s = f"EOF reached. {bn} lines read."
     else:
         s = f"EOF reached. {bn} buffers of {gl.BUFFER_SIZE} characters read."
-    com.log(s)
+    u.log(s)
 
 
 def skip(nb, in_file):
@@ -69,7 +69,7 @@ def fill_cur_list(in_file):
     gl.cur_list = []
     gl.c_cur_row = 0
     s = f"Generating temporary list no. {gl.c_list}..."
-    com.log(s, 1)
+    u.log(s, 1)
 
     while gl.c_cur_row < gl.MAX_LIST_SIZE:
         gl.c_cur_row += 1
@@ -80,7 +80,7 @@ def fill_cur_list(in_file):
         if gl.EOF:
             return
         gl.cur_list.append(line)
-    com.log("Temporary list generated", 1)
+    u.log("Temporary list generated", 1)
 
 
 def get_line_lpl(in_file):
@@ -110,7 +110,7 @@ def get_line_buf(in_file):
 def search_cur_list():
 
     s = f"Temp list no. {gl.c_list} search"
-    com.log(s, 1)
+    u.log(s, 1)
     i = 0
     for elt in gl.cur_list:
         i += 1
@@ -120,22 +120,22 @@ def search_cur_list():
             found_msg(i, j)
             gl.FOUND = True
             return True
-    bn = com.big_number(gl.c_main)
+    bn = u.big_number(gl.c_main)
     s = (f"Temp list no. {gl.c_list} search over, string not found"
          f" ({bn} lines read in total)")
-    com.log(s, 1)
+    u.log(s, 1)
     return False
 
 
 def found_msg(i, j):
 
     gl.c_row = i
-    bni = com.big_number(i)
-    bn = com.big_number(gl.c_main)
+    bni = u.big_number(i)
+    bn = u.big_number(gl.c_main)
     if gl.LINE_PER_LINE:
         s = (f"String found in line no. {bni} of list no. {gl.c_list}"
              f" (global line no. {bn}) in col {j + 1}!")
     else:
         s = (f"String found in buffer no. {bn}"
              f" (buffer list no. {gl.c_list}) in col {j + 1}!")
-    com.log(s)
+    u.log(s)

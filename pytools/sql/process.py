@@ -5,7 +5,7 @@ from threading import Thread
 from threading import RLock
 from threading import Semaphore
 
-import pytools.common as com
+import pytools.utils as u
 from . import gl
 from . import log
 from . import merge
@@ -27,7 +27,7 @@ def process_query_list():
 
 def lauch_threads():
     if gl.range_query:
-        com.log(f"Ranges to be queried: {gl.rg_list}")
+        u.log(f"Ranges to be queried: {gl.rg_list}")
     thread_list = []
     n_cnx = min(gl.MAX_DB_CNX, len(gl.QUERY_LIST))
     gen_cnx_dict(n_cnx)
@@ -39,11 +39,11 @@ def lauch_threads():
     for th in thread_list:
         th.join()
 
-    com.log("All threads are done")
-    com.log_print('|')
+    u.log("All threads are done")
+    u.log_print('|')
 
 
-@com.log_exeptions
+@u.log_exeptions
 def process_ql_elt(elt):
     with gl.sem:
         gl.c_query += 1
@@ -51,7 +51,7 @@ def process_ql_elt(elt):
         cnx = gl.cnx_dict[cur_th]
 
         if gl.ql_replace:
-            var = com.g.VAR_DEL + gl.VAR_IN + com.g.VAR_DEL
+            var = u.g.VAR_DEL + gl.VAR_IN + u.g.VAR_DEL
             query = gl.query.replace(var, elt[0])
         else:
             query = elt[0]
@@ -70,7 +70,7 @@ def process_query(c, query, elt, th_nb):
     test_recover(th_nb)
     log.process_query_finish(elt, th_nb)
     init_out_file(c, elt)
-    th_name = com.gen_sl_detail(elt, th_nb, gl.multi_th)
+    th_name = u.gen_sl_detail(elt, th_nb, gl.multi_th)
     write_rows(c, elt, th_name, th_nb)
 
 
@@ -81,7 +81,7 @@ def test_recover(th_nb):
     with verrou:
         if gl.c_row > gl.MD['N_STOP'] and not gl.MD['STOP']:
             s = f"TEST_RECOVER: Automatic stop (thread no. {th_nb})\n"
-            com.log(s)
+            u.log(s)
             # A STOP flag is sent through the manager dict to the main process in order
             # to terminate this subprocess and all the threads.
             # However a bit of time can pass before all the treads are killed so other thread
@@ -91,7 +91,7 @@ def test_recover(th_nb):
 
     if sleep:
         time.sleep(1)
-        com.log("sys.exit()")
+        u.log("sys.exit()")
         sys.exit()
 
 
@@ -125,5 +125,5 @@ def init_out_file(cursor, file_name):
         fields = [elt[0] for elt in cursor.description]
         if gl.range_query and gl.EXPORT_RANGE:
             fields.append(gl.RANGE_NAME)
-        s = com.g.CSV_SEPARATOR.join(fields)
+        s = u.g.CSV_SEPARATOR.join(fields)
         out_file.write(s + '\n')

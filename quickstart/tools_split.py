@@ -4,7 +4,7 @@ big to be opened with an app such as Excel). see in pytools/tools/gl for other
 parameters.
 """
 
-import pytools.common.g as g
+import pytools.utils.g as g
 from pytools.tools import split
 
 # Input variables default values

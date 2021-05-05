@@ -7,7 +7,7 @@ from .log import log
 from .log import log_print
 
 
-def msg_box(msg, package='common', jdur=0):
+def msg_box(msg, package='utils', jdur=0):
 
     if jdur != 0:
         jdur = jdur / 1000

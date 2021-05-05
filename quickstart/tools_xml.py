@@ -1,6 +1,6 @@
 # This script allows you to convert a xml file into csv
 
-import pytools.common.g as g
+import pytools.utils.g as g
 from pytools.tools import xml
 
 # Input variables

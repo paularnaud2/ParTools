@@ -1,6 +1,6 @@
 from random import shuffle
 
-import pytools.common as com
+import pytools.utils as u
 
 from pytools.tools.init import init_find_dup
 from pytools.tools.finish import finish_find_dup
@@ -8,27 +8,27 @@ from pytools.tools.finish import finish_del_dup
 
 
 def find_dup(in_path, out_path='', open_out=False, col=0):
-    com.log("[toolDup] find_dup: start")
+    u.log("[toolDup] find_dup: start")
     (cur_list, out_path) = init_find_dup(in_path, out_path, col)
-    bn = com.big_number(len(cur_list))
-    com.log(f"File loaded, {bn} lines to be analysed")
+    bn = u.big_number(len(cur_list))
+    u.log(f"File loaded, {bn} lines to be analysed")
     dup_list = find_dup_list(cur_list)
     finish_find_dup(dup_list, out_path, open_out)
-    com.log("[toolDup] find_dup: end")
+    u.log("[toolDup] find_dup: end")
 
 
 def del_dup(in_path, out_path, open_out=False):
-    com.log("[toolDup] del_dup: start")
-    com.log(f"Deleting duplicates in file '{in_path}'...")
-    cur_list = com.load_txt(in_path)
-    bn = com.big_number(len(cur_list))
-    com.log(f"File loaded, {bn} lines to be analysed")
-    if com.has_header(cur_list):
+    u.log("[toolDup] del_dup: start")
+    u.log(f"Deleting duplicates in file '{in_path}'...")
+    cur_list = u.load_txt(in_path)
+    bn = u.big_number(len(cur_list))
+    u.log(f"File loaded, {bn} lines to be analysed")
+    if u.has_header(cur_list):
         out_list = [cur_list[0]] + del_dup_list(cur_list[1:])
     else:
         out_list = del_dup_list(cur_list)
     finish_del_dup(out_list, out_path, open_out)
-    com.log("[toolDup] del_dup: end")
+    u.log("[toolDup] del_dup: end")
 
 
 def find_dup_list(in_list):
@@ -73,15 +73,15 @@ def del_dup_list(in_list):
 
 
 def shuffle_csv(in_path, out_path, open_out=False):
-    com.log("[toolShuf] shuffle_csv: start")
-    cur_list = com.load_csv(in_path)
-    if com.has_header(cur_list):
+    u.log("[toolShuf] shuffle_csv: start")
+    cur_list = u.load_csv(in_path)
+    if u.has_header(cur_list):
         header = cur_list[0]
         cur_list = cur_list[1:]
     shuffle(cur_list)
     cur_list = [header] + cur_list
-    com.save_csv(cur_list, out_path)
-    com.log(f"Shuffled csv file saved in {out_path}")
+    u.save_csv(cur_list, out_path)
+    u.log(f"Shuffled csv file saved in {out_path}")
     if open_out:
-        com.startfile(out_path)
-    com.log("[toolShuf] shuffle_csv: end")
+        u.startfile(out_path)
+    u.log("[toolShuf] shuffle_csv: end")

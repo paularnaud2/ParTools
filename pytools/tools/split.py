@@ -1,16 +1,16 @@
 import re
 from os import remove
 
-import pytools.common as com
+import pytools.utils as u
 from pytools.tools import gl
 
 
 def split_file(in_path, out_dir='', **kwargs):
-    com.log("[toolSplit] split_file: start")
-    com.init_kwargs(gl, kwargs)
+    u.log("[toolSplit] split_file: start")
+    u.init_kwargs(gl, kwargs)
     init_globals()
     (file_dir, file_name, ext) = parse_in_path(in_path, out_dir)
-    gl.header = com.get_header(in_path)
+    gl.header = u.get_header(in_path)
     with open(in_path, 'r', encoding='utf-8') as in_file:
         while True:
             gl.N_OUT += 1
@@ -18,8 +18,8 @@ def split_file(in_path, out_dir='', **kwargs):
             if not gen_split_out(out_path, in_file):
                 break
 
-    com.log("[toolSplit] split_file: end")
-    com.log_print()
+    u.log("[toolSplit] split_file: end")
+    u.log_print()
 
 
 def init_globals():
@@ -57,13 +57,13 @@ def gen_split_out(split_dir, in_file):
         if i == 2 and gl.ADD_HEADER:
             remove(split_dir)
         else:
-            com.log(s)
+            u.log(s)
         return False
 
-    com.log(s)
+    u.log(s)
 
     if gl.N_OUT >= gl.MAX_FILE_NB:
-        com.log(f"Maximum number of files reached ({gl.MAX_FILE_NB})")
+        u.log(f"Maximum number of files reached ({gl.MAX_FILE_NB})")
         return False
 
     return True

@@ -1,5 +1,5 @@
 # This directory contains input, output, log, and temporary files folders.
-# If you whish to change it, run import pytools.common after to initialise the
+# If you whish to change it, run import pytools.utils after to initialise the
 # new folder.
 FILES_DIR = 'PT/'
 
@@ -10,7 +10,7 @@ CFI_PATH = 'confidential.txt'
 # to the mail_name passed in the mail function.
 MAILS_DIR = 'mails/'
 
-# DEBUG = True enables function decorator in common.deco
+# DEBUG = True enables function decorator in utils.deco
 # it basically terminates the program if one of the threads
 # (or the main thread) throws an exception and prints the exception (full trace)
 # in the current log file.

@@ -1,21 +1,21 @@
 import os
 from math import floor
 
-import pytools.common as com
+import pytools.utils as u
 from . import gl
 from .functions import read_list
 
 
 def init_dq(kwargs):
-    com.log("[dq] run_dq: start")
-    com.init_kwargs(gl, kwargs)
+    u.log("[dq] run_dq: start")
+    u.init_kwargs(gl, kwargs)
     init_tmp_dir()
     set_paths()
     s = (
         f"run_dq job initialised. Input files {gl.paths['in1']} and {gl.paths['in2']}"
         " are going to be sorted and compared.")
-    com.log(s)
-    com.log_print('|')
+    u.log(s)
+    u.log_print('|')
 
 
 def init_compare_files(out):
@@ -26,7 +26,7 @@ def init_compare_files(out):
     if out:
         gl.out_path = out
     else:
-        gl.out_path = com.g.dirs['OUT'] + 'file_match_out.csv'
+        gl.out_path = u.g.dirs['OUT'] + 'file_match_out.csv'
     gl.TMP_1 = gl.TMP_DIR + 'tmp_1.csv'
     gl.TMP_2 = gl.TMP_DIR + 'tmp_2.csv'
     gl.EQUAL_OUT = False
@@ -34,8 +34,8 @@ def init_compare_files(out):
 
 
 def init_tmp_dir():
-    gl.TMP_DIR = com.g.dirs['TMP'] + gl.TMP_FOLDER
-    com.mkdirs(gl.TMP_DIR, True)
+    gl.TMP_DIR = u.g.dirs['TMP'] + gl.TMP_FOLDER
+    u.mkdirs(gl.TMP_DIR, True)
 
 
 def set_paths():
@@ -70,7 +70,7 @@ def init_stf(in_path, out_path):
     gl.OUT_DUP_KEY_FILE += "_dup_key" + gl.FILE_TYPE
 
     del_tmp_files()
-    com.gen_header(in_path, out_path=out_path)
+    u.gen_header(in_path, out_path=out_path)
 
 
 def init_prev_elt(list_in):
@@ -110,11 +110,11 @@ def init_equal_diff_bool():
             gl.EQUAL = True
             gl.DIFF = gl.DIFF_OUT
         else:
-            bn = com.big_number(gl.MAX_ROW_EQUAL_OUT)
+            bn = u.big_number(gl.MAX_ROW_EQUAL_OUT)
             s = (f"Warning: file to be compared have more than {bn} lines"
                  " and EQUAL_OUT paramter is set to True.\n"
                  "Do you want to write matching lines in output file ? (y/n)")
-            if com.log_input(s) == "y":
+            if u.log_input(s) == "y":
                 gl.EQUAL = True
                 gl.DIFF = gl.DIFF_OUT
             else:
@@ -157,4 +157,4 @@ def init_array_list():
 
     nb = gl.c_row_max
     s = (f"Buffer array initialised. It can hold a maximum of {nb} lines.")
-    com.log(s)
+    u.log(s)

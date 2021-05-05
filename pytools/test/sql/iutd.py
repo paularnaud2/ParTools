@@ -1,6 +1,6 @@
 import os
 
-import pytools.common as com
+import pytools.utils as u
 import pytools.sql as sql
 
 from pytools.test import gl
@@ -30,7 +30,7 @@ def iutd():
     # Test iutd file date ok
     sql.connect()
 
-    com.log_print()
+    u.log_print()
     os.remove(sql.gl.iutd_path)
     prepare_iutd(gl.SQL_INSERT_IUTD_KO)
     sql.gl.TEST_IUTD = True

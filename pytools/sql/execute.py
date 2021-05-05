@@ -1,6 +1,6 @@
 from time import time
 
-import pytools.common as com
+import pytools.utils as u
 
 from . import gl
 from .connect import connect
@@ -8,20 +8,20 @@ from .init import init_gl
 from .functions import get_final_script
 
 
-@com.log_exeptions
+@u.log_exeptions
 def execute(**kwargs):
-    com.log('[sql] execute: start')
+    u.log('[sql] execute: start')
     start_time = time()
-    com.init_kwargs(gl, kwargs)
+    u.init_kwargs(gl, kwargs)
     init_gl()
     script = get_final_script(gl.SCRIPT_IN)
     cnx = connect()
     c = cnx.cursor()
     if gl.PROC:
-        com.log("Executing proc:")
-        com.log_print(script)
+        u.log("Executing proc:")
+        u.log_print(script)
         c.execute(script)
-        com.log("Proc executed")
+        u.log("Proc executed")
     else:
         command_list = script.split(';\n')
         n = len(command_list)
@@ -30,14 +30,14 @@ def execute(**kwargs):
         else:
             command_list = command_list[:-1]
         for command in command_list:
-            com.log("Executing command:")
-            com.log_print(command)
+            u.log("Executing command:")
+            u.log_print(command)
             c.execute(command)
-            com.log("Command executed")
+            u.log("Command executed")
     c.close()
     cnx.commit()
     cnx.close()
 
-    dstr = com.get_duration_string(start_time)
-    com.log(f"[sql] execute: end ({dstr})")
-    com.log_print()
+    dstr = u.get_duration_string(start_time)
+    u.log(f"[sql] execute: end ({dstr})")
+    u.log_print()

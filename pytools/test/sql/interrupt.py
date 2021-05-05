@@ -4,7 +4,7 @@ from time import sleep
 from multiprocessing import Process
 from multiprocessing import Manager
 
-import pytools.common as com
+import pytools.utils as u
 from pytools.test import gl
 from .main import upload
 from .main import download
@@ -26,19 +26,19 @@ def upload_interrupted():
     manager = Manager()
     md = manager.dict()
     md["T"] = False
-    md["LOG_FILE"] = com.g.LOG_FILE
-    com.log("[sql] upload: start", c_out=False)
+    md["LOG_FILE"] = u.g.LOG_FILE
+    u.log("[sql] upload: start", c_out=False)
     p = Process(target=upload, args=(gl.SQL_IN, True, md))
     p.start()
     while not md["T"]:
         pass
-    com.log("Duration received")
+    u.log("Duration received")
 
     t = md["T"] / 1000
     sleep(t)
-    com.log("Terminating subprocess...")
+    u.log("Terminating subprocess...")
     p.terminate()
-    com.log("Subprocess terminated (upload_interrupted)\n")
+    u.log("Subprocess terminated (upload_interrupted)\n")
 
 
 def download_interrupted(query, out):
@@ -52,8 +52,8 @@ def interrupt(function, kwargs, init_msg):
     md = manager.dict()
     md["STOP"] = False
     md["N_STOP"] = math.floor(0.7 * 2900)
-    md["LOG_FILE"] = com.g.LOG_FILE
-    com.log(init_msg, c_out=False)
+    md["LOG_FILE"] = u.g.LOG_FILE
+    u.log(init_msg, c_out=False)
     kwargs['md'] = md
 
     p = Process(target=function, kwargs=kwargs)

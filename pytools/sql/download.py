@@ -1,8 +1,8 @@
 from time import time
 from importlib import reload
 
-import pytools.common as com
-import pytools.common.sTools as st
+import pytools.utils as u
+import pytools.utils.sTools as st
 from pytools.tools.dup import find_dup
 
 from . import gl
@@ -12,12 +12,12 @@ from .functions import get_query_list
 from .process import process_query_list
 
 
-@com.log_exeptions
+@u.log_exeptions
 def download(**kwargs):
-    com.log('[sql] download: start')
+    u.log('[sql] download: start')
     reload(gl)  # reinit globals
     start_time = time()
-    com.init_kwargs(gl, kwargs)
+    u.init_kwargs(gl, kwargs)
 
     init()
     get_query_list()
@@ -29,27 +29,27 @@ def download(**kwargs):
 def finish(start_time):
 
     n = gl.c_row
-    bn = com.big_number(n)
+    bn = u.big_number(n)
     s = f"Data fetched from {gl.DB} ({bn} lines written)"
-    com.log(s)
+    u.log(s)
 
     if gl.MERGE_OK:
         out_path = gl.OUT_PATH
-        com.log(f"Output file {out_path} successfully filled out")
+        u.log(f"Output file {out_path} successfully filled out")
         a = n < gl.MAX_CHECK_DUP and n > 0
 
         if a and gl.CHECK_DUP and not gl.COUNT:
             s = "Verifying duplicates on the first column of the output file..."
-            com.log(s)
-            com.log_print('|')
+            u.log(s)
+            u.log_print('|')
             find_dup(out_path, col=1)
         if gl.OPEN_OUT_FILE:
-            com.startfile(out_path)
+            u.startfile(out_path)
 
-    com.log_print('|')
-    (dms, dstr) = com.get_duration_string(start_time, True)
+    u.log_print('|')
+    (dms, dstr) = u.get_duration_string(start_time, True)
     s = f"download: end ({dstr})"
-    com.log("[sql] " + s)
-    com.log_print()
+    u.log("[sql] " + s)
+    u.log_print()
     if gl.MSG_BOX_END:
         st.msg_box(s, "sql", dms)

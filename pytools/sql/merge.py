@@ -1,7 +1,7 @@
 import os
 from shutil import move
 
-import pytools.common as com
+import pytools.utils as u
 from . import gl
 from .groupby import group_by
 
@@ -20,18 +20,18 @@ def merge_tmp_files():
         return
     for i, elt in enumerate(file_list, 1):
         if i == 1:
-            com.merge_files(elt, out_file, remove_header=False)
+            u.merge_files(elt, out_file, remove_header=False)
         else:
-            com.merge_files(elt, out_file, remove_header=True)
+            u.merge_files(elt, out_file, remove_header=True)
         os.remove(elt)
 
     n = len(file_list)
-    com.log(f"Merging and deleting of the {n} temporary files over")
+    u.log(f"Merging and deleting of the {n} temporary files over")
 
 
 def init_merge():
     gl.MERGE_OK = True
-    file_list = com.list_files(gl.TMP_DIR)
+    file_list = u.list_files(gl.TMP_DIR)
     out_file = gl.OUT_PATH
     if check_ec(file_list) or check_mono(file_list, out_file):
         return ('', '', True)
@@ -40,7 +40,7 @@ def init_merge():
         os.remove(out_file)
 
     n = len(file_list)
-    com.log(f"Merging and deleting {n} temporary files...")
+    u.log(f"Merging and deleting {n} temporary files...")
     return (file_list, out_file, False)
 
 
@@ -49,17 +49,17 @@ def move_tmp_folder():
     gl.MERGE_OK = False
     out_dir = gl.OUT_DIR
 
-    com.mkdirs(out_dir, True)
-    com.log(f"Output folder {out_dir} created")
+    u.mkdirs(out_dir, True)
+    u.log(f"Output folder {out_dir} created")
 
-    file_list = com.list_files(gl.TMP_DIR, False)
+    file_list = u.list_files(gl.TMP_DIR, False)
     n = len(file_list)
-    com.log(f"Moving {n} files to the output folder....")
+    u.log(f"Moving {n} files to the output folder....")
     for elt in file_list:
         cur_path = gl.TMP_DIR + elt
         target_path = out_dir + elt
         move(cur_path, target_path)
-    com.log(f"Files moved to {out_dir}")
+    u.log(f"Files moved to {out_dir}")
 
 
 def check_ec(file_list):
@@ -67,7 +67,7 @@ def check_ec(file_list):
         if gl.EC in elt:
             s = (f"EC file found ({elt})."
                  " Meging of temporary files aborted.")
-            com.log(s)
+            u.log(s)
             gl.MERGE_OK = False
             return True
     return False

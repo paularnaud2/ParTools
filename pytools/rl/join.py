@@ -1,6 +1,6 @@
-import pytools.common as com
+import pytools.utils as u
 
-from pytools.common import g
+from pytools.utils import g
 from pytools.tools.dup import del_dup_list
 from pytools.tools.dup import find_dup_list
 
@@ -9,17 +9,17 @@ from . import gl
 
 def left_join_arrays(ar_left_in, ar_right_in):
     check_void_right_array(ar_right_in)
-    com.log("Preparing left array...")
+    u.log("Preparing left array...")
     (ar_left, first_line_l) = prepare_array(ar_left_in)
-    com.save_csv(ar_left, gl.OUT_LEFT)
-    log_prepare(gl.OUT_LEFT, com.big_number(len(ar_left)))
+    u.save_csv(ar_left, gl.OUT_LEFT)
+    log_prepare(gl.OUT_LEFT, u.big_number(len(ar_left)))
 
-    com.log("Preparing right array...")
+    u.log("Preparing right array...")
     (ar_right, first_line_r) = prepare_array(ar_right_in)
-    com.save_csv(ar_right, gl.OUT_RIGHT)
-    log_prepare(gl.OUT_RIGHT, com.big_number(len(ar_right)))
+    u.save_csv(ar_right, gl.OUT_RIGHT)
+    log_prepare(gl.OUT_RIGHT, u.big_number(len(ar_right)))
 
-    com.log("Joining both arrays...")
+    u.log("Joining both arrays...")
     init_while_join(first_line_l, first_line_r)
     while gl.END_LEFT is False or gl.END_RIGHT is False:
         (key_l, key_r) = update_key(ar_left, ar_right)
@@ -28,16 +28,16 @@ def left_join_arrays(ar_left_in, ar_right_in):
         key_r = compare_equal(key_l, key_r, ar_left, ar_right)
         if incr_c_l(ar_left):
             break
-    bn = com.big_number(len(gl.out_array))
+    bn = u.big_number(len(gl.out_array))
     s = f"Output array generated. It has {bn} lines (including header)."
-    com.log(s)
+    u.log(s)
 
 
 def prepare_array(arr):
     # Sorts input array and deletes its dupplicates
 
-    if not com.has_header(arr):
-        com.log("Error: input array must contain a header")
+    if not u.has_header(arr):
+        u.log("Error: input array must contain a header")
         raise Exception(g.E_MH)
 
     first_line = arr[0]
@@ -49,15 +49,15 @@ def prepare_array(arr):
 
 def log_prepare(ar, bn_ar):
     n_dup = len(gl.dup_list)
-    bn_dup = com.big_number(n_dup)
+    bn_dup = u.big_number(n_dup)
     s = f"Array prepared and saved in {ar} ({bn_ar} lines, {bn_dup} duplicates dismissed)"
-    com.log(s)
-    com.log_example(gl.dup_list)
+    u.log(s)
+    u.log_example(gl.dup_list)
 
 
 def check_void_right_array(ar_right_in):
     if len(ar_right_in) == 1:
-        com.log("Error: right array is void")
+        u.log("Error: right array is void")
         raise Exception(g.E_VA)
 
 
@@ -167,7 +167,7 @@ def debug(s, key_l, key_r, out_line=[]):
     print([gl.c_cl + 2, gl.c_cr + 2])
     print([key_l, key_r])
     print(out_line)
-    com.log_array(gl.out_array)
-    com.log_print()
+    u.log_array(gl.out_array)
+    u.log_print()
     # if s == 'compare_sup':
     #     print(key_l)

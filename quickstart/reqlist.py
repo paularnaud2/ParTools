@@ -26,9 +26,9 @@ For more details, see the README.md file.
 
 from datetime import datetime
 
-import pytools.common as com
-from pytools.common import g
-from pytools.common import init_log
+import pytools.utils as u
+from pytools.utils import g
+from pytools.utils import init_log
 from pytools.rl import reqlist
 
 init_log('rl')
@@ -42,9 +42,9 @@ in_file = f"{g.dirs['IN']}rl_in.csv"
 out_file = f"{g.dirs['OUT']}export_RL_{db}_{date}.csv"
 
 # Creates input file from test file
-arr = com.load_csv('pytools/test/sql/files/in.csv')
+arr = u.load_csv('pytools/test/sql/files/in.csv')
 arr = [elt[0:2] for elt in arr]
-com.save_csv(arr, in_file)
+u.save_csv(arr, in_file)
 
 # The input query has to be variabilized
 query_in = """

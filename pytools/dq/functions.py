@@ -2,30 +2,30 @@ import sys
 from math import ceil
 from os.path import exists
 
-import pytools.common as com
+import pytools.utils as u
 from pytools.tools.split import split_file
 
 from . import gl
 
 
 def check_header(inp):
-    if not com.has_header(inp):
+    if not u.has_header(inp):
         s = (f"Error: missing header in file '{inp}'."
              " Input files must have a header.")
-        com.log(s)
-        raise Exception(com.g.E_MH)
+        u.log(s)
+        raise Exception(u.g.E_MH)
 
 
 def compare_headers(in1, in2):
 
-    line1 = com.get_header(in1)
-    line2 = com.get_header(in2)
+    line1 = u.get_header(in1)
+    line2 = u.get_header(in2)
 
     if line1 != line2:
         s = (f"Error: files {in1} and {in2} don't have the same header."
              " Input files must have the same header.")
-        com.log(s)
-        raise Exception(com.g.E_DH)
+        u.log(s)
+        raise Exception(u.g.E_DH)
 
     return True
 
@@ -51,16 +51,16 @@ def write_min_elt(min_elt, out_file):
 
     if cur_key != prev_key:
         gl.DUP_KEY = False
-        com.write_csv_line(min_elt, out_file)
+        u.write_csv_line(min_elt, out_file)
         gl.c_tot_out += 1
-        com.step_log(gl.c_tot_out, gl.SL_STEP)
+        u.step_log(gl.c_tot_out, gl.SL_STEP)
         gl.prev_elt = min_elt
     elif check_dup(min_elt):
         # Pure duplicates are not written in output file
         # But key duplicates are (lines differ but key equal)
-        com.write_csv_line(min_elt, out_file)
+        u.write_csv_line(min_elt, out_file)
         gl.c_tot_out += 1
-        com.step_log(gl.c_tot_out, gl.SL_STEP)
+        u.step_log(gl.c_tot_out, gl.SL_STEP)
 
 
 def check_dup(elt):
@@ -98,7 +98,7 @@ def array_list_not_void():
 
 def read_list(in_file):
     line = in_file.readline()
-    line_list = line.strip("\n").split(com.g.CSV_SEPARATOR)
+    line_list = line.strip("\n").split(u.g.CSV_SEPARATOR)
     return line_list
 
 
@@ -121,15 +121,15 @@ def split_needed():
 
     n_line_2 = n_line + n_out_files - 1
     n_out_files = ceil(n_line_2 / gl.MAX_LINE_SPLIT)
-    bn = com.big_number(gl.MAX_LINE_SPLIT)
+    bn = u.big_number(gl.MAX_LINE_SPLIT)
     s = (f"Input file has more than {bn} lines."
          f" It will be split in {n_out_files} files "
          f"(max file nb set to {gl.MAX_FILE_NB_SPLIT}). Continue? (y/n)")
     if gl.TEST_PROMPT_SPLIT:
-        com.log(s)
-        com.log_print('y (TEST_PROMPT_SPLIT = True)')
+        u.log(s)
+        u.log_print('y (TEST_PROMPT_SPLIT = True)')
         return True
-    if com.log_input(s) == "n":
+    if u.log_input(s) == "n":
         sys.exit()
 
     return True

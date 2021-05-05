@@ -1,5 +1,5 @@
 import os
-import pytools.common as com
+import pytools.utils as u
 
 from . import gl
 
@@ -9,25 +9,25 @@ def fill_array_list():
 
     gl.c_iter += 1
     s = "Filling buffer array - Iteration no. {}"
-    com.log(s.format(gl.c_iter))
+    u.log(s.format(gl.c_iter))
     gl.c_col = 0
     while gl.c_col < gl.c_file:
         gl.c_col += 1
         n = gl.c_col
-        com.log(f"Reading tmp file no. {n}...", 1)
+        u.log(f"Reading tmp file no. {n}...", 1)
         tmp_file_path = f"{gl.TMP_DIR}tmp_{n}{gl.FILE_TYPE}"
         if n > 1:
-            com.log("Deleting previous tmp list...", 1)
+            u.log("Deleting previous tmp list...", 1)
             del tmp_file_list
-            com.log("Previous tmp list deleted", 1)
+            u.log("Previous tmp list deleted", 1)
         tmp_file_list = read_tmp_file(tmp_file_path)
         # if current tmp file doesn't exist, we directly jump to the next one
         if tmp_file_list == "empty":
-            com.log(f"Tmp file no. {n} not found", 1)
+            u.log(f"Tmp file no. {n} not found", 1)
             continue
-        com.log(f"Writing tmp file no. {n} in buffer array...", 1)
+        u.log(f"Writing tmp file no. {n} in buffer array...", 1)
         n_written_rows = write_tmp_file_in_array(tmp_file_list)
-        com.log(f"Rewriting tmp file no. {n}...", 1)
+        u.log(f"Rewriting tmp file no. {n}...", 1)
         rewrite_tmp_file(tmp_file_list, tmp_file_path, n_written_rows)
 
 
@@ -40,7 +40,7 @@ def read_tmp_file(tmp_file_path):
     except FileNotFoundError:
         tmp_file_list = "empty"
     except MemoryError:
-        com.log_print(MemoryError)
+        u.log_print(MemoryError)
         breakpoint()
 
     return tmp_file_list
@@ -55,7 +55,7 @@ def write_tmp_file_in_array(tmp_file_list):
     cur_l = gl.array_list[gl.c_col - 1]
     while counter < cur_rm and len(cur_l) < gl.c_row_max:
         counter += 1
-        cur_l.append(com.csv_to_list(tmp_file_list[counter - 1]))
+        cur_l.append(u.csv_to_list(tmp_file_list[counter - 1]))
     return counter
 
 
@@ -69,4 +69,4 @@ def rewrite_tmp_file(tmp_file_list, tmp_file_path, n_written_rows):
     else:
         # If void, tmp file is deleted
         os.remove(tmp_file_path)
-        com.log(f"Deleting temporary file no. {gl.c_col}")
+        u.log(f"Deleting temporary file no. {gl.c_col}")

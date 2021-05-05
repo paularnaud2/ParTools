@@ -1,4 +1,4 @@
-import pytools.common as com
+import pytools.utils as u
 
 from . import gl
 from .init import init_prev_elt
@@ -8,10 +8,10 @@ from .functions import write_min_elt
 
 def empty_array_list(out_path):
     s = "Emptying buffer array in output file (and removing dupes)..."
-    com.log(s)
+    u.log(s)
     n_col = len(gl.array_list)
     with open(out_path, 'a', encoding='utf-8') as out_file:
-        com.init_sl_time()
+        u.init_sl_time()
         # cursor variable represents a reading cursor for gl.array_list
         (cursor, max_cursor, void_cursor) = init_cursors()
         init_prev_elt(gl.array_list[0])

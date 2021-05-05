@@ -1,6 +1,6 @@
 # This script aims to fix ORA-12514 (problem with local TNS listener)
 
-import pytools.common.sTools as st
+import pytools.utils.sTools as st
 
 script = """
 alter SYSTEM set LOCAL_LISTENER='(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))' scope=both;

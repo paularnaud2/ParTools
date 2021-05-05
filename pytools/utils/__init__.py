@@ -1,7 +1,7 @@
 # Check install and init PT folder
 from . import init
 
-# Imports for package common
+# Imports for package utils
 from .deco import log_exeptions
 
 from .tools import init_kwargs

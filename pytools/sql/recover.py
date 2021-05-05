@@ -1,26 +1,26 @@
 import os
-import pytools.common as com
+import pytools.utils as u
 from . import gl
 
 
 def recover():
 
-    file_list = com.list_files(gl.TMP_DIR, False)
+    file_list = u.list_files(gl.TMP_DIR, False)
     a = len(file_list)
     if a == 0:
         return
 
     s = "Work in progress detected. Recover? (y/n)"
     if gl.TEST_RECOVER:
-        com.log(s)
-        com.log_print("y (TEST_RECOVER = True)")
-    elif com.log_input(s) == 'n':
-        com.mkdirs(gl.TMP_DIR, True)
+        u.log(s)
+        u.log_print("y (TEST_RECOVER = True)")
+    elif u.log_input(s) == 'n':
+        u.mkdirs(gl.TMP_DIR, True)
         return
 
     modify_ql(file_list)
-    com.log("Query list modified according previous work in progress. "
-            f"Recovering from query '{gl.QUERY_LIST[0][1]}'")
+    u.log("Query list modified according previous work in progress. "
+          f"Recovering from query '{gl.QUERY_LIST[0][1]}'")
 
 
 def modify_ql(file_list):
@@ -36,6 +36,6 @@ def modify_ql(file_list):
         if comp_elt_ec in file_list:
             ec_path = gl.TMP_DIR + comp_elt_ec
             os.remove(ec_path)
-            com.log(f"EC file {ec_path} deleted")
+            u.log(f"EC file {ec_path} deleted")
 
     gl.QUERY_LIST = list_out

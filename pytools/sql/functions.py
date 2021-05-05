@@ -1,7 +1,7 @@
 from os import rename
 from threading import RLock
 
-import pytools.common as com
+import pytools.utils as u
 from . import gl
 from . import rg
 from . import log
@@ -24,22 +24,22 @@ def get_query_list():
 
 
 def get_query(query_in):
-    if com.like(query_in, "*.sql"):
-        query_out = com.load_txt(query_in, False)
+    if u.like(query_in, "*.sql"):
+        query_out = u.load_txt(query_in, False)
     else:
         query_out = query_in
     query_out = query_out.strip('\r\n;')
-    query_out = com.replace_from_dict(query_out, gl.VAR_DICT)
+    query_out = u.replace_from_dict(query_out, gl.VAR_DICT)
 
     return query_out
 
 
 def get_final_script(script_in):
-    if com.like(script_in, "*.sql"):
-        script = com.load_txt(script_in, False)
+    if u.like(script_in, "*.sql"):
+        script = u.load_txt(script_in, False)
     else:
         script = script_in
-    script = com.replace_from_dict(script, gl.VAR_DICT)
+    script = u.replace_from_dict(script, gl.VAR_DICT)
     return script
 
 
@@ -53,7 +53,7 @@ def write_rows(cursor, q_name='MONO', th_name='DEFAULT', th_nb=0):
             i += iter
             with verrou:
                 gl.c_row += iter
-            com.step_log(i, gl.SL_STEP, th_name=th_name)
+            u.step_log(i, gl.SL_STEP, th_name=th_name)
 
     rename(gl.out_files[q_name + gl.EC], gl.out_files[q_name])
     log.write_rows_finish(q_name, i, th_nb)
@@ -61,19 +61,19 @@ def write_rows(cursor, q_name='MONO', th_name='DEFAULT', th_nb=0):
 
 def write_row(row, out_file, q_name='MONO'):
 
-    s = com.csv_clean(str(row[0]))
+    s = u.csv_clean(str(row[0]))
     line_out = s
     for elt in row[1:]:
         s = str(elt)
         if s == 'None':
             s = ''
         else:
-            s = com.csv_clean(s)
-        line_out += com.g.CSV_SEPARATOR + s
-    if line_out.strip(com.g.CSV_SEPARATOR) == '':
+            s = u.csv_clean(s)
+        line_out += u.g.CSV_SEPARATOR + s
+    if line_out.strip(u.g.CSV_SEPARATOR) == '':
         return 0
     if gl.EXPORT_RANGE and q_name != 'MONO':
-        line_out += com.g.CSV_SEPARATOR + q_name
+        line_out += u.g.CSV_SEPARATOR + q_name
     line_out += '\n'
     out_file.write(line_out)
     return 1

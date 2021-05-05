@@ -1,11 +1,11 @@
 import pytools.dq as dq
 import pytools.dq.gl as qgl
-import pytools.common as com
+import pytools.utils as u
 import pytools.test.check_log as cl
 
 from pytools.test import gl
 from pytools.test import ttry
-from pytools.common import g
+from pytools.utils import g
 
 
 def dq_t(in1,

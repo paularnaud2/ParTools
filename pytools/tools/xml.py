@@ -2,15 +2,15 @@ import re
 import sys
 from time import time
 
-import pytools.common as com
+import pytools.utils as u
 from .finish import finish_xml
 from . import gl
 
 
 def parse_xml(in_path, out_path, **kwargs):
-    com.log("[toolParseXML] parse_xml: start")
+    u.log("[toolParseXML] parse_xml: start")
     start_time = time()
-    com.init_kwargs(gl, kwargs)
+    u.init_kwargs(gl, kwargs)
     init_globals()
     gen_img_dict(in_path)
     save_img_dict(out_path)
@@ -25,46 +25,46 @@ def init_globals():
 
 def gen_img_dict(in_path):
     s = f"Generating parse dictionary from file '{in_path}'..."
-    com.log(s)
+    u.log(s)
     gl.parse_dict = {}
     with open(in_path, 'r', encoding='utf-8', errors='ignore') as in_file:
         gl.N_READ = 0
         line = read_one_line(in_file)
         fill_parse_dict(line)
-        com.init_sl_time()
+        u.init_sl_time()
         while line != '':
             line = read_one_line(in_file)
             fill_parse_dict(line)
 
     even_dict()
-    com.log(f"Parse dictionary generated ({gl.N_READ} lines processed)")
+    u.log(f"Parse dictionary generated ({gl.N_READ} lines processed)")
 
 
 def save_img_dict(out_path):
-    com.log('Saving parse dictionary as csv...')
+    u.log('Saving parse dictionary as csv...')
     header = []
     for elt in gl.parse_dict:
         header.append(elt)
 
     with open(out_path, 'w', encoding='utf-8') as out_file:
-        com.write_csv_line(header, out_file)
-        com.init_sl_time()
+        u.write_csv_line(header, out_file)
+        u.init_sl_time()
         gl.N_WRITE = 0
         while gl.N_WRITE < gl.N_ROW:
             cur_row = []
             for elt in gl.parse_dict:
                 cur_row.append(gl.parse_dict[elt][gl.N_WRITE])
-            com.write_csv_line(cur_row, out_file)
+            u.write_csv_line(cur_row, out_file)
             gl.N_WRITE += 1
-            com.step_log(gl.N_WRITE, gl.SL_STEP_WRITE, what='lines written')
+            u.step_log(gl.N_WRITE, gl.SL_STEP_WRITE, what='lines written')
 
-    com.log(f"csv file saved in {out_path}")
+    u.log(f"csv file saved in {out_path}")
 
 
 def read_one_line(in_file):
     line = in_file.readline()
     gl.N_READ += 1
-    com.step_log(gl.N_READ, gl.SL_STEP_READ, what='lines processed')
+    u.step_log(gl.N_READ, gl.SL_STEP_READ, what='lines processed')
 
     return line
 
@@ -105,7 +105,7 @@ def get_xml(in_str):
 
     tag = m1.group(1)
     elt = m1.group(2)
-    elt = elt.replace(com.g.CSV_SEPARATOR, '')
+    elt = elt.replace(u.g.CSV_SEPARATOR, '')
 
     return (tag, elt)
 
@@ -129,8 +129,8 @@ def complete_dict():
             id = gl.parse_dict[gl.FIRST_TAG][gl.N_ROW - 2]
             s = (f"Warning: tag '{tag}' appears more than once (id = {id})."
                  " It must be added to MULTI_TAG_LIST.")
-            com.log(s)
-            com.log_print("Execution aborted")
+            u.log(s)
+            u.log_print("Execution aborted")
             sys.exit()
 
 

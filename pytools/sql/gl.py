@@ -1,4 +1,4 @@
-from pytools.common import g
+from pytools.utils import g
 
 # Mandatory inputs---------------------------------------------------
 # Either CNX_INFO or DB have to be input. If both are filled, CNX_INFO is taken

@@ -1,6 +1,6 @@
 # This script allows you to read, search or sort a big file (> 100 Mo)
 
-import pytools.common.g as g
+import pytools.utils.g as g
 import pytools.tools.bf as bf
 
 # Input variables

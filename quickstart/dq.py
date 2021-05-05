@@ -22,7 +22,7 @@ For more information, see the README.md file.
 """
 
 import pytools.dq as dq
-from pytools.common import init_log
+from pytools.utils import init_log
 from pytools.test import gl
 
 init_log('dq')

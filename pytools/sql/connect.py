@@ -3,7 +3,7 @@ from os.path import exists
 from threading import RLock
 
 from pytools import cfg
-import pytools.common as com
+import pytools.utils as u
 
 from . import gl
 from . import gls
@@ -17,7 +17,7 @@ def connect():
     init_instant_client()
     cnx_info = get_cnx_info()
     cnx = connect_with(cnx_info)
-    com.log("Connected")
+    u.log("Connected")
     is_up_to_date(cnx)
 
     return cnx
@@ -52,7 +52,7 @@ def get_cnx_info():
         s = gl.E_3.format(gl.DB, gl.ENV)
         err = True
 
-    com.log(s)
+    u.log(s)
     if err:
         raise Exception(s)
     return cnx_info
@@ -65,24 +65,24 @@ def gen_cnx_dict(nb):
     gl.cnx_dict = dict()
     i = 1
     while i <= nb:
-        com.log(f'Creating connection no. {i}...')
+        u.log(f'Creating connection no. {i}...')
         gl.cnx_dict[i] = connect_with(cnx_info)
         is_up_to_date(gl.cnx_dict[i])
-        com.log(f'Connection no. {i} created')
+        u.log(f'Connection no. {i} created')
         i += 1
 
 
 def init_instant_client():
     with verrou:
         if gls.client_is_init is False:
-            com.log("Initialising Oracle client...")
+            u.log("Initialising Oracle client...")
             gls.client_is_init = True
             if not exists(cfg.ORACLE_CLIENT):
                 s = ("Error: The Oracle instant client directory specified in"
                      f" {cfg.__file__} (ORACLE_CLIENT = {cfg.ORACLE_CLIENT})"
                      " doesn't exist. Please enter a valid directory for the"
                      " Oracle instant client.")
-                com.log(s)
+                u.log(s)
                 raise Exception(s)
             cx.init_oracle_client(cfg.ORACLE_CLIENT)
-            com.log("Client Oracle initialised")
+            u.log("Client Oracle initialised")

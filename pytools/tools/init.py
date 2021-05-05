@@ -1,21 +1,21 @@
-import pytools.common as com
+import pytools.utils as u
 from . import gl
 
 
 def init_find_dup(in_path, out_path, col):
     if not out_path:
-        tmp_dir = com.g.dirs['TMP'] + gl.TMP_FOLDER
-        com.mkdirs(tmp_dir)
+        tmp_dir = u.g.dirs['TMP'] + gl.TMP_FOLDER
+        u.mkdirs(tmp_dir)
         out_path = tmp_dir + gl.TMP_OUT
     s = "Searching duplicates in "
     if col == 0:
-        com.log(f"{s} file {in_path}")
-        cur_list = com.load_txt(in_path)
+        u.log(f"{s} file {in_path}")
+        cur_list = u.load_txt(in_path)
     else:
-        com.log(f"{s}column no. {col} of file {in_path}")
-        cur_list = com.load_csv(in_path)
+        u.log(f"{s}column no. {col} of file {in_path}")
+        cur_list = u.load_csv(in_path)
         cur_list = [x[col - 1] for x in cur_list]
-        if com.has_header(cur_list):
+        if u.has_header(cur_list):
             cur_list = cur_list[1:]
 
     return (cur_list, out_path)

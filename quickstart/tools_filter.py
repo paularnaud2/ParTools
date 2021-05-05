@@ -1,6 +1,6 @@
 # This script allows you to filter and/or extract columns from a csv file
 
-import pytools.common.g as g
+import pytools.utils.g as g
 import pytools.tools.filter as f
 from pytools.tools import gl
 

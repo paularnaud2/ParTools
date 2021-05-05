@@ -5,31 +5,31 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
-import pytools.common as com
+import pytools.utils as u
 from . import gl
 
 
 def recipients(check_internal):
     recipients_path = gl.mail_dir + gl.RECIPIENTS
-    com.log(f"Getting recipients from {recipients_path}")
+    u.log(f"Getting recipients from {recipients_path}")
     if not exists(recipients_path):
         s = gl.S_MISSING.format('Recipients', recipients_path)
-        com.log(s)
+        u.log(s)
         raise Exception(s)
 
-    recipients = com.load_txt(recipients_path)
+    recipients = u.load_txt(recipients_path)
     if not check_internal:
         return recipients
 
     i = gl.INTERNAL_STR
-    com.log(f"Checking if all recipients are internal (ie. contain '{i}')")
+    u.log(f"Checking if all recipients are internal (ie. contain '{i}')")
     for elt in recipients:
         if i not in elt:
             s = f'Warning: "{elt}" is not an internal email address. Send anyways? (y/n)'
             if gl.TEST:
-                com.log(s)
-                com.log_print('y (TEST = True)')
-            elif not com.log_input(s) == 'y':
+                u.log(s)
+                u.log_print('y (TEST = True)')
+            elif not u.log_input(s) == 'y':
                 sys.exit()
     return recipients
 
@@ -39,10 +39,10 @@ def HTML(var_dict):
     template_path = gl.mail_dir + 'template.html'
     if not exists(template_path):
         s = gl.S_MISSING.format('Template', template_path)
-        com.log(s)
+        u.log(s)
         raise Exception(s)
-    template = com.load_txt(template_path, list_out=False)
-    html = com.replace_from_dict(template, var_dict)
+    template = u.load_txt(template_path, list_out=False)
+    html = u.replace_from_dict(template, var_dict)
     return html
 
 
