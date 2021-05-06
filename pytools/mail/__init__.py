@@ -58,16 +58,16 @@ def outlook(mail_name,
 
     init(mail_name, True)
 
+    if not HTMLbody:
+        HTMLbody = get.HTML(var_dict)
+    get.save_mail(HTMLbody)
     outlook = win32.Dispatch('outlook.application')
     mail = outlook.CreateItem(0)
     mail.To = '; '.join(gl.recipients)
     mail.Subject = subject
     if TXTbody:
         mail.Body = TXTbody
-    if HTMLbody:
-        mail.HTMLBody = HTMLbody
-    else:
-        mail.HTMLBody = get.HTML(var_dict)
+    mail.HTMLBody = HTMLbody
     for attachment in attachments:
         mail.Attachments.Add(attachment)
     mail.Send()

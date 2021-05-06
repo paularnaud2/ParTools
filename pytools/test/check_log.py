@@ -13,6 +13,7 @@ MAIL = [
     "Test outlook",
     "Getting recipients from",
     "Sending mail 'test' to",
+    "Mail saved to",
     "Mail sent",
     "Checking if all recipients are internal",
     "is not an internal email address",

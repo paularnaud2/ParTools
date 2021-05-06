@@ -48,7 +48,7 @@ def HTML(var_dict):
 
 def msg(subject, TXTbody, HTMLbody, attachments, var_dict):
 
-    if not HTMLbody:
+    if not HTMLbody and var_dict:
         HTMLbody = HTML(var_dict)
 
     msg = MIMEMultipart()
@@ -62,6 +62,7 @@ def msg(subject, TXTbody, HTMLbody, attachments, var_dict):
     if HTMLbody:
         partHTML = MIMEText(HTMLbody, 'html')
         msg.attach(partHTML)
+        save_mail(HTMLbody)
 
     for path in attachments:
         name = basename(path)
@@ -71,3 +72,10 @@ def msg(subject, TXTbody, HTMLbody, attachments, var_dict):
         msg.attach(part)
 
     return msg
+
+
+def save_mail(HTMLbody):
+
+    path = gl.mail_dir + 'last_sent.html'
+    u.save_list([HTMLbody], path)
+    u.log(f"Mail saved to {path}")
