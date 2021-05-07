@@ -25,13 +25,13 @@ def gen_query_list():
         i += 1
         if len(cur_elt_list) % gl.NB_MAX_ELT_IN_STATEMENT == 0:
             n += 1
-            n_str = u.int_to_str(n, size_elt_list)
+            n_str = u.extend_str(n, '0', size_elt_list, True)
             grp = gen_group(cur_elt_list)
             query_list.append([grp, n_str])
             cur_elt_list = []
     if len(cur_elt_list) > 0:
         n += 1
-        n_str = u.int_to_str(n, size_elt_list)
+        n_str = u.extend_str(n, '0', size_elt_list, True)
         grp = gen_group(cur_elt_list)
         query_list.append([grp, n_str])
 

@@ -10,14 +10,14 @@ def test_mail():
     mail.gl.TEST = True
     args = [gl.MAIL_NAME, gl.MAIL_SUBJECT, gl.MAIL_VD, gl.MAIL_A]
 
-    u.log("Test gmail----------------------------------------------")
+    u.log_print("Test gmail", dashes=100)
     mail.gmail(*args)
     u.log_print()
 
-    u.log("Test no_auth--------------------------------------------")
+    u.log_print("Test no_auth", dashes=100)
     ttry(mail.no_auth, gl.E_NO_AUT, *args)
 
-    u.log("Test outlook--------------------------------------------")
+    u.log_print("Test outlook", dashes=100)
     ttry(mail.outlook, gl.E_OUTLOOK, *args)
 
     u.check_log(cl.MAIL)

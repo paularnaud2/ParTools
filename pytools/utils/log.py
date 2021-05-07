@@ -41,15 +41,20 @@ def check_log(in_list, log_match=False):
         log(f'check_log ko ({n_w} warnings)')
 
 
-def log_print(str_in='', nb_tab=0, c_out=True):
+def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
+
+    s = str_in
     if nb_tab != 0:
         for i in range(0, nb_tab):
-            str_in = '\t' + str_in
+            s = '\t' + s
+
+    if dashes > 0:
+        s = string.extend_str(s, '-', dashes)
 
     with g.verrou:
         if c_out:
-            print(str_in)
-        write_log(str_in)
+            print(s)
+        write_log(s)
 
 
 def log(str_in, level=0, format='%H:%M:%S -', nb_tab=0, c_out=True):

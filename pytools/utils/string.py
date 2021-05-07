@@ -41,11 +41,11 @@ def gen_random_string(length=10):
     return out
 
 
-def int_to_str(n, length):
-    str_out = str(n)
-    while len(str_out) < length:
-        str_out = '0' + str_out
-    return str_out
+def extend_str(str_in, char, length, left=False):
+    s = str(str_in)
+    while len(s) < length:
+        s = char + s if left else s + char
+    return s
 
 
 def get_duration_ms(start_time, end_time=''):
