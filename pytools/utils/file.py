@@ -8,6 +8,7 @@ from .string import like
 
 def startfile(in_path):
     """Same as os.startfile but with absolute path (more robust)"""
+
     os.startfile(p.abspath(in_path))
 
 
@@ -20,12 +21,20 @@ def delete_folder(dir):
 def mkdirs(dir, delete=False):
     """Same as os.makedirs but with a delete option which (if True) deletes the
     folder if it already exists."""
+
     if p.exists(dir) and not delete:
         return
     if p.exists(dir) and delete:
         delete_folder(dir)
     os.makedirs(dir)
     log(f"Folder {dir} created")
+
+
+def abspath(path):
+    """Same as os.path.abspath but with '/' instead of '\'"""
+
+    out = p.abspath(path).replace('\\', '/')
+    return out
 
 
 def merge_files(in_path, out_path, remove_header=False):

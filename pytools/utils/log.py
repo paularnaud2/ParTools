@@ -1,6 +1,5 @@
 import sys
 import warnings
-import os.path as p
 
 from time import time
 from datetime import datetime
@@ -73,7 +72,7 @@ def init_log(parent_module='', force_init=False):
     s = datetime.now().strftime('%Y%m%d_%H%M%S')
     if parent_module:
         s += '_' + parent_module
-    g.log_path = p.abspath(g.dirs['LOG'] + s + '.txt')
+    g.log_path = file.abspath(g.dirs['LOG'] + s + '.txt')
     with open(g.log_path, 'w', encoding='utf-8') as in_file:
         in_file.write('')
     g.logs = []

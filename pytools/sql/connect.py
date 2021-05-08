@@ -52,9 +52,11 @@ def get_cnx_info():
         s = gl.E_3.format(gl.DB, gl.ENV)
         err = True
 
-    u.log(s)
     if err:
         raise Exception(s)
+    else:
+        u.log(s)
+
     return cnx_info
 
 

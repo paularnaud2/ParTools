@@ -29,6 +29,7 @@ from .string import get_duration_ms
 from .string import get_duration_string
 
 from .file import mkdirs
+from .file import abspath
 from .file import load_txt
 from .file import save_list
 from .file import startfile
