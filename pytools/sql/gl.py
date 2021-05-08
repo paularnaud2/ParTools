@@ -14,7 +14,7 @@ ENV = ''  # See comment in conf.py for details
 OUT_PATH = f"{g.dirs['OUT']}sql_out.csv"
 OUT_DIR = f"{g.dirs['OUT']}sql_out/"  # Used when MERGE_FILES = False
 
-MAX_DB_CNX = 8  # Maximum number of connections allowed to work in parralel
+MAX_DB_CNX = 8  # Maximum number of connections allowed to work in parallel
 
 OPEN_OUT_FILE = True
 MERGE_FILES = True  # See quickstart/sql

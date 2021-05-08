@@ -17,7 +17,7 @@ def upload_interrupted():
     md['T'] is the duration of one insert in ms. As the aim is to
     simulate an unexpected stop, once this duration is received from the
     subprocess, the main process sleeps for this duration before killing
-    the subprocess. This is belieived to introduce some kind of
+    the subprocess. This is believed to introduce some kind of
     randomness to the moment where the subprocess is killed (we also
     want to test interruption while the the file gl.tmp_file_chunk  is
     being written)

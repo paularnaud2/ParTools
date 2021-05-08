@@ -1,5 +1,5 @@
 # This directory contains input, output, log, and temporary files folders.
-# If you whish to change it, run import pytools.utils after to initialise the
+# If you wish to change it, run import pytools.utils after to initialise the
 # new folder.
 FILES_DIR = 'PT/'
 

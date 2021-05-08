@@ -62,7 +62,7 @@ When first used, the __utils__ package gets initialised by creating a __PT__ dir
 ## Recover functionalities
 
 ``sql.download``, ``rl.reqlist`` and ``sql.execute`` have a __recovery functionality__. This means that if the process is unexpectedly stopped (e.g. because of network issues), then when relaunched, the script __automatically restarts from where it stopped__. When you run long processes (e.g. extracting millions of lines from a database), this can save you a significant amount of time if something goes wrong (especially when close to the end!).  
-The reliability of these recovery mecanismes is ensured by automated tests using the ``multiprocessing`` library to simulate the unexpected process interruption.
+The reliability of these recovery mechanisms is ensured by automated tests using the ``multiprocessing`` library to simulate the unexpected process interruption.
 
 ## Running the automated tests
 

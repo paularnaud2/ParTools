@@ -9,8 +9,7 @@ if it contains several commands (second example), you have to set PROC=False.
 
 Notes:
 - SCRIPT_IN accepts either a string or a file path
-- You can input either CNX_INFO or DB, as long as the DB you pass is defined
-in the conf file (pytool/conf.py)
+- CNX_INFO and DB inputs follow the same rules as for sql.download
 
 For more details, see the README.md file.
 """

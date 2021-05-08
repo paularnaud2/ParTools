@@ -4,8 +4,8 @@ A detailed result of the comparison is output.
 
 In order for the run_dq function to work correctly, the input files must both
 have a pivot column (ie. containing keys/IDs) and be free of 'key duplicates'
-meaning having different lines with the same ID. The index of the pivot column is an
-input parameter (gl.PIVOT_IDX = 0)
+meaning having different lines with the same ID. The index of the pivot column
+is an input parameter (gl.PIVOT_IDX = 0)
 
 In this script, two files used for testing purposes are compared.
 Result interpretation:

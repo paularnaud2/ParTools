@@ -85,7 +85,7 @@ def init_log(parent_module='', force_init=False):
 
 def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
     """For simple use, initialise with init_sl_time()
-    For multi thread use, initialise with gen_sl_detail(q_name)"""
+    For multithreaded use, initialise with gen_sl_detail(q_name)"""
 
     if counter % step != 0:
         return False

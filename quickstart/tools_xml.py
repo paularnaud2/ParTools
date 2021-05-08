@@ -1,4 +1,4 @@
-# This script allows you to convert a xml file into csv
+# This script allows you to convert a potentially big xml file into csv.
 
 import pytools.utils.g as g
 from pytools.tools import xml

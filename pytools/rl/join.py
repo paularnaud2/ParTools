@@ -34,7 +34,7 @@ def left_join_arrays(ar_left_in, ar_right_in):
 
 
 def prepare_array(arr):
-    # Sorts input array and deletes its dupplicates
+    # Sorts the input array and deletes its duplicates
 
     if not u.has_header(arr):
         u.log("Error: input array must contain a header")
@@ -137,8 +137,8 @@ def compare_equal(key_l, key_r, ar_left, ar_right):
 
 
 def incr_c_l(ar_left):
-    # Increases left cursor and check if end of array has been reached.
-    # In this case, cursor is set to -1
+    # Increases the left cursor and checks if the end of the array has been
+    # reached. In this case, the cursor is set to -1
 
     gl.c_cl += 1
     if gl.c_cl == len(ar_left):

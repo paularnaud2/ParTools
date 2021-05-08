@@ -8,7 +8,7 @@ from .log import log_input
 
 
 def log_exeptions(f):
-    """When cfg.DEBUG = True, this decorator writes potential exeption in
+    """When cfg.DEBUG = True, this decorator writes potential exception in
     current log file and kills all the running threads (os._exit(1))"""
     def new(*arg, **kwargs):
         try:

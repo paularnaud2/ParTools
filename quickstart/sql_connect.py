@@ -1,5 +1,10 @@
-# Use this script to troubleshoot you connection problems to Oracle DB.
-# Here you can try to connect either by using a connection string, a DNS or a TNS_NAME.
+"""
+Use this script to troubleshoot your connection problems.
+Here you can try to connect either by using one of the following:
+- Connection string,
+- DNS
+- TNS_NAME.
+"""
 
 import cx_Oracle as cx
 from pytools import cfg

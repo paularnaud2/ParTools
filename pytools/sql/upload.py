@@ -49,7 +49,7 @@ def send_chunk_duration(start):
     """Sends The duration of one insert to the main process.
 
     It is not wanted to send the duration of the first insert as it
-    might be longer than expected due to cache mecanisms. Hence, the
+    might be longer than expected due to cache mechanisms. Hence, the
     duration of the second insert is sent to the main process
     """
 

@@ -94,7 +94,7 @@ def get_line_lpl(in_file):
 
 def get_line_buf(in_file):
     # For the buffer, end of previous line is taken to
-    # guaranty the integrity of searched string
+    # guarantee the integrity of searched string
 
     line = in_file.read(gl.BUFFER_SIZE)
     if gl.c_cur_row > 1:

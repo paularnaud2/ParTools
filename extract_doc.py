@@ -22,30 +22,33 @@ def extract_doc_from_dir(in_dir, out):
 
 def extract_doc_from_file(path, out):
     out.append(path)
-    out.append('-------------------------------------------------------------')
+    out.append(u.extend_str('', '-', 100))
     x = u.load_txt(path)
     description = False
+    n_written = 0
     for i, line in enumerate(x):
+        append = False
         if '#' in line or u.like(line, '*"""*"""*'):
-            line = line.replace('#', '').strip()
-            line = line.replace('"""', '').strip()
-            out.append(line)
-            continue
-        if '"""' in line and description is False:
-            line = line.replace('"""', '').strip()
+            append = True
+        elif '"""' in line and description is False:
             description = True
-            out.append(line)
-            continue
-        if '"""' in line and description is True:
-            line = line.replace('"""', '').strip()
+            append = True
+        elif '"""' in line and description is True:
             description = False
+            append = True
+        elif description is True:
+            append = True
+        if append:
+            line = line.strip()
             out.append(line)
-            continue
-        if description is True:
-            out.append(line)
-    out.append('-------------------------------------------------------------')
-    out.append('')
-    out.append('')
+            n_written += 1
+
+    if n_written > 0:
+        out.append(u.extend_str('', '-', 100))
+        out.append('')
+        out.append('')
+    else:
+        del out[-2:]
 
 
 main()

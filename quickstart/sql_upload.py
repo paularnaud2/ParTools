@@ -12,8 +12,7 @@ replaced by 'TEST'.
 
 Notes:
 - SCRIPT_IN accepts either a string or a file path
-- You can input either CNX_INFO or DB, as long as the DB you pass is defined
-in the conf file (pytools/conf.py)
+- CNX_INFO and DB inputs follow the same rules as for sql.download
 
 For more details, see the README.md file.
 """

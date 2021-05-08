@@ -1,6 +1,6 @@
 """
 The dup script allows you to find and/or remove duplicates as well as sort and
-shuffle a csv file or a list. Just uncomment and run this script to try out!
+shuffle a csv file or a list.
 """
 
 import pytools.utils.g as g

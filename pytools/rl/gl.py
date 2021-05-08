@@ -13,7 +13,7 @@ IN_PATH = f"{g.dirs['IN']}rl_in.csv"
 OUT_PATH = f"{g.dirs['OUT']}rl_out.csv"
 
 # Default const------------------------------------------------------
-MAX_DB_CNX = 8  # Maximum number of connections allowed to work in parralel
+MAX_DB_CNX = 8  # Maximum number of connections allowed to work in parallel
 NB_MAX_ELT_IN_STATEMENT = 1000  # Maximum number of elements in the 'IN' statement per queries
 PIVOT_IDX = 0  # Index of the pivot column (column on which the queries and joint are performed)
 
