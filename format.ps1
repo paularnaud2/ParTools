@@ -1,1 +1,0 @@
-docformatter --in-place format.py --force-wrap --wrap-descriptions 80
