@@ -8,6 +8,7 @@ from pytools.tools.finish import finish_del_dup
 
 
 def find_dup(in_path, out_path='', open_out=False, col=0):
+
     u.log("[toolDup] find_dup: start")
     (cur_list, out_path) = init_find_dup(in_path, out_path, col)
     bn = u.big_number(len(cur_list))
@@ -18,6 +19,7 @@ def find_dup(in_path, out_path='', open_out=False, col=0):
 
 
 def del_dup(in_path, out_path, open_out=False):
+
     u.log("[toolDup] del_dup: start")
     u.log(f"Deleting duplicates in file '{in_path}'...")
     cur_list = u.load_txt(in_path)
@@ -32,6 +34,7 @@ def del_dup(in_path, out_path, open_out=False):
 
 
 def find_dup_list(in_list):
+
     if not in_list:
         return []
 
@@ -51,6 +54,7 @@ def find_dup_list(in_list):
 
 
 def del_dup_list(in_list):
+
     if not in_list:
         return []
 
@@ -73,6 +77,7 @@ def del_dup_list(in_list):
 
 
 def shuffle_csv(in_path, out_path, open_out=False):
+
     u.log("[toolShuf] shuffle_csv: start")
     cur_list = u.load_csv(in_path)
     if u.has_header(cur_list):

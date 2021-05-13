@@ -1,17 +1,17 @@
 import pytools.utils as u
 
-IN_DIRS = ['pytools', 'quickstart', 'tests']
-OUT_PATH = 'doc.txt'
 
-
-def main():
+def extract_doc(in_dirs, out_path):
+    """Extracts all Python doc ('# comments included) present in the 'in_dir'
+    directories (can be usefull for spell check)
+    """
 
     out = []
-    for in_dir in IN_DIRS:
+    for in_dir in in_dirs:
         extract_doc_from_dir(in_dir, out)
 
-    u.save_list(out, OUT_PATH)
-    u.startfile(OUT_PATH)
+    u.save_list(out, out_path)
+    u.startfile(out_path)
 
 
 def extract_doc_from_dir(in_dir, out):
@@ -49,6 +49,3 @@ def extract_doc_from_file(path, out):
         out.append('')
     else:
         del out[-2:]
-
-
-main()
