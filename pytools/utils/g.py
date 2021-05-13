@@ -51,6 +51,8 @@ def init_directories():
 
 
 def init_PT():
+    """Initialises the pytools package"""
+
     if exists(dirs['LOG']):
         return
 

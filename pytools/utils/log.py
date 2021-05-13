@@ -20,6 +20,12 @@ def write_log(str_in):
 
 
 def check_log(in_list, log_match=False):
+    """Checks whether the current log file contains the 'in_list' elements.
+    If it doesn't, a warning is thrown.
+
+    Args (non-exhaustive):
+        log_match: If True, the matches are printed out in the log file
+    """
 
     log('check_log...')
     txt = file.load_txt(g.log_path, False)
@@ -41,6 +47,14 @@ def check_log(in_list, log_match=False):
 
 
 def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
+    """Prints something in the current log file (g.log_path)
+
+    Args (non-exhaustive):
+        nb_tab: Number of tab indentations
+        c_out: Console out
+        dashes: Total length of the input string extended
+        with dashes ('-')
+    """
 
     s = str_in
     if nb_tab != 0:
@@ -56,16 +70,34 @@ def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
         write_log(s)
 
 
-def log(str_in, level=0, format='%H:%M:%S -', nb_tab=0, c_out=True):
+def log(str_in, level=0, format='%H:%M:%S -', c_out=True):
+    """Logs 'str_in' in the current log file (g.log_path)
+
+    Args (non-exhaustive):
+        level: Log level. Current log level set in g.LOG_LEVEL.
+        Nothing will be logged if g.LOG_LEVEL < level
+        format: Log format
+        c_out: Console output
+    """
+
     if g.LOG_LEVEL < level:
         return
 
     fdate = datetime.now().strftime(format)
     s = f"{fdate} {str_in}"
-    log_print(s, nb_tab, c_out)
+    log_print(s, c_out=c_out)
 
 
 def init_log(parent_module='', force_init=False):
+    """Initialises a log file
+
+    Args:
+        parent_module: Name of the parent module (appears in the
+        name of the log file)
+        force_init: If True, the log file is initialised even if a
+        current log file is already set
+    """
+
     if g.log_file_initialised and not force_init:
         return
 
@@ -84,8 +116,13 @@ def init_log(parent_module='', force_init=False):
 
 
 def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
-    """For simple use, initialise with init_sl_time()
-    For multithreaded use, initialise with gen_sl_detail(q_name)"""
+    """Logs something only when the 'counter' is a multiple of 'step'
+
+    For simple use, initialise with init_sl_time()
+    For multithreaded use, initialise with gen_sl_detail(q_name)
+
+    For more info, check out the README.md file
+    """
 
     if counter % step != 0:
         return False
@@ -109,11 +146,14 @@ def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
 
 
 def init_sl_time(th_name='DEFAULT'):
+    """Initialises the timer for the step_log function (simple use)"""
+
     with g.verrou:
         g.sl_time_dict[th_name] = time()
 
 
 def gen_sl_detail(q_name='', th_nb=1, multi_th=False):
+    """Initialises the timer for the step_log function (multithread use)"""
 
     if q_name not in ['', 'MONO'] and multi_th is True:
         detail = f" for query '{q_name}' (connection no. {th_nb})"
@@ -133,6 +173,8 @@ def gen_sl_detail(q_name='', th_nb=1, multi_th=False):
 
 
 def log_input(str_in):
+    """Same as input but traced in the log file"""
+
     command = input(str_in)
     write_log(str_in + command)
 

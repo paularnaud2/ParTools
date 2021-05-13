@@ -3,6 +3,8 @@ from .log import log
 
 
 def list_to_dict(list_in, separator='='):
+    """Transforms 'list_in' to a dictionary using the 'separator'"""
+
     out = {}
     for elt in list_in:
         e = elt.split(separator)

@@ -20,9 +20,9 @@ def merge_tmp_files():
         return
     for i, elt in enumerate(file_list, 1):
         if i == 1:
-            u.merge_files(elt, out_file, remove_header=False)
+            u.append_file(elt, out_file, remove_header=False)
         else:
-            u.merge_files(elt, out_file, remove_header=True)
+            u.append_file(elt, out_file, remove_header=True)
         os.remove(elt)
 
     n = len(file_list)

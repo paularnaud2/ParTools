@@ -10,9 +10,14 @@ from . import g
 
 
 def like(in_str, like_string, match_output=False):
-    # Oracle equivalent of LIKE operator but with '*' instead of '%'
-    # Outputs boolean str LIKE like_string
-    # Example: like('Hello World', 'He*o w*d') => True
+    """ Behaves as the LIKE of Oracle SQL (you can match strings with wildcard
+    character '*')
+
+    Example: like('Hello World', 'He*o w*d') => True
+
+    Args (non-exhaustive):
+        match_output: If True, the function returns the match
+    """
 
     if '*' not in like_string:
         return like_string in in_str
@@ -29,11 +34,16 @@ def like(in_str, like_string, match_output=False):
 
 
 def hash512(in_str, length=10):
+    """Contrary to hash, this hash function is not randomised, meaning it
+    always outputs the same string for the same input string"""
+
     out = hashlib.sha512(in_str.encode('utf-8')).hexdigest()[:length]
     return out
 
 
 def gen_random_string(length=10):
+    """Generates a random string (letters and digits) of length 'length'"""
+
     letters = string.ascii_letters
     digits = string.digits
     ln = letters + digits
@@ -42,14 +52,19 @@ def gen_random_string(length=10):
 
 
 def extend_str(str_in, char, length, left=False):
+    """Extends the string 'str_in' to the length 'length' with the given 'char'"""
+
     s = str(str_in)
     while len(s) < length:
         s = char + s if left else s + char
     return s
 
 
-def get_duration_ms(start_time, end_time=''):
-    if end_time == '':
+def get_duration_ms(start_time, end_time=None):
+    """Gives the duration in ms between 'end_time' and 'start_time'. If 'end_time'
+    is not given, the current time is taken."""
+
+    if not end_time:
         end_time = time()
 
     duration = floor((end_time - start_time) * 1000)
@@ -57,7 +72,15 @@ def get_duration_ms(start_time, end_time=''):
     return duration
 
 
-def get_duration_string(start_time, return_dms=False, end_time=''):
+def get_duration_string(start_time, return_dms=False, end_time=None):
+    """Outputs a string representing the time elapsed between 'end_time' and
+    'start_time'. If 'end_time' is not given, the current time is taken.
+
+    Args (non-exhaustive):
+        return_dms: If True, the duration in ms is also output: (dms, dstr).
+        If False, only the duration string is output (dstr).
+    """
+
     dms = get_duration_ms(start_time, end_time)
     if dms >= 1000:
         duration_s = dms / 1000
@@ -78,8 +101,13 @@ def get_duration_string(start_time, return_dms=False, end_time=''):
     return dstr
 
 
-def big_number(str_in):
-    s = str(str_in)
+def big_number(int_in):
+    """Converts a potentially big number into a lisible string.
+
+    Example: big_number(10000000) returns '10 000 000'.
+    """
+
+    s = str(int_in)
     position = len(s)
     counter = 0
     out = ''
@@ -93,6 +121,13 @@ def big_number(str_in):
 
 
 def replace_from_dict(str_in, dict_in):
+    """Replaces the variables (delimited by '@@') in 'str_in' with the values
+    of 'dict_in'.
+
+    Exemple: replace_from_dict('Hello @@VAR@@', {'VAR': 'world'})
+    returns 'Hello world'
+    """
+
     for key in dict_in:
         str_in = str_in.replace(g.VAR_DEL + key + g.VAR_DEL, str(dict_in[key]))
     return str_in

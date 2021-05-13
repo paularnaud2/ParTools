@@ -1,7 +1,7 @@
 """
 reqlist allows you to quickly retrieve data from an Oracle DB given an input
 perimeter. The SQL output can be joint to the input csv file (which can
-contain more than one columns). The database is queried in parallel by multiple
+contain more than one column). The database is queried in parallel by multiple
 threads.
 
 In this example of use, the input file is first created from the 'in.csv' file

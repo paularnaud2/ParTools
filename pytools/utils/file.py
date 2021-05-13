@@ -13,14 +13,16 @@ def startfile(in_path):
 
 
 def delete_folder(dir):
+    """Deletes a folder and its content"""
+
     if p.exists(dir):
         rmtree(dir)
         log(f"Folder {dir} deleted")
 
 
 def mkdirs(dir, delete=False):
-    """Same as os.makedirs but with a delete option which (if True) deletes the
-    folder if it already exists."""
+    """Same as os.makedirs but with a 'delete' option which (if True) deletes
+    the folder if it already exists."""
 
     if p.exists(dir) and not delete:
         return
@@ -37,7 +39,14 @@ def abspath(path):
     return out
 
 
-def merge_files(in_path, out_path, remove_header=False):
+def append_file(in_path, out_path, remove_header=False):
+    """Appends the 'in_path' file to the 'out_path' file.
+
+    Args (non-exhaustive):
+        remove_header: If True, the header of the 'in_path' file is removed
+        before appending
+    """
+
     with open(in_path, 'r', encoding='utf-8') as in_file:
         with open(out_path, 'a', encoding='utf-8') as out_file:
             i = 0
@@ -54,6 +63,17 @@ def list_files(in_dir,
                walk=False,
                only_list=[],
                ignore_list=[]):
+    """Lists the files of the 'in_dir' directory
+
+    Args (non-exhaustive):
+        incl_root: If True, the root is included in each paths (absolute paths)
+        walk: If True, the files of all the subdirectories are listed as well
+        only_list: List of wanted patterns. e.g. ['*.py'] (only these patterns
+        will be output)
+        ignore_list: List of unwanted patterns. e.g. ['*.pyc'] (these patterns
+        won't be output)
+    """
+
     if not p.exists(in_dir):
         return []
 
@@ -90,6 +110,13 @@ def ignore(path, ignore_list):
 
 
 def load_txt(in_path, list_out=True):
+    """Loads a text file
+
+    Args (non-exhaustive):
+        list_out: If True, a list es output, each element representing a
+        line a the file. If False, a string is output.
+    """
+
     if list_out:
         out = []
     else:
@@ -105,16 +132,20 @@ def load_txt(in_path, list_out=True):
     return out
 
 
+def save_list(list, out_path, att='w'):
+    """Saves a list in a file, each element representing a line"""
+
+    with open(out_path, 'w', encoding='utf-8') as out_file:
+        for elt in list:
+            out_file.write(str(elt).strip("\n") + '\n')
+
+
 def count_lines(in_path):
+    """Counts the number of lines of a file"""
+
     with open(in_path, 'r', encoding='utf-8') as in_file:
         i = 0
         for line in in_file:
             i += 1
 
     return i
-
-
-def save_list(list, out_path, att='w'):
-    with open(out_path, 'w', encoding='utf-8') as out_file:
-        for elt in list:
-            out_file.write(str(elt).strip("\n") + '\n')

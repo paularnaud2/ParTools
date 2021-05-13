@@ -33,7 +33,7 @@ from .file import abspath
 from .file import load_txt
 from .file import save_list
 from .file import startfile
-from .file import merge_files
+from .file import append_file
 from .file import count_lines
 from .file import delete_folder
 from .file import list_files

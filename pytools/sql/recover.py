@@ -24,8 +24,8 @@ def recover():
 
 
 def modify_ql(file_list):
-    # Modifies the query list by deleting element already
-    # in file list. EC files are also deleted.
+    # Modifies the query list by deleting elements already
+    # present in the file list. EC files are also deleted.
 
     list_out = []
     for elt in gl.QUERY_LIST:

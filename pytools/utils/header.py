@@ -5,6 +5,12 @@ from .csv import csv_to_list
 
 
 def get_header(in_path, csv=False):
+    """Returns the header of a file
+
+    Args (non-exhaustive):
+        csv: If True, the returned header is a list containing each csv field
+    """
+
     with open(in_path, 'r', encoding='utf-8') as in_file:
         header = in_file.readline().strip('\n')
 
@@ -15,6 +21,12 @@ def get_header(in_path, csv=False):
 
 
 def gen_header(in_path, last_field='', out_path=''):
+    """If the in_path file has no header, this function generates one looking
+    like this : FIELD_1;FIELD_2;...;FIELD_N; last_field where N is the number
+    of columns of the csv file. If last_field == '' it is not appended.
+    If an out_path is passed in, a file is created with the generated header
+    (or with the existing one is the in_path file has one)
+    """
 
     if has_header(in_path):
         header = get_header(in_path)
@@ -37,15 +49,22 @@ def gen_header(in_path, last_field='', out_path=''):
     return header
 
 
-def has_header(in_var):
+def has_header(inp):
+    """Returns True if inp has a header (inp can be a file path or a list).
+    To do so, it looks at the first elements of the two first lines. If they
+    are of same length then we consider that inp has no header and conversely.
+    Note that this function should be used with caution as it can not be fully
+    reliable.
+    """
+
     out = True
-    if isinstance(in_var, str):
+    if isinstance(inp, str):
         ar = []
-        with open(in_var, 'r', encoding='utf-8') as in_file:
+        with open(inp, 'r', encoding='utf-8') as in_file:
             ar.append(csv_to_list(in_file.readline()))
             ar.append(csv_to_list(in_file.readline()))
     else:
-        ar = in_var
+        ar = inp
 
     if not ar:
         return False
@@ -62,6 +81,10 @@ def has_header(in_var):
 
 
 def check_header(in_path):
+    """Logs an error message and raises an exception if the in_path file has no
+    header (relies on the has_header function).
+    """
+
     if not has_header(in_path):
         s = f"Error: the input file {in_path} must have a header"
         log(s)
