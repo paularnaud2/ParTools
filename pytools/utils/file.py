@@ -42,9 +42,10 @@ def abspath(path):
 def append_file(in_path, out_path, remove_header=False):
     """Appends the 'in_path' file to the 'out_path' file.
 
-    Args (non-exhaustive):
-        remove_header: If True, the header of the 'in_path' file is removed
-        before appending
+    Args (non-exhaustive)
+    ----------------------
+    remove_header: If True, the header of the 'in_path' file is removed
+    before appending
     """
 
     with open(in_path, 'r', encoding='utf-8') as in_file:
@@ -65,13 +66,17 @@ def list_files(in_dir,
                ignore_list=[]):
     """Lists the files of the 'in_dir' directory
 
-    Args (non-exhaustive):
-        incl_root: If True, the root is included in each paths (absolute paths)
-        walk: If True, the files of all the subdirectories are listed as well
-        only_list: List of wanted patterns. e.g. ['*.py'] (only these patterns
-        will be output)
-        ignore_list: List of unwanted patterns. e.g. ['*.pyc'] (these patterns
-        won't be output)
+    Args (non-exhaustive)
+    ----------------------
+    incl_root: If True, the root is included in each paths (absolute paths)
+
+    walk: If True, the files of all the subdirectories are listed as well
+
+    only_list: List of wanted patterns. e.g. ['*.py'] (only these patterns
+    will be output)
+
+    ignore_list: List of unwanted patterns. e.g. ['*.pyc'] (these patterns
+    won't be output)
     """
 
     if not p.exists(in_dir):
@@ -112,9 +117,10 @@ def ignore(path, ignore_list):
 def load_txt(in_path, list_out=True):
     """Loads a text file
 
-    Args (non-exhaustive):
-        list_out: If True, a list es output, each element representing a
-        line a the file. If False, a string is output.
+    Args (non-exhaustive)
+    ----------------------
+    list_out: If True, a list es output, each element representing a
+    line a the file. If False, a string is output.
     """
 
     if list_out:

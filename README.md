@@ -36,9 +36,12 @@ The __pytools__ package includes a __utils__ package which provides generic func
 - `save_list`: saves a list into a text file
 - `load_txt`: loads a text file into a string or a list
 - `list_files`: returns the list of the files in a folder
-- `like`: behaves as the LIKE of Oracle SQL (you can match strings with wildcard character '\*'). Example: like('Hello World', 'He*o w*d') => True
+- `like`: behaves as the LIKE of Oracle SQL (you can match strings with wildcard character '\*'). Example: like('Hello World', 'He\*o w\*d') returns True
 - `big_number`: converts a potentially big number into a lisible string. For example big_number(10000000) returns '10 000 000'.
 - `get_duration_string`: outputs a string representing the time elapsed since the input ``start_time``. For example '3 minutes and 20 seconds'.
+- ``run_cmd``: runs a Windows shell command (__sTools__)
+- ``run_sqlplus``: connects to sqlplus as sysdba and runs a sql script (__sTools__)
+- ``msg_box``: opens a message box containing the 'msg' input string (__sTools__)
 
 ### Logging with the utils package
 

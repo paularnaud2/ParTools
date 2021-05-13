@@ -1,6 +1,7 @@
+import os.path as p
 from threading import RLock
-from os.path import exists
 
+import quickstart
 from pytools import cfg
 from .file import mkdirs
 from .file import load_txt
@@ -13,6 +14,7 @@ from .tools import list_to_dict
 CSV_SEPARATOR = ';'
 VAR_DEL = '@@'
 DEFAULT_FIELD = "FIELD"
+GITHUB_LINK = 'https://github.com/paularnaud2/PyTools'
 
 MAX_EXAMPLE_PRINT = 5
 MIN_DUR_MSG_BOX_TRIGGER = 30
@@ -53,19 +55,22 @@ def init_directories():
 def init_PT():
     """Initialises the pytools package"""
 
-    if exists(dirs['LOG']):
+    if p.exists(dirs['LOG']):
         return
 
     init_directories()
     save_list(['*'], cfg.FILES_DIR + '.gitignore')
     init_log('init')
-    log("PyTools package successfully initialised."
-        f" Set up your conf here: {cfg.__file__}\n")
+    log("PyTools package successfully initialised!\n"
+        f"Checkout the README.md on GitHub: {GITHUB_LINK}\n"
+        f"Get started here {p.dirname(quickstart.__file__)}\n"
+        f"Set up your conf here: {cfg.__file__}\n"
+        "Happy scripting!\n")
 
 
 def get_confidential(raise_e=True):
 
-    if not exists(cfg.CFI_PATH):
+    if not p.exists(cfg.CFI_PATH):
         log(E_CFI)
         if raise_e:
             raise Exception(E_CFI)

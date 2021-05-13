@@ -7,22 +7,42 @@ from .log import log
 from .log import log_print
 
 
-def msg_box(msg, package='utils', jdur=0):
+def msg_box(msg, package='utils', dur=0, threaded=True):
+    """Opens a message box containing the 'msg' input string
 
-    if jdur != 0:
-        jdur = jdur / 1000
-        if jdur < g.MIN_DUR_MSG_BOX_TRIGGER:
+    Args (non-exhaustive)
+    ----------------------
+    dur: duration in ms. If input, this value is used to determine if the
+    message box should pop out or not. The message box pops out only if
+    dur >= g.MIN_DUR_MSG_BOX_TRIGGER. This can be useful if you want to use
+    this function as an end-process notification but only wants to be notified
+    when the process has taken a long enough time.
+
+    threaded: If true, the message box is open in a parallel process and the
+    main script can continue (can be used as a end process notification)
+    """
+
+    if dur != 0:
+        dur = dur / 1000
+        if dur < g.MIN_DUR_MSG_BOX_TRIGGER:
             return
 
     title = "Python - " + package
-    p = Process(target=showinfo, args=(title, msg))
-    p.start()
+    if threaded:
+        p = Process(target=showinfo, args=(title, msg))
+        p.start()
+    else:
+        showinfo(title, msg)
 
 
 def run_cmd(cmd, input=''):
-    # input variable is used in the case the command expects the user
-    # to input something (e.g. Y or N). In this case, a binary
-    # string should be used (e.g. b'Y')
+    """Runs a Windows shell command
+
+    Args (non-exhaustive)
+    ----------------------
+    input: used in the case the command expects the user to input something
+    (e.g. Y or N). In this case, a binary string should be used (e.g. b'Y')
+    """
 
     a = subprocess.run(
         cmd,
@@ -45,6 +65,7 @@ def run_cmd(cmd, input=''):
 
 
 def run_sqlplus(script):
+    """Connects to sqlplus as sysdba and runs the input 'script'"""
 
     p = subprocess.Popen(
         'sqlplus / as sysdba',
@@ -58,4 +79,4 @@ def run_sqlplus(script):
     out = stdout.decode('cp1252', errors="ignore")
     # out = stdout.decode('cp850', errors="ignore")
 
-    print(out)
+    log_print(out)

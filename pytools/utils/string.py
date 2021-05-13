@@ -13,10 +13,13 @@ def like(in_str, like_string, match_output=False):
     """ Behaves as the LIKE of Oracle SQL (you can match strings with wildcard
     character '*')
 
-    Example: like('Hello World', 'He*o w*d') => True
+    Args (non-exhaustive)
+    ----------------------
+    match_output: If True, the function returns the match
 
-    Args (non-exhaustive):
-        match_output: If True, the function returns the match
+    Example
+    -------
+    like('Hello World', 'He*o w*d') => True
     """
 
     if '*' not in like_string:
@@ -76,9 +79,10 @@ def get_duration_string(start_time, return_dms=False, end_time=None):
     """Outputs a string representing the time elapsed between 'end_time' and
     'start_time'. If 'end_time' is not given, the current time is taken.
 
-    Args (non-exhaustive):
-        return_dms: If True, the duration in ms is also output: (dms, dstr).
-        If False, only the duration string is output (dstr).
+    Args (non-exhaustive)
+    ----------------------
+    return_dms: If True, the duration in ms is also output: (dms, dstr).
+    If False, only the duration string is output (dstr).
     """
 
     dms = get_duration_ms(start_time, end_time)
@@ -104,7 +108,9 @@ def get_duration_string(start_time, return_dms=False, end_time=None):
 def big_number(int_in):
     """Converts a potentially big number into a lisible string.
 
-    Example: big_number(10000000) returns '10 000 000'.
+    Example
+    -------
+    big_number(10000000) returns '10 000 000'.
     """
 
     s = str(int_in)
@@ -124,7 +130,9 @@ def replace_from_dict(str_in, dict_in):
     """Replaces the variables (delimited by '@@') in 'str_in' with the values
     of 'dict_in'.
 
-    Exemple: replace_from_dict('Hello @@VAR@@', {'VAR': 'world'})
+    Example
+    -------
+    replace_from_dict('Hello @@VAR@@', {'VAR': 'world'})
     returns 'Hello world'
     """
 

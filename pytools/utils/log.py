@@ -23,8 +23,9 @@ def check_log(in_list, log_match=False):
     """Checks whether the current log file contains the 'in_list' elements.
     If it doesn't, a warning is thrown.
 
-    Args (non-exhaustive):
-        log_match: If True, the matches are printed out in the log file
+    Args (non-exhaustive)
+    ----------------------
+    log_match: If True, the matches are printed out in the log file
     """
 
     log('check_log...')
@@ -49,11 +50,14 @@ def check_log(in_list, log_match=False):
 def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
     """Prints something in the current log file (g.log_path)
 
-    Args (non-exhaustive):
-        nb_tab: Number of tab indentations
-        c_out: Console out
-        dashes: Total length of the input string extended
-        with dashes ('-')
+    Args (non-exhaustive)
+    ----------------------
+    nb_tab: Number of tab indentations
+
+    c_out: Console out
+
+    dashes: Total length of the input string extended
+    with dashes ('-')
     """
 
     s = str_in
@@ -73,11 +77,14 @@ def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
 def log(str_in, level=0, format='%H:%M:%S -', c_out=True):
     """Logs 'str_in' in the current log file (g.log_path)
 
-    Args (non-exhaustive):
-        level: Log level. Current log level set in g.LOG_LEVEL.
-        Nothing will be logged if g.LOG_LEVEL < level
-        format: Log format
-        c_out: Console output
+    Args (non-exhaustive)
+    ----------------------
+    level: Log level. Current log level set in g.LOG_LEVEL.
+    Nothing will be logged if g.LOG_LEVEL < level
+
+    format: Log format
+
+    c_out: Console output
     """
 
     if g.LOG_LEVEL < level:
@@ -91,11 +98,13 @@ def log(str_in, level=0, format='%H:%M:%S -', c_out=True):
 def init_log(parent_module='', force_init=False):
     """Initialises a log file
 
-    Args:
-        parent_module: Name of the parent module (appears in the
-        name of the log file)
-        force_init: If True, the log file is initialised even if a
-        current log file is already set
+    Args (non-exhaustive)
+    ----------------------
+    parent_module: Name of the parent module (appears in the
+    name of the log file)
+
+    force_init: If True, the log file is initialised even if a
+    current log file is already set
     """
 
     if g.log_file_initialised and not force_init:
@@ -119,6 +128,7 @@ def step_log(counter, step, what='lines written', nb=0, th_name='DEFAULT'):
     """Logs something only when the 'counter' is a multiple of 'step'
 
     For simple use, initialise with init_sl_time()
+
     For multithreaded use, initialise with gen_sl_detail(q_name)
 
     For more info, check out the README.md file

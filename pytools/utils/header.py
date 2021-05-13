@@ -7,8 +7,9 @@ from .csv import csv_to_list
 def get_header(in_path, csv=False):
     """Returns the header of a file
 
-    Args (non-exhaustive):
-        csv: If True, the returned header is a list containing each csv field
+    Args (non-exhaustive)
+    ----------------------
+    csv: If True, the returned header is a list containing each csv field
     """
 
     with open(in_path, 'r', encoding='utf-8') as in_file:

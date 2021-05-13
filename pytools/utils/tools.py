@@ -13,6 +13,10 @@ def list_to_dict(list_in, separator='='):
 
 
 def init_kwargs(mod, kwargs):
+    """Initializes the gl (global) variables of the module 'mod' with the 'kwargs'
+    dictionary (kwargs of a main package function such as sql.download)
+    """
+
     if 'MD' in kwargs:
         if kwargs['MD'] is not None:
             if 'LOG_PATH' in kwargs['MD']:
