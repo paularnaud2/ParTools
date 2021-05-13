@@ -1,8 +1,9 @@
 import os.path as p
 from threading import RLock
 
-import quickstart
 from pytools import cfg
+from pytools import quickstart
+
 from .file import mkdirs
 from .file import load_txt
 from .file import save_list
@@ -61,7 +62,7 @@ def init_PT():
     init_directories()
     save_list(['*'], cfg.FILES_DIR + '.gitignore')
     init_log('init')
-    log("PyTools package successfully initialised!\n"
+    log("PyTools package successfully initialised\n"
         f"Checkout the README.md on GitHub: {GITHUB_LINK}\n"
         f"Get started here {p.dirname(quickstart.__file__)}\n"
         f"Set up your conf here: {cfg.__file__}\n"
