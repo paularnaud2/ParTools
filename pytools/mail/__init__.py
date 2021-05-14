@@ -12,12 +12,13 @@ from . import get
 
 def gmail(mail_name,
           subject,
+          recipients=[],
           var_dict=[],
           attachments=[],
           TXTbody='',
           HTMLbody=''):
 
-    init(mail_name)
+    init(mail_name, recipients)
     init_cfi()
     msg = get.msg(subject, TXTbody, HTMLbody, attachments, var_dict)
 
@@ -35,12 +36,13 @@ def gmail(mail_name,
 
 def no_auth(mail_name,
             subject,
+            recipients=[],
             var_dict=[],
             attachments=[],
             TXTbody='',
             HTMLbody=''):
 
-    init(mail_name, True)
+    init(mail_name, recipients, True)
     init_cfi()
     msg = get.msg(subject, TXTbody, HTMLbody, attachments, var_dict)
 
@@ -51,12 +53,13 @@ def no_auth(mail_name,
 
 def outlook(mail_name,
             subject,
+            recipients=[],
             var_dict=[],
             attachments=[],
             TXTbody='',
             HTMLbody=''):
 
-    init(mail_name, True)
+    init(mail_name, recipients, True)
 
     if not HTMLbody:
         HTMLbody = get.HTML(var_dict)
@@ -74,10 +77,13 @@ def outlook(mail_name,
     u.log('Mail sent')
 
 
-def init(mail_name, check_internal=False):
+def init(mail_name, recipients, check_internal=False):
 
     gl.mail_dir = cfg.MAILS_DIR + mail_name + '/'
-    gl.recipients = get.recipients(check_internal)
+    if recipients:
+        gl.recipients = recipients
+    else:
+        gl.recipients = get.recipients(check_internal)
     u.log(f"Sending mail '{mail_name}' to {gl.recipients}...")
 
 

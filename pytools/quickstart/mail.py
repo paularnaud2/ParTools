@@ -19,6 +19,7 @@ variables delimited by @@ (in the example @@NAME@@ and @@DATE@@) which are
 replaced using the var_dict passed in input.
 - recipients.txt: the list of recipients here containing three fictive
 recipients. For your test, it is advised to just let one line with your infos.
+You can also directly input a recipients list in each mail function.
 """
 
 from datetime import date

@@ -8,7 +8,7 @@ import pytools.test.check_log as cl
 def test_mail():
     u.init_log('test_mail', True)
     mail.gl.TEST = True
-    args = [gl.MAIL_NAME, gl.MAIL_SUBJECT, gl.MAIL_VD, gl.MAIL_A]
+    args = [gl.MAIL_NAME, gl.MAIL_SUBJECT, [], gl.MAIL_VD, gl.MAIL_A]
 
     u.log_print("Test gmail", dashes=100)
     mail.gmail(*args)
