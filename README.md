@@ -14,13 +14,11 @@ You can mainly use them for:
 - Splitting potentially big files (__tools.split__)
 - Extracting doc string from Python code (__tools.extract_doc__)
 - Sending mails with gmail, outlook or without authentication (__mail__)
-- Simple loging or loging in loops (``log`` and ``step_log``), manipulating files and strings, running shell commands, generating message box and many others (__utils__)
+- Simple loging or loging in loops (``log`` and ``step_log``), manipulating files and strings, running shell commands, generating threaded message boxes and many others (__utils__)
 
 ## Quickstart
-
-Run
-    
-    `pip install partools`
+  
+    pip install partools
 
 You'll find examples of use and descriptions of the different available packages and functions in the __partools/quickstart__ folder.
 If you want to use the __cx_Oracle__ dependant packages (__sql__ and __rl__), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the __conf.py__ file.
@@ -45,7 +43,7 @@ The __partools__ package includes a __utils__ package which provides generic fun
 - `get_duration_string`: outputs a string representing the time elapsed since the input ``start_time``. For example '3 minutes and 20 seconds'.
 - ``run_cmd``: runs a Windows shell command (__sTools__)
 - ``run_sqlplus``: connects to sqlplus as sysdba and runs a sql script (__sTools__)
-- ``msg_box``: opens a message box containing the 'msg' input string (__sTools__)
+- ``msg_box``: opens a threaded message box containing the 'msg' input string (__sTools__)
 
 ### Logging with the utils package
 
