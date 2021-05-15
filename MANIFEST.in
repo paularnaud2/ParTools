@@ -1,2 +1,2 @@
-graft pytools/test/mail
-graft pytools/quickstart/files
+graft partools/test/mail
+graft partools/quickstart/files

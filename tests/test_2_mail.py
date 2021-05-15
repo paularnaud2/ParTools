@@ -1,8 +1,8 @@
-import pytools.utils as u
-from pytools import mail
-from pytools.test import gl
-from pytools.test import ttry
-import pytools.test.check_log as cl
+import partools.utils as u
+from partools import mail
+from partools.test import gl
+from partools.test import ttry
+import partools.test.check_log as cl
 
 
 def test_mail():

@@ -1,6 +1,6 @@
-import pytools.utils as u
-import pytools.utils.sTools as st
-import pytools.test.check_log as cl
+import partools.utils as u
+import partools.utils.sTools as st
+import partools.test.check_log as cl
 
 
 def msg_box():

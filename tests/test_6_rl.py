@@ -1,13 +1,13 @@
-import pytools.utils as u
-import pytools.dq as dq
-import pytools.test.rl as t
-import pytools.test.check_log as cl
+import partools.utils as u
+import partools.dq as dq
+import partools.test.rl as t
+import partools.test.check_log as cl
 
-from pytools.test import gl
-from pytools.test import ttry
-from pytools.test import is_test_db_defined
-from pytools.test.sql import upload
-from pytools.test.sql import clean_db
+from partools.test import gl
+from partools.test import ttry
+from partools.test import is_test_db_defined
+from partools.test.sql import upload
+from partools.test.sql import clean_db
 
 
 def test_rl():

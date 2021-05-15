@@ -1,12 +1,12 @@
-import pytools.utils as u
-import pytools.dq as dq
+import partools.utils as u
+import partools.dq as dq
 
-import pytools.test.sql as t
-import pytools.test.check_log as cl
+import partools.test.sql as t
+import partools.test.check_log as cl
 
-from pytools.test import gl
-from pytools.test import ttry
-from pytools.test import is_test_db_defined
+from partools.test import gl
+from partools.test import ttry
+from partools.test import is_test_db_defined
 
 
 def test_sql():

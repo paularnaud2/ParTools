@@ -1,11 +1,11 @@
-import pytools.dq as dq
-import pytools.utils as u
-import pytools.test.dq as t
-import pytools.test.check_log as cl
+import partools.dq as dq
+import partools.utils as u
+import partools.test.dq as t
+import partools.test.check_log as cl
 
-from pytools.test import gl
-from pytools.test import ttry
-from pytools.utils import g
+from partools.test import gl
+from partools.test import ttry
+from partools.utils import g
 
 
 def test_dq():

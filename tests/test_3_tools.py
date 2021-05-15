@@ -1,11 +1,11 @@
-import pytools.utils as u
-import pytools.dq as dq
-import pytools.tools.bf as bf
-import pytools.test.tools as t
-import pytools.tools.dup as dup
-import pytools.test.check_log as cl
+import partools.utils as u
+import partools.dq as dq
+import partools.tools.bf as bf
+import partools.test.tools as t
+import partools.tools.dup as dup
+import partools.test.check_log as cl
 
-from pytools.test import gl
+from partools.test import gl
 
 
 def test_tools():
