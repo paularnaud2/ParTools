@@ -1,6 +1,6 @@
 """
 In this file, you'll find examples of use for the different sTools (special tools)
-script functions. Just uncomment the one you want to try out (see end of script)
+script functions. Just uncomment the one you want to try out (see end of script).
 """
 
 import pytools.utils.sTools as st
@@ -34,7 +34,7 @@ def msg_box():
 
 
 if __name__ == '__main__':
+    cmd()
     # sqlplus()
-    # cmd()
     # msg_box()
     pass

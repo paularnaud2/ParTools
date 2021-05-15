@@ -16,12 +16,13 @@ For more details, see the README.md file.
 
 import pytools.sql as sql
 from pytools.utils import init_log
+from pytools.quickstart import files_dir
 
 init_log('sql_execute')
 
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
-script_in = 'pytools/test/sql/files/create_table.sql'
+script_in = f'{files_dir}create_table.sql'
 
 sql.execute(
     DB=db,

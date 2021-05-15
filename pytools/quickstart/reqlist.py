@@ -32,6 +32,7 @@ import pytools.utils as u
 from pytools.utils import g
 from pytools.utils import init_log
 from pytools.rl import reqlist
+from pytools.quickstart import files_dir
 
 init_log('rl')
 
@@ -39,12 +40,11 @@ db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
 
 date = datetime.now().strftime("%Y%m%d")
-query_in = 'pytools/test/rl/files/query1.sql'
 in_file = f"{g.dirs['IN']}rl_in.csv"
 out_file = f"{g.dirs['OUT']}export_RL_{db}_{date}.csv"
 
 # Creates input file from test file
-arr = u.load_csv('pytools/test/sql/files/in.csv')
+arr = u.load_csv(f'{files_dir}in.csv')
 arr = [elt[0:2] for elt in arr]
 u.save_csv(arr, in_file)
 

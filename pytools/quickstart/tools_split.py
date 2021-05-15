@@ -6,10 +6,11 @@ parameters.
 
 import pytools.utils.g as g
 from pytools.tools import split
+from pytools.quickstart import files_dir
 
 # Input variables default values
 # in_path = g.dirs['IN'] + "in.csv"
-in_path = "pytools/test/sql/files/in.csv"
+in_path = f'{files_dir}in.csv'
 out_dir = g.dirs['OUT']
 
 split.split_file(in_path, out_dir, MAX_LINE=1000)

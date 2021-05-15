@@ -19,15 +19,16 @@ For more details, see the README.md file.
 
 import pytools.sql as sql
 from pytools.utils import init_log
+from pytools.quickstart import files_dir
 
 init_log('sql_upload')
 
 db = 'XE'
 cnx_str = 'USERNAME/PWD@localhost:1521/XE'
-script_in = 'pytools/test/sql/files/insert_table.sql'
+script_in = f'{files_dir}insert_table.sql'
 
 execute_kwargs = {
-    "SCRIPT_IN": 'pytools/test/sql/files/create_table.sql',
+    "SCRIPT_IN": f'{files_dir}create_table.sql',
     "PROC": True,
 }
 
@@ -35,7 +36,7 @@ sql.upload(
     # CNX_INFO=cnx_str,
     # CNX_INFO=cnx_tns,
     DB=db,
-    UPLOAD_IN='pytools/test/sql/files/in.csv',
+    UPLOAD_IN=f'{files_dir}in.csv',
     SCRIPT_IN=script_in,
     VAR_DICT={'TABLE_NAME': 'TEST'},
     EXECUTE_KWARGS=execute_kwargs,

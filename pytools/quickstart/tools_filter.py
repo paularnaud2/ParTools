@@ -3,10 +3,11 @@
 import pytools.utils.g as g
 import pytools.tools.filter as f
 from pytools.tools import gl
+from pytools.quickstart import files_dir
 
 # Input variables
 # in_path = g.dirs['IN'] + "in.csv"
-in_path = "pytools/test/sql/files/in.csv"
+in_path = f'{files_dir}in.csv'
 out_path = g.dirs['OUT'] + "out_filtered.csv"
 col_list = ['PRM', 'AFFAIRE']
 

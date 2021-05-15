@@ -23,12 +23,12 @@ For more information, see the README.md file.
 
 import pytools.dq as dq
 from pytools.utils import init_log
-from pytools.test import gl
+from pytools.quickstart import files_dir
 
 init_log('dq')
 
 dq.run_dq(
-    IN_DIR=gl.TEST_DQ,
+    IN_DIR=files_dir,
     IN_FILE_NAME_1="in_11",
     IN_FILE_NAME_2="in_12",
 )

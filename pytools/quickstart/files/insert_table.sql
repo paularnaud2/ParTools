@@ -1,0 +1,6 @@
+INSERT INTO @@TABLE_NAME@@ (
+AFFAIRE
+, DEM_ID
+, PRM
+)
+VALUES (:1, :2, :3)

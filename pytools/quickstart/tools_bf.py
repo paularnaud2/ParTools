@@ -2,10 +2,11 @@
 
 import pytools.utils.g as g
 import pytools.tools.bf as bf
+from pytools.quickstart import files_dir
 
 # Input variables
 # in_path = g.dirs['IN'] + "in.csv"
-in_path = "pytools/test/sql/files/in.csv"
+in_path = f'{files_dir}in.csv'
 out_path = g.dirs['OUT'] + "out.csv"
 look_for = "22173227102607"
 
