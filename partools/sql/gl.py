@@ -1,3 +1,4 @@
+import os.path as p
 from partools.utils import g
 
 # Mandatory inputs---------------------------------------------------
@@ -35,8 +36,8 @@ FILE_TYPE = '.csv'
 EC = '_EC'
 
 TMP_FOLDER = 'sql/'
-RANGE_DIR = 'partools/sql/ranges/'
-QUERY_DIR = 'partools/sql/queries/'
+RANGE_DIR = f'{p.dirname(__file__)}/ranges/'
+QUERY_DIR = f'{p.dirname(__file__)}/queries/'
 IUTD_FILE = 'last_iutd_check.csv'
 
 # Strings

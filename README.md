@@ -14,13 +14,26 @@ You can mainly use them for:
 - Splitting potentially big files (__tools.split__)
 - Extracting doc string from Python code (__tools.extract_doc__)
 - Sending mails with gmail, outlook or without authentication (__mail__)
-- Simple loging or loging in loops (``log`` and ``step_log``), manipulating files and strings, running shell commands, generating threaded message boxes and many others (__utils__)
+- Simple logging or logging in loops (``log`` and ``step_log``), manipulating files and strings, running shell commands, generating threaded message boxes and many others (__utils__)
 
 ## Quickstart
   
     pip install partools
 
-You'll find examples of use and descriptions of the different available packages and functions in the __partools/quickstart__ folder.
+Then just run ``import partools`` (or run any partools function) with python to initialise the package.  
+You should then see something like this in the console:
+
+    2021-05-15 20:02:17 - Log file initialised (C:/Git/Test/PT/log/20210515_200217_init.txt)      
+    Python version: 3.9.4 (tags/v3.9.4:1f2e308, Apr  6 2021, 13:40:21) [MSC v.1928 64 bit (AMD64)]
+
+    20:02:17 - ParTools package successfully initialised
+    Checkout the README.md on GitHub: https://github.com/paularnaud2/ParTools
+    Get started here c:\Git\Test\venv\lib\site-packages\partools\quickstart
+    Set up your conf here: c:\Git\Test\venv\lib\site-packages\partools\conf.py
+    Happy scripting!
+
+This gives you the links to the __quickstart__ folder where you'll find examples of use and descriptions of the different available packages and functions. You'll also find here the link to the __conf.py__ file (see below).
+
 If you want to use the __cx_Oracle__ dependant packages (__sql__ and __rl__), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the __conf.py__ file.
 
 ## The conf.py file

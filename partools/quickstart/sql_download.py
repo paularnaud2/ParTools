@@ -90,12 +90,14 @@ def example_ql_var():
         ["3", "query 3"],
     ]
 
+    # With MERGE_FILES=False, the files from the three parallel queries won't be
+    # merged but moved to OUT_DIR
     sql.download(
         CNX_INFO=cnx_str,
         QUERY_IN=query_in_var,
         QUERY_LIST=query_list_var,
-        OUT_PATH=out_file,
         MERGE_FILES=False,
+        OUT_DIR=f"{g.dirs['OUT']}sql_out/",
     )
 
 

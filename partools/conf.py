@@ -17,6 +17,7 @@ MAILS_DIR = 'mails/'
 # Warning: DEBUG = True will make pytest fail!
 DEBUG = False
 
+# Default format for the log function
 LOG_FORMAT = '%H:%M:%S -'
 
 # sql--------------------------------------------------------------------------
