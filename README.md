@@ -7,18 +7,20 @@ You can mainly use them for:
 - Performing multi threaded SQL queries on an Oracle DB (__sql__)
 - Performing multi threaded SQL queries on a given perimeter on an Oracle DB (__rl__)
 - Comparing and sorting potentially big files (__dq__)
-- Reading and searching potentially big files (__toolB__)
-- Parsing potentially big XML files (__toolParseXML__)
-- Searching and removing duplicates (__toolDup__)
-- Filtering potentially big file with flexible conditions (__toolFilter__)
-- Splitting potentially big files (__toolSplit__)
+- Reading and searching potentially big files (__tools.bf__)
+- Parsing potentially big XML files (__tools.xml__)
+- Searching and removing duplicates (__tools.dup__)
+- Filtering potentially big file with flexible conditions (__tools.filter__)
+- Splitting potentially big files (__tools.split__)
+- Extracting doc string from Python code (__tools.extract_doc__)
 - Sending mails with gmail, outlook or without authentication (__mail__)
+- Simple loging or loging in loops (``log`` and ``step_log``), manipulating files and strings, running shell commands, generating message box and many others (__utils__)
 
 ## Quickstart
 
 Download code, __extract zip and run `pip install -e .` at the root.__
 
-You'll find examples of use and descriptions of the different available packages and functions in the __quickstart folder__.
+You'll find examples of use and descriptions of the different available packages and functions in the __pytools/quickstart__ folder.
 If you want to use the __cx_Oracle__ dependant packages (__sql__ and __rl__), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the __conf.py__ file.
 
 ## The conf.py file
