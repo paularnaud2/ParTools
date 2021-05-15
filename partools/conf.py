@@ -17,6 +17,8 @@ MAILS_DIR = 'mails/'
 # Warning: DEBUG = True will make pytest fail!
 DEBUG = False
 
+LOG_FORMAT = '%H:%M:%S -'
+
 # sql--------------------------------------------------------------------------
 
 # Path to the Oracle instant client

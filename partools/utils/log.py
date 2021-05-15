@@ -1,8 +1,9 @@
 import sys
 import warnings
-
 from time import time
 from datetime import datetime
+
+from partools import cfg
 
 from . import g
 from . import file
@@ -74,7 +75,7 @@ def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
         write_log(s)
 
 
-def log(str_in, level=0, format='%H:%M:%S -', c_out=True):
+def log(str_in, level=0, log_format='', c_out=True):
     """Logs 'str_in' in the current log file (g.log_path)
 
     Args (non-exhaustive)
@@ -90,7 +91,9 @@ def log(str_in, level=0, format='%H:%M:%S -', c_out=True):
     if g.LOG_LEVEL < level:
         return
 
-    fdate = datetime.now().strftime(format)
+    if not log_format:
+        log_format = cfg.LOG_FORMAT
+    fdate = datetime.now().strftime(log_format)
     s = f"{fdate} {str_in}"
     log_print(s, c_out=c_out)
 
@@ -119,7 +122,7 @@ def init_log(parent_module='', force_init=False):
     g.logs = []
     g.log_file_initialised = True
     s = f"Log file initialised ({g.log_path})"
-    log(s, format='%Y-%m-%d %H:%M:%S -')
+    log(s, log_format='%Y-%m-%d %H:%M:%S -')
     log_print("Python version: " + sys.version)
     log_print()
 
