@@ -26,7 +26,7 @@ from datetime import date
 import partools.mail as mail
 """
 First run init_mail() and (except if you only want to use mail.outlook) set a
-confidential.txt file at the root from the example in 'mails/'."""
+confidential.txt file a the cwd root path using the example provided in 'mails/'."""
 mail.init_mail()
 
 var_dict = {

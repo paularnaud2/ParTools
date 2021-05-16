@@ -1,7 +1,7 @@
 # ParTools
 
 ## Introduction
-This package contains a bunch of Python tools I have developed and used as an IT Support / Test Engineer.  
+This package contains a bunch of Python tools I have developed and used as an IT Test / Support / Automation Engineer.  
 You can mainly use them for:
 
 - Performing multi threaded SQL queries on an Oracle DB (__sql__)

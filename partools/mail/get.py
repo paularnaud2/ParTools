@@ -14,7 +14,6 @@ def recipients(check_internal):
     u.log(f"Getting recipients from {recipients_path}")
     if not exists(recipients_path):
         s = gl.S_MISSING.format('Recipients', recipients_path)
-        u.log(s)
         raise Exception(s)
 
     recipients = u.load_txt(recipients_path)
@@ -39,7 +38,6 @@ def HTML(var_dict):
     template_path = gl.mail_dir + 'template.html'
     if not exists(template_path):
         s = gl.S_MISSING.format('Template', template_path)
-        u.log(s)
         raise Exception(s)
     template = u.load_txt(template_path, list_out=False)
     html = u.replace_from_dict(template, var_dict)

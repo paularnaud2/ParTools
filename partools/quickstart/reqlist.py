@@ -61,5 +61,4 @@ reqlist(
     QUERY_IN=query_in,
     IN_PATH=in_file,
     OUT_PATH=out_file,
-    OPEN_OUT_FILE=True,
 )
