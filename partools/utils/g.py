@@ -62,10 +62,17 @@ def init_PT():
     init_directories()
     save_list(['*'], cfg.FILES_DIR + '.gitignore')
     init_log('init')
+    path = cfg.__file__
+    if p.basename(path) == 'conf.py':
+        s = (" or set up your own 'PTconf.py' file (by copying the"
+             " default conf.py file) at the root of your cwd")
+    else:
+        path = p.abspath(path)
+        s = ''
     log("ParTools package successfully initialised\n"
         f"Checkout the README.md on GitHub: {GITHUB_LINK}\n"
-        f"Get started here {p.dirname(quickstart.__file__)}\n"
-        f"Set up your conf here: {cfg.__file__}\n"
+        f"Get started here: {p.dirname(quickstart.__file__)}\n"
+        f"Set up your conf here: {path}{s}\n"
         "Happy scripting!\n")
 
 

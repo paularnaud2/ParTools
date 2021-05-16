@@ -3,7 +3,7 @@ import warnings
 from time import time
 from datetime import datetime
 
-from partools import cfg
+import partools as pt
 
 from . import g
 from . import file
@@ -92,7 +92,7 @@ def log(str_in, level=0, log_format='', c_out=True):
         return
 
     if not log_format:
-        log_format = cfg.LOG_FORMAT
+        log_format = pt.cfg.LOG_FORMAT
     fdate = datetime.now().strftime(log_format)
     s = f"{fdate} {str_in}"
     log_print(s, c_out=c_out)
@@ -124,6 +124,7 @@ def init_log(parent_module='', force_init=False):
     s = f"Log file initialised ({g.log_path})"
     log(s, log_format='%Y-%m-%d %H:%M:%S -')
     log_print("Python version: " + sys.version)
+    log_print("ParTools version: " + pt.__version__)
     log_print()
 
 

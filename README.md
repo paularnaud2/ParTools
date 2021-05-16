@@ -23,10 +23,7 @@ You can mainly use them for:
 Then just run ``import partools`` (or run any partools function) with python to initialise the package.  
 You should then see something like this in the console:
 
-    2021-05-15 20:02:17 - Log file initialised (C:/Git/Test/PT/log/20210515_200217_init.txt)      
-    Python version: 3.9.4 (tags/v3.9.4:1f2e308, Apr  6 2021, 13:40:21) [MSC v.1928 64 bit (AMD64)]
-
-    20:02:17 - ParTools package successfully initialised
+    ...
     Checkout the README.md on GitHub: https://github.com/paularnaud2/ParTools
     Get started here c:\Git\Test\venv\lib\site-packages\partools\quickstart
     Set up your conf here: c:\Git\Test\venv\lib\site-packages\partools\conf.py
