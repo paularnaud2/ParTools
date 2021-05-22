@@ -5,8 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
 import partools.utils as u
+
 from . import gl
-from . import functions
+from . import functions as f
 
 
 def recipients(check_internal):
@@ -17,8 +18,9 @@ def recipients(check_internal):
         raise Exception(s)
 
     recipients = u.load_txt(recipients_path)
+    f.is_configured(recipients, recipients_path)
     if check_internal:
-        functions.check_internal(recipients)
+        f.check_internal(recipients)
 
     return recipients
 
@@ -52,12 +54,12 @@ def msg(subject, HTMLbody, attachments, var_dict):
     if HTMLbody:
         partHTML = MIMEText(HTMLbody, 'html')
         msg.attach(partHTML)
-        functions.save_mail(HTMLbody)
+        f.save_mail(HTMLbody)
 
     for path in attachments:
         name = basename(path)
-        with open(path, "rb") as f:
-            part = MIMEApplication(f.read(), Name=name)
+        with open(path, "rb") as file:
+            part = MIMEApplication(file.read(), Name=name)
         part['Content-Disposition'] = f'attachment; filename="{name}"'
         msg.attach(part)
 

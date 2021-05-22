@@ -16,6 +16,7 @@ CSV_SEPARATOR = ';'
 VAR_DEL = '@@'
 DEFAULT_FIELD = "FIELD"
 GITHUB_LINK = 'https://github.com/paularnaud2/ParTools'
+GITHUB_ISSUES = GITHUB_LINK + '/issues'
 
 MAX_EXAMPLE_PRINT = 5
 MIN_DUR_MSG_BOX_TRIGGER = 30

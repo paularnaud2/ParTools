@@ -19,7 +19,9 @@ variables delimited by @@ (in the example @@NAME@@ and @@DATE@@) which are
 replaced using the var_dict passed in input.
 - recipients.txt: the list of recipients here containing three fictive
 recipients. For your test, it is advised to just let one line with your infos.
-You can also directly input a recipients list in each mail function.
+You can also directly input a recipients list and a HTMLbody in each mail function.
+If you input a HTMLbody and a var_dict, your HTMLbody input will be seen as
+a template whose variables will be replaced using the var_dict.
 """
 
 from datetime import date
@@ -37,6 +39,6 @@ var_dict = {
 Then run one of the following functions (on a personal computer/network try
 gmail, on a business computer/network try either no_auth or outlook) to send
 a test mail (pointing to mails/test/)."""
-# mail.gmail('test', '[Test] Python mail', var_dict=var_dict)
+mail.gmail('test', '[Test] Python mail', var_dict=var_dict)
 # mail.no_auth('test', '[Test] Python mail', var_dict=var_dict)
 # mail.outlook('test', '[Test] Python mail', var_dict=var_dict)
