@@ -138,12 +138,16 @@ def load_txt(in_path, list_out=True):
     return out
 
 
-def save_list(list, out_path, att='w'):
+def save_list(in_list, out_path, att='w'):
     """Saves a list in a file, each element representing a line"""
 
     with open(out_path, 'w', encoding='utf-8') as out_file:
-        for elt in list:
-            out_file.write(str(elt).strip("\n") + '\n')
+        for i, elt in enumerate(in_list):
+            s = str(elt).strip("\n")
+            if i == 0:
+                out_file.write(s)
+            else:
+                out_file.write('\n' + s)
 
 
 def count_lines(in_path):

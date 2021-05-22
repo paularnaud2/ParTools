@@ -20,10 +20,6 @@ def test_dq():
     u.log_print("Test dup key", dashes=100)
     t.dq_t(gl.IN_DK, gl.IN12, gl.OUT1, tpd=True)
 
-    u.log_print("Test matching files comparison", dashes=100)
-    dq.file_match(gl.OUT_DK, gl.OUT_DK_REF, compare=True, out_path=gl.OUT_FM)
-    dq.file_match(gl.OUT_FM, gl.REF_FM)
-
     u.log_print("Test different files comparison", dashes=100)
     dq.file_match(gl.REF1_F, gl.REF2_F, err=False, out_path=gl.OUT_FM)
     dq.file_match(gl.OUT_FM, gl.REF_FDM)

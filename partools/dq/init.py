@@ -23,10 +23,6 @@ def init_compare_files(out):
     init_tmp_dir()
     gl.IN_FILE_NAME_1 = '1'
     gl.IN_FILE_NAME_2 = '2'
-    if out:
-        gl.out_path = out
-    else:
-        gl.out_path = u.g.dirs['OUT'] + 'file_match_out.csv'
     gl.TMP_1 = gl.TMP_DIR + 'tmp_1.csv'
     gl.TMP_2 = gl.TMP_DIR + 'tmp_2.csv'
     gl.EQUAL_OUT = False

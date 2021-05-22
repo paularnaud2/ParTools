@@ -1,2 +1,2 @@
 from .main import ttry
-from .main import is_test_db_defined
+from .sql.main import is_test_db_defined

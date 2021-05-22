@@ -1,6 +1,4 @@
 # This directory contains input, output, log, and temporary files folders.
-# If you wish to change it, run import partools.utils after to initialise the
-# new folder.
 FILES_DIR = 'PT/'
 
 # Path to confidential data (used by mail package)

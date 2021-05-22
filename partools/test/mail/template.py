@@ -1,3 +1,4 @@
+BODY = """
 <html>
 
 <head>
@@ -10,7 +11,7 @@
         <p class="MsoNormal">
             <span style="color:#1F497D">
                 Hi @@NAME@@,<br><br>
-                This is an email sent on the @@DATE@@ using a Python script (HTML template case).
+                This is an email sent on the @@DATE@@ using a Python script (Python template case).
             </span>
         </p>
     </div>
@@ -18,3 +19,4 @@
 </body>
 
 </html>
+"""

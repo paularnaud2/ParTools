@@ -44,8 +44,8 @@ def test_rl():
     u.log_print('Test rl - standard', dashes=100)
     t.reqlist(gl.RL_IN_1, gl.RL_OUT_1, gl.RL_QUERY_1, cnx=1)
     t.reqlist(gl.RL_OUT_1, gl.RL_OUT_2, gl.RL_QUERY_2)
-    t.dq.file_match(gl.SQL_IN, gl.RL_OUT_2, del_dup=True)
-    t.dq.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
+    dq.file_match(gl.SQL_IN, gl.RL_OUT_2, del_dup=True)
+    dq.file_match(gl.OUT_DUP_TMP, gl.RL_OUT_DUP_REF)
 
     u.log_print('Test rl - interuption and recovery', dashes=100)
     u.mkdirs(gl.RL_TMP, True)

@@ -1,3 +1,5 @@
+import warnings
+
 import partools.utils as u
 import partools.sql as sql
 
@@ -5,21 +7,47 @@ from partools.test import gl
 from partools.test import ttry
 
 
+def is_test_db_defined():
+    if not gl.SQL_DB:
+        s = f"TEST_DB is not defined in '{gl.__file__}'. Test aborted."
+        u.log(s)
+        warnings.warn(s)
+        return False
+    else:
+        return True
+
+
 def connect():
+    u.log_print('Test - nothing configured')
     (sql.gl.CNX_INFO, sql.gl.DB, sql.gl.ENV) = ('', '', '')
     ttry(sql.connect, sql.gl.E_1)
+    u.log_print()
 
+    u.log_print('Test - DB undefined')
     sql.gl.DB = 'TEST_DB'
     ttry(sql.connect, sql.gl.E_2.format('TEST_DB'))
+    u.log_print()
 
+    u.log_print('Test - ENV undefined')
     (sql.gl.DB, sql.gl.ENV) = ('TEST_DB', 'TEST_ENV')
     ttry(sql.connect, sql.gl.E_3.format('TEST_DB', 'TEST_ENV'))
+    u.log_print()
 
+    u.log_print('Test - OK DB only')
     (sql.gl.DB, sql.gl.ENV) = (gl.SQL_DB, '')
     sql.connect()
+    u.log_print()
 
+    u.log_print('Test - OK DB + ENV')
     (sql.gl.DB, sql.gl.ENV) = (gl.SQL_DB, gl.SQL_ENV)
     sql.connect()
+    u.log_print()
+
+    u.log_print('Test - OK CNX_INFO (via TNS_NAMES)')
+    sql.gl.CNX_INFO = gl.SQL_CNX_INFO
+    sql.connect()
+    u.log_print()
+    pass
 
 
 def upload(inp, tr=False, md=""):

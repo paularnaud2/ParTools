@@ -6,7 +6,6 @@ from partools.tools.dup import del_dup_list
 
 from . import gl
 from .init import init_dq
-from .init import init_compare_files
 from .csf import compare_sorted_files
 from .sort import sort_big_file
 from .functions import check_split
@@ -40,37 +39,47 @@ def finish_dq(start_time):
 
 def file_match(in1, in2, del_dup=False, compare=False, err=True, out_path=''):
     u.log("[dq] file_match: start")
+
+    if not out_path:
+        out_path = u.g.dirs['OUT'] + 'file_match_out.csv'
+
     s = f"Comparing files '{in1}' and '{in2}'..."
     u.log(s)
-    ar1 = u.load_csv(in1)
-    ar2 = u.load_csv(in2)
-    ar1.sort()
-    ar2.sort()
+    l1 = u.load_txt(in1)
+    l2 = u.load_txt(in2)
+    l1.sort()
+    l2.sort()
     if del_dup:
-        ar1 = del_dup_list(ar1)
-        ar2 = del_dup_list(ar2)
+        l1 = del_dup_list(l1)
+        l2 = del_dup_list(l2)
 
-    res = ar1 == ar2
+    res = l1 == l2
     if res:
         u.log("Files match")
     else:
         u.log("Files don't match")
 
     if not res or compare:
-        init_compare_files(out_path)
-        u.save_csv(ar1, gl.TMP_1)
-        u.save_csv(ar2, gl.TMP_2)
-        u.log(f"Deep comparison of '{gl.TMP_1}' and '{gl.TMP_2}'...")
-        u.log_print('|')
-        compare_files(gl.TMP_1, gl.TMP_2, gl.out_path)
-        u.log_print('|')
+        diff_list(l1, l2, out_path)
 
     if not res and err:
-        u.startfile(gl.out_path)
+        u.startfile(out_path)
         assert res is True
 
     u.log("[dq] file_match: end")
     u.log_print()
+
+
+def diff_list(list1, list2, out_path):
+
+    if not out_path:
+        out_path = u.g.dirs['OUT'] + 'file_match_out.csv'
+
+    out1 = [e for e in list1 if e not in list2]
+    out2 = [e for e in list2 if e not in list1]
+    out = del_dup_list(out1 + out2)
+    u.save_list(out, out_path)
+    u.log(f"Comparison result available here: {out_path}")
 
 
 def compare_files(in_1, in_2, out_path):
