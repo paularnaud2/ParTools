@@ -6,8 +6,6 @@ from multiprocessing import Manager
 import partools.utils as u
 
 from . import gl
-from .main import upload
-from .main import download
 
 
 def upload_interrupted():
@@ -22,6 +20,7 @@ def upload_interrupted():
     want to test interruption while the the file gl.tmp_file_chunk  is
     being written)
     """
+    from .main import upload
 
     manager = Manager()
     md = manager.dict()
@@ -42,6 +41,8 @@ def upload_interrupted():
 
 
 def download_interrupted(query, out):
+    from .main import download
+
     init_msg = "[sql] download: start"
     kwargs = {"query": query, "out": out, "tr": True}
     interrupt(download, kwargs, init_msg)

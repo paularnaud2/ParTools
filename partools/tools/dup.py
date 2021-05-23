@@ -2,12 +2,10 @@ from random import shuffle
 
 import partools.utils as u
 
-from .init import init_find_dup
-from .finish import finish_find_dup
-from .finish import finish_del_dup
-
 
 def find_dup(in_path, out_path='', open_out=False, col=0):
+    from .init import init_find_dup
+    from .finish import finish_find_dup
 
     u.log("[toolDup] find_dup: start")
     (cur_list, out_path) = init_find_dup(in_path, out_path, col)
@@ -19,6 +17,7 @@ def find_dup(in_path, out_path='', open_out=False, col=0):
 
 
 def del_dup(in_path, out_path, open_out=False):
+    from .finish import finish_del_dup
 
     u.log("[toolDup] del_dup: start")
     u.log(f"Deleting duplicates in file '{in_path}'...")

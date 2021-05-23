@@ -1,6 +1,4 @@
 import subprocess
-from multiprocessing import Process
-from tkinter.messagebox import showinfo
 
 from . import g
 from .log import log
@@ -21,6 +19,8 @@ def msg_box(msg, package='utils', dur=0, threaded=True):
     threaded: If true, the message box is open in a parallel process and the
     main script can continue (can be used as a end process notification)
     """
+    from multiprocessing import Process
+    from tkinter.messagebox import showinfo
 
     if dur != 0:
         dur = dur / 1000

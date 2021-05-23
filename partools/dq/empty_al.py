@@ -1,12 +1,12 @@
 import partools.utils as u
 
 from . import gl
-from .init import init_prev_elt
-from .functions import compare_elt
-from .functions import write_min_elt
 
 
 def empty_array_list(out_path):
+    from .init import init_prev_elt
+    from .functions import write_min_elt
+
     s = "Emptying buffer array in output file (and removing dupes)..."
     u.log(s)
     n_col = len(gl.array_list)
@@ -31,6 +31,7 @@ def empty_array_list(out_path):
 
 def get_min_elt(cursor, n_col):
     # Determines the smallest element of all non empty list from the current cursor position
+    from .functions import compare_elt
 
     # min_col initialised with the first non empty list (cursor != -1)
     min_col = -1

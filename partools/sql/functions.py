@@ -3,13 +3,13 @@ from threading import RLock
 
 import partools.utils as u
 from . import gl
-from . import rg
 from . import log
 
 verrou = RLock()
 
 
 def get_query_list():
+    from . import rg
 
     gl.query = get_query(gl.QUERY_IN)
     if gl.QUERY_LIST:
@@ -77,3 +77,34 @@ def write_row(row, out_file, q_name='MONO'):
     line_out += '\n'
     out_file.write(line_out)
     return 1
+
+
+def finish(start_time):
+    import partools.tools as to
+    import partools.utils.sTools as st
+
+    n = gl.c_row
+    bn = u.big_number(n)
+    s = f"Data fetched from {gl.DB} ({bn} lines written)"
+    u.log(s)
+
+    if gl.MERGE_OK:
+        out_path = gl.OUT_PATH
+        u.log(f"Output file {out_path} successfully filled out")
+        a = n < gl.MAX_CHECK_DUP and n > 0
+
+        if a and gl.CHECK_DUP and not gl.COUNT:
+            s = "Verifying duplicates on the first column of the output file..."
+            u.log(s)
+            u.log_print('|')
+            to.find_dup(out_path, col=1)
+        if gl.OPEN_OUT_FILE:
+            u.startfile(out_path)
+
+    u.log_print('|')
+    (dms, dstr) = u.get_duration_string(start_time, True)
+    s = f"download: end ({dstr})"
+    u.log("[sql] " + s)
+    u.log_print()
+    if gl.MSG_BOX_END:
+        st.msg_box(s, "sql", dms)

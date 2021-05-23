@@ -7,14 +7,13 @@ import partools.tools as to
 import partools.utils.sTools as st
 
 from . import gl
-from .init import init
-from .init import init_globals
-from .ql import gen_query_list
-from .join import left_join_arrays
 
 
 @u.log_exeptions
 def reqlist(**kwargs):
+    from .init import init
+    from .ql import gen_query_list
+
     u.log("[rl] reqlist: start")
     reload(gl)  # reinit globals
     init(kwargs)
@@ -49,6 +48,9 @@ def download():
 
 
 def left_join_files(lpath='', rpath='', out='', debug=False):
+    from .init import init_globals
+    from .join import left_join_arrays
+
     u.log("[rl] left_join_files: start")
     start_time = time()
     if debug:

@@ -3,7 +3,6 @@ import warnings
 import partools.utils as u
 import partools.sql as sql
 
-from partools.test import ttry
 from partools.test.sql import gl
 
 
@@ -18,6 +17,8 @@ def is_test_db_defined():
 
 
 def connect():
+    from partools.test import ttry
+
     u.log_print('Test - nothing configured')
     (sql.gl.CNX_INFO, sql.gl.DB, sql.gl.ENV) = ('', '', '')
     ttry(sql.connect, sql.gl.E_1)

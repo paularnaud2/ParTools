@@ -1,8 +1,6 @@
 import partools.utils as u
 
 from . import gl
-from .init import init_prev_elt
-from .functions import write_min_elt
 
 
 def gen_sorted_temp_files(in_path, out_path):
@@ -60,6 +58,8 @@ def gen_last_file(out_path):
 
 def gen_out_file(out_path):
     # Generating output file in the case of only one temporary list
+    from .init import init_prev_elt
+    from .functions import write_min_elt
 
     with open(out_path, 'a', encoding='utf-8') as out_file:
         gl.c_tot_out = 1

@@ -1,9 +1,11 @@
 import sys
 from math import ceil
+from time import time
 from os.path import exists
 
 import partools.utils as u
-from partools.tools import split_file
+import partools.tools as to
+import partools.utils.sTools as st
 
 from . import gl
 
@@ -105,7 +107,7 @@ def read_list(in_file):
 def check_split(in_path):
 
     if split_needed():
-        split_file(
+        to.split_file(
             in_path,
             MAX_LINE=gl.MAX_LINE_SPLIT,
             MAX_FILE_NB=gl.MAX_FILE_NB_SPLIT,
@@ -133,3 +135,48 @@ def split_needed():
         sys.exit()
 
     return True
+
+
+def diff_list(list1, list2, out_path):
+
+    if not out_path:
+        out_path = u.g.dirs['OUT'] + 'file_match_out.csv'
+
+    out1 = [e for e in list1 if e not in list2]
+    out2 = [e for e in list2 if e not in list1]
+    out = to.del_dup_list(out1 + out2)
+    u.save_list(out, out_path)
+    u.log(f"Comparison result available here: {out_path}")
+
+
+def compare_files(in_1, in_2, out_path):
+    from .csf import compare_sorted_files
+
+    u.log("[dq] compare_files: start")
+    start_time = time()
+    u.gen_header(in_1, gl.COMPARE_FIELD, out_path)
+    compare_sorted_files(in_1, in_2, out_path)
+
+    if gl.c_diff == 0:
+        u.log("Files match")
+        out = True
+    else:
+        bn = u.big_number(gl.c_diff)
+        u.log(f"{bn} differences found")
+        out = False
+
+    dstr = u.get_duration_string(start_time)
+    u.log(f"[dq] compare_files: end ({dstr})")
+
+    return out
+
+
+def finish_dq(start_time):
+
+    (dms, dstr) = u.get_duration_string(start_time, True)
+    s = f"[dq] run_dq: end ({dstr})"
+    u.log(s)
+    st.msg_box(s, "dq", dms)
+    u.log_print()
+    if gl.OPEN_OUT_FILE:
+        u.startfile(gl.paths["out"])

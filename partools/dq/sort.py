@@ -4,17 +4,12 @@ from time import time
 import partools.utils as u
 
 from . import gl
-from .init import init_stf
-from .init import init_msf
-from .gstf import gen_sorted_temp_files
-from .functions import temp_files
-from .functions import array_list_not_void
-from .fill_al import fill_array_list
-from .empty_al import empty_array_list
 
 
 def sort_big_file(in_path, out_path, prompt=False, nb=0, main=False):
     # nb variable is used to differentiate input file when main run is dq
+    from .init import init_stf
+    from .gstf import gen_sorted_temp_files
 
     u.log(f"[dq] sort_file: start ({in_path})")
     start_time = time()
@@ -32,6 +27,11 @@ def sort_big_file(in_path, out_path, prompt=False, nb=0, main=False):
 
 
 def merge_sorted_files(out_path):
+    from .init import init_msf
+    from .functions import temp_files
+    from .functions import array_list_not_void
+    from .fill_al import fill_array_list
+    from .empty_al import empty_array_list
 
     init_msf()
     while temp_files() or array_list_not_void():

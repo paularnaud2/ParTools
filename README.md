@@ -1,6 +1,5 @@
 # ParTools
  
-## Introduction
 This package contains a bunch of Python tools I have developed and used as an IT Test / Support / Automation Engineer.  
 You can mainly use them for:
  
@@ -33,11 +32,11 @@ This gives you the links to the __quickstart__ folder where you'll find examples
  
 If you want to use the __cx_Oracle__ dependant packages (__sql__ and __rl__), you'll need an [Oracle instant client](https://www.oracle.com/uk/database/technologies/instant-client/downloads.html) whose directory you can set in the __conf.py__ file.
  
-## The conf.py file
+### The conf.py file
  
 The __partools/conf.py__ file contains the __main user settings__ for the __partools__ package such as the path to the Oracle instant client (``ORACLE_CLIENT``). If needed, you can create a __PTconf.py__ file at the root that will be used instead of the native __partools/conf.py__ file. Similarly, you can also create a __PTconf_perso.py__ file at the root that will take over the two previous files described. This can be useful if you __work on a shared repository__ but still want/need to have your own local configurations.
  
-## The global variable files gl.py and main functions inputs
+### The global variable files gl.py and main functions inputs
  
 Each package has a __gl.py__ file which sets its __global variables and constants__. Each of these variables can be passed to the main package function (e.g. rl.reqlist for the rl package) and if so, overwrites the value defined in the __gl.py__ file. In that respect, __constants defined in the gl.py file can be seen as default input values__.
  

@@ -3,10 +3,11 @@ from shutil import move
 
 import partools.utils as u
 from . import gl
-from .groupby import group_by
 
 
 def finish():
+    from .groupby import group_by
+
     if gl.MERGE_FILES or len(gl.QUERY_LIST) == 1:
         merge_tmp_files()
         group_by()

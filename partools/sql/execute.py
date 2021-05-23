@@ -3,8 +3,8 @@ from time import time
 import partools.utils as u
 
 from . import gl
-from .connect import connect
 from .init import init_gl
+from .connect import connect
 from .functions import get_final_script
 
 

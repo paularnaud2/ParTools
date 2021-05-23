@@ -5,7 +5,6 @@ import partools.utils as u
 import partools.sql as sql
 
 from . import gl
-from partools.tools import dup
 
 
 def gen_query_list():
@@ -80,6 +79,8 @@ def check_var(query):
 
 
 def prepare_elt_list(array_in):
+    from partools.tools import dup
+
     u.check_header(array_in)
     check_field_nb()
 

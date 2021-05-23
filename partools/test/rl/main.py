@@ -1,4 +1,3 @@
-import partools.dq as dq
 import partools.rl as rl
 import partools.test.sql as ts
 
@@ -25,6 +24,8 @@ def reqlist(inp, out, query, tr=False, md='', cnx=3, elt=200):
 
 
 def left_join_files(left, right, ref):
+    import partools.dq as dq
+
     rl.left_join_files(left, right, gl.OUT_JOIN, debug=False)
     dq.file_match(ref, gl.OUT_JOIN)
 

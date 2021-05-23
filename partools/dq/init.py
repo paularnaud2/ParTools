@@ -2,8 +2,8 @@ import os
 from math import floor
 
 import partools.utils as u
+
 from . import gl
-from .functions import read_list
 
 
 def init_dq(kwargs):
@@ -75,7 +75,43 @@ def init_prev_elt(list_in):
         gl.prev_elt = ['' for elt in list_in[0]]
 
 
+def del_tmp_files():
+
+    counter = 0
+    while True:
+        try:
+            counter += 1
+            tmp_path = gl.TMP_DIR + str(counter) + gl.FILE_TYPE
+            os.remove(tmp_path)
+        except FileNotFoundError:
+            break
+
+
+def init_msf():
+
+    gl.prev_elt = []
+    gl.c_tot_out = 1
+    gl.c_row_max = floor(gl.MAX_ROW_LIST / gl.c_file)
+    if gl.c_row_max == 0:
+        gl.c_row_max = 1
+    init_array_list()
+
+
+def init_array_list():
+
+    counter = 1
+    gl.array_list = [[]]
+    while counter < gl.c_file:
+        counter += 1
+        gl.array_list.append([])
+
+    nb = gl.c_row_max
+    s = (f"Buffer array initialised. It can hold a maximum of {nb} lines.")
+    u.log(s)
+
+
 def init_compare(in_file_1, in_file_2):
+    from .functions import read_list
 
     init_equal_diff_bool()
 
@@ -119,38 +155,3 @@ def init_equal_diff_bool():
     else:
         gl.EQUAL = False
         gl.DIFF = True
-
-
-def del_tmp_files():
-
-    counter = 0
-    while True:
-        try:
-            counter += 1
-            tmp_path = gl.TMP_DIR + str(counter) + gl.FILE_TYPE
-            os.remove(tmp_path)
-        except FileNotFoundError:
-            break
-
-
-def init_msf():
-
-    gl.prev_elt = []
-    gl.c_tot_out = 1
-    gl.c_row_max = floor(gl.MAX_ROW_LIST / gl.c_file)
-    if gl.c_row_max == 0:
-        gl.c_row_max = 1
-    init_array_list()
-
-
-def init_array_list():
-
-    counter = 1
-    gl.array_list = [[]]
-    while counter < gl.c_file:
-        counter += 1
-        gl.array_list.append([])
-
-    nb = gl.c_row_max
-    s = (f"Buffer array initialised. It can hold a maximum of {nb} lines.")
-    u.log(s)

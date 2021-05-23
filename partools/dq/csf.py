@@ -1,7 +1,6 @@
 import partools.utils as u
 
 from . import gl
-from .init import init_compare
 from .functions import read_list
 from .functions import compare_elt
 
@@ -17,6 +16,8 @@ def compare_sorted_files(in_path_1, in_path_2, out_path):
 
 
 def comp(in1, in2, out):
+    from .init import init_compare
+
     (l1, l2) = init_compare(in1, in2)
     u.init_sl_time()
     while compare_elt(l1, l2) != " ":

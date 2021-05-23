@@ -6,7 +6,6 @@ from partools import cfg
 import partools.utils as u
 
 from . import gl
-from . import get
 
 
 def is_configured(recipients, path):
@@ -44,6 +43,7 @@ def save_mail(HTMLbody):
 
 
 def init(mail_name, recipients, check_internal=False):
+    from . import get
 
     init_mail()
     gl.mail_dir = cfg.MAILS_DIR + mail_name + '/'

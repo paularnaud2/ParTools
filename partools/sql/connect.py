@@ -6,7 +6,6 @@ from partools import cfg
 import partools.utils as u
 
 from . import gl
-from . import gls
 from .iutd import is_up_to_date
 
 verrou = RLock()
@@ -75,6 +74,8 @@ def gen_cnx_dict(nb):
 
 
 def init_instant_client():
+    from . import gls
+
     with verrou:
         if gls.client_is_init is False:
             u.log("Initialising Oracle client...")

@@ -6,10 +6,6 @@ import partools.utils as u
 
 from . import gl
 from . import log
-from .init import init_gl
-from .connect import connect
-from .functions import get_final_script
-from .execute import execute
 
 
 @u.log_exeptions
@@ -69,6 +65,8 @@ def send_chunk_duration(start):
 
 
 def prepare_bdd():
+    from .execute import execute
+
     if gl.EXECUTE_KWARGS:
         u.log("Preparing DB before data injection...")
         u.log_print("|")
@@ -76,6 +74,7 @@ def prepare_bdd():
 
 
 def finish_this(start_time):
+
     gl.cnx.close()
     os.remove(gl.tmp_file_chunk)
     bn = u.big_number(gl.c_main)
@@ -85,6 +84,9 @@ def finish_this(start_time):
 
 
 def init(kwargs):
+    from .connect import connect
+    from .init import init_gl
+
     u.init_kwargs(gl, kwargs)
     init_gl()
     u.mkdirs(gl.TMP_DIR)
@@ -98,6 +100,8 @@ def init(kwargs):
 
 
 def get_script():
+    from .functions import get_final_script
+
     script = get_final_script(gl.SCRIPT_IN)
     log.script(script)
     log.inject()

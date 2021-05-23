@@ -5,13 +5,12 @@ import partools.utils as u
 import partools.dq as dq
 
 from . import gl
-from .init import init_sbf
-from .init import init_rbf
-from .finish import finish_sbf
 from . import bf_functions as f
 
 
 def read_big_file(in_path, **kwargs):
+    from .init import init_rbf
+
     u.log("[toolBF] read_big_file: start")
     init_rbf()
     u.init_kwargs(gl, kwargs)
@@ -31,6 +30,9 @@ def read_big_file(in_path, **kwargs):
 
 
 def search_big_file(in_path, out_path, look_for, **kwargs):
+    from .init import init_sbf
+    from .finish import finish_sbf
+
     u.log("[toolBF] search_big_file: start")
     start_time = time()
     init_sbf(in_path, look_for)
@@ -46,8 +48,11 @@ def search_big_file(in_path, out_path, look_for, **kwargs):
 
 
 def sort_big_file(in_path, out_path):
+    from partools.dq.init import init_tmp_dir
+    from partools.dq.sort import sort_big_file
+
     reload(dq.gl)  # To reinitialise MAX_ROW_LIST value when pytest is run
-    dq.init.init_tmp_dir()
+    init_tmp_dir()
     u.log_print()
-    dq.sort.sort_big_file(in_path, out_path, main=True)
+    sort_big_file(in_path, out_path, main=True)
     u.log_print()

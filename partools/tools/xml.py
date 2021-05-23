@@ -3,11 +3,12 @@ import sys
 from time import time
 
 import partools.utils as u
-from .finish import finish_xml
 from . import gl
 
 
 def parse_xml(in_path, out_path, **kwargs):
+    from .finish import finish_xml
+
     u.log("[toolParseXML] parse_xml: start")
     start_time = time()
     u.init_kwargs(gl, kwargs)

@@ -7,6 +7,7 @@ from . import gl
 
 
 def left_join_arrays(ar_left_in, ar_right_in):
+
     check_void_right_array(ar_right_in)
     u.log("Preparing left array...")
     (ar_left, first_line_l) = prepare_array(ar_left_in)
@@ -47,6 +48,7 @@ def prepare_array(arr):
 
 
 def log_prepare(ar, bn_ar):
+
     n_dup = len(gl.dup_list)
     bn_dup = u.big_number(n_dup)
     s = f"Array prepared and saved in {ar} ({bn_ar} lines, {bn_dup} duplicates dismissed)"
@@ -55,12 +57,14 @@ def log_prepare(ar, bn_ar):
 
 
 def check_void_right_array(ar_right_in):
+
     if len(ar_right_in) == 1:
         u.log("Error: right array is void")
         raise Exception(g.E_VA)
 
 
 def init_while_join(first_line_l, first_line_r):
+
     gl.out_array = []
     gl.old_key_l = 'old_key_init'
     gl.blank_right_row = ['' for elt in first_line_r[1:]]
@@ -73,6 +77,7 @@ def init_while_join(first_line_l, first_line_r):
 
 
 def update_key(ar_left, ar_right):
+
     key_l = ar_left[gl.c_cl][0]
     if key_l == gl.old_key_l:
         # c_e_r cursor saves the right cursor position of the first
@@ -86,6 +91,7 @@ def update_key(ar_left, ar_right):
 
 
 def compare_inf(key_l, key_r, ar_left):
+
     while key_l < key_r:
         out_line = ar_left[gl.c_cl] + gl.blank_right_row
         gl.out_array.append(out_line)
@@ -99,6 +105,7 @@ def compare_inf(key_l, key_r, ar_left):
 
 
 def compare_sup(key_l, key_r, ar_left, ar_right):
+
     while key_l > key_r:
         out_line = ar_left[gl.c_cl] + gl.blank_right_row
         if gl.END_RIGHT:
@@ -121,6 +128,7 @@ def compare_sup(key_l, key_r, ar_left, ar_right):
 
 
 def compare_equal(key_l, key_r, ar_left, ar_right):
+
     gl.c_cer = gl.c_cr
     while key_l == key_r:
         out_line = ar_left[gl.c_cl] + ar_right[gl.c_cr][1:]

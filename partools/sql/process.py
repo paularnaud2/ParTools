@@ -8,14 +8,12 @@ from threading import Semaphore
 import partools.utils as u
 from . import gl
 from . import log
-from . import merge
-from .connect import gen_cnx_dict
-from .functions import write_rows
 
 verrou = RLock()
 
 
 def process_query_list():
+    from . import merge
 
     gl.multi_th = len(gl.QUERY_LIST) > 1 and gl.MAX_DB_CNX > 1
     gl.c_query = 0
@@ -26,6 +24,8 @@ def process_query_list():
 
 
 def lauch_threads():
+    from .connect import gen_cnx_dict
+
     if gl.range_query:
         rg_list = [elt[1] for elt in gl.QUERY_LIST]
         u.log(f"Ranges to be queried: {rg_list}")
@@ -46,6 +46,7 @@ def lauch_threads():
 
 @u.log_exeptions
 def process_ql_elt(elt):
+
     with gl.sem:
         gl.c_query += 1
         cur_th = get_th_nb()
@@ -65,6 +66,7 @@ def process_ql_elt(elt):
 
 
 def process_query(c, query, elt, th_nb):
+    from .functions import write_rows
 
     log.process_query_init(elt, query, th_nb)
     c.execute(query)
