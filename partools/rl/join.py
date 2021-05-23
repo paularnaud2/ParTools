@@ -1,8 +1,7 @@
 import partools.utils as u
+import partools.tools as to
 
 from partools.utils import g
-from partools.tools.dup import del_dup_list
-from partools.tools.dup import find_dup_list
 
 from . import gl
 
@@ -41,8 +40,8 @@ def prepare_array(arr):
         raise Exception(g.E_MH)
 
     first_line = arr[0]
-    gl.dup_list = find_dup_list(arr)
-    arr = del_dup_list(arr[1:])
+    gl.dup_list = to.find_dup_list(arr)
+    arr = to.del_dup_list(arr[1:])
 
     return (arr, first_line)
 

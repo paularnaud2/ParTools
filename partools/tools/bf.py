@@ -3,12 +3,12 @@ from importlib import reload
 
 import partools.utils as u
 import partools.dq as dq
-import partools.tools.bf_functions as bf
 
-from partools.tools import gl
-from partools.tools.init import init_sbf
-from partools.tools.init import init_rbf
-from partools.tools.finish import finish_sbf
+from . import gl
+from .init import init_sbf
+from .init import init_rbf
+from .finish import finish_sbf
+from . import bf_functions as f
 
 
 def read_big_file(in_path, **kwargs):
@@ -16,13 +16,13 @@ def read_big_file(in_path, **kwargs):
     init_rbf()
     u.init_kwargs(gl, kwargs)
     with open(in_path, 'r', encoding='utf-8', errors='ignore') as in_file:
-        line = bf.read_file(in_file)
+        line = f.read_file(in_file)
         u.log_print(line.strip("\n"))
         while line != "":
-            line = bf.read_file(in_file)
+            line = f.read_file(in_file)
             u.log_print(line.strip("\n"))
             gl.c_read += 1
-            if bf.check_counter(in_file):
+            if f.check_counter(in_file):
                 continue
             else:
                 break
@@ -38,8 +38,8 @@ def search_big_file(in_path, out_path, look_for, **kwargs):
     u.log(gl.s_init)
     with open(in_path, 'r', encoding='utf-8', errors='ignore') as in_file:
         while not gl.EOF:
-            bf.fill_cur_list(in_file)
-            if bf.search_cur_list():
+            f.fill_cur_list(in_file)
+            if f.search_cur_list():
                 break
 
     finish_sbf(out_path, start_time)

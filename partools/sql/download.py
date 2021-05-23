@@ -2,8 +2,8 @@ from time import time
 from importlib import reload
 
 import partools.utils as u
+import partools.tools as to
 import partools.utils.sTools as st
-from partools.tools.dup import find_dup
 
 from . import gl
 from .init import init
@@ -42,7 +42,7 @@ def finish(start_time):
             s = "Verifying duplicates on the first column of the output file..."
             u.log(s)
             u.log_print('|')
-            find_dup(out_path, col=1)
+            to.find_dup(out_path, col=1)
         if gl.OPEN_OUT_FILE:
             u.startfile(out_path)
 

@@ -1,13 +1,13 @@
 import os
 from shutil import copytree
 
+import partools.utils as u
+import partools.test.mail as tm
+import partools.test.mail.gl as gl
+
 from partools import cfg
 from partools import mail
-from partools.test import gl
 from partools.test import ttry
-from partools import utils as u
-from partools.test import check_log as cl
-from partools.test.mail.template import BODY
 
 
 def ast(in1, in2):
@@ -47,7 +47,7 @@ def test_mail():
 
     mail.gl.TEST = True
     u.log_print(f"Test gmail - {gl.S_VDPT}", dashes=100)
-    args = [gl.MAIL_NAME, gl.S_VDPT, gl.VD, [], BODY, gl.RECIPIENTS_IN]
+    args = [gl.MAIL_NAME, gl.S_VDPT, gl.VD, [], tm.BODY, gl.RECIPIENTS_IN]
     mail.gmail(*args)
     ast(gl.NVAR, gl.PT)
     u.log_print()
@@ -59,7 +59,7 @@ def test_mail():
     u.log_print()
 
     u.log_print(f"Test gmail - {gl.S_PT}", dashes=100)
-    args = [gl.MAIL_NAME, gl.S_PT, [], [], BODY]
+    args = [gl.MAIL_NAME, gl.S_PT, [], [], tm.BODY]
     mail.gmail(*args)
     ast(gl.VAR, gl.PT)
     u.log_print()
@@ -71,7 +71,7 @@ def test_mail():
     u.log_print()
 
     u.log_print("Test outlook", dashes=100)
-    args = [gl.MAIL_NAME, gl.S_VDPT, gl.VD, [], BODY]
+    args = [gl.MAIL_NAME, gl.S_VDPT, gl.VD, [], tm.BODY]
     ttry(mail.outlook, gl.E_OUTLOOK, *args)
     ast(gl.NVAR, gl.PT)
     u.log_print()
@@ -81,7 +81,7 @@ def test_mail():
     copytree('mail_back', cfg.MAILS_DIR)
     u.delete_folder('mail_back')
 
-    u.check_log(cl.MAIL)
+    u.check_log(tm.CL)
 
 
 if __name__ == '__main__':

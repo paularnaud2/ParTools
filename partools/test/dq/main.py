@@ -1,6 +1,7 @@
 import partools.dq as dq
 import partools.dq.gl as qgl
-from partools.test import gl
+
+from . import gl
 
 
 def dq_t(in1,
@@ -17,10 +18,10 @@ def dq_t(in1,
          sl=100):
 
     dq.run_dq(
-        IN_DIR=gl.TEST_DQ,
+        IN_DIR=gl.FILES_DIR,
         IN_FILE_NAME_1=in1,
         IN_FILE_NAME_2=in2,
-        OUT_DIR=gl.DQ_OUT,
+        OUT_DIR=gl.OUT_DIR,
         OUT_FILE_NAME=out,
         MAX_ROW_LIST=mrl,
         OUT_DUP_FILE_NAME='dup_',
@@ -41,6 +42,6 @@ def dq_t(in1,
 
 
 def file_match(ref, out):
-    left = gl.TEST_DQ + ref
-    right = gl.DQ_OUT + out + qgl.FILE_TYPE
+    left = gl.FILES_DIR + ref
+    right = gl.OUT_DIR + out + qgl.FILE_TYPE
     dq.file_match(left, right)

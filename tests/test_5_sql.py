@@ -1,70 +1,67 @@
 import partools.utils as u
 import partools.dq as dq
 
-import partools.test.sql as t
-import partools.test.check_log as cl
-
-from partools.test import gl
-from partools.test import ttry
-from partools.test import is_test_db_defined
+import partools.test as t
+import partools.test.sql as ts
+import partools.test.sql.gl as gl
 
 
 def test_sql():
     u.init_log("test_sql", True)
-    if not is_test_db_defined():
+    if not ts.is_test_db_defined():
         return
 
     u.log_print("Test connect", dashes=100)
-    t.connect()
+    ts.connect()
 
     u.log_print("Test iutd", dashes=100)
-    t.reset()
-    t.iutd()
+    ts.reset()
+    ts.iutd()
 
     u.log_print("Test upload - missing header in input file", dashes=100)
-    ttry(t.upload, u.g.E_MH, gl.SQL_IN_MH)
+    t.ttry(ts.upload, u.g.E_MH, gl.IN_MH)
 
     u.log_print("Test upload - interuption and recovery", dashes=100)
-    t.upload_interrupted()
-    t.upload(gl.SQL_IN, tr=True)
+    ts.upload_interrupted()
+    ts.upload(gl.IN, tr=True)
 
     u.log_print("Test download - no output", dashes=100)
-    t.download(gl.SQL_QUERY_NO, gl.SQL_DL_OUT, ti=True)
+    ts.download(gl.QUERY_NO, gl.DL_OUT, ti=True)
 
     u.log_print("Test download standard", dashes=100)
-    t.reset()
-    t.download(gl.SQL_QUERY, gl.SQL_DL_OUT)
-    dq.file_match(gl.SQL_IN, gl.SQL_DL_OUT)
-    dq.file_match(gl.OUT_DUP_TMP, gl.SQL_OUT_DUP_REF)
+    ts.reset()
+    ts.download(gl.QUERY, gl.DL_OUT)
+    dq.file_match(gl.IN, gl.DL_OUT)
+    dq.file_match(t.gl.OUT_DUP_TMP, gl.OUT_DUP_REF)
 
     s = "Test download RG with merge - interuption and recovery"
     u.log_print(s, dashes=100)
-    t.download_interrupted(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG)
-    t.download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, tr=True, sl=50)
-    dq.file_match(gl.SQL_DL_OUT, gl.SQL_DL_OUT_RG)
+    ts.download_interrupted(gl.QUERY_RG, gl.DL_OUT_RG)
+    ts.download(gl.QUERY_RG, gl.DL_OUT_RG, tr=True, sl=50)
+    dq.file_match(gl.DL_OUT, gl.DL_OUT_RG)
 
     u.log_print("Test download RG without merge", dashes=100)
-    t.reset()
-    t.download(gl.SQL_QUERY_RG, gl.SQL_DL_OUT_RG, merge=False, cnx=1, sl=50)
-    dq.file_match(gl.SQL_RG_REF, gl.SQL_RG_COMP)
+    ts.reset()
+    ts.download(gl.QUERY_RG, gl.DL_OUT_RG, merge=False, cnx=1, sl=50)
+    dq.file_match(gl.RG_REF, gl.RG_COMP)
 
     u.log_print("Test download - count simple", dashes=100)
-    t.reset()
-    t.download(gl.SQL_QUERY_COUNT_1, gl.SQL_DL_OUT_COUNT)
-    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
-    t.download(gl.SQL_QUERY_COUNT_1_RG, gl.SQL_DL_OUT_COUNT)
-    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_1_REF)
+    ts.reset()
+    ts.download(gl.QUERY_COUNT_1, gl.DL_OUT_COUNT)
+    dq.file_match(gl.DL_OUT_COUNT, gl.DL_OUT_COUNT_1_REF)
+    ts.download(gl.QUERY_COUNT_1_RG, gl.DL_OUT_COUNT)
+    dq.file_match(gl.DL_OUT_COUNT, gl.DL_OUT_COUNT_1_REF)
 
     u.log_print("Test download - count group by", dashes=100)
-    t.reset()
-    t.download(gl.SQL_QUERY_COUNT_2, gl.SQL_DL_OUT_COUNT)
-    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
-    t.download(gl.SQL_QUERY_COUNT_2_RG, gl.SQL_DL_OUT_COUNT)
-    dq.file_match(gl.SQL_DL_OUT_COUNT, gl.SQL_DL_OUT_COUNT_2_REF)
+    ts.reset()
+    ts.download(gl.QUERY_COUNT_2, gl.DL_OUT_COUNT)
+    dq.file_match(gl.DL_OUT_COUNT, gl.DL_OUT_COUNT_2_REF)
+    ts.download(gl.QUERY_COUNT_2_RG, gl.DL_OUT_COUNT)
+    dq.file_match(gl.DL_OUT_COUNT, gl.DL_OUT_COUNT_2_REF)
 
-    t.clean_db([gl.SQL_T_TEST, gl.SQL_T_IUTD])
+    ts.clean_db([gl.T_TEST, gl.T_IUTD])
 
-    u.check_log(cl.SQ)
+    u.check_log(ts.CL)
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ import partools.utils as u
 from partools.tools import gl
 
 
-def filter(in_path, out_path, **kwargs):
+def flt(in_path, out_path, **kwargs):
     u.log("[toolFilter] filter: start")
     start_time = time()
     u.init_kwargs(gl, kwargs)

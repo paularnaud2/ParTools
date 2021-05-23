@@ -1,15 +1,14 @@
 import partools.dq as dq
-import partools.tools.filter as f
+import partools.tools as to
 import partools.tools.bf as bf
-import partools.tools.xml as xml
+import partools.test.sql as ts
 
-from partools.test import gl
-from partools.tools.split import split_file
+from . import gl
 
 
 def read_big_file():
     bf.read_big_file(
-        gl.SQL_IN,
+        ts.gl.IN,
         LINE_PER_LINE=True,
         OPEN_OUT_FILE=False,
         TEST=True,
@@ -20,7 +19,7 @@ def read_big_file():
 
 def search_big_file():
     bf.search_big_file(
-        gl.SQL_IN,
+        ts.gl.IN,
         gl.SEARCH_BF_OUT,
         gl.LOOK_FOR,
         LINE_PER_LINE=True,
@@ -33,9 +32,9 @@ def search_big_file():
     dq.file_match(gl.SEARCH_BF_OUT, gl.SEARCH_BF_OUT_REF)
 
 
-def filter():
-    f.filter(
-        gl.SQL_IN,
+def flt():
+    to.flt(
+        ts.gl.IN,
         gl.FLT_OUT,
         COL_LIST=['PRM', 'AFFAIRE'],
         FF=filter_function,
@@ -56,9 +55,9 @@ def filter_function(line_list):
 
 
 def split():
-    split_file(
-        gl.SQL_IN,
-        gl.TOOLS_OUT,
+    to.split_file(
+        ts.gl.IN,
+        gl.OUT_DIR,
         MAX_LINE=1000,
         MAX_FILE_NB=3,
         ADD_HEADER=True,
@@ -69,7 +68,7 @@ def split():
 
 
 def parse_xml():
-    xml.parse_xml(
+    to.parse_xml(
         gl.XML_IN,
         gl.XML_OUT,
         OPEN_OUT_FILE=False,

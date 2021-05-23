@@ -2,7 +2,7 @@ from time import time
 
 import partools.utils as u
 import partools.utils.sTools as st
-from partools.tools.dup import del_dup_list
+from partools.tools import del_dup_list
 
 from . import gl
 from .init import init_dq

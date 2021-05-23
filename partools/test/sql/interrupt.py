@@ -1,11 +1,11 @@
 import math
 from time import sleep
-
 from multiprocessing import Process
 from multiprocessing import Manager
 
 import partools.utils as u
-from partools.test import gl
+
+from . import gl
 from .main import upload
 from .main import download
 
@@ -28,7 +28,7 @@ def upload_interrupted():
     md["T"] = False
     md["LOG_PATH"] = u.g.log_path
     u.log("[sql] upload: start", c_out=False)
-    p = Process(target=upload, args=(gl.SQL_IN, True, md))
+    p = Process(target=upload, args=(gl.IN, True, md))
     p.start()
     while not md["T"]:
         pass

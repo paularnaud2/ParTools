@@ -3,12 +3,12 @@ import warnings
 import partools.utils as u
 import partools.sql as sql
 
-from partools.test import gl
 from partools.test import ttry
+from partools.test.sql import gl
 
 
 def is_test_db_defined():
-    if not gl.SQL_DB:
+    if not gl.DB:
         s = f"TEST_DB is not defined in '{gl.__file__}'. Test aborted."
         u.log(s)
         warnings.warn(s)
@@ -34,17 +34,17 @@ def connect():
     u.log_print()
 
     u.log_print('Test - OK DB only')
-    (sql.gl.DB, sql.gl.ENV) = (gl.SQL_DB, '')
+    (sql.gl.DB, sql.gl.ENV) = (gl.DB, '')
     sql.connect()
     u.log_print()
 
     u.log_print('Test - OK DB + ENV')
-    (sql.gl.DB, sql.gl.ENV) = (gl.SQL_DB, gl.SQL_ENV)
+    (sql.gl.DB, sql.gl.ENV) = (gl.DB, gl.ENV)
     sql.connect()
     u.log_print()
 
     u.log_print('Test - OK CNX_INFO (via TNS_NAMES)')
-    sql.gl.CNX_INFO = gl.SQL_CNX_INFO
+    sql.gl.CNX_INFO = gl.CNX_INFO
     sql.connect()
     u.log_print()
     pass
@@ -52,21 +52,21 @@ def connect():
 
 def upload(inp, tr=False, md=""):
     execute_kwargs = {
-        "DB": gl.SQL_DB,
-        "SCRIPT_IN": gl.SQL_CREATE_TABLE,
+        "DB": gl.DB,
+        "SCRIPT_IN": gl.CREATE_TABLE,
         "VAR_DICT": {
-            "TABLE_NAME": gl.SQL_T_TEST
+            "TABLE_NAME": gl.T_TEST
         },
         "PROC": True,
     }
 
     sql.upload(
-        DB=gl.SQL_DB,
+        DB=gl.DB,
         EXECUTE_KWARGS=execute_kwargs,
-        SCRIPT_IN=gl.SQL_INSERT_TABLE,
-        VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
+        SCRIPT_IN=gl.INSERT_TABLE,
+        VAR_DICT={"TABLE_NAME": gl.T_TEST},
         UPLOAD_IN=inp,
-        NB_MAX_ELT_INSERT=gl.SQL_MAX_ELT_INSERT,
+        NB_MAX_ELT_INSERT=gl.MAX_ELT_INSERT,
         TEST_RECOVER=tr,
         MD=md,
     )
@@ -75,11 +75,11 @@ def upload(inp, tr=False, md=""):
 def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
 
     sql.download(
-        DB=gl.SQL_DB,
+        DB=gl.DB,
         QUERY_IN=query,
-        VAR_DICT={"TABLE_NAME": gl.SQL_T_TEST},
+        VAR_DICT={"TABLE_NAME": gl.T_TEST},
         OUT_PATH=out,
-        OUT_DIR=gl.SQL_DL_OUT_RG_FOLDER,
+        OUT_DIR=gl.DL_OUT_RG_FOLDER,
         MAX_DB_CNX=cnx,
         SL_STEP=sl,
         MERGE_FILES=merge,
@@ -94,8 +94,8 @@ def download(query, out, merge=True, tr=False, ti=False, cnx=3, sl=500, md=""):
 
 def reset():
     u.log("Resetting folders...")
-    u.mkdirs(gl.SQL_TMP, True)
-    u.mkdirs(gl.SQL_OUT, True)
+    u.mkdirs(gl.TMP_DIR, True)
+    u.mkdirs(gl.OUT_DIR, True)
     u.log("Reset over\n")
 
 
@@ -108,8 +108,8 @@ def clean_db(list_in):
 
 def drop_table(table_name):
     sql.execute(
-        DB=gl.SQL_DB,
-        SCRIPT_IN=gl.SQL_DROP_TABLE,
+        DB=gl.DB,
+        SCRIPT_IN=gl.DROP_TABLE,
         VAR_DICT={"TABLE_NAME": table_name},
         PROC=False,
     )

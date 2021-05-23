@@ -4,10 +4,10 @@ This script extracts all Python doc ('# comments included) present in the
 This can be useful for spell checking your code.
 """
 
-from partools.tools.ed import extract_doc
-from partools.quickstart import quickstart_dir
+import partools.tools as to
+import partools.quickstart as qs
 
-in_dirs = [quickstart_dir]
+in_dirs = [qs.quickstart_dir]
 out_path = 'extract_doc_out.txt'
 
-extract_doc(in_dirs, out_path)
+to.extract_doc(in_dirs, out_path)

@@ -3,7 +3,7 @@ from math import ceil
 from os.path import exists
 
 import partools.utils as u
-from partools.tools.split import split_file
+from partools.tools import split_file
 
 from . import gl
 

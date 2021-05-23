@@ -2,9 +2,9 @@ from random import shuffle
 
 import partools.utils as u
 
-from partools.tools.init import init_find_dup
-from partools.tools.finish import finish_find_dup
-from partools.tools.finish import finish_del_dup
+from .init import init_find_dup
+from .finish import finish_find_dup
+from .finish import finish_del_dup
 
 
 def find_dup(in_path, out_path='', open_out=False, col=0):

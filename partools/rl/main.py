@@ -3,8 +3,8 @@ from importlib import reload
 
 import partools.utils as u
 import partools.sql as sql
+import partools.tools as to
 import partools.utils.sTools as st
-from partools.tools.dup import find_dup
 
 from . import gl
 from .init import init
@@ -80,7 +80,7 @@ def finish(start_time):
     if gl.CHECK_DUP:
         s = "Checking duplicates on the first column of the output file..."
         u.log(s)
-        find_dup(gl.OUT_PATH, col=1)
+        to.find_dup(gl.OUT_PATH, col=1)
         u.log_print('|')
 
     (dms, dstr) = u.get_duration_string(start_time, True)

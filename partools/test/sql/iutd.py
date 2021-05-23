@@ -1,28 +1,27 @@
 import os
-
 import partools.utils as u
 import partools.sql as sql
 
-from partools.test import gl
+from . import gl
 
 
 def prepare_iutd(sf):
     sql.gl.TEST_IUTD = False
     sql.execute(
-        DB=gl.SQL_DB,
-        SCRIPT_IN=gl.SQL_CREATE_TABLE_IUTD,
-        VAR_DICT={"TABLE_NAME": gl.SQL_T_IUTD},
+        DB=gl.DB,
+        SCRIPT_IN=gl.CREATE_TABLE_IUTD,
+        VAR_DICT={"TABLE_NAME": gl.T_IUTD},
         PROC=True,
     )
     sql.execute(
-        DB=gl.SQL_DB,
+        DB=gl.DB,
         SCRIPT_IN=sf,
         PROC=False,
     )
 
 
 def iutd():
-    prepare_iutd(gl.SQL_INSERT_IUTD_OK)
+    prepare_iutd(gl.INSERT_IUTD_OK)
     sql.gl.TEST_IUTD = True
 
     # Test no iutd file date db ok
@@ -32,7 +31,7 @@ def iutd():
 
     u.log_print()
     os.remove(sql.gl.iutd_path)
-    prepare_iutd(gl.SQL_INSERT_IUTD_KO)
+    prepare_iutd(gl.INSERT_IUTD_KO)
     sql.gl.TEST_IUTD = True
 
     # Test no iutd file date db ko
