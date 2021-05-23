@@ -11,7 +11,7 @@ Notes:
 - SCRIPT_IN accepts either a string or a file path
 - CNX_INFO and DB inputs follow the same rules as for sql.download
 
-For more details, see the README.md file.
+For more details, check out the README.md file.
 """
 
 import partools.sql as sql

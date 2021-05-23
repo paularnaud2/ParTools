@@ -18,7 +18,7 @@ files' values separated by '|' for each field that differs. For example 'O|N' in
 the field 'ETAT' means that the first file (in_11) has a 'O' and the second file
 (in_12) has a 'N'.
 
-For more information, see the README.md file.
+For more details, check out the README.md file.
 """
 
 import partools.dq as dq

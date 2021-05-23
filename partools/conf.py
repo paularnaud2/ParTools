@@ -7,6 +7,7 @@ CFI_PATH = 'confidential.txt'
 # This directory has to contain a conf.txt file and the mail folders corresponding
 # to the mail_name passed in the mail function.
 MAILS_DIR = 'mails/'
+HOST_NO_AUTH = 'host.no_auth.com'
 
 # DEBUG = True enables function decorator in utils.deco
 # it basically terminates the program if one of the threads

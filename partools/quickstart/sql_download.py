@@ -26,7 +26,7 @@ in the conf file (partools/conf.py, CONF_ORACLE)
  or a list:
 ['USERNAME', 'PWD', 'TNS_NAME'] or ['USERNAME', 'PWD', 'DSN']
 
-For more details, see the README.md file.
+For more details, check out the README.md file.
 """
 
 from datetime import datetime

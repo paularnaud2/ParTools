@@ -2,6 +2,7 @@ import ssl
 import smtplib
 import win32com.client as win32
 
+from partools import cfg
 import partools.utils as u
 
 from . import gl
@@ -48,7 +49,7 @@ def no_auth(mail_name,
     msg = get.msg(subject, HTMLbody, attachments, var_dict)
 
     u.log(f"Sending mail '{mail_name}' to {gl.recipients}...")
-    with smtplib.SMTP(gl.NO_AUTH_HOST) as server:
+    with smtplib.SMTP(cfg.HOST_NO_AUTH) as server:
         server.sendmail(gl.sender, gl.recipients, msg.as_string())
     u.log('Mail sent')
 

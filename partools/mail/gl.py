@@ -1,7 +1,6 @@
 RECIPIENTS = 'recipients.txt'
 GMAIL_HOST = 'smtp.gmail.com'
 GMAIL_PORT = '465'
-NO_AUTH_HOST = 'host.no_auth.com'
 INTERNAL_STR = '@ubs.com'
 TEST = False
 

@@ -23,7 +23,7 @@ while building the final queries being run in parallel.
 populate the TEST table.
 - CNX_INFO and DB inputs follow the same rules as for sql.download
 
-For more details, see the README.md file.
+For more details, check out the README.md file.
 """
 
 from datetime import datetime
