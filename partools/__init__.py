@@ -18,4 +18,7 @@ else:
     import partools.conf as cfg
 
 __version__ = '1.0.3'
+GITHUB_LINK = 'https://github.com/paularnaud2/ParTools'
+GITHUB_ISSUES = GITHUB_LINK + '/issues'
+
 import partools.utils

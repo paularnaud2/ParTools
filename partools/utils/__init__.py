@@ -1,4 +1,4 @@
-# Check install and init PT folder
+# Init PT folder
 from . import init
 
 # Imports for package utils

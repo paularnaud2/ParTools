@@ -117,6 +117,7 @@ def init_log(parent_module='', force_init=False):
     if parent_module:
         s += '_' + parent_module
     g.log_path = file.abspath(g.dirs['LOG'] + s + '.txt')
+    file.mkdirs(g.dirs['LOG'])
     with open(g.log_path, 'w', encoding='utf-8') as in_file:
         in_file.write('')
     g.logs = []

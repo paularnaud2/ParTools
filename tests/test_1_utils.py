@@ -1,11 +1,22 @@
+import partools as pt
 import partools.utils as u
 import partools.utils.sTools as st
 import partools.test.check_log as cl
+
+back = pt.cfg.FILES_DIR
+
+
+def init_PT():
+
+    u.delete_folder('PT_test/')
+    pt.cfg.FILES_DIR = 'PT_test/'
+    u.g.init_PT()
 
 
 def msg_box():
     u.log_print("Test msg_box", dashes=100)
     st.msg_box('Message box test', 'Test')
+    u.log('Message box notification successfully sent')
     u.log_print()
 
 
@@ -24,10 +35,14 @@ def get_duration():
 
 
 def test_utils():
-    u.init_log('test_utils', True)
+    init_PT()
     msg_box()
     get_duration()
     u.check_log(cl.CO)
+
+    pt.cfg.FILES_DIR = back
+    u.g.init_PT(True)
+    u.delete_folder('PT_test/')
 
 
 if __name__ == '__main__':
