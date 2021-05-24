@@ -17,7 +17,7 @@ elif exists('PTconf.py'):
 else:
     import partools.conf as cfg
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 GITHUB_LINK = 'https://github.com/paularnaud2/ParTools'
 GITHUB_ISSUES = GITHUB_LINK + '/issues'
 
