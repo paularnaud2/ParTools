@@ -1,8 +1,5 @@
-import ssl
 import smtplib
-import win32com.client as win32
 
-from partools import cfg
 import partools.utils as u
 
 from . import gl
@@ -16,6 +13,23 @@ def gmail(mail_name,
           attachments=[],
           HTMLbody='',
           recipients=[]):
+    """Sends emails using gmail
+
+    See README.md for guidance
+
+    See partools/quickstart/mail.py for examples of use
+
+    Args (non-exhaustive)
+    ----------------------
+    attachments: list of absolute path for attached files
+
+    var_dict: dictionary of variables to be replaced in HTMLbody
+
+    HTMLbody: if not input, mails/mail_name/template.html is taken
+
+    recipients: if not input, mails/mail_name/recipients.txt is taken
+    """
+    import ssl
 
     f.init(mail_name, recipients)
     f.init_cfi()
@@ -43,6 +57,23 @@ def no_auth(mail_name,
             attachments=[],
             HTMLbody='',
             recipients=[]):
+    """Sends emails using a no authentication smtp server
+
+    See README.md for guidance
+
+    See partools/quickstart/mail.py for examples of use
+
+    Args (non-exhaustive)
+    ----------------------
+    attachments: list of absolute path for attached files
+
+    var_dict: dictionary of variables to be replaced in HTMLbody
+
+    HTMLbody: if not input, mails/mail_name/template.html is taken
+
+    recipients: if not input, mails/mail_name/recipients.txt is taken
+    """
+    from partools import cfg
 
     f.init(mail_name, recipients, True)
     f.init_cfi()
@@ -60,6 +91,23 @@ def outlook(mail_name,
             attachments=[],
             HTMLbody='',
             recipients=[]):
+    """Sends emails using installed Outlook application
+
+    See README.md for guidance
+
+    See partools/quickstart/mail.py for examples of use
+
+    Args (non-exhaustive)
+    ----------------------
+    attachments: list of absolute path for attached files
+
+    var_dict: dictionary of variables to be replaced in HTMLbody
+
+    HTMLbody: if not input, mails/mail_name/template.html is taken
+
+    recipients: if not input, mails/mail_name/recipients.txt is taken
+    """
+    import win32com.client as win32
 
     f.init(mail_name, recipients, True)
 

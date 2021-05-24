@@ -9,6 +9,12 @@ from . import bf_functions as f
 
 
 def read_big_file(in_path, **kwargs):
+    """Reads a potentially big file
+
+    See in partools/tools/gl for other parameters (kwargs)
+
+    See partools/quickstart/tools_bf.py for examples of use
+    """
     from .init import init_rbf
 
     u.log("[toolBF] read_big_file: start")
@@ -30,6 +36,12 @@ def read_big_file(in_path, **kwargs):
 
 
 def search_big_file(in_path, out_path, look_for, **kwargs):
+    """Searches a potentially big file
+
+    See in partools/tools/gl for other parameters (kwargs)
+
+    See partools/quickstart/tools_bf.py for examples of use
+    """
     from .init import init_sbf
     from .finish import finish_sbf
 
@@ -48,6 +60,10 @@ def search_big_file(in_path, out_path, look_for, **kwargs):
 
 
 def sort_big_file(in_path, out_path):
+    """Sorts a potentially big file
+
+    See partools/quickstart/tools_bf.py for examples of use
+    """
     from partools.dq.init import init_tmp_dir
     from partools.dq.sort import sort_big_file
 

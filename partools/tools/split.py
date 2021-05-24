@@ -6,6 +6,14 @@ from partools.tools import gl
 
 
 def split_file(in_path, out_dir='', **kwargs):
+    """Splits a file into multiple files (e.g. if it is too big to be opened
+    with an app such as Excel)
+
+    See in partools/tools/gl for other parameters (kwargs)
+
+    See partools/quickstart/tools_filter.py for examples of use
+    """
+
     u.log("[toolSplit] split_file: start")
     u.init_kwargs(gl, kwargs)
     init_globals()

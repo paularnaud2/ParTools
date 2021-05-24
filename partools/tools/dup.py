@@ -4,6 +4,12 @@ import partools.utils as u
 
 
 def find_dup(in_path, out_path='', open_out=False, col=0):
+    """Finds the duplicates in in_path file
+
+    Args (non-exhaustive)
+    ----------------------
+    col: if the file is a csv, the duplicates will be searched in this column index
+    """
     from .init import init_find_dup
     from .finish import finish_find_dup
 
@@ -17,6 +23,7 @@ def find_dup(in_path, out_path='', open_out=False, col=0):
 
 
 def del_dup(in_path, out_path, open_out=False):
+    """Deletes the duplicates in in_path file"""
     from .finish import finish_del_dup
 
     u.log("[toolDup] del_dup: start")
@@ -33,6 +40,7 @@ def del_dup(in_path, out_path, open_out=False):
 
 
 def find_dup_list(in_list):
+    """Returns a list of the duplicates in in_list"""
 
     if not in_list:
         return []
@@ -53,6 +61,7 @@ def find_dup_list(in_list):
 
 
 def del_dup_list(in_list):
+    """Returns in_list sorted and without duplicates"""
 
     if not in_list:
         return []
@@ -75,17 +84,18 @@ def del_dup_list(in_list):
     return out_list
 
 
-def shuffle_csv(in_path, out_path, open_out=False):
+def shuffle_file(in_path, out_path, open_out=False):
+    """Shuffles the line order of a file using the native random package"""
 
-    u.log("[toolShuf] shuffle_csv: start")
-    cur_list = u.load_csv(in_path)
+    u.log("[toolShuf] shuffle_file: start")
+    cur_list = u.load_txt(in_path)
     if u.has_header(cur_list):
         header = cur_list[0]
         cur_list = cur_list[1:]
     shuffle(cur_list)
     cur_list = [header] + cur_list
-    u.save_csv(cur_list, out_path)
-    u.log(f"Shuffled csv file saved in {out_path}")
+    u.save_list(cur_list, out_path)
+    u.log(f"Shuffled file saved in {out_path}")
     if open_out:
         u.startfile(out_path)
-    u.log("[toolShuf] shuffle_csv: end")
+    u.log("[toolShuf] shuffle_file: end")

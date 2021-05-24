@@ -10,6 +10,13 @@ from .functions import get_final_script
 
 @u.log_exeptions
 def execute(**kwargs):
+    """Executes a SQL script or a PL/SQL procedure on an Oracle DB
+
+    See README.md for guidance
+
+    See partools/quickstart/sql_execute.py for examples of use
+    """
+
     u.log('[sql] execute: start')
     start_time = time()
     u.init_kwargs(gl, kwargs)

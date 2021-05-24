@@ -31,7 +31,7 @@ def test_tools():
     dq.file_match(gl.DUP_OUT, gl.DUP_OUT_REF)
 
     u.log_print("Test toolDup - to.del_dup + shuffle", dashes=100)
-    to.shuffle_csv(gl.DUP_IN, gl.SHUF_OUT)
+    to.shuffle_file(gl.DUP_IN, gl.SHUF_OUT)
     u.log_print()
     to.del_dup(gl.SHUF_OUT, gl.DUP_OUT)
     u.log_print()

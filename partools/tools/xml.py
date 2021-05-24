@@ -7,6 +7,12 @@ from . import gl
 
 
 def parse_xml(in_path, out_path, **kwargs):
+    """Converts a potentially big xml file into csv
+
+    See in partools/tools/gl for other parameters (kwargs)
+
+    See partools/quickstart/tools_xml.py for examples of use
+    """
     from .finish import finish_xml
 
     u.log("[toolParseXML] parse_xml: start")

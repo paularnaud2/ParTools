@@ -10,12 +10,12 @@ from . import g
 
 
 def like(in_str, like_string, match_output=False):
-    """ Behaves as the LIKE of Oracle SQL (you can match strings with wildcard
+    """Behaves as the LIKE of Oracle SQL (you can match strings with wildcard
     character '*')
 
     Args (non-exhaustive)
     ----------------------
-    match_output: If True, the function returns the match
+    match_output: if True, the function returns the match
 
     Example
     -------
@@ -81,7 +81,7 @@ def get_duration_string(start_time, return_dms=False, end_time=None):
 
     Args (non-exhaustive)
     ----------------------
-    return_dms: If True, the duration in ms is also output: (dms, dstr).
+    return_dms: if True, the duration in ms is also output: (dms, dstr).
     If False, only the duration string is output (dstr).
     """
 

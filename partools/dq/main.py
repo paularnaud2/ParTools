@@ -8,6 +8,11 @@ from . import functions as f
 
 
 def run_dq(**kwargs):
+    """Compares two big csv files (> 100 Mo) and outputs a detailed result 
+    of the comparison is output
+
+    See partools/quickstart/dq.py for guidance
+    """
     from .init import init_dq
     from .sort import sort_big_file
 
@@ -25,7 +30,20 @@ def run_dq(**kwargs):
     f.finish_dq(start_time)
 
 
-def file_match(in1, in2, del_dup=False, compare=False, err=True, out_path=''):
+def file_match(in1, in2, del_dup=False, err=True, out_path=''):
+    """Compares two files and outputs the diff if the files don't match.
+    Note that the files are sorted before comparison.
+    (more generic than run_dq but doesn't work for big files)
+
+    Args (non-exhaustive)
+    ----------------------
+    del_dup: if true, duplicates are deleted before comparison
+
+    err: if True, an exception is raised when the files don't match
+
+    out_path: specifies an output path for file comparison different from default
+    """
+
     u.log("[dq] file_match: start")
 
     if not out_path:
@@ -42,12 +60,11 @@ def file_match(in1, in2, del_dup=False, compare=False, err=True, out_path=''):
     s = "Files match" if res else "Files don't match"
     u.log(s)
 
-    if not res or compare:
+    if not res:
         f.diff_list(l1, l2, out_path)
-
-    if not res and err:
-        u.startfile(out_path)
-        assert res is True
+        if err:
+            u.startfile(out_path)
+            assert res is True
 
     u.log("[dq] file_match: end")
     u.log_print()

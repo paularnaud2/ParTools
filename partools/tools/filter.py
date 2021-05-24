@@ -5,6 +5,13 @@ from partools.tools import gl
 
 
 def flt(in_path, out_path, **kwargs):
+    """Filters and/or extracts columns from a csv file
+
+    See in partools/tools/gl for other parameters (kwargs)
+
+    See partools/quickstart/tools_filter.py for examples of use
+    """
+
     u.log("[toolFilter] filter: start")
     start_time = time()
     u.init_kwargs(gl, kwargs)
@@ -20,6 +27,7 @@ def flt(in_path, out_path, **kwargs):
 
 
 def init_globals(in_path):
+
     gl.n_r = 0
     gl.n_o = 0
     gl.out_list = []
@@ -28,6 +36,7 @@ def init_globals(in_path):
 
 
 def process_header(in_file):
+
     line = in_file.readline()
     gl.n_r += 1
     line_list = u.csv_to_list(line)
@@ -37,6 +46,7 @@ def process_header(in_file):
 
 
 def process_line(line):
+
     gl.n_r += 1
     line_list = u.csv_to_list(line)
     if filter_line(line_list):
@@ -47,6 +57,7 @@ def process_line(line):
 
 
 def finish(out_path, start_time):
+
     u.log("Filtering over")
     bn1 = u.big_number(gl.n_r)
     bn2 = u.big_number(gl.n_o)

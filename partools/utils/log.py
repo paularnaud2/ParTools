@@ -26,7 +26,7 @@ def check_log(in_list, log_match=False):
 
     Args (non-exhaustive)
     ----------------------
-    log_match: If True, the matches are printed out in the log file
+    log_match: if True, the matches are printed out in the log file
     """
 
     log('check_log...')
@@ -53,11 +53,11 @@ def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
 
     Args (non-exhaustive)
     ----------------------
-    nb_tab: Number of tab indentations
+    nb_tab: number of tab indentations
 
-    c_out: Console out
+    c_out: console out
 
-    dashes: Total length of the input string extended
+    dashes: total length of the input string extended
     with dashes ('-')
     """
 
@@ -80,12 +80,12 @@ def log(str_in, level=0, log_format='', c_out=True):
 
     Args (non-exhaustive)
     ----------------------
-    level: Log level. Current log level set in g.LOG_LEVEL.
+    level: log level. Current log level set in g.LOG_LEVEL.
     Nothing will be logged if g.LOG_LEVEL < level
 
-    format: Log format
+    format: log format
 
-    c_out: Console output
+    c_out: console output
     """
 
     if g.LOG_LEVEL < level:
@@ -103,10 +103,10 @@ def init_log(parent_module='', force_init=False):
 
     Args (non-exhaustive)
     ----------------------
-    parent_module: Name of the parent module (appears in the
+    parent_module: name of the parent module (appears in the
     name of the log file)
 
-    force_init: If True, the log file is initialised even if a
+    force_init: if True, the log file is initialised even if a
     current log file is already set
     """
 

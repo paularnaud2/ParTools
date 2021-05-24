@@ -14,7 +14,7 @@ out_path = g.dirs['OUT'] + "out_dup.csv"
 
 dup.find_dup(in_path, out_path, True)
 # dup.del_dup(in_path, out_path, True)
-# dup.shuffle_csv(in_path, out_path, True)
+# dup.shuffle_file(in_path, out_path, True)
 
 # Working with lists-------------------------------------------------
 in_list = ['2', '1', '3', '2', '1']

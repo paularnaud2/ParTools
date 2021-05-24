@@ -16,7 +16,7 @@ def msg_box(msg, package='utils', dur=0, threaded=True):
     this function as an end-process notification but only wants to be notified
     when the process has taken a long enough time.
 
-    threaded: If true, the message box is open in a parallel process and the
+    threaded: if true, the message box is open in a parallel process and the
     main script can continue (can be used as a end process notification)
     """
     from multiprocessing import Process

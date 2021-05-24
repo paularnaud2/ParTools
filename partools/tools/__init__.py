@@ -7,4 +7,4 @@ from .dup import del_dup
 from .dup import find_dup
 from .dup import del_dup_list
 from .dup import find_dup_list
-from .dup import shuffle_csv
+from .dup import shuffle_file

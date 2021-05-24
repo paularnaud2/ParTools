@@ -1,7 +1,7 @@
 """
 This script extracts all Python doc ('# comments included) present in the
 'in_dir' directories and subdirectories (recursive search).
-This can be useful for spell checking your code.
+This can be useful for spell checking.
 """
 
 import partools.tools as to

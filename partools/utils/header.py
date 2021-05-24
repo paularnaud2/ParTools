@@ -9,7 +9,7 @@ def get_header(in_path, csv=False):
 
     Args (non-exhaustive)
     ----------------------
-    csv: If True, the returned header is a list containing each csv field
+    csv: if True, the returned header is a list containing each csv field
     """
 
     with open(in_path, 'r', encoding='utf-8') as in_file:

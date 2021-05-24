@@ -44,7 +44,7 @@ def append_file(in_path, out_path, remove_header=False):
 
     Args (non-exhaustive)
     ----------------------
-    remove_header: If True, the header of the 'in_path' file is removed
+    remove_header: if True, the header of the 'in_path' file is removed
     before appending
     """
 
@@ -68,14 +68,14 @@ def list_files(in_dir,
 
     Args (non-exhaustive)
     ----------------------
-    incl_root: If True, the root is included in each paths (absolute paths)
+    incl_root: if True, the root is included in each paths (absolute paths)
 
-    walk: If True, the files of all the subdirectories are listed as well
+    walk: if True, the files of all the subdirectories are listed as well
 
-    only_list: List of wanted patterns. e.g. ['*.py'] (only these patterns
+    only_list: list of wanted patterns. e.g. ['*.py'] (only these patterns
     will be output)
 
-    ignore_list: List of unwanted patterns. e.g. ['*.pyc'] (these patterns
+    ignore_list: list of unwanted patterns. e.g. ['*.pyc'] (these patterns
     won't be output)
     """
 
@@ -119,7 +119,7 @@ def load_txt(in_path, list_out=True):
 
     Args (non-exhaustive)
     ----------------------
-    list_out: If True, a list es output, each element representing a
+    list_out: if True, a list es output, each element representing a
     line a the file. If False, a string is output.
     """
 

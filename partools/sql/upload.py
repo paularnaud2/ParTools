@@ -10,6 +10,12 @@ from . import log
 
 @u.log_exeptions
 def upload(**kwargs):
+    """Performs multi threaded SQL queries on an Oracle DB
+
+    See README.md for guidance
+
+    See partools/quickstart/sql_upload.py for examples of use
+    """
     u.log("[sql] upload: start")
     reload(gl)  # reinit globals
     start_time = time()

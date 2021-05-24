@@ -13,7 +13,12 @@ from .recover import recover
 
 @u.log_exeptions
 def download(**kwargs):
+    """Performs multi threaded SQL queries on an Oracle DB
 
+    See README.md for guidance
+
+    See partools/quickstart/sql_download.py for examples of use
+    """
     u.log('[sql] download: start')
     reload(gl)  # reinit globals
     start_time = time()

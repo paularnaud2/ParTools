@@ -1,7 +1,7 @@
 """
 This script allows you to split a file into multiple files (e.g. if it is too
-big to be opened with an app such as Excel). see in partools/tools/gl for other
-parameters.
+big to be opened with an app such as Excel).
+See in partools/tools/gl for other parameters.
 """
 
 import partools.utils.g as g

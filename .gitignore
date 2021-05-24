@@ -1,6 +1,7 @@
 *.pyc
 _old/
 .coverage
+.vscode
 htmlcov
 venv/
 *.egg-info/
@@ -12,3 +13,4 @@ format.py
 test.py
 build/
 dist/
+extract_doc.py
