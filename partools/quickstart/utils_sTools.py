@@ -34,7 +34,6 @@ def msg_box():
 
 
 if __name__ == '__main__':
-    # cmd()
-    sqlplus()
-    # msg_box()
-    pass
+    cmd()
+    # sqlplus()
+    msg_box()

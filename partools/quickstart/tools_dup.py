@@ -20,4 +20,4 @@ dup.find_dup(in_path, out_path, True)
 in_list = ['2', '1', '3', '2', '1']
 
 print(dup.find_dup_list(in_list))
-# print(dup.del_dup_list(in_list))
+print(dup.del_dup_list(in_list))
