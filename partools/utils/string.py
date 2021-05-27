@@ -9,17 +9,14 @@ from time import time
 from . import g
 
 
-def like(in_str, like_string, match_output=False):
+def like(in_str, like_string):
     """Behaves as the LIKE of Oracle SQL (you can match strings with wildcard
-    character '*')
-
-    Args (non-exhaustive)
-    ----------------------
-    match_output: if True, the function returns the match
+    character '*'). Returns the match object that you can access with the group
+    function.
 
     Example
     -------
-    like('Hello World', 'He*o w*d') => True
+    like('Hello World', 'He*o w*d') => m, m.group(0) = 'Hello World', m.group(1) = 'll'
     """
 
     if '*' not in like_string:
@@ -30,10 +27,8 @@ def like(in_str, like_string, match_output=False):
     if '\n' not in in_str:
         like_string = '^' + like_string + '$'
     m = re.search(like_string, in_str)
-    if not m:
-        return False
 
-    return m.group(0)
+    return m
 
 
 def hash512(in_str, length=10):
