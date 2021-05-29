@@ -25,6 +25,7 @@ def parse_xml(in_path, out_path, **kwargs):
 
 
 def init_globals():
+
     gl.FIRST_TAG = ''
     gl.SUB_TAG = ''
     gl.N_ROW = 0
@@ -69,6 +70,7 @@ def save_img_dict(out_path):
 
 
 def read_one_line(in_file):
+
     line = in_file.readline()
     gl.N_READ += 1
     u.step_log(gl.N_READ, gl.SL_STEP_READ, what='lines processed')
@@ -77,6 +79,7 @@ def read_one_line(in_file):
 
 
 def fill_parse_dict(str_in):
+
     xml_out = get_xml(str_in)
     if xml_out != []:
         (tag, elt) = xml_out
@@ -101,6 +104,7 @@ def fill_parse_dict(str_in):
 
 
 def get_xml(in_str):
+
     m1 = re.search(gl.RE_EXP_TAG_ELT, in_str)
     m2 = re.search(gl.RE_EXP_SUB_TAG, in_str)
 
@@ -118,6 +122,7 @@ def get_xml(in_str):
 
 
 def gen_void_list(size):
+
     i = 0
     out_list = []
     while i < size:
@@ -128,6 +133,7 @@ def gen_void_list(size):
 
 
 def complete_dict():
+
     for tag in gl.parse_dict:
         n = len(gl.parse_dict[tag])
         if n < gl.N_ROW - 1:
@@ -142,6 +148,7 @@ def complete_dict():
 
 
 def even_dict():
+
     for tag in gl.parse_dict:
         n = len(gl.parse_dict[tag])
         if n < gl.N_ROW:

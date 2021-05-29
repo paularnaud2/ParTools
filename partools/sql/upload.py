@@ -16,6 +16,7 @@ def upload(**kwargs):
 
     See partools/quickstart/sql_upload.py for examples of use
     """
+
     u.log("[sql] upload: start")
     reload(gl)  # reinit globals
     start_time = time()

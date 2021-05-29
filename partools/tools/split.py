@@ -31,11 +31,13 @@ def split_file(in_path, out_dir='', **kwargs):
 
 
 def init_globals():
+
     gl.QUIT = False
     gl.N_OUT = 0
 
 
 def parse_in_path(in_path, out_dir):
+
     exp = r'(.*)/(\w*).(\w*)$'
     m = re.search(exp, in_path)
     (file_dir, file_name, ext) = (m.group(1), m.group(2), m.group(3))

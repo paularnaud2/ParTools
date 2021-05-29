@@ -19,6 +19,5 @@ else:
 
 __version__ = '1.0.4'
 GITHUB_LINK = 'https://github.com/paularnaud2/ParTools'
-GITHUB_ISSUES = GITHUB_LINK + '/issues'
 
 import partools.utils

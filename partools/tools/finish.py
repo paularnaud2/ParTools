@@ -3,6 +3,7 @@ from . import gl
 
 
 def finish_find_dup(dup_list, out_path, open_out):
+
     n = len(dup_list)
     if n == 0:
         u.log("No duplicates found")
@@ -51,6 +52,7 @@ def finish_sbf(out_path, start_time):
 
 
 def finish_xml(out_path, start_time):
+
     dstr = u.get_duration_string(start_time)
     bn = u.big_number(gl.N_WRITE)
     s = f"[toolParseXML] parse_xml: end ({bn} lines written in {dstr})"

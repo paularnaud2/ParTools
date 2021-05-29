@@ -19,6 +19,7 @@ def download(**kwargs):
 
     See partools/quickstart/sql_download.py for examples of use
     """
+
     u.log('[sql] download: start')
     reload(gl)  # reinit globals
     start_time = time()

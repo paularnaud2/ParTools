@@ -3,6 +3,7 @@ from . import gl
 
 
 def init_find_dup(in_path, out_path, col):
+
     if not out_path:
         tmp_dir = u.g.dirs['TMP'] + gl.TMP_FOLDER
         u.mkdirs(tmp_dir)
@@ -22,6 +23,7 @@ def init_find_dup(in_path, out_path, col):
 
 
 def init_rbf():
+
     gl.c_main = 0
     gl.c_read = 1
 
