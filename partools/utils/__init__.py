@@ -2,6 +2,8 @@
 from . import init
 
 # Imports for package utils
+from .g import get_confidential
+
 from .deco import log_exeptions
 
 from .tools import init_kwargs

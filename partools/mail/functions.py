@@ -55,7 +55,7 @@ def init(mail_name, recipients, check_internal=False):
 
 def init_cfi():
 
-    gl.cfi = u.g.get_confidential(False)
+    gl.cfi = u.get_confidential(False)
     if not gl.cfi:
         raise Exception(gl.S_MISSING_CFI)
     gl.sender = gl.cfi['MAIL_FROM']
