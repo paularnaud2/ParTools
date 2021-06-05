@@ -20,7 +20,7 @@ def write_log(str_in):
         in_file.write(s + '\n')
 
 
-def check_log(in_list, log_match=False):
+def check_log(in_list, log_match=False, max_warn=5):
     """Checks whether the current log file contains the 'in_list' elements.
     If it doesn't, a warning is thrown.
 
@@ -42,8 +42,12 @@ def check_log(in_list, log_match=False):
 
     if n_w == 0:
         log('check_log ok')
+    elif n_w <= max_warn:
+        log(f'check_log ended with {n_w} warnings')
     else:
-        log(f'check_log ko ({n_w} warnings)')
+        s = f'check_log ko, too many warnings ({n_w} warnings)'
+        log(s)
+        raise Exception(s)
 
 
 def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
