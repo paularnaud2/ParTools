@@ -12,7 +12,7 @@ def list_to_dict(list_in, separator='='):
     return out
 
 
-def init_kwargs(mod, kwargs):
+def init_kwargs(mod, kwargs, max_n_char=100):
     """Initializes the gl (global) variables of the module 'mod' with the 'kwargs'
     dictionary (kwargs of a main package function such as sql.download)
     """
@@ -25,7 +25,7 @@ def init_kwargs(mod, kwargs):
 
     if len(kwargs) > 0:
         kwargs_log = {
-            key: str(value)[:g.MAX_LOG_VAR_CHAR]
+            key: str(value)[:max_n_char]
             for (key, value) in kwargs.items()
         }
         log(f"Initialising parameters: {kwargs_log}")

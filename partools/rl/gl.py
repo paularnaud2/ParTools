@@ -21,7 +21,8 @@ SKIP_JOIN = False  # If True, no joint is performed and the SQL result is direct
 SKIP_SQL = False  # If True, no SQL query is performed and the joint is directly performed with the available SQL tmp file (only needed for test purpose)
 CHECK_DUP = True
 OPEN_OUT_FILE = True
-MSG_BOX_END = True  # If True, a message box will pop up at the end of the process, if the processing time is greater than that defined in g.MIN_DUR_MSG_BOX_TRIGGER
+MSG_BOX_END = True  # If True, a message box will pop up at the end of the process, if the processing time is greater than MIN_DUR_TRIGGER
+MIN_DUR_TRIGGER = 30
 DEBUG_JOIN = False
 TEST_RECOVER = False
 

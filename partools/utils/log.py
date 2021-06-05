@@ -193,9 +193,9 @@ def log_dict(dict):
         log_print(f'{key}: {dict[key]}')
 
 
-def log_example(list_in, what="duplicates"):
+def log_example(list_in, what="duplicates", n_print=5):
     if not list_in:
         return
 
-    log_print(f"Examples of {what} (limited to {g.MAX_EXAMPLE_PRINT}):")
-    log_array(list_in[:g.MAX_EXAMPLE_PRINT])
+    log_print(f"Examples of {what} (limited to {n_print}):")
+    log_array(list_in[:n_print])

@@ -1,16 +1,15 @@
 import subprocess
 
-from . import g
 from .log import log
 from .log import log_print
 
 
-def msg_box(msg, package='utils', dur=0, threaded=True):
+def msg_box(msg, package='utils', dur=0, min_dur_trigger=30, threaded=True):
     """Opens a message box containing the 'msg' input string
 
     - dur: duration in ms. If input, this value is used to determine if the
     message box should pop out or not. The message box pops out only if
-    dur >= g.MIN_DUR_MSG_BOX_TRIGGER. This can be useful if you want to use
+    dur >= min_dur_trigger. This can be useful if you want to use
     this function as an end-process notification but only wants to be notified
     when the process has taken a long enough time.
 
@@ -22,7 +21,7 @@ def msg_box(msg, package='utils', dur=0, threaded=True):
 
     if dur != 0:
         dur = dur / 1000
-        if dur < g.MIN_DUR_MSG_BOX_TRIGGER:
+        if dur < min_dur_trigger:
             return
 
     title = "Python - " + package

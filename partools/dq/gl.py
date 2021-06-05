@@ -30,3 +30,5 @@ COMPARE_SEPARATOR = '|'
 COMPARE_FIELD = "COMPARE_RES"
 TEST_PROMPT_SPLIT = False
 TEST_PROMPT_DK = False
+MSG_BOX_END = True  # If True, a message box will pop up at the end of the process, if the processing time is greater than MIN_DUR_TRIGGER
+MIN_DUR_TRIGGER = 30

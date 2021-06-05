@@ -176,7 +176,8 @@ def finish_dq(start_time):
     (dms, dstr) = u.get_duration_string(start_time, True)
     s = f"[dq] run_dq: end ({dstr})"
     u.log(s)
-    st.msg_box(s, "dq", dms)
+    if gl.MSG_BOX_END:
+        st.msg_box(s, "dq", dms, gl.MIN_DUR_TRIGGER)
     u.log_print()
     if gl.OPEN_OUT_FILE:
         u.startfile(gl.paths["out"])

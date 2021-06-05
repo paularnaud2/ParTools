@@ -107,4 +107,4 @@ def finish(start_time):
     u.log("[sql] " + s)
     u.log_print()
     if gl.MSG_BOX_END:
-        st.msg_box(s, "sql", dms)
+        st.msg_box(s, "sql", dms, gl.MIN_DUR_TRIGGER)

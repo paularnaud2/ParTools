@@ -38,7 +38,7 @@ def finish(start_time):
     s = f"reqlist: end ({dstr})"
     u.log("[rl] " + s)
     if gl.MSG_BOX_END:
-        st.msg_box(s, "rl", dms)
+        st.msg_box(s, "rl", dms, gl.MIN_DUR_TRIGGER)
     u.log_print()
     if gl.OPEN_OUT_FILE:
         u.startfile(gl.OUT_PATH)

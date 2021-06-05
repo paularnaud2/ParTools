@@ -21,7 +21,8 @@ OPEN_OUT_FILE = True
 MERGE_FILES = True  # See quickstart/sql
 EXPORT_RANGE = False  # See quickstart/sql
 CHECK_DUP = True
-MSG_BOX_END = True  # If True, a message box will pop up at the end of the process, if the processing time is greater than that defined in g.MIN_DUR_MSG_BOX_TRIGGER
+MSG_BOX_END = True  # If True, a message box will pop up at the end of the process, if the processing time is greater than MIN_DUR_TRIGGER
+MIN_DUR_TRIGGER = 30
 
 # Default const------------------------------------------------------
 SL_STEP = 100 * 10**3  # step_log setting (see README.md)
