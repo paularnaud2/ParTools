@@ -79,21 +79,21 @@ When first used, the __utils__ package gets initialised by creating a __PT__ dir
 ## The sql package
  
 The __sql__ package provides you with three main functions:
-- ``download``: executes multithreaded SELECT or COUNT queries (see quickstart/sql_download.py)
-- ``upload``: executes mass insert queries (see quickstart/sql_upload.py)
-- ``execute``: executes PL/SQL procedures or SQL scripts (see quickstart/sql_execute.py)
+- ``download``: executes multithreaded SELECT or COUNT queries (see partools/quickstart/sql_download.py)
+- ``upload``: executes mass insert queries (see partools/quickstart/sql_upload.py)
+- ``execute``: executes PL/SQL procedures or SQL scripts (see partools/quickstart/sql_execute.py)
  
 The ``download`` function has three main cases of use:
 - Writing the result of a simple SELECT/COUNT query in a csv file
 - Processing a list of SELECT/COUNT queries in parallel
 - Processing a range query ie. a variabilized query which is executed in parallel for a specified range of KEYs/IDs
 
-Each of these cases is detailed in __quickstart/sql_download.py__
+Each of these cases is detailed in __partools/quickstart/sql_download.py__
  
 ## The rl package
  
 The __rl__ package has two main functions:
-- ``reqlist``: executes a multithreaded SELECT query on a perimeter given by a csv file. The SQL output can be joint to the input file (see quickstart/reqlist.py)
+- ``reqlist``: executes a multithreaded SELECT query on a perimeter given by a csv file. The SQL output can be joint to the input file (see partools/quickstart/reqlist.py)
 - ``left_join_files``: performs a joint between two csv files. This function is used by reqlist to joint the SQL result to the input file.
 
 ## Sending emails
