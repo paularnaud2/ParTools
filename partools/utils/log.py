@@ -24,9 +24,7 @@ def check_log(in_list, log_match=False):
     """Checks whether the current log file contains the 'in_list' elements.
     If it doesn't, a warning is thrown.
 
-    Args (non-exhaustive)
-    ----------------------
-    log_match: if True, the matches are printed out in the log file
+    - log_match: if True, the matches are printed out in the log file
     """
 
     log('check_log...')
@@ -51,14 +49,9 @@ def check_log(in_list, log_match=False):
 def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
     """Prints something in the current log file (g.log_path)
 
-    Args (non-exhaustive)
-    ----------------------
-    nb_tab: number of tab indentations
-
-    c_out: console out
-
-    dashes: total length of the input string extended
-    with dashes ('-')
+    - nb_tab: number of tab indentations
+    - c_out: console out
+    - dashes: total length of the input string extended with dashes ('-')
     """
 
     s = str_in
@@ -78,14 +71,9 @@ def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
 def log(str_in, level=0, log_format='', c_out=True):
     """Logs 'str_in' in the current log file (g.log_path)
 
-    Args (non-exhaustive)
-    ----------------------
-    level: log level. Current log level set in g.LOG_LEVEL.
-    Nothing will be logged if g.LOG_LEVEL < level
-
-    format: log format
-
-    c_out: console output
+    - level: log level. Current log level set in g.LOG_LEVEL. Nothing will be logged if g.LOG_LEVEL < level
+    - format: log format
+    - c_out: console output
     """
 
     if g.LOG_LEVEL < level:
@@ -101,13 +89,8 @@ def log(str_in, level=0, log_format='', c_out=True):
 def init_log(parent_module='', force_init=False):
     """Initialises a log file
 
-    Args (non-exhaustive)
-    ----------------------
-    parent_module: name of the parent module (appears in the
-    name of the log file)
-
-    force_init: if True, the log file is initialised even if a
-    current log file is already set
+    - parent_module: name of the parent module (appears in the name of the log file)
+    - force_init: if True, the log file is initialised even if a current log file is already set
     """
 
     if g.log_file_initialised and not force_init:

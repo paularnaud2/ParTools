@@ -19,15 +19,10 @@ def gmail(mail_name,
 
     See partools/quickstart/mail.py for examples of use
 
-    Args (non-exhaustive)
-    ----------------------
-    attachments: list of absolute path for attached files
-
-    var_dict: dictionary of variables to be replaced in HTMLbody
-
-    HTMLbody: if not input, mails/mail_name/template.html is taken
-
-    recipients: if not input, mails/mail_name/recipients.txt is taken
+    - attachments: list of absolute path for attached files
+    - var_dict: dictionary of variables to be replaced in HTMLbody
+    - HTMLbody: if not input, mails/mail_name/template.html is taken
+    - recipients: if not input, mails/mail_name/recipients.txt is taken
     """
     import ssl
 
@@ -63,15 +58,10 @@ def no_auth(mail_name,
 
     See partools/quickstart/mail.py for examples of use
 
-    Args (non-exhaustive)
-    ----------------------
-    attachments: list of absolute path for attached files
-
-    var_dict: dictionary of variables to be replaced in HTMLbody
-
-    HTMLbody: if not input, mails/mail_name/template.html is taken
-
-    recipients: if not input, mails/mail_name/recipients.txt is taken
+    - attachments: list of absolute path for attached files
+    - var_dict: dictionary of variables to be replaced in HTMLbody
+    - HTMLbody: if not input, mails/mail_name/template.html is taken
+    - recipients: if not input, mails/mail_name/recipients.txt is taken
     """
     from partools import cfg
 
@@ -97,15 +87,10 @@ def outlook(mail_name,
 
     See partools/quickstart/mail.py for examples of use
 
-    Args (non-exhaustive)
-    ----------------------
-    attachments: list of absolute path for attached files
-
-    var_dict: dictionary of variables to be replaced in HTMLbody
-
-    HTMLbody: if not input, mails/mail_name/template.html is taken
-
-    recipients: if not input, mails/mail_name/recipients.txt is taken
+    - attachments: list of absolute path for attached files
+    - var_dict: dictionary of variables to be replaced in HTMLbody
+    - HTMLbody: if not input, mails/mail_name/template.html is taken
+    - recipients: if not input, mails/mail_name/recipients.txt is taken
     """
     import win32com.client as win32
 

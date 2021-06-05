@@ -8,15 +8,13 @@ from .log import log_print
 def msg_box(msg, package='utils', dur=0, threaded=True):
     """Opens a message box containing the 'msg' input string
 
-    Args (non-exhaustive)
-    ----------------------
-    dur: duration in ms. If input, this value is used to determine if the
+    - dur: duration in ms. If input, this value is used to determine if the
     message box should pop out or not. The message box pops out only if
     dur >= g.MIN_DUR_MSG_BOX_TRIGGER. This can be useful if you want to use
     this function as an end-process notification but only wants to be notified
     when the process has taken a long enough time.
 
-    threaded: if true, the message box is open in a parallel process and the
+    - threaded: if true, the message box is open in a parallel process and the
     main script can continue (can be used as a end process notification)
     """
     from multiprocessing import Process
@@ -38,9 +36,7 @@ def msg_box(msg, package='utils', dur=0, threaded=True):
 def run_cmd(cmd, input=''):
     """Runs a Windows shell command
 
-    Args (non-exhaustive)
-    ----------------------
-    input: used in the case the command expects the user to input something
+    - input: used in the case the command expects the user to input something
     (e.g. Y or N). In this case, a binary string should be used (e.g. b'Y')
     """
 

@@ -14,9 +14,10 @@ def like(in_str, like_string):
     character '*'). Returns the match object that you can access with the group
     function.
 
-    Example
-    -------
-    like('Hello World', 'He*o w*d') => m, m.group(0) = 'Hello World', m.group(1) = 'll'
+    Example: 
+    - m = like('Hello World', 'He*o w*d')
+    - m.group(0) => 'Hello World'
+    - m.group(1) => 'll'
     """
 
     if '*' not in like_string:
@@ -74,9 +75,7 @@ def get_duration_string(start_time, return_dms=False, end_time=None):
     """Outputs a string representing the time elapsed between 'end_time' and
     'start_time'. If 'end_time' is not given, the current time is taken.
 
-    Args (non-exhaustive)
-    ----------------------
-    return_dms: if True, the duration in ms is also output: (dms, dstr).
+    - return_dms: if True, the duration in ms is also output: (dms, dstr).
     If False, only the duration string is output (dstr).
     """
 
@@ -103,9 +102,8 @@ def get_duration_string(start_time, return_dms=False, end_time=None):
 def big_number(int_in):
     """Converts a potentially big number into a lisible string.
 
-    Example
-    -------
-    big_number(10000000) returns '10 000 000'.
+    Example:
+    - big_number(10000000) returns '10 000 000'.
     """
 
     s = str(int_in)
@@ -125,10 +123,8 @@ def replace_from_dict(str_in, dict_in):
     """Replaces the variables (delimited by '@@') in 'str_in' with the values
     of 'dict_in'.
 
-    Example
-    -------
-    replace_from_dict('Hello @@VAR@@', {'VAR': 'world'})
-    returns 'Hello world'
+    Example:
+    - replace_from_dict('Hello @@VAR@@', {'VAR': 'world'}) returns 'Hello world'
     """
 
     for key in dict_in:

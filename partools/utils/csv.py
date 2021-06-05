@@ -39,9 +39,7 @@ def csv_to_list(line_in):
 def save_csv(array_in, out_path, mode='w'):
     """Saves a list to a csv file
 
-    Args (non-exhaustive)
-    ----------------------
-    mode: mode for the open methode.
+    - mode: mode for the open methode.
     """
 
     with open(out_path, mode, encoding='utf-8') as out_file:
@@ -52,9 +50,7 @@ def save_csv(array_in, out_path, mode='w'):
 def write_csv_line(row, out_file):
     """Writes a line to a csv file
 
-    Args (non-exhaustive)
-    ----------------------
-    row: can be either a list of the csv fields or a csv string
+    - row: can be either a list of the csv fields or a csv string
     """
 
     if isinstance(row, str):

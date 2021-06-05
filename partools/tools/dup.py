@@ -6,9 +6,7 @@ import partools.utils as u
 def find_dup(in_path, out_path='', open_out=False, col=0):
     """Finds the duplicates in in_path file
 
-    Args (non-exhaustive)
-    ----------------------
-    col: if the file is a csv, the duplicates will be searched in this column index
+    - col: if the file is a csv, the duplicates will be searched in this column index
     """
     from .init import init_find_dup
     from .finish import finish_find_dup
