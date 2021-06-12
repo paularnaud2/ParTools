@@ -32,13 +32,13 @@ print("Initialising Oracle instant client initialised")
 print("Connecting...")
 
 # 1) connect via connection string
-# cnx = cx.connect(cnx_str)
+cnx = cx.connect(cnx_str)
 
 # 2) connect via DSN
 # cnx = cx.connect("USERNAME", "PWD", dsn)
 
 # 3) connection via TNS_NAME
-cnx = cx.connect("USERNAME", "PWD", "XE_TNS")
+# cnx = cx.connect("USERNAME", "PWD", "XE_TNS")
 
 print("Connected")
 print(f'Executing "{query}"')
