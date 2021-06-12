@@ -20,6 +20,7 @@ def ast(in1, in2):
 def test_mail():
     u.init_log('test_mail', True)
 
+    u.delete_folder('mail_back')
     if os.path.exists(cfg.MAILS_DIR):
         copytree(cfg.MAILS_DIR, 'mail_back')
         u.delete_folder(cfg.MAILS_DIR)
