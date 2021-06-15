@@ -8,7 +8,7 @@ def list_to_dict(list_in, separator='='):
     out = {}
     for elt in list_in:
         e = elt.split(separator)
-        out[e[0]] = e[1]
+        out[e[0].strip()] = e[1].strip()
     return out
 
 
