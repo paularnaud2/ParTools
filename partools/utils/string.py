@@ -82,7 +82,7 @@ def get_duration_string(start_time, return_dms=False, end_time=None):
     dms = get_duration_ms(start_time, end_time)
     if dms >= 1000:
         duration_s = dms / 1000
-        if duration_s > 60:
+        if duration_s > 120:
             duration_m = duration_s // 60
             duration_s = duration_s % 60
             dm = str(floor(duration_m))
@@ -90,7 +90,7 @@ def get_duration_string(start_time, return_dms=False, end_time=None):
             dstr = f"{dm} minutes and {ds} seconds"
         else:
             duration_s = floor(duration_s * 10) / 10
-            dstr = str(duration_s) + " seconds"
+            dstr = str(duration_s) + " s"
     else:
         dstr = str(dms) + " ms"
 

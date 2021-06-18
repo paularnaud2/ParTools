@@ -27,7 +27,7 @@ def get_duration():
     assert dstr == "350 ms"
     dstr = u.get_duration_string(0, end_time=5.369)
     u.log(dstr)
-    assert dstr == "5.3 seconds"
+    assert dstr == "5.3 s"
     dstr = u.get_duration_string(0, end_time=150)
     u.log(dstr)
     assert dstr == "2 minutes and 30 seconds"
