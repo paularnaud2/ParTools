@@ -1,5 +1,3 @@
-# pip install wheel
-# pip install twine
 Remove-Item "dist" -Recurse
 python setup.py bdist_wheel
 twine upload dist/*
