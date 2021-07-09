@@ -22,6 +22,8 @@ from .log import init_sl_time
 from .log import gen_sl_detail
 
 from .string import like
+from .string import like_list
+from .string import like_dict
 from .string import hash512
 from .string import big_number
 from .string import extend_str
