@@ -9,16 +9,29 @@ from time import time
 from . import g
 
 
-def like(in_str, like_string):
+def like(in_str, like_string, case_sensitive=True):
     """Behaves as the LIKE of Oracle SQL (you can match strings with wildcard
     character '*'). Returns the match object that you can access with the group
     function.
 
-    Example: 
+    Important note:
+    If in_str is multiline and contains 'Hello World'
+        - like(in_str, 'Hello World') returns True
+        - like(in_str, 'Hel*ld') returns a match object
+    If in_str is a one line string (no \n) and contains 'Hello World'
+        - like(in_str, 'Hello World') returns True
+        - like(in_str, 'Hel*ld') returns None
+        - like(in_str, '*Hel*ld*') returns a match object
+
+    Example:
     - m = like('Hello World', 'He*o w*d')
     - m.group(0) => 'Hello World'
     - m.group(1) => 'll'
     """
+
+    if not case_sensitive:
+        in_str = in_str.lower()
+        like_string = like_string.lower()
 
     if '*' not in like_string:
         return like_string in in_str
@@ -30,6 +43,31 @@ def like(in_str, like_string):
     m = re.search(like_string, in_str)
 
     return m
+
+
+def like_list(in_str, like_list, case_sensitive=True):
+    """Returns True if in_str matches (using the like function) of the like_list elements.
+    See the like function description for more details."""
+
+    for elt in like_list:
+        if like(in_str, elt, case_sensitive):
+            return elt
+
+    return False
+
+
+def like_dict(in_str, like_dict, case_sensitive=True):
+    """Returns the key whose list elt matches (using the like_list function) in_str.
+    See the like_list function description for more details."""
+
+    for key in like_dict:
+        item = like_dict[key]
+        if isinstance(item, str) and like(in_str, item, case_sensitive):
+            return key
+        if isinstance(item, list) and like_list(in_str, item, case_sensitive):
+            return key
+
+    return False
 
 
 def hash512(in_str, length=10):
