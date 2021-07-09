@@ -56,12 +56,12 @@ def like_list(in_str, like_list, case_sensitive=True):
     return False
 
 
-def like_dict(in_str, like_dict, case_sensitive=True):
+def like_dict(in_str, like_dict, case_sensitive=True, skey=''):
     """Returns the key whose list elt matches (using the like_list function) in_str.
     See the like_list function description for more details."""
 
     for key in like_dict:
-        item = like_dict[key]
+        item = like_dict[key] if not skey else like_dict[key][skey]
         if isinstance(item, str) and like(in_str, item, case_sensitive):
             return key
         if isinstance(item, list) and like_list(in_str, item, case_sensitive):
