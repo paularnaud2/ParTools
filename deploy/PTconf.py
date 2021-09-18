@@ -1,2 +1,2 @@
 # This directory contains input, output, log, and temporary files folders.
-FILES_DIR = 'PT2/'
+FILES_DIR = 'PT1/'
