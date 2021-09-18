@@ -74,7 +74,7 @@ def init_PT(force=False):
         path = p.abspath(path)
         s = ''
     log("ParTools package successfully initialised\n"
-        f"Checkout the README.md on GitHub: {pt.GITHUB_LINK}\n"
+        "Checkout the README.md on GitHub: 'https://github.com/paularnaud2/ParTools'\n"
         f"Get started here: {p.dirname(quickstart.__file__)}\n"
         f"Set up your conf here: {path}{s}\n"
         "Happy scripting!\n")

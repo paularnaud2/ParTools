@@ -99,6 +99,9 @@ def outlook(mail_name,
     HTMLbody = get.HTML(HTMLbody, var_dict)
 
     f.save_mail(HTMLbody)
+    if gl.TEST:
+        s = "Skipped sending (TEST = True). Simulated error 2147221005"
+        raise Exception(s)
     outlook = win32.Dispatch('outlook.application')
     mail = outlook.CreateItem(0)
     mail.To = '; '.join(gl.recipients)

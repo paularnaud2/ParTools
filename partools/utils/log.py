@@ -97,6 +97,8 @@ def init_log(parent_module='', force_init=False):
     - force_init: if True, the log file is initialised even if a current log file is already set
     """
 
+    from partools.changelog import VERSION
+
     if g.log_file_initialised and not force_init:
         return
 
@@ -112,7 +114,7 @@ def init_log(parent_module='', force_init=False):
     s = f"Log file initialised ({g.log_path})"
     log(s, log_format='%Y-%m-%d %H:%M:%S -')
     log_print("Python version: " + sys.version)
-    log_print("ParTools version: " + pt.VERSION)
+    log_print("ParTools version: " + VERSION)
     log_print()
 
 

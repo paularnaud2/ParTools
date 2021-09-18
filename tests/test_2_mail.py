@@ -40,13 +40,13 @@ def test_mail():
     os.rename(cfg.CFI_PATH + '_', cfg.CFI_PATH)
     u.log_print()
 
+    mail.gl.TEST = True
     u.log_print(f"Test gmail - {gl.S_VDHT}", dashes=100)
     args = [gl.MAIL_NAME, gl.S_VDHT, gl.VD, gl.ATT]
     mail.gmail(*args)
     ast(gl.NVAR, gl.HT)
     u.log_print()
 
-    mail.gl.TEST = True
     u.log_print(f"Test gmail - {gl.S_VDPT}", dashes=100)
     args = [gl.MAIL_NAME, gl.S_VDPT, gl.VD, [], tm.BODY, gl.RECIPIENTS_IN]
     mail.gmail(*args)

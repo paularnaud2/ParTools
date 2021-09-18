@@ -15,7 +15,6 @@ CL = [
     "Paul ARNAUD (IN) <paularnaud2@gmail.com>",
     "Paul ARNAUD (FILE) <paularnaud2@gmail.com>",
     "Mail saved to",
-    "Mail sent",
     "Checking if all recipients are internal",
     "is not an internal email address",
     "y (TEST = True)",

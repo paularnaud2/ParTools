@@ -8,8 +8,8 @@ back = pt.cfg.FILES_DIR
 
 def init_PT():
 
-    u.delete_folder('PT_test/')
-    pt.cfg.FILES_DIR = 'PT_test/'
+    u.delete_folder('PT_test_utils/')
+    pt.cfg.FILES_DIR = 'PT_test_utils/'
     u.g.init_PT()
 
 
@@ -66,7 +66,7 @@ def test_utils():
 
     pt.cfg.FILES_DIR = back
     u.g.init_PT(True)
-    u.delete_folder('PT_test/')
+    u.delete_folder('PT_test_utils/')
 
 
 if __name__ == '__main__':

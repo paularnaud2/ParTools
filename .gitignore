@@ -8,9 +8,11 @@ venv/
 .old/
 .pytest_cache/
 /confidential.txt
-PTconf_perso.py
 format.py
-test.py
+/test.py
 build/
 dist/
 extract_doc.py
+*.spec
+/PTconf.py
+/PTconf_perso.py

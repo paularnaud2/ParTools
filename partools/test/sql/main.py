@@ -1,5 +1,6 @@
 import warnings
 
+import partools as pt
 import partools.utils as u
 import partools.sql as sql
 
@@ -7,8 +8,8 @@ from partools.test.sql import gl
 
 
 def is_test_db_defined():
-    if not gl.DB:
-        s = f"TEST_DB is not defined in '{gl.__file__}'. Test aborted."
+    if not pt.cfg.CONF_ORACLE:
+        s = "cfg.CONF_ORACLE not defined. Test aborted."
         u.log(s)
         warnings.warn(s)
         return False
