@@ -34,7 +34,7 @@ If you want to use the __cx_Oracle__ dependant packages (__sql__ and __rl__), yo
  
 ### The conf.py file
  
-The __partools/conf.py__ file contains the __main user settings__ for the __partools__ package such as the path to the Oracle instant client (``ORACLE_CLIENT``). If needed, you can create a __PTconf.py__ file at the root. Attributes found in this file will overwrite default (found in __partools/conf.py__). Similarly, you can also create a __PTconf_perso.py__ file at the root that will take over PTconf.py. This can be useful if you __work on a shared repository__ but still want/need to have your own local configurations.
+The __partools/conf.py__ file contains the __main user settings__ for the __partools__ package such as the path to the Oracle instant client (``ORACLE_CLIENT``). If needed, you can create a __PTconf.py__ file at the root whose attributes will overwrite default (found in __partools/conf.py__). Similarly, you can also create a __PTconf_perso.py__ file that will take over PTconf.py. This can be useful if you __work on a shared repository__ but still want/need to have your own local configurations.
  
 ### The global variable files gl.py and main functions inputs
  
