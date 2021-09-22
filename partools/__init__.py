@@ -42,7 +42,9 @@ def overwrite_cfg():
 
     print(f"partools/conf.py overwritten by {super_path}")
     for var in var_list:
-        print(var, '=', getattr(cfg, var))
+        atr = str(getattr(cfg, var))
+        print(var, '=', atr[:100])
+    print()
     return cfg
 
 
