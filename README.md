@@ -22,8 +22,8 @@ You can mainly use them for:
 Create a python file containing:
 
     import partools.utils as u
-    
-    u.init_log('TEST')
+
+    u.init_log('TEST', True)
     u.log('Hello World')
 
 And run it. You should then see something like this in the console:
@@ -33,7 +33,7 @@ And run it. You should then see something like this in the console:
     Get started here c:\Git\Test\venv\lib\site-packages\partools\quickstart
     Set up your conf here: c:\Git\Test\venv\lib\site-packages\partools\conf.py
     Happy scripting!
-    
+    ...
     07:51:26 - Hello World
  
 This gives you the links to the __quickstart__ folder where you'll find examples of use and descriptions of the different available packages and functions. You'll also find here the link to the __conf.py__ file (see below).
