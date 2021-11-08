@@ -19,14 +19,22 @@ You can mainly use them for:
   
     pip install partools
  
-Then just run ``import partools`` (or run any partools function) with python to initialise the package.  
-You should then see something like this in the console:
+Create a python file containing:
+
+    import partools.utils as u
+    
+    u.init_log('TEST')
+    u.log('Hello World')
+
+And run it. You should then see something like this in the console:
  
     ...
     Checkout the README.md on GitHub: https://github.com/paularnaud2/ParTools
     Get started here c:\Git\Test\venv\lib\site-packages\partools\quickstart
     Set up your conf here: c:\Git\Test\venv\lib\site-packages\partools\conf.py
     Happy scripting!
+    
+    07:51:26 - Hello World
  
 This gives you the links to the __quickstart__ folder where you'll find examples of use and descriptions of the different available packages and functions. You'll also find here the link to the __conf.py__ file (see below).
  
