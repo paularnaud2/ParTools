@@ -5,7 +5,6 @@ from selenium import webdriver as wd
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchWindowException
-from selenium.webdriver.opera.webdriver import OperaDriver
 from selenium.webdriver.support import expected_conditions as EC
 
 from sel import cfg
@@ -35,6 +34,7 @@ def start_driver():
         pt.log(f"Starting Chrome driver ({cfg.DRIVER_PATH})...")
         g.driver = wd.Chrome(cfg.DRIVER_PATH, options=options)
         g.driver.set_window_size(1800, 900)
+        g.driver.implicitly_wait(10)
         pt.log("Chrome driver started")
 
 
@@ -191,14 +191,14 @@ def save_source(name='SOURCE'):
     source = g.driver.page_source
     path = f"{g.path}{name}.html"
     pt.save_list([source], path)
-    pt.log(f"Page source saved in {path}")
+    # pt.log(f"Page source saved in {path}")
 
 
 def load_source(name='SOURCE'):
     path = f'{g.path}{name}.html'
     out = pt.load_txt(path, False)
     g.source = out
-    pt.log(f"Source loaded from {path}")
+    # pt.log(f"Source loaded from {path}")
     return out
 
 

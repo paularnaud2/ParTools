@@ -8,7 +8,8 @@ def get_elt(x_path):
     root = lxml.html.fromstring(g.source)
     elt = root.xpath(x_path)
     if elt:
-        pt.log(f"Element found ({x_path})")
+        # pt.log(f"Element found ({x_path})")
+        pass
     else:
         pt.log(f"Element not found ({x_path})")
 

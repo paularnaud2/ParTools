@@ -46,7 +46,7 @@ def like(in_str, like_string, case_sensitive=True):
 
 
 def like_list(in_str, like_list, case_sensitive=True):
-    """Returns True if in_str matches (using the like function) of the like_list elements.
+    """Returns True if in_str matches (using the like function) one of the like_list elements.
     See the like function description for more details."""
 
     for elt in like_list:

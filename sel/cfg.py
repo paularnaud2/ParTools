@@ -12,5 +12,5 @@ SUBCHECK_LABEL = 'Sub check'
 SC_ENABLED = True
 SC_TIME = '08:00:00'
 NETWORK = False
-DRIVER_PATH = 'C:/Git/chromedriver.exe'
+DRIVER_PATH = 'C:/Dev/chromedriver.exe'
 DATE_DIR = datetime.now().strftime('%Y%m%d')
