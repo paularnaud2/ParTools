@@ -191,7 +191,7 @@ def save_source(name='SOURCE'):
     source = g.driver.page_source
     path = f"{g.path}{name}.html"
     pt.save_list([source], path)
-    # pt.log(f"Page source saved in {path}")
+    pt.log(f"Page source saved in {path}")
 
 
 def load_source(name='SOURCE'):
