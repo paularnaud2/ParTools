@@ -20,11 +20,6 @@ def ast(in1, in2):
 def test_mail():
     u.init_log('test_mail', True)
 
-    u.delete_folder('mail_back')
-    if os.path.exists(cfg.MAILS_DIR):
-        copytree(cfg.MAILS_DIR, 'mail_back')
-        u.delete_folder(cfg.MAILS_DIR)
-
     u.log_print("Test gmail - KO, recipients not configureed", dashes=100)
     args = [gl.MAIL_NAME, gl.S_VDHT, gl.VD, gl.ATT]
     ttry(mail.gmail, gl.E_NOT_CONFIGURED, *args)
@@ -76,11 +71,6 @@ def test_mail():
     ttry(mail.outlook, gl.E_OUTLOOK, *args)
     ast(gl.NVAR, gl.PT)
     u.log_print()
-
-    # Restauring mail backup
-    u.delete_folder(cfg.MAILS_DIR)
-    copytree('mail_back', cfg.MAILS_DIR)
-    u.delete_folder('mail_back')
 
     u.check_log(tm.CL)
 
