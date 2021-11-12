@@ -68,7 +68,11 @@ def init_mail():
         return
     files_dir = f'{p.dirname(__file__)}/files'
     files_dir = files_dir.replace('\\', '/')
-    u.delete_folder(cfg.MAILS_DIR)
+    if not p.exists(files_dir):
+        s = f"Warning: mail folder couldn't be initialised because {files_dir} was not found"
+        u.log(s)
+        return
+
     copytree(files_dir, cfg.MAILS_DIR)
     u.save_list(['*'], cfg.MAILS_DIR + '.gitignore')
     u.log(f"Mail folder '{cfg.MAILS_DIR}' successfully initialised")
