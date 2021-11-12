@@ -1,5 +1,5 @@
 import partools as pt
-from sel import cfg
+from partools.sel import cfg
 
 if cfg.TEST:
     OUT_DIR = 'tests/files/'

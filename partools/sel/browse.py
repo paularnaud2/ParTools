@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchWindowException
 from selenium.webdriver.support import expected_conditions as EC
 
-from sel import cfg
+from partools.sel import cfg
 import partools.utils as pt
 
 from . import g
