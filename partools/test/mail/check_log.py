@@ -1,6 +1,8 @@
 CL = [
     "Log file initialised",
     "Python version:",
+    "Test gmail - KO, recipients not configureed",
+    "Mail folder 'mails/' successfully initialised",
     "Test gmail - [Test] Python mail - var dict, HTML template with attachments",
     "Test gmail - [Test] Python mail - var dict, Python template with recipients",
     "Test gmail - [Test] Python mail - no var dict, HTML template",
@@ -8,6 +10,7 @@ CL = [
     "Template variables have been replaced",
     "Test no_auth",
     "Test outlook",
+    "Warning: * is not an internal email address. Send anyways?*",
     "Getting recipients from",
     "HTML template * successfully loaded",
     "Skipped sending (TEST = True)",
