@@ -9,7 +9,7 @@ from .file import load_txt
 from .tools import list_to_dict
 
 
-def get_confidential(raise_e=True, decrypt_key=''):
+def get_confidential(decrypt_key='', raise_e=True):
 
     if not p.exists(pt.cfg.CFI_PATH):
         log(g.E_CFI)

@@ -56,7 +56,7 @@ def init(mail_name, recipients, check_internal=False):
 
 def init_cfi():
 
-    gl.cfi = u.get_confidential(False, KEY)
+    gl.cfi = u.get_confidential(KEY, False)
     if not gl.cfi:
         raise Exception(gl.S_MISSING_CFI)
     u.log(f"Password decrypted: '{gl.cfi['PWD_GMAIL']}'")
