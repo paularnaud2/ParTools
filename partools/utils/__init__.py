@@ -2,7 +2,7 @@
 from . import init
 
 # Imports for package utils
-from .g import get_confidential
+from .cfi import get_confidential
 
 from .deco import log_exeptions
 

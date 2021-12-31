@@ -29,4 +29,5 @@ CL = [
     "'@@NAME@@' and 'Python template case' found in last_sent",
     "[ttry] Exception caught match expected ('[Errno 11001] getaddrinfo failed')",
     "[ttry] Exception caught match expected ('2147221005')",
+    "Password decrypted: 'my_password'",
 ]

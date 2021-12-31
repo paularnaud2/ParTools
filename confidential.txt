@@ -1,0 +1,3 @@
+MAIL_FROM=Paul Arnaud <paularnaud2pro@gmail.com>
+USER_GMAIL=paularnaud2pro@gmail.com
+PWD_GMAIL=ENCRYPTED[gAAAAABhzrIXH0PFTxeHouYqeMNffEL58ZOhE-rfCTl0Tr4tbAb4RsvWcrMyZpELmrlj--GfyNunhVoBD0jqkQIh4xhdYwd3Rg==]

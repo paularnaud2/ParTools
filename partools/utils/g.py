@@ -4,11 +4,9 @@ from threading import RLock
 import partools as pt
 
 from .file import mkdirs
-from .file import load_txt
 from .file import save_list
 from .log import log
 from .log import init_log
-from .tools import list_to_dict
 
 # Misc
 CSV_SEPARATOR = ';'
@@ -78,16 +76,3 @@ def init_PT(force=False):
         f"Get started here: {p.dirname(quickstart.__file__)}\n"
         f"Set up your conf here: {path}{s}\n"
         "Happy scripting!\n")
-
-
-def get_confidential(raise_e=True):
-
-    if not p.exists(pt.cfg.CFI_PATH):
-        log(E_CFI)
-        if raise_e:
-            raise Exception(E_CFI)
-        else:
-            return False
-    cfi_list = load_txt(pt.cfg.CFI_PATH)
-    cfi = list_to_dict(cfi_list)
-    return cfi

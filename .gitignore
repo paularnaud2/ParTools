@@ -7,7 +7,6 @@ venv/
 *.egg-info/
 .old/
 .pytest_cache/
-/confidential.txt
 format.py
 /test.py
 build/
