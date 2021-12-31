@@ -1,4 +1,5 @@
-VERSION = '2.0.0'  # cfi - encypted fields handling
+VERSION = '2.0.1'  # cfi - inverted args
+# VERSION = '2.0.0'  # cfi - encypted fields handling
 # VERSION = '1.0.9'  # more robust init_mail
 # VERSION = '1.0.8'  # conf overwriting
 # VERSION = '1.0.7'  # Added like_list and like_dict

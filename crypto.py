@@ -11,7 +11,6 @@ def encrypt(message):
 
 def gen_key():
     key = Fernet.generate_key()
-    print("New key:")
     print(key)
 
 
