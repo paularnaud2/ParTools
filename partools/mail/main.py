@@ -12,7 +12,8 @@ def gmail(mail_name,
           var_dict=[],
           attachments=[],
           HTMLbody='',
-          recipients=[]):
+          recipients=[],
+          decrypt_key=''):
     """Sends emails using gmail
 
     See README.md for guidance
@@ -27,7 +28,7 @@ def gmail(mail_name,
     import ssl
 
     f.init(mail_name, recipients)
-    f.init_cfi()
+    f.init_cfi(decrypt_key)
     msg = get.msg(subject, HTMLbody, attachments, var_dict)
 
     host = gl.GMAIL_HOST
@@ -51,7 +52,8 @@ def no_auth(mail_name,
             var_dict=[],
             attachments=[],
             HTMLbody='',
-            recipients=[]):
+            recipients=[],
+            decrypt_key=''):
     """Sends emails using a no authentication smtp server
 
     See README.md for guidance
@@ -66,7 +68,7 @@ def no_auth(mail_name,
     from partools import cfg
 
     f.init(mail_name, recipients, True)
-    f.init_cfi()
+    f.init_cfi(decrypt_key)
     msg = get.msg(subject, HTMLbody, attachments, var_dict)
 
     u.log(f"Sending mail '{mail_name}' to {gl.recipients}...")
@@ -80,7 +82,8 @@ def outlook(mail_name,
             var_dict=[],
             attachments=[],
             HTMLbody='',
-            recipients=[]):
+            recipients=[],
+            decrypt_key=''):
     """Sends emails using installed Outlook application
 
     See README.md for guidance

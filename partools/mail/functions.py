@@ -2,7 +2,6 @@ import sys
 import os.path as p
 from shutil import copytree
 
-from crypto import KEY
 from partools import cfg
 import partools.utils as u
 
@@ -54,9 +53,9 @@ def init(mail_name, recipients, check_internal=False):
         gl.recipients = get.recipients(check_internal)
 
 
-def init_cfi():
+def init_cfi(decrypt_key=''):
 
-    gl.cfi = u.get_confidential(KEY, False)
+    gl.cfi = u.get_confidential(decrypt_key, False)
     if not gl.cfi:
         raise Exception(gl.S_MISSING_CFI)
     u.log(f"Password decrypted: '{gl.cfi['PWD_GMAIL']}'")

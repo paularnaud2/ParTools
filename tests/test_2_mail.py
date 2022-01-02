@@ -9,6 +9,8 @@ from partools import cfg
 from partools import mail
 from partools.test import ttry
 
+from partools.crypto import KEY
+
 
 def ast(in1, in2):
 
@@ -48,7 +50,7 @@ def test_mail():
     u.log_print()
 
     u.log_print(f"Test gmail - {gl.S_VDPT}", dashes=100)
-    args = [gl.MAIL_NAME, gl.S_VDPT, gl.VD, [], tm.BODY, gl.RECIPIENTS_IN]
+    args = [gl.MAIL_NAME, gl.S_VDPT, gl.VD, [], tm.BODY, gl.RECIPIENTS_IN, KEY]
     mail.gmail(*args)
     ast(gl.NVAR, gl.PT)
     u.log_print()
