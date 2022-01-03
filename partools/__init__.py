@@ -20,7 +20,7 @@ def overwrite_cfg():
 
     # Switching CWD to root
     file_path = os.path.realpath(__file__)
-    print('file_path', file_path)
+    # print('file_path', file_path)
     if file_path[-4] == '.pyc':
         ncwd = dirname(dirname(file_path))
         if os.getcwd() != ncwd:
