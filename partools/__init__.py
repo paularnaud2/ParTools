@@ -1,4 +1,5 @@
 import os
+from os.path import dirname
 
 print("CWD:", os.getcwd())
 
@@ -16,6 +17,15 @@ def load_module(name, path):
 
 def overwrite_cfg():
     import partools.conf as cfg
+
+    # Switching CWD to root
+    file_path = os.path.realpath(__file__)
+    print('file_path', file_path)
+    if file_path[-4] == '.pyc':
+        ncwd = dirname(dirname(file_path))
+        if os.getcwd() != ncwd:
+            os.chdir(ncwd)
+            print(f"Switched CWD to {ncwd}")
 
     if os.path.exists('PTconf_perso.py'):
         super_path = 'PTconf_perso.py'
