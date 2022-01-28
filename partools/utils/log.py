@@ -58,7 +58,7 @@ def log_print(str_in='', nb_tab=0, c_out=True, dashes=0):
     - dashes: total length of the input string extended with dashes ('-')
     """
 
-    s = str_in
+    s = str(str_in)
     if nb_tab != 0:
         for i in range(0, nb_tab):
             s = '\t' + s
@@ -190,9 +190,9 @@ def log_array(array, nb_tab=0):
         log_print(elt, nb_tab)
 
 
-def log_dict(dict):
+def log_dict(dict, nb_tab=0):
     for key in dict:
-        log_print(f'{key}: {dict[key]}')
+        log_print(f'{key}: {dict[key]}', nb_tab)
 
 
 def log_example(list_in, what="duplicates", n_print=5):
