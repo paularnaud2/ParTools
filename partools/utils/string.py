@@ -49,6 +49,9 @@ def like_list(in_str, like_list, case_sensitive=True):
     """Returns True if in_str matches (using the like function) one of the like_list elements.
     See the like function description for more details."""
 
+    if not isinstance(like_list, list):
+        raise Exception('like_list must be of type list')
+
     for elt in like_list:
         if like(in_str, elt, case_sensitive):
             return elt
@@ -59,6 +62,9 @@ def like_list(in_str, like_list, case_sensitive=True):
 def like_dict(in_str, like_dict, case_sensitive=True, skey=''):
     """Returns the key whose list elt matches (using the like_list function) in_str.
     See the like_list function description for more details."""
+
+    if not isinstance(like_dict, dict):
+        raise Exception('like_dict must be of type dict')
 
     for key in like_dict:
         item = like_dict[key] if not skey else like_dict[key][skey]
