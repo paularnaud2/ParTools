@@ -6,7 +6,7 @@ print("CWD:", os.getcwd())
 
 def load_module(name, path):
     # Importing this way is required to force a deployed executable to load
-    # from actual file and not from a .pyc statis file generated during the build
+    # from actual file and not from a .pyc static file generated during the build
     import importlib.util as u
 
     spec = u.spec_from_file_location(name, path)

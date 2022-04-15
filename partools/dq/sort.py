@@ -7,7 +7,9 @@ from . import gl
 
 
 def sort_big_file(in_path, out_path, prompt=False, nb=0, main=False):
-    # nb variable is used to differentiate input file when main run is dq
+    # Sorts a potentially big csv file according to the first column
+    # the 'nb' input is used to differentiate input file when main run is dq
+
     from .init import init_stf
     from .gstf import gen_sorted_temp_files
 

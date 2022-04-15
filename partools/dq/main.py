@@ -9,7 +9,7 @@ from . import functions as f
 
 def run_dq(**kwargs):
     """Compares two big csv files (> 100 Mo) and outputs a detailed result 
-    of the comparison is output
+    of the comparison
 
     See partools/quickstart/dq.py for guidance
     """

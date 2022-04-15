@@ -60,7 +60,7 @@ def search_big_file(in_path, out_path, look_for, **kwargs):
 
 
 def sort_big_file(in_path, out_path):
-    """Sorts a potentially big file
+    """Sorts a potentially big csv file according to the first column
 
     See partools/quickstart/tools_bf.py for examples of use
     """
