@@ -13,6 +13,7 @@ def run_dq(**kwargs):
 
     See partools/quickstart/dq.py for guidance
     """
+
     from .init import init_dq
     from .sort import sort_big_file
 
