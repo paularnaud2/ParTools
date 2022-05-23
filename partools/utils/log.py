@@ -113,6 +113,7 @@ def init_log(parent_module='', force_init=False):
     g.log_file_initialised = True
     s = f"Log file initialised ({g.log_path})"
     log_print(s)
+    log_print("Python interpreter path: " + sys.executable)
     log_print("Python version: " + sys.version)
     log_print("ParTools version: " + VERSION)
     log_print()
