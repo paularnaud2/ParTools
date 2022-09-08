@@ -1,6 +1,5 @@
 import os.path as p
 import partools as pt
-from cryptography.fernet import Fernet
 
 from . import g
 from .log import log
@@ -21,6 +20,7 @@ def get_confidential(decrypt_key='', raise_e=True):
     cfi = list_to_dict(cfi_list)
 
     if decrypt_key:
+        from cryptography.fernet import Fernet
         fernet = Fernet(decrypt_key)
 
     for key in cfi:
