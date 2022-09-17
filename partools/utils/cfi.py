@@ -1,14 +1,12 @@
-import os.path as p
-import partools as pt
-
-from . import g
-from .log import log
-from .string import like
-from .file import load_txt
-from .tools import list_to_dict
-
-
 def get_confidential(decrypt_key='', raise_e=True):
+    import os.path as p
+    import partools as pt
+
+    from . import g
+    from .log import log
+    from .string import like
+    from .file import load_txt
+    from .tools import list_to_dict
 
     if not p.exists(pt.cfg.CFI_PATH):
         log(g.E_CFI)

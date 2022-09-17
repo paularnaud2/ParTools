@@ -1,10 +1,9 @@
-from . import g
 from .log import log
 from .log import log_print
-from .csv import csv_to_list
 
 
 def get_header(in_path, csv=False):
+    from .csv import csv_to_list
     """Returns the header of a file
 
     - csv: if True, the returned header is a list containing each csv field
@@ -19,7 +18,7 @@ def get_header(in_path, csv=False):
     return header
 
 
-def gen_header(in_path, last_field='', out_path=''):
+def gen_header(in_path, sep, field='FIELD', last_field='', out_path=''):
     """If the in_path file has no header, this function generates one looking
     like this : FIELD_1;FIELD_2;...;FIELD_N; last_field where N is the number
     of columns of the csv file. If last_field == '' it is not appended.
@@ -31,15 +30,15 @@ def gen_header(in_path, last_field='', out_path=''):
         header = get_header(in_path)
     else:
         first_line = get_header(in_path, True)
-        header = g.DEFAULT_FIELD + "_1"
+        header = field + "_1"
         if len(first_line) > 1:
             counter = 1
             for elt in first_line[1:]:
                 counter += 1
-                header = f'{header}{g.CSV_SEPARATOR}{g.DEFAULT_FIELD}_{counter}'
+                header = f'{header}{sep}{field}_{counter}'
 
     if last_field:
-        header = header + g.CSV_SEPARATOR + last_field
+        header = header + sep + last_field
 
     if out_path:
         with open(out_path, 'w', encoding='utf-8') as out_file:
@@ -55,6 +54,7 @@ def has_header(inp):
     Note that this function should be used with caution as it can not be fully
     reliable.
     """
+    from .csv import csv_to_list
 
     out = True
     if isinstance(inp, str):
@@ -83,10 +83,10 @@ def check_header(in_path):
     """Logs an error message and raises an exception if the in_path file has no
     header (relies on the has_header function).
     """
-
+    from . import const
     if not has_header(in_path):
         s = f"Error: the input file {in_path} must have a header"
         log(s)
         s = "Make sure the first elements of the first two lines are of different lengths"
         log_print(s)
-        raise Exception(g.E_MH)
+        raise Exception(const.E_MH)

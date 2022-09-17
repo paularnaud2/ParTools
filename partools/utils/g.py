@@ -9,18 +9,8 @@ from .log import log
 from .log import init_log
 
 # Misc
-CSV_SEPARATOR = ';'
 VAR_DEL = '@@'
-DEFAULT_FIELD = "FIELD"
-
 verrou = RLock()
-
-# Exceptions
-E_MH = "Missing header (first elements of line 1 and 2 must be of different length)"
-E_MV = "Missing variable"
-E_DH = "Different headers"
-E_VA = "Void array"
-E_CFI = f"Confidential file '{pt.cfg.CFI_PATH}' not found"
 
 # Log
 LOG_LEVEL = 0

@@ -1,11 +1,11 @@
-from . import g
-from . import header
+SEPARATOR = ';'
 
 
 def get_csv_fields_dict(in_path):
     """Returns a dictionary whose keys are the csv fields of the 'in_path' file
     and elements are the columns index.
     """
+    from . import header
 
     fields = {}
     line_list = header.get_header(in_path, True)
@@ -31,9 +31,9 @@ def load_csv(in_path):
 
 
 def csv_to_list(line_in):
-    """Converts a csv line to a list using g.CSV_SEPARATOR as separator"""
+    """Converts a csv line to a list using SEPARATOR as separator"""
 
-    return line_in.strip('\n').split(g.CSV_SEPARATOR)
+    return line_in.strip('\n').split(SEPARATOR)
 
 
 def save_csv(array_in, out_path, mode='w'):
@@ -56,7 +56,7 @@ def write_csv_line(row, out_file):
     if isinstance(row, str):
         line_out = row
     else:
-        line_out = g.CSV_SEPARATOR.join(row)
+        line_out = SEPARATOR.join(row)
     line_out += '\n'
     out_file.write(line_out)
 
@@ -66,5 +66,5 @@ def csv_clean(s):
 
     out = s.replace('\r', '')
     out = out.replace('\n', '')
-    out = out.replace(g.CSV_SEPARATOR, '')
+    out = out.replace(SEPARATOR, '')
     return out

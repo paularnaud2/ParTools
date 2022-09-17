@@ -1,5 +1,3 @@
-from random import shuffle
-
 import partools.utils as u
 
 
@@ -8,8 +6,6 @@ def find_dup(in_path, out_path='', open_out=False, col=0):
 
     - col: if the file is a csv, the duplicates will be searched in this column index
     """
-    from .init import init_find_dup
-    from .finish import finish_find_dup
 
     u.log("[toolDup] find_dup: start")
     (cur_list, out_path) = init_find_dup(in_path, out_path, col)
@@ -20,9 +16,28 @@ def find_dup(in_path, out_path='', open_out=False, col=0):
     u.log("[toolDup] find_dup: end")
 
 
+def init_find_dup(in_path, out_path, col):
+    import os.path as p
+
+    if not out_path:
+        out_path = p.join(u.g.dirs['TMP'], 'out_dup.csv')
+
+    s = "Searching duplicates in "
+    if col == 0:
+        u.log(f"{s} file {in_path}")
+        cur_list = u.load_txt(in_path)
+    else:
+        u.log(f"{s}column no. {col} of file {in_path}")
+        cur_list = u.load_csv(in_path)
+        cur_list = [x[col - 1] for x in cur_list]
+        if u.has_header(cur_list):
+            cur_list = cur_list[1:]
+
+    return (cur_list, out_path)
+
+
 def del_dup(in_path, out_path, open_out=False):
     """Deletes the duplicates in in_path file"""
-    from .finish import finish_del_dup
 
     u.log("[toolDup] del_dup: start")
     u.log(f"Deleting duplicates in file '{in_path}'...")
@@ -84,6 +99,7 @@ def del_dup_list(in_list):
 
 def shuffle_file(in_path, out_path, open_out=False):
     """Shuffles the line order of a file using the native random package"""
+    from random import shuffle
 
     u.log("[toolShuf] shuffle_file: start")
     cur_list = u.load_txt(in_path)
@@ -97,3 +113,30 @@ def shuffle_file(in_path, out_path, open_out=False):
     if open_out:
         u.startfile(out_path)
     u.log("[toolShuf] shuffle_file: end")
+
+
+def finish_find_dup(dup_list, out_path, open_out):
+
+    n = len(dup_list)
+    if n == 0:
+        u.log("No duplicates found")
+        return
+
+    bn = u.big_number(len(dup_list))
+    u.log(f"{bn} duplicates found")
+    u.log_example(dup_list)
+
+    u.save_csv(dup_list, out_path)
+    u.log(f"List of duplicates saved in {out_path}")
+    if open_out:
+        u.startfile(out_path)
+
+
+def finish_del_dup(out_list, out_path, open_out):
+
+    u.log(f"Saving list without duplicates in '{out_path}'...")
+    u.save_list(out_list, out_path)
+    bn_out = u.big_number(len(out_list))
+    u.log(f"List saved, it has {bn_out} lines")
+    if open_out:
+        u.startfile(out_path)
