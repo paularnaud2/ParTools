@@ -29,28 +29,6 @@ def finish_del_dup(out_list, out_path, open_out):
         u.startfile(out_path)
 
 
-def finish_sbf(out_path, start_time):
-
-    if gl.FOUND:
-        lowI = gl.c_row - 1 - gl.PRINT_SIZE // 2
-        if lowI < 0:
-            lowI = 0
-        highI = gl.c_row - 1 + gl.PRINT_SIZE // 2
-        u.save_list(gl.cur_list[lowI:highI], out_path)
-        s = f"Current list written in {out_path}"
-        u.log(s.format())
-        if gl.OPEN_OUT_FILE:
-            u.startfile(out_path)
-    else:
-        bn = u.big_number(gl.c_main)
-        s = (f"EOF reached ({bn} lines, {gl.c_list} temporary lists)"
-             f", string '{gl.LOOK_FOR}' not found")
-        u.log(s)
-
-    dstr = u.get_duration_string(start_time)
-    u.log(f"[toolBF] search_big_file: end ({dstr})\n")
-
-
 def finish_xml(out_path, start_time):
 
     dstr = u.get_duration_string(start_time)

@@ -23,15 +23,6 @@ MULTI_TAG_LIST = [
 SL_STEP_READ = 1000 * 10**3  # step_log setting (see README.md)
 SL_STEP_WRITE = 100 * 10**3  # step_log setting (see README.md)
 
-# BF-----------------------------------------------------------------
-# Optional input defaults
-N_READ = 10
-PRINT_SIZE = 10
-MAX_LIST_SIZE = 5 * 10**6  # Warning: a too high value may cause a Memory error
-BUFFER_SIZE = 100 * 10**3  # Warning: a too high value may cause a Memory error
-LINE_PER_LINE = True
-TEST = False
-
 # Filter-------------------------------------------------------------
 # Const
 s = ("{bn_1} lines read in {dstr}."
