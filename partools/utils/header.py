@@ -3,11 +3,11 @@ from .log import log_print
 
 
 def get_header(in_path, csv=False):
-    from .csv import csv_to_list
     """Returns the header of a file
 
     - csv: if True, the returned header is a list containing each csv field
     """
+    from .csv import csv_to_list
 
     with open(in_path, 'r', encoding='utf-8') as in_file:
         header = in_file.readline().strip('\n')
@@ -84,6 +84,7 @@ def check_header(in_path):
     header (relies on the has_header function).
     """
     from . import const
+
     if not has_header(in_path):
         s = f"Error: the input file {in_path} must have a header"
         log(s)
